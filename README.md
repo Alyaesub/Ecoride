@@ -17,7 +17,7 @@ du projet web ou web mobile:
     lien du diagramme de fonctionnement: https://www.figma.com/design/tDpcbYwymMGQ1bRDxAunYQ/Diagramme-d'utilisation-Ecoride?node-id=0-1&m=dev&t=VxZjbrq5tiGvYXBt-1
 
 -Maquetter une application:
-    3 maquettes mobile et 3 maquettes desktop (a finir)
+    3 maquettes mobile et 3 maquettes desktop
     lien du figma: https://www.figma.com/design/wzlnTb3rpsE1tW39XHNRj9/Maquettage-Ecoride?node-id=0-1&m=dev&t=Js0XPddOeIyc9Kc3-1
 
 -Rajouter des requêtes asynchrone (sans rechargement de page avec fetch, ajax ou autre en Javascript)
