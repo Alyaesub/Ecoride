@@ -3,15 +3,31 @@
 // Styles principaux (styles.scss)
 @import 'variables';
 
-* {
+html, body {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
+  height: 100%; // Assure que l'écran est entièrement utilisé
 }
 
 body {
+  display: flex;
+  flex-direction: column; // Organise les éléments verticalement
+  min-height: 100vh;
   background-color: $background-color;
 }
+
+main {
+  flex: 1; // Remplit l'espace entre le header et le footer
+}
+
+footer {
+  background-color: #4caf50;
+  color: white;
+  text-align: center;
+  padding: 10px;
+}
+
+
 
 /* Media Queries */
 @media (min-width: 768px) {

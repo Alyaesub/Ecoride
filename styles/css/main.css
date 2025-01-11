@@ -1,11 +1,25 @@
-* {
+html, body {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
+  height: 100%;
 }
 
 body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
   background-color: #BCE593;
+}
+
+main {
+  flex: 1;
+}
+
+footer {
+  background-color: #4caf50;
+  color: white;
+  text-align: center;
+  padding: 10px;
 }
 
 /* Media Queries */
@@ -40,4 +54,20 @@ body {
   align-items: center;
   justify-content: space-around;
   padding: 0;
+}
+.header .login {
+  margin-right: 20px;
+}
+
+.footer {
+  height: 50px;
+  width: 100%;
+  background-color: #4caf50;
+  color: white;
+  text-align: center;
+  padding: 10px;
+}
+
+.buttonlog {
+  width: 80px;
 }/*# sourceMappingURL=main.css.map */
