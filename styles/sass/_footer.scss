@@ -1,8 +1,16 @@
-.footer {
-    height: 50px;
-    width: 100%;
+@media (min-width: 768px) {
+    .footer {
+        height: 50px;
+        width: 100%;
         background-color: #4caf50;
         color: white;
         text-align: center;
         padding: 10px;
+    }
+}
+
+@media (max-width: 768px) {
+    .footer {
+        display: none;
+    }
 }
