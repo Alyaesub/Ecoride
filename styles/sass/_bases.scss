@@ -11,15 +11,11 @@
   }
   
   body {
-    display: flex;
-    flex-direction: column; // Organise les éléments verticalement
     min-height: 100vh;
     background-color: $background-color;
   }
   
-  main {
-    flex: 1; // Remplit l'espace entre le header et le footer
-  }
+
 }
 //////////////////////////////////////////////////////////////////////
 

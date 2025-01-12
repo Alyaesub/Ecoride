@@ -1,0 +1,79 @@
+/////////////////////  CODE Mobilefirst //////////////////////////
+@media (max-width: 768px) {
+    .navbar {
+        display: none;
+    }
+
+        .mobile-nav {
+            display: flex; // Affiche la navbar mobile
+            justify-content: space-around;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background-color: #4caf50;
+        
+            ul {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+        
+            li a {
+                text-decoration: none;
+                color: white;
+                font-weight: bold;
+            }
+            }
+        }
+        
+        .logo {
+            display: block; // Le logo reste en haut
+            margin: 20px auto;
+            width: 100px;
+        }
+    }
+
+
+///////////////////////////////////////////////////////////////////
+
+///////////////////////////// Code Desktop ////////////////////////
+@media (min-width: 768px) {
+
+    .mobile-nav {
+        display: none;
+    }
+
+    .nav-menu-desk {
+        display: flex;
+        align-items: center;
+        margin-top: 10px;
+        height: 100px;
+        
+        img {
+            width: 20%;
+            height: 100%;
+        }
+    
+        .navbar {
+            width: 100%;
+        }
+        
+        ul {
+            list-style: none;
+            display: flex;
+            align-items: center;
+            justify-content: space-evenly;
+            padding: 0;
+    
+            a {
+                text-decoration: none;
+                color: $dark;
+            }
+        }
+    
+        .login {
+            margin-right: 20px;
+        }
+        
+    }
+}
+////////////////////////////////////////////////////////////
