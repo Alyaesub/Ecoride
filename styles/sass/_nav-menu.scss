@@ -28,8 +28,9 @@
         
         .logo {
             display: block; // Le logo reste en haut
-            margin: 20px auto;
-            width: 100px;
+            margin: 10px 10px 10px 10px ;
+            width: 150px;
+            height: 100px;
         }
     }
 
@@ -39,11 +40,7 @@
 ///////////////////////////// Code Desktop ////////////////////////
 @media (min-width: 768px) {
 
-    .mobile-nav {
-        display: none;
-    }
-
-    .nav-menu-desk {
+    .header {
         display: flex;
         align-items: center;
         margin-top: 10px;
