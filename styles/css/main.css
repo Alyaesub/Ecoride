@@ -5,6 +5,7 @@
     height: 100%;
   }
   body {
+    height: 100vh;
     min-height: 100vh;
     background-color: #BCE593;
   }
@@ -34,22 +35,22 @@
 /* Media Queries */
 @media (max-width: 768px) {
   .navbar {
-    display: none;
-  }
-  .mobile-nav {
+    position: absolute;
+    inset: auto 0 0 0;
     display: flex;
     justify-content: space-around;
-    position: fixed;
-    bottom: 0;
+    height: 80px;
     width: 100%;
-    background-color: #4caf50;
+    background-color: #34a853;
   }
-  .mobile-nav ul {
-    list-style: none;
+  .navbar ul {
+    padding-left: 0;
     display: flex;
-    gap: 20px;
+    align-items: center;
+    list-style: none;
+    gap: 10px;
   }
-  .mobile-nav ul li a {
+  .navbar ul li a {
     text-decoration: none;
     color: white;
     font-weight: bold;
@@ -118,7 +119,7 @@
   }
 }
 @media (max-width: 768px) {
-  .title-search .title {
+  .title-search {
     display: none;
   }
 }

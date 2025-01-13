@@ -1,29 +1,30 @@
 /////////////////////  CODE Mobilefirst //////////////////////////
 @media (max-width: 768px) {
     .navbar {
-        display: none;
-    }
-
-        .mobile-nav {
-            display: flex; // Affiche la navbar mobile
-            justify-content: space-around;
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-            background-color: #4caf50;
+        position: absolute;
+        inset: auto 0 0 0;
+        display: flex; // Affiche la navbar mobile
+        justify-content: space-around;
+        height: 80px;
+        width: 100%;
+        background-color: $primary-color;
         
             ul {
-            list-style: none;
+            padding-left: 0;
             display: flex;
-            gap: 20px;
+            align-items: center;
+            list-style: none;
+            gap: 10px;
         
             li a {
                 text-decoration: none;
                 color: white;
                 font-weight: bold;
             }
+            
             }
-        }
+    }
+
         
         .logo {
             display: block; // Le logo reste en haut
