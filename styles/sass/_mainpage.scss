@@ -1,7 +1,18 @@
 ///////////////////////////// Code Mobilfirst //////////////////////
 @media (max-width: 768px) {
-    .title-search { // code a garder
-        display: none;
+    .title {
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        
+        h1 {
+            margin: 0;
+        }
+    
+        p {
+            margin: 0;
+        }
     }
 }
 //////////////////////////////////////////////////////////////
