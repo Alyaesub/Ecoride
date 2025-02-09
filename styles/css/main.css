@@ -259,6 +259,12 @@
   .section-pubs-covoit a .link-covoit p {
     color: black;
   }
+  .pub-1 {
+    display: none;
+  }
+  .pub-2 {
+    display: none;
+  }
 }
 @media (min-width: 768px) {
   .section-pubs-covoit {
