@@ -1,0 +1,64 @@
+//////////////////////////// Code Mobilfirst //////////////////////
+@media (max-width: 768px) {
+    .search-bar-section {
+        display: flex;
+        align-items: center;
+        justify-content: space-around
+    }
+    .search-bar {
+        width: 100%; // Prend toute la largeur
+        max-width: 250px;
+    }
+}
+//////////////////////////////////////////////////////////////
+
+
+
+
+///////////////////////////// Code Desktop ////////////////////////
+@media (min-width: 768px) {
+
+    .search-bar-section {
+        display: flex;
+        align-items: center;
+        justify-content: space-around
+    }
+    .search-bar {
+        display: flex;
+        align-items: center;
+        background: #f4f4f4;
+        border-radius: 25px;
+        padding: 5px;
+        width: 300px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease-in-out;
+    
+        &:hover {
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+    
+        input {
+            border: none;
+            outline: none;
+            background: transparent;
+            padding: 10px;
+            font-size: 1rem;
+            flex: 1;
+        }
+    
+        button {
+            background: #007bff;
+            border: none;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: background 0.3s;
+    
+            &:hover {
+                background: #0056b3;
+            }
+        }
+    }
+    
+}    
