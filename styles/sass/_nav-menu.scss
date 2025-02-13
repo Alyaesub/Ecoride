@@ -23,16 +23,23 @@
             }
             
             }
+            
     }
+}
+.header {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+    height: 100px;
+    justify-content: center;
+}
 
-        
     .logo {
         display: block; // Le logo reste en haut
         margin: 10px 10px 10px 10px ;
-        width: 150px;
-        height: 100px;
+        width: 200px;
+        height: 100%;
     }
-}
 
 
 ///////////////////////////////////////////////////////////////////
