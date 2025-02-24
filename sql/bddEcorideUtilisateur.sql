@@ -43,3 +43,11 @@ CREATE TABLE Avis (
     FOREIGN KEY (covoiturage_id) REFERENCES Covoiturages(id),
     FOREIGN KEY (utilisateur_id) REFERENCES Utilisateurs(id)
 );
+
+--Relations entre les tables :
+
+-- Utilisateurs → Covoiturages : Un utilisateur (conducteur) peut proposer plusieurs covoiturages.
+-- Utilisateurs → Vehicules : Un utilisateur peut posséder plusieurs véhicules.
+-- Covoiturages → Vehicules : Un covoiturage est associé à un véhicule.
+-- Covoiturages → Avis : Un covoiturage peut recevoir plusieurs avis.
+-- Utilisateurs → Avis : Un utilisateur peut laisser plusieurs avis.
