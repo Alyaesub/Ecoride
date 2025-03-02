@@ -17,11 +17,12 @@
   }
 
   main {
+    display: flex;
+    flex-direction: column;
     flex: 1; // Remplit l'espace entre le header et le footer
     padding-bottom: 50px;
   }
   
-
 }
 //////////////////////////////////////////////////////////////////////
 
@@ -41,6 +42,8 @@
   }
   
   main {
+    display: flex;
+    flex-direction: column;
     flex: 1; // Remplit l'espace entre le header et le footer
   }
   

@@ -4,6 +4,7 @@
     
     form {
         background-color: $primary-color;
+        width: 70%;
         padding: 15px;
         margin: 10px;
         border-radius: 8px;
@@ -45,8 +46,14 @@
 
 ////////////////////////// Code Desktop /////////////////////////
 @media (min-width: 768px) {
+
+    .formulaire {
+        width: 70%;
+    }
+
     form {
         background-color: $primary-color;
+        width: 70%;
         padding: 15px;
         margin: 10px;
         border-radius: 8px;
