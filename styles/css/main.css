@@ -11,6 +11,7 @@
   }
   main {
     flex: 1;
+    padding-bottom: 50px;
   }
 }
 @media (min-width: 768px) {
@@ -37,7 +38,7 @@
 }
 @media (max-width: 768px) {
   .navbar {
-    position: absolute;
+    position: fixed;
     inset: auto 0 0 0;
     display: flex;
     justify-content: space-around;
@@ -335,5 +336,77 @@
   }
   .pub-2:hover {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  }
+}
+@media (max-width: 768px) {
+  form {
+    background-color: #34a853;
+    padding: 15px;
+    margin: 10px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  form label {
+    display: block;
+    margin-top: 10px;
+    font-weight: bold;
+  }
+  form input {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+    border: 1px solid white;
+    border-radius: 8px;
+  }
+  form button {
+    width: 100%;
+    padding: 10px;
+    background-color: #81ED4F;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  form button:hover {
+    background-color: #4da6ff;
+  }
+}
+@media (min-width: 768px) {
+  form {
+    background-color: #34a853;
+    padding: 15px;
+    margin: 10px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  form label {
+    display: block;
+    margin-top: 10px;
+    font-weight: bold;
+  }
+  form input {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+    border: 1px solid white;
+    border-radius: 8px;
+  }
+  form button {
+    width: 100%;
+    padding: 10px;
+    background-color: #81ED4F;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  form button:hover {
+    background-color: #4da6ff;
   }
 }/*# sourceMappingURL=main.css.map */

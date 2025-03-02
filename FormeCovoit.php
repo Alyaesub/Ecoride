@@ -16,7 +16,7 @@
     </header>
     <main>
         <?php
-        include 'php/mainFormPage.php';
+        include 'php/addCovoitForm.php';
         ?>
     </main>
     <footer>

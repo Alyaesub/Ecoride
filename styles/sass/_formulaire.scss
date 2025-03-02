@@ -1,0 +1,87 @@
+///////////////// code mobile////////
+
+@media (max-width: 768px) {
+    
+    form {
+        background-color: $primary-color;
+        padding: 15px;
+        margin: 10px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    
+        label {
+            display: block;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+    
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+            border: 1px solid $white;
+            border-radius: 8px;
+        }
+    
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: $link;
+            color: white;
+            border: none;
+            border-radius: 8px;
+
+            cursor: pointer;
+            font-size: 16px;
+    
+            &:hover {
+                background-color: $secondary-color;
+            }
+        }
+    }
+}
+
+////////////////////////// Code Desktop /////////////////////////
+@media (min-width: 768px) {
+    form {
+        background-color: $primary-color;
+        padding: 15px;
+        margin: 10px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    
+        label {
+            display: block;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+    
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+            border: 1px solid $white;
+            border-radius: 8px;
+        }
+    
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: $link;
+            color: white;
+            border: none;
+            border-radius: 8px;
+
+            cursor: pointer;
+            font-size: 16px;
+    
+            &:hover {
+                background-color: $secondary-color;
+            }
+        }
+    }
+}
