@@ -343,9 +343,14 @@
   }
 }
 @media (max-width: 768px) {
+  .formulaire {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    flex-wrap: wrap;
+  }
   form {
     background-color: #34a853;
-    width: 70%;
     padding: 15px;
     margin: 10px;
     border-radius: 8px;
@@ -381,11 +386,16 @@
 }
 @media (min-width: 768px) {
   .formulaire {
-    width: 70%;
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 100px;
+    margin-top: 30px;
   }
   form {
     background-color: #34a853;
-    width: 70%;
     padding: 15px;
     margin: 10px;
     border-radius: 8px;
