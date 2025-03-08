@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formulaire Covoiturage</title>
-    <link rel="stylesheet" href="/styles/css/main.css">
+    <link rel="stylesheet" href="styles\css\main.css">
 </head>
 
 <body>
@@ -16,7 +16,7 @@
     </header>
     <main>
         <?php
-        include 'php/addCovoitForm.php';
+        include 'php/covoitForm.php';
         ?>
     </main>
     <footer>

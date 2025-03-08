@@ -5,24 +5,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EcoRide</title>
-    <link rel="stylesheet" href="/styles/css/main.css">
+    <link rel="stylesheet" href="styles\css\main.css">
 </head>
 
 <body>
     <header class="header">
-            <img class="logo" src="assets/Design_sans_titre-removebg-preview.png" alt="logoecoride">
-            <nav class="navbar">
-                <ul>
-                    <li><a href="index.html">Accueil</a></li>
-                    <li><a href="FormeCovoit.php">Voyages</a></li>
-                    <li><a href="">Activités</a></li>
-                    <li><a href="">Profil</a></li>
-                </ul>
-            </nav>
-            <div class="login">
-                <button class="buttonlog" id="btn-log">Connectez vous</button>
-            </div>
-        </header>
+        <img class="logo" src="assets/Design_sans_titre-removebg-preview.png" alt="logoecoride">
+        <nav class="navbar">
+            <ul>
+                <li><a href="index.php">Accueil</a></li>
+                <li><a href="FormeCovoit.php">Voyages</a></li>
+                <li><a href="">Activités</a></li>
+                <li><a href="">Profil</a></li>
+            </ul>
+        </nav>
+        <div class="login">
+            <button class="buttonlog" id="btn-log">Connectez vous</button>
+        </div>
+    </header>
 
     <main class="content" id="home"> <!--Main general de la page-->
         <section class="title-search">
