@@ -9,9 +9,9 @@ ecoride/
 ├── php/
 │   ├── db.php               // Connexion à la base de données
 │   ├── rechercher_covoiturage.php  // Traitement de la recherche
-│   ├── ajouter_covoiturage.php     // Traitement de l'ajout
+│   ├── ajouter_covoiturage.php     // Traitement de l ajout
 │   ├── header.php           // En-tête de la page
-│   ├── addCovoitForm.php    // Formulaire d'ajout de covoiturage
+│   ├── addCovoitForm.php    // Formulaire d ajout de covoiturage
 │   └── footer.php           // Pied de page
 │
 └── index.php                // Page principale

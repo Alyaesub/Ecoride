@@ -129,7 +129,19 @@
 }
 @media (min-width: 768px) {
   .buttonlog {
-    width: 80px;
+    display: inline-block;
+    padding: 5px 10px;
+    background-color: #007BFF;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    text-align: center;
+    font-family: Arial, sans-serif;
+    font-size: 10px;
+    cursor: pointer;
+  }
+  .buttonlog:hover {
+    background-color: #0056b3;
   }
 }
 @media (max-width: 768px) {
@@ -428,4 +440,13 @@
   form button:hover {
     background-color: #4da6ff;
   }
+}
+.profile-container h1 {
+  text-align: center;
+}
+.profile-container .profile-picture img {
+  margin-left: 30px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
 }/*# sourceMappingURL=main.css.map */

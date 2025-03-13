@@ -39,23 +39,23 @@ CREATE TABLE Utilisateurs (
     FOREIGN KEY (id_utilisateur) REFERENCES Utilisateurs (id_utilisateur)
 );
 
---             -- Création de la table Avis
---             CREATE TABLE Avis
---             (
---                 id INT
---                 AUTO_INCREMENT PRIMARY KEY,
---     covoiturage_id INT NOT NULL,
---     utilisateur_id INT NOT NULL,
---     note INT CHECK
---                 (note BETWEEN 1 AND 5),
---     commentaire TEXT,
---     FOREIGN KEY
---                 (covoiturage_id) REFERENCES Covoiturages
---                 (id),
---     FOREIGN KEY
---                 (utilisateur_id) REFERENCES Utilisateurs
---                 (id)
--- );
+            -- Création de la table Avis
+            CREATE TABLE Avis
+            (
+                id INT
+                AUTO_INCREMENT PRIMARY KEY,
+    covoiturage_id INT NOT NULL,
+    utilisateur_id INT NOT NULL,
+    note INT CHECK
+                (note BETWEEN 1 AND 5),
+    commentaire TEXT,
+    FOREIGN KEY
+                (covoiturage_id) REFERENCES Covoiturages
+                (id),
+    FOREIGN KEY
+                (utilisateur_id) REFERENCES Utilisateurs
+                (id)
+);
 
 --Relations entre les tables :
 

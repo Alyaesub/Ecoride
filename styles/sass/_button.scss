@@ -9,8 +9,21 @@
 
  ////////////////////// Code desktop ///////////////////////////
 @media (min-width: 768px) {
-    .buttonlog {
-        width: 80px;
-    }
+            .buttonlog {
+                display: inline-block;
+                padding: 5px 10px;
+                background-color: #007BFF;
+                color: white;
+                text-decoration: none;
+                border-radius: 5px;
+                text-align: center;
+                font-family: Arial, sans-serif;
+                font-size: 10px;
+                cursor: pointer;
+            }
+            
+            .buttonlog:hover {
+                background-color: #0056b3;
+            }
 }
 ////////////////////////////////////////////////////////////

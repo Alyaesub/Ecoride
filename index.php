@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EcoRide</title>
+    <title>Accueil EcoRide</title>
     <link rel="stylesheet" href="styles\css\main.css">
 </head>
 
@@ -16,11 +16,11 @@
                 <li><a href="index.php">Accueil</a></li>
                 <li><a href="FormeCovoit.php">Voyages</a></li>
                 <li><a href="">Activités</a></li>
-                <li><a href="">Profil</a></li>
+                <li><a href="profilUtilisateur.php">Profil</a></li>
             </ul>
         </nav>
         <div class="login">
-            <button class="buttonlog" id="btn-log">Connectez vous</button>
+            <a href="profilUtilisateur.php" class="buttonlog" id="btn-log">Connectez-vous</a>
         </div>
     </header>
 
