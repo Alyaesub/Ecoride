@@ -10,7 +10,7 @@
 
 <body>
   <div class="profile-container">
-    <h1>Profil Utilisateur</h1>
+    <h1>Connectez vous a votre profil</h1>
     <div class="profile-picture">
       <img src="assets\mowgli-personnage-livre-jungle-10.jpg" alt="Photo de profil">
     </div>
@@ -21,10 +21,7 @@
       <label for="email">Email :</label>
       <input type="email" id="email" name="email" required>
 
-      <label for="bio">Bio :</label>
-      <textarea id="bio" name="bio" rows="4"></textarea>
-
-      <button type="submit">Mettre à jour le profil</button>
+      <button type="submit">connetez-vous</button>
     </form>
   </div>
 

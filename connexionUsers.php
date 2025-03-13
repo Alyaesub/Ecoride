@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Formulaire Covoiturage</title>
+  <title>Connexion a votre profiles</title>
   <link rel="stylesheet" href="styles\css\main.css">
 </head>
 
@@ -16,7 +16,7 @@
   </header>
   <main>
     <?php
-    include 'php\profil.php';
+    include 'php\connexionProfils.php';
     ?>
   </main>
   <footer>
