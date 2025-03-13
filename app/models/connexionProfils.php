@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profil Utilisateur</title>
+  <link rel="stylesheet" href="styles\css\main.css">
+</head>
+
+<body>
+  <div class="profile-container">
+    <h1>Connectez vous a votre profil</h1>
+    <?php if (isset($_GET['error'])): ?>
+      <p style="color: red;">Identifiants incorrects, merci de réessayer.</p>
+    <?php endif; ?>
+    <div class="profile-picture">
+      <img src="" alt="Photo de profil">
+    </div>
+    <form action="php\traitement.php" method="$_POST" class="formulaire" id="profileForm">
+      <label for="email">Email :</label>
+      <input type="email" name="email" id="email" required>
+
+      <label for="password">Mot de passe :</label>
+      <input type="password" name="password" id="password" required>
+
+      <button type="submit">Se connecter</button>
+    </form>
+  </div>
+</body>
+
+</html>

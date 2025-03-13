@@ -5,7 +5,7 @@
     <section class="formulaire">
         <section class="search-covoit">
             <h2>trouver un covoiturage</h2>
-            <form id="searchCovoiturageForm" action="saveCodeTest\traitement.php" method="get">
+            <form id="searchCovoiturageForm" action="/app\controllers\traitement.php" method="get">
                 <label for="adresse_depart">Adresse de départ :</label>
                 <input type="text" id="adresse_depart" name="adresse_depart" required><br>
 
@@ -29,7 +29,7 @@
         </section>
         <section class="add-covoit">
             <h2>Ajouter un covoiturage</h2>
-            <form id="addCovoiturageForm" action="saveCodeTest\traitement.php" method="post">
+            <form id="addCovoiturageForm" action="/app\controllers\traitement.php" method="post">
 
                 <label for="conducteur_id">ID Conducteur :</label>
                 <input type="number" id="conducteur_id" name="conducteur_id" required><br>

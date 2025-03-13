@@ -5,23 +5,23 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Connexion a votre profiles</title>
-  <link rel="stylesheet" href="styles\css\main.css">
+  <link rel="stylesheet" href="/public\styles\css\main.css">
 </head>
 
 <body>
   <header>
     <?php
-    include 'php/header.php';
+    include '../partials/header.php';
     ?>
   </header>
   <main>
     <?php
-    include 'php\connexionProfils.php';
+    include '../../models/connexionProfils.php';
     ?>
   </main>
   <footer>
     <?php
-    include 'php/footer.php';
+    include '../partials/footer.php';
     ?>
   </footer>
 </body>
