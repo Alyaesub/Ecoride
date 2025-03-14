@@ -14,10 +14,7 @@
     <?php if (isset($_GET['error'])): ?>
       <p style="color: red;">Identifiants incorrects, merci de réessayer.</p>
     <?php endif; ?>
-    <div class="profile-picture">
-      <img src="" alt="Photo de profil">
-    </div>
-    <form action="php\traitement.php" method="$_POST" class="formulaire" id="profileForm">
+    <form action="/app/controllers/traitement.php" method="post" class="formulaire" id="profileForm">
       <label for="email">Email :</label>
       <input type="email" name="email" id="email" required>
 

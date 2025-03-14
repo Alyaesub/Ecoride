@@ -20,7 +20,7 @@
             </ul>
         </nav>
         <div class="login">
-            <a href="app\views\pages\connexionUsers.php" class="buttonlog" id="btn-log">Connectez-vous</a>
+            <a href="app\views\pages\loginUsers.php" class="buttonlog" id="btn-log">Connectez-vous</a>
         </div>
     </header>
 

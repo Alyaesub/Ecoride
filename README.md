@@ -1,3 +1,4 @@
+-- Active: 1741715531234@@127.0.0.1@3306
 Dossier Projet et ECF de la formations
 Conception d'une apllication de covoiturage écologique
 
@@ -128,18 +129,17 @@ Installation et paramétrage de VSC, relier mon vsc avec mon github installation
 autoRenam, Prettier, indent-rainbow, github codespace, ESlint, live Preview, mobile preview, et html Css support, SASS compilateur, JavaScript ES6, node.js et nmp pour mes packages pour coter front
 et nod.js, php et sql, php server, php intelehense, MySql coter back ce projet
 
-lien du tableau Trello: https://trello.com/invite/b/674dfbcb0c1b62a2c6577364/ATTI5bbb7e636c9c9aac07b4b2c4cb037469670CFCA8/ecf-ecoride
+-   lien du github: https://github.com/Alyaesub/Ecoride.git
 
-lien du github: https://github.com/Alyaesub/Ecoride.git
+-   lien du tableau Trello: https://trello.com/invite/b/674dfbcb0c1b62a2c6577364/ ATTI5bbb7e636c9c9aac07b4b2c4cb037469670CFCA8/ecf-ecoride
 
-lien du figma: https://www.figma.com/design/wzlnTb3rpsE1tW39XHNRj9/Maquettage-Ecoride?node-id=0-1&m=dev&t=Js0XPddOeIyc9Kc3-1
-
-lien du diagramme de fonctionnement: https://www.figma.com/design/tDpcbYwymMGQ1bRDxAunYQ/Diagramme-d'utilisation-Ecoride?node-id=0-1&m=dev&t=VxZjbrq5tiGvYXBt-1
+-   lien du diagramme de fonctionnement: https://www.figma.com/design/tDpcbYwymMGQ1bRDxAunYQ/Diagramme-d'utilisation-Ecoride?node-id=0-1&m=dev&t=VxZjbrq5tiGvYXBt-1
 
 -Maquetter une application:
 
 3 maquettes mobile et 3 maquettes desktop
-lien du figma: https://www.figma.com/design/wzlnTb3rpsE1tW39XHNRj9/Maquettage-Ecoride?node-id=0-1&m=dev&t=Js0XPddOeIyc9Kc3-1
+
+-   lien du figma: https://www.figma.com/design/wzlnTb3rpsE1tW39XHNRj9/Maquettage-Ecoride?node-id=0-1&m=dev&t=Js0XPddOeIyc9Kc3-1
 
 //////////////// explication du processuce de dev //////////////////
 

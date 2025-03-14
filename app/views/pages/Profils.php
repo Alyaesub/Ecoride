@@ -3,19 +3,30 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>Mon Profil</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mon profiles</title>
+  <link rel="stylesheet" href="/public\styles\css\main.css">
 </head>
 
 <body>
+  <header>
+    <?php
+    include '../partials/header.php';
+    ?>
+  </header>
 
-  <h1>Bienvenue sur votre profil</h1>
+  <div class="profile-container">
+    <h1>Bienvenue sur votre profil</h1>
+  </div>
   <?php
-  include '../../models/connexionProfils.php';
+  include '../../models/login.php'; // une fois connecter la page ce reactualise sur app\models\profils.php
   ?>
-  <p>Informations de l’utilisateur connecté...</p>
-  <!-- Afficher éventuellement plus de détails sur l'utilisateur, 
-    ses trajets, ses crédits, etc. -->
 
+  <footer>
+    <?php
+    include '../partials/footer.php';
+    ?>
+  </footer>
 </body>
 
 </html>
