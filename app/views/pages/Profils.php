@@ -19,7 +19,7 @@
     <h1>Bienvenue sur votre profil</h1>
   </div>
   <?php
-  include '../../models/login.php'; // une fois connecter la page ce reactualise sur app\models\profils.php
+  include '../../form/login.php'; // une fois connecter la page ce reactualise sur app\models\profils.php
   ?>
 
   <footer>

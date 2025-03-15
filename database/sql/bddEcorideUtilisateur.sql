@@ -20,7 +20,7 @@ CREATE TABLE parametre (
 ) ENGINE=InnoDB;
 
 -- Création de la table Utilisateurs
-CREATE TABLE Utilisateurs (
+CREATE TABLE Utilisateur (
     id_utilisateur INT PRIMARY KEY AUTO_INCREMENT,
     nom VARCHAR(30),
     prenom VARCHAR(30),
@@ -32,10 +32,10 @@ CREATE TABLE Utilisateurs (
 ) ENGINE=InnoDB;
 
 -- Création de la table Véhicules
-    CREATE TABLE Vehicules (
+    CREATE TABLE Vehicule (
     id_vehicule INT AUTO_INCREMENT PRIMARY KEY,
     id_utilisateur INT NOT NULL,
-    marque VARCHAR (50) NOT NULL,
+    id_marque  INT NOT NULL,
     modele VARCHAR (50) NOT NULL,
     immatriculation VARCHAR(30),
     couleur VARCHAR (50) NOT NULL,
@@ -53,9 +53,9 @@ CREATE TABLE marque (
 ) ENGINE=InnoDB;
 
     -- Création de la table Covoiturages
-    CREATE TABLE Covoiturages (
+    CREATE TABLE Covoiturage (
     id_covoiturage INT AUTO_INCREMENT PRIMARY KEY,
-    id_conducteur INT NOT NULL,
+    id_utilisateur INT NOT NULL,
     id_vehicule INT NOT NULL,
     adresse_depart VARCHAR (255) NOT NULL,
     adresse_arrivee VARCHAR (255) NOT NULL,
@@ -63,10 +63,10 @@ CREATE TABLE marque (
     heure_depart TIME,
     date_arrivee DATETIME NOT NULL,
     heure_arrive TIME,
-    prix DECIMAL (10, 2) NOT NULL,
+    prix_personne DECIMAL (10, 2) NOT NULL,
     places_disponibles INT NOT NULL,
     est_ecologique BOOLEAN DEFAULT FALSE,
-    FOREIGN KEY (id_conducteur) REFERENCES Utilisateurs (id_utilisateur),
+    FOREIGN KEY (id_utilisateur) REFERENCES Utilisateurs (id_utilisateur),
     FOREIGN KEY (id_vehicule) REFERENCES Vehicules(id_vehicule),
     CONSTRAINT chk_places CHECK (places_disponibles >= 0),
     CONSTRAINT chk_prix CHECK (prix >= 0)
@@ -74,16 +74,16 @@ CREATE TABLE marque (
 
 -- Table de liaison UTILISATEUR_COVOITURAGE (relation Many-to-Many "participe")
 CREATE TABLE utilisateur_covoiturage (
-    utilisateur_id INT NOT NULL,
-    covoiturage_id INT NOT NULL,
-    PRIMARY KEY (utilisateur_id, covoiturage_id),
+    id_utilisateur INT NOT NULL,
+    id_covoiturage INT NOT NULL,
+    PRIMARY KEY (id_utilisateur, id_covoiturage),
     CONSTRAINT fk_uc_utilisateur
-    FOREIGN KEY (utilisateur_id)
-    REFERENCES utilisateur(utilisateur_id)
+    FOREIGN KEY (id_utilisateur)
+    REFERENCES utilisateur(id_utilisateur)
     ON DELETE CASCADE
     ON UPDATE CASCADE,
     CONSTRAINT fk_uc_covoiturage
-    FOREIGN KEY (covoiturage_id)
+    FOREIGN KEY (id_covoiturage)
     REFERENCES covoiturage(id_covoiturage)
     ON DELETE CASCADE
     ON UPDATE CASCADE
@@ -97,9 +97,9 @@ CREATE TABLE utilisateur_covoiturage (
     note INT CHECK (note BETWEEN 1 AND 5),
     commentaire TEXT,
     statut VARCHAR(30),
-    FOREIGN KEY (covoiturage_id) REFERENCES Covoiturages (id),
-    FOREIGN KEY (utilisateur_id) REFERENCES Utilisateurs (id)
-) ENGINE=InnoDB;;
+    FOREIGN KEY (id_covoiturage) REFERENCES Covoiturages (id),
+    FOREIGN KEY (id_utilisateur) REFERENCES Utilisateurs (id)
+) ENGINE=InnoDB;
 
 --Relations entre les tables :
 
