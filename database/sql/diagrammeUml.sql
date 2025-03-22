@@ -39,8 +39,8 @@ class Vehicule {
   + energie : VARCHAR(30)
 }
 
-class Marque {
-  + id_marque : INT
+class Role {
+  + id_role : INT
   + libelle : VARCHAR(30)
 }
 
@@ -74,6 +74,7 @@ Configuration "1" -- "0..*" Parametre : dispose
 -- 2 Utilisateur -- Avis
 Utilisateur "1" -- "0..*" Avis : possede
 
+
 -- 3 Utilisateur -- Covoiturage
 -- Relation "participe" = un utilisateur peut participer à plusieurs covoiturages
 -- et un covoiturage peut avoir plusieurs utilisateurs
@@ -82,7 +83,7 @@ Utilisateur "0..*" -- "0..*" Covoiturage : participe
 -- 4 Utilisateur -- Voiture
 -- On voit "gere" ou "dep(o)se". 
 -- Selon le MCD, un utilisateur peut gérer ou déposer plusieurs voitures.
-Utilisateur "1" -- "0..*" Voiture : gere / depose
+Utilisateur "1" -- "0..*" Vehicule : gere / depose
 
 -- 5 Voiture -- Covoiturage
 --   Une voiture peut être utilisée pour plusieurs covoiturages,

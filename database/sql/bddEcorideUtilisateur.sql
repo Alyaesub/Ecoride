@@ -28,7 +28,8 @@ CREATE TABLE Utilisateur (
     mot_de_passe VARCHAR (255) NOT NULL,
     credits INT DEFAULT 20,
     photo VARCHAR(50),
-    role ENUM ('utilisateur', 'employe', 'admin') DEFAULT 'utilisateur'
+    role ENUM ('utilisateur', 'employe', 'admin') DEFAULT 'utilisateur',
+    FOREIGN KEY id_role INT
 ) ENGINE=InnoDB;
 
 -- Création de la table Véhicules
@@ -47,8 +48,8 @@ CREATE TABLE Utilisateur (
 ) ENGINE=InnoDB;
 
 -- 5) Table MARQUE
-CREATE TABLE marque (
-    id_marque INT AUTO_INCREMENT PRIMARY KEY,
+CREATE TABLE Role (
+    id_role INT AUTO_INCREMENT PRIMARY KEY,
     libelle VARCHAR(30) NOT NULL
 ) ENGINE=InnoDB;
 

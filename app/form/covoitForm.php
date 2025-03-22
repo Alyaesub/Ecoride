@@ -31,11 +31,11 @@
             <h2>Ajouter un covoiturage</h2>
             <form id="addCovoiturageForm" action="/app\controllers\traitement.php" method="post">
 
-                <label for="conducteur_id">ID Conducteur :</label>
+                <!-- <label for="conducteur_id">ID Conducteur :</label>
                 <input type="number" id="conducteur_id" name="conducteur_id" required><br>
 
                 <label for="vehicule_id">ID Vehicule :</label>
-                <input type="number" id="vehicule_id" name="vehicule_id" required><br>
+                <input type="number" id="vehicule_id" name="vehicule_id" required><br> -->
 
                 <label for="adresse_depart">Adresse de départ :</label>
                 <input type="text" id="adresse_depart" name="adresse_depart" required><br>

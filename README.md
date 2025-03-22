@@ -131,7 +131,7 @@ Documentation du déploiement.
 
 -   lien du tableau Trello : https://trello.com/invite/b/674dfbcb0c1b62a2c6577364/ ATTI5bbb7e636c9c9aac07b4b2c4cb037469670CFCA8/ecf-ecoride
 
--   lien du diagramme de classe : https://www.figma.com/design/UErDXx2fShe8iPASCSTqLB/diagramme-classe-Ecoride?t=Pwlr8pHJmC4x7soR-0
+-   lien du diagramme de classe : https://www.figma.com/design/UErDXx2fShe8iPASCSTqLB/diagramme-classe-Ecoride?node-id=0-1&p=f&t=Jbyde96Sn3lnjZMU-0
 
 -   lien du diagramme d'utilisation : https://www.figma.com/design/tDpcbYwymMGQ1bRDxAunYQ/Diagramme-d'utilisation-Ecoride?node-id=0-1&m=dev&t=VxZjbrq5tiGvYXBt-1
 
