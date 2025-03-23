@@ -1,0 +1,29 @@
+/////////////////////// Code mobilfirst //////////////////
+
+@media (max-width: 768px) {
+    .buttonlog {
+        display: none;
+    }
+}
+ ///////////////////////////////////////////////////////////
+
+ ////////////////////// Code desktop ///////////////////////////
+@media (min-width: 768px) {
+            .buttonlog {
+                display: inline-block;
+                padding: 5px 10px;
+                background-color: $secondary-color;
+                color: white;
+                text-decoration: none;
+                border-radius: 5px;
+                text-align: center;
+                font-family: Arial, sans-serif;
+                font-size: 10px;
+                cursor: pointer;
+            }
+            
+            .buttonlog:hover {
+                background-color: #0056b3;
+            }
+}
+////////////////////////////////////////////////////////////

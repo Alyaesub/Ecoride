@@ -10,6 +10,8 @@
     background-color: #BCE593;
   }
   main {
+    display: flex;
+    flex-direction: column;
     flex: 1;
     padding-bottom: 50px;
   }
@@ -27,6 +29,8 @@
     background-color: #BCE593;
   }
   main {
+    display: flex;
+    flex-direction: column;
     flex: 1;
   }
   footer {
@@ -126,7 +130,19 @@
 }
 @media (min-width: 768px) {
   .buttonlog {
-    width: 80px;
+    display: inline-block;
+    padding: 5px 10px;
+    background-color: #4da6ff;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    text-align: center;
+    font-family: Arial, sans-serif;
+    font-size: 10px;
+    cursor: pointer;
+  }
+  .buttonlog:hover {
+    background-color: #0056b3;
   }
 }
 @media (max-width: 768px) {
@@ -340,6 +356,12 @@
   }
 }
 @media (max-width: 768px) {
+  .formulaire {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    flex-wrap: wrap;
+  }
   form {
     background-color: #34a853;
     padding: 15px;
@@ -376,6 +398,15 @@
   }
 }
 @media (min-width: 768px) {
+  .formulaire {
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 100px;
+    margin-top: 30px;
+  }
   form {
     background-color: #34a853;
     padding: 15px;
@@ -409,5 +440,37 @@
   }
   form button:hover {
     background-color: #4da6ff;
+  }
+}
+@media (max-width: 768px) {
+  .profile-container h1 {
+    text-align: center;
+  }
+  .profile-container .register-button {
+    margin-top: 20px;
+  }
+  .profile-container .register-button p {
+    text-align: center;
+  }
+}
+@media (min-width: 768px) {
+  .profile-container {
+    display: flex;
+    flex-direction: column;
+    align-content: space-between;
+    justify-content: flex-end;
+    align-items: center;
+  }
+  .profile-container h1 {
+    text-align: center;
+  }
+  .profile-container form {
+    width: 50%;
+  }
+  .profile-container .register-button {
+    margin-top: 20px;
+  }
+  .profile-container .register-button p {
+    text-align: center;
   }
 }/*# sourceMappingURL=main.css.map */

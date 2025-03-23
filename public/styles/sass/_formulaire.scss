@@ -1,6 +1,14 @@
 ///////////////// code mobile////////
 
 @media (max-width: 768px) {
+
+    .formulaire {
+        display: flex;
+        flex-direction: column;
+        align-content: center;
+        flex-wrap: wrap;
+
+    }
     
     form {
         background-color: $primary-color;
@@ -45,6 +53,17 @@
 
 ////////////////////////// Code Desktop /////////////////////////
 @media (min-width: 768px) {
+
+    .formulaire {
+        display: flex;
+        flex-direction: row;
+        align-content: center;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 100px;
+        margin-top: 30px;
+    }
+
     form {
         background-color: $primary-color;
         padding: 15px;
