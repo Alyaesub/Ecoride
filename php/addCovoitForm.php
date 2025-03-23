@@ -27,6 +27,7 @@
                 <button type="submit">Rechercher</button>
             </form>
         </section>
+
         <section class="add-covoit">
             <h2>Ajouter un covoiturage</h2>
             <form id="addCovoiturageForm" action="saveCodeTest\traitement.php" method="post">
