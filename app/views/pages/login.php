@@ -16,7 +16,7 @@
   </header>
   <main>
     <?php
-    include '../../form/login.php';
+    include '../../form/loginPost.php';
     ?>
   </main>
   <footer>

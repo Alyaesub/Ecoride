@@ -16,11 +16,11 @@
                 <li><a href="index.php">Accueil</a></li>
                 <li><a href="app\views\pages\FormeCovoit.php">Voyages</a></li>
                 <li><a href="">Activités</a></li>
-                <li><a href="app/views/pages/Profils.php">Profil</a></li>
+                <li><a href="app/views/pages/ProfilUsers.php">Profil</a></li>
             </ul>
         </nav>
         <div class="login">
-            <a href="app\views\pages\loginUsers.php" class="buttonlog" id="btn-log">Connectez-vous</a>
+            <a href="app\views\pages\login.php" class="buttonlog" id="btn-log">Connectez-vous</a>
         </div>
     </header>
 

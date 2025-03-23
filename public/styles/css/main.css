@@ -441,12 +441,35 @@
     background-color: #4da6ff;
   }
 }
-.profile-container h1 {
-  text-align: center;
+@media (max-width: 768px) {
+  .profile-container h1 {
+    text-align: center;
+  }
+  .profile-container .register-button {
+    margin-top: 20px;
+  }
+  .profile-container .register-button p {
+    text-align: center;
+  }
 }
-.profile-container .profile-picture img {
-  margin-left: 30px;
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
+@media (min-width: 768px) {
+  .profile-container {
+    display: flex;
+    flex-direction: column;
+    align-content: space-between;
+    justify-content: flex-end;
+    align-items: center;
+  }
+  .profile-container h1 {
+    text-align: center;
+  }
+  .profile-container form {
+    width: 50%;
+  }
+  .profile-container .register-button {
+    margin-top: 20px;
+  }
+  .profile-container .register-button p {
+    text-align: center;
+  }
 }/*# sourceMappingURL=main.css.map */

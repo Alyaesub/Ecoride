@@ -17,11 +17,16 @@
     <form action="/app/controllers/traitement.php" method="post" class="formulaire" id="profileForm">
       <label for="email">Email :</label>
       <input type="email" name="email" id="email" required>
-
       <label for="password">Mot de passe :</label>
       <input type="password" name="password" id="password" required>
-
       <button type="submit">Se connecter</button>
+
+      <div class="register-button">
+        <p>Ou créez vous un profil : </p>
+        <a href="">
+          <button type="button">Créer votre profil</button>
+        </a>
+      </div>
     </form>
   </div>
 </body>

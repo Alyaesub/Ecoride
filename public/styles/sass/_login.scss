@@ -1,0 +1,41 @@
+////////// Mobilfirst/////////////////
+@media (max-width: 768px) {
+  .profile-container {
+    h1{
+      text-align: center;
+    }
+    .register-button {
+      margin-top: 20px;
+  
+      p {
+        text-align: center;
+      }
+    }
+  }
+}
+
+
+////////////////////////// Code Desktop /////////////////////////
+@media (min-width: 768px) {
+  .profile-container {
+    display: flex;
+    flex-direction: column;
+    align-content: space-between;
+    justify-content: flex-end;
+    align-items: center;
+    h1{
+      text-align: center;
+    }
+    form{
+      width: 50%;
+    }
+    
+    .register-button {
+      margin-top: 20px;
+  
+      p {
+        text-align: center;
+      }
+    }
+  }
+}

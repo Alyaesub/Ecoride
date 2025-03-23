@@ -54,9 +54,11 @@ class Covoiturage {
   + heure_depart TIME : TIME
   + date_arrivee DATETIME NOT NULL
   + heure_arrive TIME
-  + prix_personne : FLOAT
-  + places_disponibles : INT
+  + prix_personne  FLOAT
+  + places_disponibles  INT
   + est_ecologique BOOLEAN DEFAULT FALSE
+  + animaux_autoriser BOOLEAN DEFAULT FALSE
+  + fumeur BOOLEAN DEFAULT FALSE
 }
 
 class Utilisateur_covoiturage {

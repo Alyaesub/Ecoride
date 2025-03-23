@@ -67,6 +67,8 @@ CREATE TABLE Role (
     prix_personne DECIMAL (10, 2) NOT NULL,
     places_disponibles INT NOT NULL,
     est_ecologique BOOLEAN DEFAULT FALSE,
+    animaux_autoriser BOOLEAN DEFAULT FALSE
+    fumeur BOOLEAN DEFAULT FALSE
     FOREIGN KEY (id_utilisateur) REFERENCES Utilisateurs (id_utilisateur),
     FOREIGN KEY (id_vehicule) REFERENCES Vehicules(id_vehicule),
     CONSTRAINT chk_places CHECK (places_disponibles >= 0),
