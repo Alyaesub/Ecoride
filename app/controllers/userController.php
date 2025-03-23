@@ -13,7 +13,7 @@ class UserController
   public function showLoginForm()
   {
     // Charger la vue du formulaire de connexion
-    require __DIR__ . 'app\views\pages\connexionUsers.php';
+    require __DIR__ . 'app\views\pages\login.php';
   }
 
   /**
@@ -33,7 +33,7 @@ class UserController
     // 3. Si OK, enregistrer en session et rediriger vers le profil
     if ($email === 'test@test.com' && $password === '1234') {
       $_SESSION['user_id'] = 42; // par exemple
-      header('Location: /profil');
+      header('Location: /app\views\pages\login.php');
       exit;
     } else {
       // Gérer l'erreur (rester sur la page ou afficher un message)
@@ -50,7 +50,7 @@ class UserController
     // Vérifier si l’utilisateur est connecté
     if (!isset($_SESSION['user_id'])) {
       // Rediriger vers la connexion s’il n’est pas logué
-      header('Location: /connexion');
+      header('Location: /login');
       exit;
     }
 
@@ -58,6 +58,6 @@ class UserController
     // $user = User::find($_SESSION['user_id']);
 
     // Charger la vue du profil
-    require __DIR__ . 'app\views\pages\connexionProfils.php';
+    require __DIR__ . 'app\views\ProfilUsers.php';
   }
 }
