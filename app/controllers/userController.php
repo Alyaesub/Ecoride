@@ -2,7 +2,7 @@
 
 namespace App\Controllers;
 
-use App\Models\User; // ton modèle User s’il existe
+use App\models\User; // ton modèle User s’il existe
 // use ... d'autres classes nécessaires (session, etc.)
 
 class UserController

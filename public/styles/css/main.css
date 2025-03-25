@@ -257,18 +257,20 @@
   }
 }
 @media (max-width: 768px) {
-  .section-pubs-covoit {
+  .section-photo-covoit {
     padding-top: 20px;
     width: 100%;
-    height: 250px;
+    height: auto;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
+    gap: 20px;
   }
-  .section-pubs-covoit a {
+  .section-photo-covoit a {
     text-decoration: none;
   }
-  .section-pubs-covoit a .link-covoit {
+  .section-photo-covoit a .link-covoit {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -280,21 +282,69 @@
     transition: all 0.3s ease-in-out;
     text-decoration: none;
   }
-  .section-pubs-covoit a .link-covoit:hover {
+  .section-photo-covoit a .link-covoit:hover {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
   }
-  .section-pubs-covoit a .link-covoit p {
+  .section-photo-covoit a .link-covoit p {
     color: black;
   }
-  .pub-1 {
+  .photo-1 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 150px;
+    height: 150px;
+    background-color: #34a853;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+    transition: all 0.3s ease-in-out;
+    text-decoration: none;
+  }
+  .photo-1:hover {
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  }
+  .photo-1 p {
+    color: black;
+  }
+  .photo-2 {
     display: none;
   }
-  .pub-2 {
+  .photo-3 {
     display: none;
+  }
+  .description {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 90%;
+    max-width: 300px;
+    height: auto;
+    background-color: #34a853;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+    transition: all 0.3s ease-in-out;
+    text-decoration: none;
+    padding: 8px;
+    text-align: center;
+  }
+  .description:hover {
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  }
+  .description p {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    width: 100%;
+    max-width: 100%;
+    color: black;
+    white-space: nowrap;
+    text-overflow: ellipsis;
   }
 }
 @media (min-width: 768px) {
-  .section-pubs-covoit {
+  .section-photo-covoit {
     display: flex;
     align-items: center;
     justify-content: space-around;
@@ -303,10 +353,10 @@
     width: 100%;
     height: 250px;
   }
-  .section-pubs-covoit a {
+  .section-photo-covoit a {
     text-decoration: none;
   }
-  .section-pubs-covoit a .link-covoit {
+  .section-photo-covoit a .link-covoit {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -318,13 +368,13 @@
     transition: all 0.3s ease-in-out;
     text-decoration: none;
   }
-  .section-pubs-covoit a .link-covoit:hover {
+  .section-photo-covoit a .link-covoit:hover {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
   }
-  .section-pubs-covoit a .link-covoit p {
+  .section-photo-covoit a .link-covoit p {
     color: black;
   }
-  .pub-1 {
+  .photo-1 {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -336,10 +386,10 @@
     transition: all 0.3s ease-in-out;
     text-decoration: none;
   }
-  .pub-1:hover {
+  .photo-1:hover {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
   }
-  .pub-2 {
+  .photo-2 {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -351,8 +401,50 @@
     transition: all 0.3s ease-in-out;
     text-decoration: none;
   }
-  .pub-2:hover {
+  .photo-2:hover {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  }
+  .photo-3 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 150px;
+    height: 150px;
+    background-color: #34a853;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+    transition: all 0.3s ease-in-out;
+    text-decoration: none;
+  }
+  .photo-3:hover {
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  }
+  .description {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+    background-color: #34a853;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+    transition: all 0.3s ease-in-out;
+    text-decoration: none;
+    padding: 10px;
+    text-align: center;
+  }
+  .description:hover {
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  }
+  .description p {
+    max-width: 100%;
+    overflow-wrap: break-word;
+    word-break: break-word;
+    hyphens: auto;
+    white-space: normal;
+    padding: 10px;
+    color: black;
   }
 }
 @media (max-width: 768px) {

@@ -39,7 +39,7 @@
             </div>
         </section>
         <!--Section general des pubs et de la section covoit-->
-        <section class="section-pubs-covoit">
+        <section class="section-photo-covoit">
             <!--div et lien qui méne au formulaire de covoit-->
             <a href="app\views\pages\FormeCovoit.php">
                 <div class="link-covoit" id="link-covoit">
@@ -47,8 +47,17 @@
                 </div>
             </a>
             <!--Section pour les pubs pour le format desktop-->
-            <div class="pub-1">PUB 1</div>
-            <div class="pub-2">PUB 2</div>
+            <div class="photo-1">photo- 1</div>
+            <div class="photo-2">photo- 2</div>
+            <div class="photo-3">photo- 3</div>
+            <div class="description">
+                <p>
+                    EcoRide – Le covoiturage éco-responsable 🌿🚗
+                    EcoRide est la plateforme de covoiturage dédiée aux trajets en voiture, alliant économie et écologie.<br>
+                    Notre mission ? Réduire l’impact environnemental des déplacements en connectant des voyageurs soucieux de la planète.<br>
+                    Voyagez malin, partagez vos trajets et contribuez à un monde plus vert avec EcoRide ! 💚
+                </p>
+            </div>
         </section>
 
     </main>
