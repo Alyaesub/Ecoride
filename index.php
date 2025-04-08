@@ -39,24 +39,20 @@
             </div>
         </section>
         <!--Section general des pubs et de la section covoit-->
-        <section class="section-photo-covoit">
-            <!--div et lien qui méne au formulaire de covoit-->
-            <a href="app\views\pages\FormeCovoit.php">
-                <div class="link-covoit" id="link-covoit">
-                    <p>Envie de voyage?<br> Cliquez ici et GO!!!!</p>
+        <section class="section-photo-covoit carousel">
+            <a href="app/views/pages/FormeCovoit.php">
+                <div class="carousel-item link-covoit " id="link-covoit">
+                    <p>envie de voyager ? GO!!</p>
                 </div>
             </a>
-            <!--Section pour les pubs pour le format desktop-->
-            <div class="photo-1">photo- 1</div>
-            <div class="photo-2">photo- 2</div>
-            <div class="photo-3">photo- 3</div>
-            <div class="description">
-                <p>
-                    EcoRide – Le covoiturage éco-responsable 🌿🚗
-                    EcoRide est la plateforme de covoiturage dédiée aux trajets en voiture, alliant économie et écologie.<br>
-                    Notre mission ? Réduire l’impact environnemental des déplacements en connectant des voyageurs soucieux de la planète.<br>
-                    Voyagez malin, partagez vos trajets et contribuez à un monde plus vert avec EcoRide ! 💚
-                </p>
+            <div class=" photo-1 carousel-item">photo 1</div>
+            <div class=" photo-2 carousel-item">photo 2</div>
+            <div class=" photo-3 carousel-item">photo 3</div>
+            <div class=" description carousel-item">
+                <h2>Pourquoi choisir EcoRide ?</h2>
+                <p>EcoRide est la plateforme idéale pour trouver des trajets en covoiturage.<br>
+                    Que vous soyez conducteur ou passager, nous vous mettons en relation avec d'autres<br>
+                    utilisateurs pour partager vos trajets et réduire vos coûts de transport.</p>
             </div>
         </section>
 
