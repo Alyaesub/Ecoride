@@ -4,18 +4,45 @@
 $primary-color: #34a853;
 $secondary-color: #4da6ff;
 $background-color: #BCE593;
+$background-color-light: "";
+$background-color-dark: "";
+$link: #81ED4F;
 $white: white;
 $dark: #000000;
 $border-color: #ccc;
-$link: #81ED4F;
-$iconnav: #9747FF;
+
+
+
+//Couleurs de texte
+$text-color: #333;
+$text-color-light: #666;
+$text-color-dark: #000;
+$text-color-inverse: #fff;
+$text-color-muted: #999;
+$text-color-success: #28a745;
+$text-color-danger: #dc3545;
+$text-color-warning: #ffc107;
+$text-color-info: #17a2b8;
+
 
 
 //dimensions
 $gap-size: 10px;
-$max-width-mobile: 600px;
-$max-width-tablet: 900px;
-$max-width-desktop: 1200px;
 $header-height: 50px;
 $footer-height: 30px;
 $menu-height: 50px;
+$border-radius: 5px;
+
+//Breakpoints
+$max-width-mobile: 600px;
+$max-width-tablet: 900px;
+$max-width-desktop: 1200px;
+
+
+//Fonts
+$font-family: 'Roboto', sans-serif;
+$font-size: 16px;
+$font-size-small: 14px;
+$font-size-large: 18px;
+$font-size-xlarge: 24px;
+$font-size-xxlarge: 32px;

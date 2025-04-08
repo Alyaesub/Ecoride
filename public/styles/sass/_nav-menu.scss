@@ -39,13 +39,15 @@
         display: block; // Le logo reste en haut
         margin: 10px 10px 10px 10px ;
         width: 200px;
-        height: 100%;
+        height: auto;
     }
 
 
 ///////////////////////////////////////////////////////////////////
 
 ///////////////////////////// Code Desktop ////////////////////////
+
+
 @media (min-width: 768px) {
 
     .header {
@@ -53,6 +55,7 @@
         align-items: center;
         margin-top: 10px;
         height: 100px;
+        width: 100%;
         
         img {
             width: 20%;
@@ -60,7 +63,8 @@
         }
     
         .navbar {
-            width: 100%;
+            width: 70%;
+            gap: 20px;
         }
         
         ul {
