@@ -4,6 +4,11 @@
 
 EcoRide est une application web de covoiturage écologique visant à faciliter les déplacements tout en réduisant l'impact environnemental. L'application permet aux utilisateurs de proposer et de réserver des trajets en covoiturage.
 
+## Structure :
+
+📁 /database/sql contient les scripts d’installation et de test pour la base relationnelle.
+📁 /database/nosql contient les données stockées au format JSON, utilisées pour les avis utilisateurs.
+
 ## 🎯 Fonctionnalités
 
 ### Front-end

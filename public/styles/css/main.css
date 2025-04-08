@@ -123,6 +123,7 @@
     color: white;
     text-align: center;
     padding: 10px;
+    bottom: 0;
   }
 }
 @media (max-width: 768px) {
