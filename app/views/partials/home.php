@@ -22,11 +22,16 @@
     <div class=" photo-1 carousel-item">photo 1</div>
     <div class=" photo-2 carousel-item">photo 2</div>
     <div class=" photo-3 carousel-item">photo 3</div>
-    <div class=" description carousel-item">
+    <div class=" description-desktop carousel-item">
       <h2>Pourquoi choisir EcoRide ?</h2>
       <p>EcoRide est la plateforme idéale pour trouver des trajets en covoiturage.<br>
         Que vous soyez conducteur ou passager, nous vous mettons en relation avec d'autres<br>
         utilisateurs pour partager vos trajets et réduire vos coûts de transport.</p>
+    </div>
+    <!-- Version simplifiée pour mobile -->
+    <div class="description-mobile carousel-item">
+      <h2>EcoRide en bref</h2>
+      <p>Trouvez rapidement votre covoiturage et partagez vos trajets pour économiser.</p>
     </div>
   </section>
 </main>
