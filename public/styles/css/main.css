@@ -117,14 +117,50 @@
 }
 @media (min-width: 768px) {
   .footer {
-    height: 50px;
     width: 100%;
-    background-color: #4caf50;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #34a853;
     color: white;
     text-align: center;
-    padding: 10px;
+    padding: 5px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+  }
+  .footer p {
+    margin: 0;
+  }
+  .footer .social-media,
+  .footer .contact {
+    margin: 10px 5px;
+  }
+  .footer .social-media h3 {
+    margin-bottom: 10px;
+    font-size: 1.2rem;
+  }
+  .footer .social-media a {
+    margin: 0 10px;
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+    transition: color 0.3s ease;
+  }
+  .footer .social-media a:hover {
+    color: #4d4d4d;
   }
 }
+.contact h3 {
+  margin-bottom: 10px;
+  font-size: 1.2rem;
+}
+.contact p {
+  margin: 5px 0;
+  font-size: 0.9rem;
+}
+
 @media (max-width: 768px) {
   .buttonlog {
     display: none;
@@ -259,6 +295,9 @@
   }
 }
 @media (max-width: 768px) {
+  .description-desktop {
+    display: none;
+  }
   .section-photo-covoit {
     display: flex;
     overflow-x: auto !important;
@@ -352,7 +391,7 @@
   .photo-3 p {
     color: black;
   }
-  .description {
+  .description-mobile {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -368,10 +407,10 @@
     text-align: center;
     flex-shrink: 0; /* rajouter pour faire fonctionner le scroll */
   }
-  .description:hover {
+  .description-mobile:hover {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
   }
-  .description p {
+  .description-mobile p {
     display: -webkit-box;
     -webkit-line-clamp: 3;
     line-clamp: 3;
@@ -385,6 +424,9 @@
   }
 }
 @media (min-width: 768px) {
+  .description-mobile {
+    display: none;
+  }
   .section-photo-covoit {
     display: flex;
     align-items: center;
@@ -462,7 +504,7 @@
   .photo-3:hover {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
   }
-  .description {
+  .description-desktop {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -477,10 +519,10 @@
     padding: 10px;
     text-align: center;
   }
-  .description:hover {
+  .description-desktop:hover {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
   }
-  .description p {
+  .description-desktop p {
     max-width: 100%;
     overflow-wrap: break-word;
     word-break: break-word;

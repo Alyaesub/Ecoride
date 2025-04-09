@@ -1,5 +1,6 @@
 ///////////////////////////// Code Mobilfirst //////////////////////
 @media (max-width: $max-width-mobile) {
+    .description-desktop{display: none;}
     .section-photo-covoit{
         display: flex;
         overflow-x: auto !important;
@@ -93,7 +94,7 @@
             color: black;
         }
     }
-    .description {
+    .description-mobile {
         display: flex;
         align-items: center;
         justify-content: center;
@@ -123,6 +124,7 @@
             max-width: 100%;
             color: black;
 
+
             // Alternative si `-webkit-line-clamp` ne fonctionne pas
             /* white-space: nowrap;
             text-overflow: ellipsis; */
@@ -133,6 +135,7 @@
 
 ////////////////////////// Code Desktop /////////////////////////
 @media (min-width: $min-width-desktop) {
+    .description-mobile{display: none;}
     .section-photo-covoit{
         display: flex;
         align-items: center;
@@ -214,7 +217,7 @@
         }
     }
 
-    .description {
+    .description-desktop {
         display: flex;
         align-items: center;
         justify-content: center;
