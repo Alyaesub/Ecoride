@@ -1,6 +1,6 @@
 /////////////////////////// Code mobilfirst //////////////////////////////////
 
-@media (max-width: 768px) {
+@media (max-width: $max-width-mobile) {
     .footer {
         display: none;
     }
@@ -9,11 +9,11 @@
 
 //////////////////// Code desktop ////////////////////////////////
 
-@media (min-width: 768px) {
+@media (min-width: $min-width-desktop) {
     .footer {
         height: 50px;
         width: 100%;
-        background-color: #4caf50;
+        background-color: $primary-color;
         color: white;
         text-align: center;
         padding: 10px;
