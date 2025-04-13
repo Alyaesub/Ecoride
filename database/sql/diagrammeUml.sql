@@ -12,21 +12,27 @@ class Parametre {
   + valeur : VARCHAR(50)
 }
 
+class Role {
+  + id_role : INT
+  + libelle : VARCHAR(30)
+}
+
 class Utilisateur {
   + id_utilisateur : INT
+  + pseudo : VARCHAR(30)
   + nom : VARCHAR(30)
   + prenom : VARCHAR(30)
   + email : VARCHAR(50)
   + motdepasse : VARCHAR(255)
+  + credits : INT DEFAULT 20
   + photo : VARCHAR(50)
-  + role : VARCHAR(30)
+  + id_role : INT
 }
 
-class Avis {
-  + id_avis : INT
-  + note : INT
-  + commentaire : VARCHAR(255)
-  + statut : VARCHAR(30)
+
+class Marque {
+  + id_marque : INT
+  + nom_marque: VARCHAR(30)
 }
 
 class Vehicule {
@@ -37,11 +43,6 @@ class Vehicule {
   + immatriculation : VARCHAR(30)
   + couleur : VARCHAR(30)
   + energie : VARCHAR(30)
-}
-
-class Role {
-  + id_role : INT
-  + libelle : VARCHAR(30)
 }
 
 class Covoiturage {
@@ -65,91 +66,117 @@ class Utilisateur_covoiturage {
   + id_utilisateur INT NOT NULL
   + id_covoiturage INT NOT NULL
 }
+class Avis {
+  + id_avis : INT
+  + id_utilisateur : INT
+  + id_covoiturage : INT
+  + note : INT
+  + commentaire : VARCHAR(255)
+  + statut : VARCHAR(30)
+}
 
-/////////////////////////////////////
-  Les Relations
+  Les Associations
 
+  -- 1 Configuration -- Parametre
+  Configuration "1" -- "0..*" Parametre : dispose
 
--- 1 Configuration -- Parametre
-Configuration "1" -- "0..*" Parametre : dispose
+  -- 2 Utilisateur -- Avis
+  Utilisateur "1" -- "0..*" Avis : possede
 
--- 2 Utilisateur -- Avis
-Utilisateur "1" -- "0..*" Avis : possede
+  -- 3 Utilisateur -- Covoiturage
+  Utilisateur "0..*" -- "0..*" Covoiturage : participe
 
+  -- 4 Utilisateur -- Voiture
+  Utilisateur "1" -- "0..*" Vehicule : gere / depose
 
--- 3 Utilisateur -- Covoiturage
--- Relation "participe" = un utilisateur peut participer à plusieurs covoiturages
--- et un covoiturage peut avoir plusieurs utilisateurs
-Utilisateur "0..*" -- "0..*" Covoiturage : participe
+  -- 5 Voiture -- Covoiturage
+  Vehicule "1" -- "0..*" Covoiturage : utilise
 
--- 4 Utilisateur -- Voiture
--- On voit "gere" ou "dep(o)se". 
--- Selon le MCD, un utilisateur peut gérer ou déposer plusieurs voitures.
-Utilisateur "1" -- "0..*" Vehicule : gere / depose
+  -- 6 Marque -- Voiture
+  Marque "1" -- "0..*" Vehicule : detient
 
--- 5 Voiture -- Covoiturage
---   Une voiture peut être utilisée pour plusieurs covoiturages,
---   un covoiturage utilise une seule voiture à la fois (a priori).
-Vehicule "1" -- "0..*" Covoiturage : utilise
+  -- 7 Utilisateur -- Role
+  Utilisateur "1" -- "1" Role : possede
 
--- 6 Marque -- Voiture
-Marque "1" -- "0..*" Voiture : detient
+  -- 8 Covoiturage -- Utilisateur
+  Covoiturage "1" -- "0..*" Utilisateur : participe
+
+  -- 9 Covoiturage -- Utilisateur_covoiturage
+  Covoiturage "1" -- "0..*" Utilisateur_covoiturage : participe   
 
 @enduml
 
 
+-- Table Configuration pour faire les diagrammes UML
 Table Configuration {
   id_configuration  INT
 }
+
 Table Parametre {
-   id_parametre  INT
-   propriete  VARCHAR(50)
-   valeur  VARCHAR(50)
+  id_parametre  INT
+  propriete  VARCHAR(50)
+  valeur  VARCHAR(50)
+  id_configuration  INT
+}
+
+Table Role {
+  id_role  INT
+  libelle  VARCHAR(30)
 }
 
 Table Utilisateur {
-   id_utilisateur  INT
-   nom  VARCHAR(30)
-   prenom  VARCHAR(30)
-   email  VARCHAR(50)
-   motdepasse  VARCHAR(255)
-   photo  VARCHAR(50)
-   role  VARCHAR(30)
-}
-
-Table Avis {
-   id_avis  INT
-   note  INT
-   commentaire  VARCHAR(255)
-   statut  VARCHAR(30)
-}
-
-Table Vehicule {
-   id_vehicule  INT
-   id_utilisateur INT
-   id_marque  INT
-   modele  VARCHAR(50)
-   immatriculation  VARCHAR(30)
-   couleur  VARCHAR(30)
-   energie  VARCHAR(30)
+  id_utilisateur  INT
+  pseudo  VARCHAR(30)
+  nom  VARCHAR(30)
+  prenom  VARCHAR(30)
+  email  VARCHAR(50)
+  motdepasse  VARCHAR(255)
+  photo  VARCHAR(50)
+  id_role  INT
 }
 
 Table Marque {
-   id_marque  INT
-   libelle  VARCHAR(30)
+  id_marque  INT
+  nom_marque  VARCHAR(50)
+}
+
+Table Vehicule {
+  id_vehicule  INT
+  id_utilisateur  INT
+  id_marque  INT
+  modele  VARCHAR(50)
+  immatriculation  VARCHAR(30)
+  couleur  VARCHAR(30)
+  energie  ENUM('essence','diesel','electrique','hybride')
 }
 
 Table Covoiturage {
-   id_covoiturage  INT
-   id_conducteur INT
-   id_vehicule INT
-   adresse_depart VARCHAR (255)
-   adresse_arrivee VARCHAR (255)
-   date_depart DATETIME
-   heure_depart TIME
-   date_arrivee DATETIME 
-   heure_arrive TIME
-   prix_personne  FLOAT
-   places_disponibles  INT
-   est_ecologique BOOLEAN 
+  id_covoiturage  INT
+  id_utilisateur  INT
+  id_vehicule  INT
+  adresse_depart  VARCHAR(255)
+  adresse_arrivee  VARCHAR(255)
+  date_depart  DATETIME
+  heure_depart  TIME
+  date_arrivee  DATETIME 
+  heure_arrive  TIME
+  prix_personne  DECIMAL(10,2)
+  places_disponibles  INT
+  est_ecologique  BOOLEAN 
+  animaux_autoriser  BOOLEAN
+  fumeur  BOOLEAN
+}
+
+class Utilisateur_covoiturage {
+  id_utilisateur INT NOT NULL
+  id_covoiturage INT NOT NULL
+}
+
+Table Avis {
+  id_avis  INT
+  id_utilisateur  INT
+  id_covoiturage  INT
+  note  INT
+  commentaire  VARCHAR(255)
+  statut  VARCHAR(30)
 }

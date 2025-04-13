@@ -1,3 +1,4 @@
+<!-- partial du footer de l'application -->
 <footer class="footer">
     <p>&copy; 2024 EcoRide. Tous droits réservés.</p>
     <section class="social-media">

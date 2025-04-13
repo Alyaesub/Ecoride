@@ -1,7 +1,7 @@
 <?php
 // Connexion à la base de données
 // Ce fichier est utilisé pour établir une connexion à la base de données
-
+namespace App\Models;
 
 use PDO; //importation de la classe PDO pour la connexion à la base de données   
 

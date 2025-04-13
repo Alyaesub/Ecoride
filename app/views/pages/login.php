@@ -1,3 +1,4 @@
+<!-- page de la view du login -->
 <!DOCTYPE html>
 <html lang="fr">
 

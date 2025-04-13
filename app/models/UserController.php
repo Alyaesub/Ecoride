@@ -1,5 +1,6 @@
 <?php
 //feuille de code pour l'objet userController avec les methodes de la page de connexion et de la page de profils
+namespace App\Models;
 
 class UserController
 {
