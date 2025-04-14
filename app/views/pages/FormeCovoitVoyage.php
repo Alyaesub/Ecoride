@@ -10,21 +10,21 @@
 </head>
 
 <body>
-    <header>
-        <?php
-        include '../partials/header.php';
-        ?>
-    </header>
+
+    <?php
+    include '../partials/header.php';
+    ?>
+
     <main>
         <?php
         include '../../form/covoitForm.php';
         ?>
     </main>
-    <footer>
-        <?php
-        include '../partials/footer.php';
-        ?>
-    </footer>
+
+    <?php
+    include '../partials/footer.php';
+    ?>
+
 </body>
 
 </html>

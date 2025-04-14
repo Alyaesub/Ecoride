@@ -10,11 +10,11 @@
 </head>
 
 <body>
-  <header>
-    <?php
-    include '../partials/header.php';
-    ?>
-  </header>
+
+  <?php
+  include '../partials/header.php';
+  ?>
+
 
   <main>
     <h1>Bienvenue sur votre profil</h1>
@@ -41,11 +41,11 @@
       <input type="number" id="wallet" name="wallet" value="20" readonly><br><br> -->
   </main>
 
-  <footer>
-    <?php
-    include '../partials/footer.php';
-    ?>
-  </footer>
+
+  <?php
+  include '../partials/footer.php';
+  ?>
+
 </body>
 
 </html>

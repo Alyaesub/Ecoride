@@ -33,24 +33,35 @@ $test->hello(); */
 
 <body>
     <main>
-        <header>
-            <?php
-            require_once 'app/views/partials/header.php'; //require du header
-            ?>
-        </header>
+        <?php
+        $page = $_GET['page'] ?? 'home';
 
-        <body>
-            <?php
-            require_once 'app/views/partials/home.php'; // j'ai require le home
-            ?>
-        </body>
+        switch ($page) {
+            case 'home':
+                require 'app/views/pages/home.php';
+                break;
 
-        <footer>
-            <?php
-            require_once 'app/views/partials/footer.php'; //require du footer
-            ?>
-        </footer>
+            case 'covoitVoyage':
+                require 'app/views/pages/formeCovoitVoyage.php';
+                break;
+
+            case 'login':
+                require 'app/views/pages/login.php';
+                break;
+
+            case 'profil':
+                require 'app/views/pages/profilUsers.php';
+                break;
+
+            default:
+                require 'app/views/pages/404.php'; // une page 404 si tu veux
+                break;
+        }
+        ?>
     </main>
+    <footer class="footer">
+        <?php require 'app/views/partials/footer.php'; ?>
+    </footer>
 </body>
 
 </html>

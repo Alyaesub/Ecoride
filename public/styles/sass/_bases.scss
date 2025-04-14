@@ -38,7 +38,7 @@
   body {
     display: flex;
     flex-direction: column; // Organise les éléments verticalement
-    min-height: 100%;
+    min-height: 100vh;
     background-color: $background-color;
   }
   
