@@ -1,3 +1,4 @@
+<!-- partial de l'entête de l'application -->
 <header class="header">
     <img class="logo" src="/public\assets\Design_sans_titre-removebg-preview.png" alt="logoecoride">
     <nav class="navbar">

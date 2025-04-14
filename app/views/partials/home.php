@@ -1,3 +1,4 @@
+<!-- partial de la page d'accueil de l'application -->
 <main class="content" id="home"> <!--Main general de la page-->
   <section class="title-search">
     <div class="title">

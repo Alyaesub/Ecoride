@@ -1,5 +1,8 @@
 CREATE DATABASE ecoride;
 
+/* Pour les clés étrangères, assure-toi que la table référencée est créée avant la table qui la référence. Par exemple, il vaudrait mieux créer la table role avant celle de utilisateur, pour éviter des erreurs de dépendance.
+ */
+
 -- Table CONFIGURATION
 CREATE TABLE configuration (
     id_configuration INT AUTO_INCREMENT PRIMARY KEY
@@ -8,10 +11,9 @@ CREATE TABLE configuration (
 -- Table PARAMETRE
 CREATE TABLE parametre (
     id_parametre INT AUTO_INCREMENT PRIMARY KEY,
+    id_configuration INT,
     propriete VARCHAR(50) NOT NULL,
     valeur VARCHAR(50),
-    -- Clé étrangère vers CONFIGURATION (relation "dispose")
-    id_configuration INT,
     CONSTRAINT fk_parametre_configuration
     FOREIGN KEY (id_configuration)
     REFERENCES configuration(id_configuration)
@@ -19,21 +21,35 @@ CREATE TABLE parametre (
     ON UPDATE CASCADE
 ) ENGINE=InnoDB;
 
+--  Table ROLE
+CREATE TABLE role (
+    id_role INT AUTO_INCREMENT PRIMARY KEY,
+    libelle VARCHAR(30) NOT NULL
+) ENGINE=InnoDB;
+
 -- Création de la table Utilisateurs
-CREATE TABLE Utilisateur (
+CREATE TABLE utilisateur (
     id_utilisateur INT PRIMARY KEY AUTO_INCREMENT,
+    pseudo VARCHAR(30) NOT NULL UNIQUE,
     nom VARCHAR(30),
     prenom VARCHAR(30),
     email VARCHAR (100) NOT NULL UNIQUE,
     mot_de_passe VARCHAR (255) NOT NULL,
     credits INT DEFAULT 20,
     photo VARCHAR(50),
-    role ENUM ('utilisateur', 'employe', 'admin') DEFAULT 'utilisateur',
-    FOREIGN KEY id_role INT
+    id_role INT,
+    CONSTRAINT fk_utilisateur_role
+    FOREIGN KEY (id_role) REFERENCES role(id_role)
+) ENGINE=InnoDB;
+
+--  Table MARQUE
+CREATE TABLE marque (
+    id_marque INT AUTO_INCREMENT PRIMARY KEY,
+    nom_marque VARCHAR(50) NOT NULL
 ) ENGINE=InnoDB;
 
 -- Création de la table Véhicules
-    CREATE TABLE Vehicule (
+    CREATE TABLE vehicule (
     id_vehicule INT AUTO_INCREMENT PRIMARY KEY,
     id_utilisateur INT NOT NULL,
     id_marque  INT NOT NULL,
@@ -42,19 +58,14 @@ CREATE TABLE Utilisateur (
     couleur VARCHAR (50) NOT NULL,
     energie ENUM ('essence', 'diesel', 'electrique', 'hybride') NOT NULL,
     CONSTRAINT fk_voiture_utilisateur
-    FOREIGN KEY (id_utilisateur) REFERENCES Utilisateurs (id_utilisateur),
+    FOREIGN KEY (id_utilisateur) REFERENCES utilisateur (id_utilisateur),
     CONSTRAINT fk_voiture_marque
     FOREIGN KEY (id_marque) REFERENCES marque(id_marque)
 ) ENGINE=InnoDB;
 
--- 5) Table MARQUE
-CREATE TABLE Role (
-    id_role INT AUTO_INCREMENT PRIMARY KEY,
-    libelle VARCHAR(30) NOT NULL
-) ENGINE=InnoDB;
 
     -- Création de la table Covoiturages
-    CREATE TABLE Covoiturage (
+    CREATE TABLE covoiturage (
     id_covoiturage INT AUTO_INCREMENT PRIMARY KEY,
     id_utilisateur INT NOT NULL,
     id_vehicule INT NOT NULL,
@@ -67,13 +78,13 @@ CREATE TABLE Role (
     prix_personne DECIMAL (10, 2) NOT NULL,
     places_disponibles INT NOT NULL,
     est_ecologique BOOLEAN DEFAULT FALSE,
-    animaux_autoriser BOOLEAN DEFAULT FALSE
-    fumeur BOOLEAN DEFAULT FALSE
-    FOREIGN KEY (id_utilisateur) REFERENCES Utilisateurs (id_utilisateur),
-    FOREIGN KEY (id_vehicule) REFERENCES Vehicules(id_vehicule),
+    animaux_autoriser BOOLEAN DEFAULT FALSE,
+    fumeur BOOLEAN DEFAULT FALSE,
+    FOREIGN KEY (id_utilisateur) REFERENCES utilisateur (id_utilisateur),
+    FOREIGN KEY (id_vehicule) REFERENCES vehicule(id_vehicule),
     CONSTRAINT chk_places CHECK (places_disponibles >= 0),
-    CONSTRAINT chk_prix CHECK (prix >= 0)
-) ENGINE=InnoDB;;
+    CONSTRAINT chk_prix CHECK (prix_personne >= 0)
+) ENGINE=InnoDB;
 
 -- Table de liaison UTILISATEUR_COVOITURAGE (relation Many-to-Many "participe")
 CREATE TABLE utilisateur_covoiturage (
@@ -92,16 +103,16 @@ CREATE TABLE utilisateur_covoiturage (
     ON UPDATE CASCADE
 ) ENGINE=InnoDB;
 
--- Création de la table Avis
-    CREATE TABLE Avis(
-    id INT AUTO_INCREMENT PRIMARY KEY,
+-- Création de la table Avis 
+    CREATE TABLE avis(
+    id_avis INT AUTO_INCREMENT PRIMARY KEY,
     id_covoiturage INT NOT NULL,
     id_utilisateur INT NOT NULL,
     note INT CHECK (note BETWEEN 1 AND 5),
     commentaire TEXT,
     statut VARCHAR(30),
-    FOREIGN KEY (id_covoiturage) REFERENCES Covoiturages (id),
-    FOREIGN KEY (id_utilisateur) REFERENCES Utilisateurs (id)
+    FOREIGN KEY (id_covoiturage) REFERENCES covoiturage (id_covoiturage),
+    FOREIGN KEY (id_utilisateur) REFERENCES utilisateur (id_utilisateur)
 ) ENGINE=InnoDB;
 
 --Relations entre les tables :

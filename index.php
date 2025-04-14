@@ -1,3 +1,13 @@
+<?php
+
+require_once __DIR__ . '/vendor/autoload.php';
+
+use App\Controllers\TestController;
+
+$test = new TestController();
+$test->hello();
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -12,19 +22,19 @@
     <main>
         <header>
             <?php
-            require_once 'app/views/partials/header.php';
+            require_once 'app/views/partials/header.php'; //require du header
             ?>
         </header>
 
         <body>
             <?php
-            require_once 'app/views/partials/home.php';
+            require_once 'app/views/partials/home.php'; // j'ai require le home
             ?>
         </body>
 
         <footer>
             <?php
-            require_once 'app/views/partials/footer.php';
+            require_once 'app/views/partials/footer.php'; //require du footer
             ?>
         </footer>
     </main>

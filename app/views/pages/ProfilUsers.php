@@ -1,3 +1,4 @@
+<!-- page de la view profilUsers.php -->
 <!DOCTYPE html>
 <html lang="fr">
 
