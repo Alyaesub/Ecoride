@@ -1,3 +1,13 @@
+<?php
+
+require_once __DIR__ . '/vendor/autoload.php';
+
+use App\Controllers\TestController;
+
+$test = new TestController();
+$test->hello();
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 
