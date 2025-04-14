@@ -1,8 +1,8 @@
 /////////////////////  CODE Mobilefirst //////////////////////////
 @media (max-width: 768px) {
     .navbar {
-        /* position: fixed;
-        inset: auto 0 0 0; */
+        position: fixed;
+        inset: auto 0 0 0;
         display: flex; // Affiche la navbar mobile
         justify-content: space-around;
         height: 80px;

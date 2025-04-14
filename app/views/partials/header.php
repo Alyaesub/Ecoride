@@ -4,7 +4,7 @@
     <nav class="navbar">
         <ul>
             <li><a href="/index.php">Accueil</a></li>
-            <li><a href="/app/views/pages/formeCovoit.php">Voyages</a></li>
+            <li><a href="/app/views/pages/formeCovoitVoyage.php">Voyages</a></li>
             <li><a href="">Activités</a></li>
             <li><a href="/app/views/pages/profilUsers.php">Profil</a></li>
         </ul>
