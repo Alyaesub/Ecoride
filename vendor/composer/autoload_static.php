@@ -19,6 +19,7 @@ class ComposerStaticInit1a2012ceb5a454724fa2331cd94c71c7
         array (
             'App\\Models\\' => 11,
             'App\\Helpers\\' => 12,
+            'App\\Functions\\' => 14,
             'App\\Form\\' => 9,
             'App\\Controllers\\' => 16,
         ),
@@ -40,6 +41,10 @@ class ComposerStaticInit1a2012ceb5a454724fa2331cd94c71c7
         'App\\Helpers\\' => 
         array (
             0 => __DIR__ . '/../..' . '/app/helpers',
+        ),
+        'App\\Functions\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/app/functions',
         ),
         'App\\Form\\' => 
         array (

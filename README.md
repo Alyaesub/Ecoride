@@ -54,6 +54,44 @@ npm install
 # [Instructions à venir]
 ```
 
+Voici le récap de ce que tu as en place (et qui tourne au poil) :
+
+⸻
+
+🧱 Structure projet
+• app/ bien organisée : controllers, models, views, functions, etc.
+• public/ ou racine bien propre avec un index.php central
+
+⸻
+
+⚙️ Autoload Composer
+• composer.json configuré proprement
+• Dossier vendor/ bien généré
+• composer dump-autoload fait ✅
+• Les classes sont automatiquement chargées via require 'vendor/autoload.php'
+
+⸻
+
+📦 Whoops
+• Installé via Composer
+• Activé dans index.php
+• T’affiche des erreurs jolies et utiles si besoin ✅
+
+⸻
+
+🧠 Fonction render()
+• Dans app/functions/view.php
+• Utilisée partout via require_once (ou bientôt via namespace si tu veux)
+• Injecte le contenu + le layout avec $pageContent & $title
+
+⸻
+
+📄 Layout général
+• layout.php propre avec :
+• balises <html>, <head>, <body> centralisées
+• chargement du CSS
+• affichage dynamique du contenu de chaque page
+
 ## 🔗 Liens utiles
 
 -   [GitHub Repository](https://github.com/Alyaesub/Ecoride.git)

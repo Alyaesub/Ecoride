@@ -14,7 +14,8 @@
             "App\\Controllers\\": "app/controllers/",
             "App\\Models\\": "app/models/",
             "App\\Helpers\\": "app/helpers/",
-            "App\\Form\\": "app/form/"
+            "App\\Form\\": "app/form/",
+            "App\\Functions\\": "app/functions/"
         }
     },
     "require": {

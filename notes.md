@@ -47,3 +47,48 @@ forcÃ© Ã  partir du dÃ©but
 
 Items compressÃ©s
 ajout de flex-shrink: 0
+
+✅ Un layout général propre
+✅ Un système de vues dynamique
+✅ Un moteur de rendu centralisé
+✅ Un HomeController qui respecte le MVC
+✅ Un SCSS bien structuré en mobile-first
+✅ Et un footer stable, qui reste à sa place, même quand le contenu est court
+
+Voici le récap de ce que tu as en place (et qui tourne au poil) :
+
+⸻
+
+🧱 Structure projet
+• app/ bien organisée : controllers, models, views, functions, etc.
+• public/ ou racine bien propre avec un index.php central
+
+⸻
+
+⚙️ Autoload Composer
+• composer.json configuré proprement
+• Dossier vendor/ bien généré
+• composer dump-autoload fait ✅
+• Les classes sont automatiquement chargées via require 'vendor/autoload.php'
+
+⸻
+
+📦 Whoops
+• Installé via Composer
+• Activé dans index.php
+• T’affiche des erreurs jolies et utiles si besoin ✅
+
+⸻
+
+🧠 Fonction render()
+• Dans app/functions/view.php
+• Utilisée partout via require_once (ou bientôt via namespace si tu veux)
+• Injecte le contenu + le layout avec $pageContent & $title
+
+⸻
+
+📄 Layout général
+• layout.php propre avec :
+• balises <html>, <head>, <body> centralisées
+• chargement du CSS
+• affichage dynamique du contenu de chaque page
