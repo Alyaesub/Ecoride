@@ -3,9 +3,22 @@
 require_once __DIR__ . '/vendor/autoload.php';
 
 use App\Controllers\TestController;
+use Whoops\Run;
+use Whoops\Handler\PrettyPageHandler;
 
-$test = new TestController();
-$test->hello();
+
+// Init Whoops
+$whoops = new Run();
+$whoops->pushHandler(new PrettyPageHandler());
+$whoops->register();
+
+// Test autoload
+/* $test = new TestController();
+$test->hello(); */
+
+// Test erreur Whoops (tu peux commenter après)
+/* throw new Exception("Oups, une belle erreur stylée !"); */
+
 ?>
 
 <!DOCTYPE html>

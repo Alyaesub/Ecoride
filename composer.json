@@ -17,5 +17,7 @@
             "App\\Form\\": "app/form/"
         }
     },
-    "require": {}
+    "require": {
+        "filp/whoops": "^2.18"
+    }
 }
