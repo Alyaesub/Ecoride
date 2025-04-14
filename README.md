@@ -92,6 +92,8 @@ Voici le récap de ce que tu as en place (et qui tourne au poil) :
 • chargement du CSS
 • affichage dynamique du contenu de chaque page
 
+✅ et maintenant… des liens centralisés et dynamiques !
+
 ## 🔗 Liens utiles
 
 -   [GitHub Repository](https://github.com/Alyaesub/Ecoride.git)

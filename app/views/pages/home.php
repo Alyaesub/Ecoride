@@ -1,5 +1,7 @@
 <!-- page de la vue de la page d'accueil -->
-
+<?php
+$title = 'Accueil';
+?>
 <section class="title-search">
   <div class="title">
     <h1>Bienvenue sur EcoRide</h1>

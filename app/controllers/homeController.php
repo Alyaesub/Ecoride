@@ -1,5 +1,6 @@
 <?php
 //page de code qui gére le controller de la page d'accueil
+//pour plus tard l'utiliser pour gére les affichage de la page home.
 namespace App\Controllers;
 
 
