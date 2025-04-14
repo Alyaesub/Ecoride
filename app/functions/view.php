@@ -1,6 +1,5 @@
 <!-- page de code qui gére le moteur de rendue pour les views -->
 <?php
-
 //fonction qui gére le moteur de rendu pour les views et donc le routage des views
 // Les variables comme $title sont injectées automatiquement via extract($params)
 function render(string $viewPath, array $params = []): void
@@ -14,6 +13,4 @@ function render(string $viewPath, array $params = []): void
   extract(['pageContent' => $pageContent]);
 
   require __DIR__ . '/../views/layout.php';
-  echo "<!-- layout OK depuis render() -->";
 }
-echo "<!-- render() appelé -->";
