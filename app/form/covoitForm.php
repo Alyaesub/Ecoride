@@ -1,7 +1,7 @@
 <!-- formuliare pour le covoiturage dans voyage -->
 <main class="content" id="home">
     <div class="title">
-        <h1>Formulaire de Covoiturage</h1>
+        <h1>Formulaire de recherche de Covoiturage</h1>
     </div>
     <section class="formulaire">
         <section class="search-covoit">
