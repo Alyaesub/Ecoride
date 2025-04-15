@@ -4,7 +4,7 @@
         <ul>
             <li><a href="<?= route('home') ?>">Accueil</a></li>
             <li><a href="<?= route('covoitVoyage') ?>">Voyages</a></li>
-            <li><a href="<?= route('#') ?>">Activités</a></li>
+            <li><a href="<?= route('activites') ?>">Activités</a></li>
             <li><a href="<?= route('profil') ?>">Profil</a></li>
         </ul>
     </nav>

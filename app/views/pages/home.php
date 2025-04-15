@@ -17,7 +17,7 @@ $title = 'Accueil';
 </section>
 <!--Section general des pubs et de la section covoit-->
 <section class="section-photo-covoit carousel">
-  <a href="app/views/pages/formeCovoitVoyage.php">
+  <a href="<?= route('covoitVoyage') ?>">
     <div class="carousel-item link-covoit " id="link-covoit">
       <p>envie de voyager ? GO!!</p>
     </div>

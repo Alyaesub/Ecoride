@@ -687,4 +687,26 @@
   .carousel .carousel-item::-webkit-scrollbar {
     display: none;
   }
+}
+.activite-section {
+  padding: 2rem;
+}
+.activite-section h1 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+.activite-section .historique-covoiturages,
+.activite-section .contacts-covoiturages {
+  margin-top: 2rem;
+  background: #f8f8f8;
+  padding: 1rem;
+  border-radius: 5px;
+}
+.activite-section .historique-covoiturages h2,
+.activite-section .contacts-covoiturages h2 {
+  font-size: 1.5rem;
+}
+.activite-section .historique-covoiturages p,
+.activite-section .contacts-covoiturages p {
+  color: #666;
 }/*# sourceMappingURL=main.css.map */
