@@ -1,9 +1,6 @@
 <?php
-
-namespace App\Controllers;
-
-use App\Models\User; // ton modèle User s’il existe
-// use ... d'autres classes nécessaires (session, etc.)
+//feuille de code pour l'objet userController avec les methodes de la page de connexion et de la page de profils
+namespace App\Models;
 
 class UserController
 {
@@ -21,7 +18,6 @@ class UserController
    */
   public function login()
   {
-    // Exemple de pseudo-code :
 
     // 1. Récupérer les données du formulaire
     $email = $_POST['email'] ?? '';

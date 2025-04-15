@@ -1,0 +1,24 @@
+.activite-section {
+  padding: 2rem;
+
+  h1 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  .historique-covoiturages,
+  .contacts-covoiturages {
+    margin-top: 2rem;
+    background: #f8f8f8;
+    padding: 1rem;
+    border-radius: 5px;
+
+    h2 {
+      font-size: 1.5rem;
+    }
+
+    p {
+      color: #666;
+    }
+  }
+}
