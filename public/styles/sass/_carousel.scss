@@ -5,9 +5,13 @@
     scroll-snap-type: x mandatory;
     gap: 1rem;
     padding: 1rem;
+    
+      h2{
+        margin: 0;
+        color: $text-color;
+      }
+    
 
-
-  
     .carousel-item {
       flex: 0 0 auto;
       scroll-snap-align: start;
