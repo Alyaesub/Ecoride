@@ -89,6 +89,9 @@ if (!isset($places)) {
 
         <button type="submit">Afficher les covoiturage</button> <!-- affiche les covoit si user est log sinon redirection form register -->
       </form>
+      <div id="displayInfo" class="display-box">
+        <!-- Affichage des informations personnelles enregistrées -->
+      </div>
     </section>
   </section>
   <section class="description-photo">
