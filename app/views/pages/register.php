@@ -1,6 +1,7 @@
 <?php
 $title = 'Créer votre profile';
 ?>
+<h1>Créer votre profil</h1>
 <form action="" method="post">
   <label>Pseudo :</label>
   <input type="text" name="pseudo" required><br>
