@@ -647,6 +647,7 @@ $border-color: #ccc;
     color: white;
     border: none;
     border-radius: 8px;
+    margin-top: 10px;
     cursor: pointer;
     font-size: 16px;
   }
@@ -693,6 +694,7 @@ $border-color: #ccc;
     color: white;
     border: none;
     border-radius: 16px;
+    margin-top: 10px;
     cursor: pointer;
     font-size: 16px;
   }
@@ -706,6 +708,9 @@ $border-color: #ccc;
   }
   .profile-container .register-button {
     margin-top: 20px;
+  }
+  .profile-container .register-button a {
+    text-decoration: none;
   }
   .profile-container .register-button p {
     text-align: center;
@@ -725,10 +730,20 @@ $border-color: #ccc;
   .profile-container form {
     width: 50%;
   }
-  .profile-container .register-button {
-    margin-top: 20px;
+  .profile-container .register-button a {
+    width: 150px;
+    height: 20px;
+    padding: 5px 10px;
+    background-color: #388E3C;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: large;
+  }
+  .profile-container .register-button a:hover {
+    background-color: #4c95ae;
   }
   .profile-container .register-button p {
+    font-size: large;
     text-align: center;
   }
 }

@@ -38,7 +38,7 @@ $title = 'Mon profil';
         <label for="photo">Photo :</label>
         <input type="file" id="photo" name="photo">
 
-        <button type="submit">Enregistrer</button>
+        <button type="submit">Mettre à jour votre profile</button>
       </form>
       <div id="displayInfo" class="display-box">
         <!-- Affichage des informations personnelles enregistrées -->

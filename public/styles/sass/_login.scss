@@ -6,6 +6,10 @@
     }
     .register-button {
       margin-top: 20px;
+
+      a {
+        text-decoration: none;
+      }
   
       p {
         text-align: center;
@@ -31,9 +35,22 @@
     }
     
     .register-button {
-      margin-top: 20px;
-  
+    
+    a {
+      width: 150px;
+      height: 20px;
+      padding: 5px 10px;  
+      background-color: $button;
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: large;
+
+        &:hover {
+            background-color: $button-active;
+        }
+    }  
       p {
+        font-size: large;
         text-align: center;
       }
     }

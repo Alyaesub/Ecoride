@@ -14,10 +14,8 @@
     <button type="submit">Se connecter</button>
 
     <div class="register-button">
-      <p>Ou créez vous un profil : </p>
-      <a href="">
-        <button type="button">Créer votre profil</button>
-      </a>
+      <p>Ou : </p>
+      <a href="<?= route('register') ?>" class="buttonlog" id="btn-register">Créer votre profil</a>
     </div>
   </form>
 </div>
