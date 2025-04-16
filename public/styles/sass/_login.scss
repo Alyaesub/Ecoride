@@ -1,18 +1,42 @@
 ////////// Mobilfirst/////////////////
 @media (max-width: 768px) {
   .profile-container {
+    display: flex;
+    flex-direction: column;
+    align-content: space-between;
+    justify-content: flex-end;
+    align-items: center;
     h1{
       text-align: center;
+      font-family: $font-title;
     }
+    form{
+      width: 60%;
+      height: auto;
+    }
+    
     .register-button {
-      margin-top: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    
+    a {
+      padding: 5px 10px;  
+      background-color: $button;
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: large;
+      font-family: $font-link;
+      color: $secondary-color;
 
-      a {
-        text-decoration: none;
-      }
-  
+        &:hover {
+            background-color: $button-active;
+        }
+    }  
       p {
+        font-size: large;
         text-align: center;
+        font-family: $font-primary;
       }
     }
   }
@@ -29,21 +53,26 @@
     align-items: center;
     h1{
       text-align: center;
+      font-family: $font-title;
     }
     form{
-      width: 50%;
+      width: 60%;
+      height: auto;
     }
     
     .register-button {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     
     a {
-      width: 150px;
-      height: 20px;
       padding: 5px 10px;  
       background-color: $button;
+      color: $secondary-color;
       border-radius: 8px;
       text-decoration: none;
       font-size: large;
+      font-family: $font-link;
 
         &:hover {
             background-color: $button-active;
@@ -52,6 +81,7 @@
       p {
         font-size: large;
         text-align: center;
+        font-family: $font-primary;
       }
     }
   }

@@ -1,8 +1,8 @@
 /////////////: dashboard mobile /////////////
 @media (max-width: $max-width-mobile) {
   .dashboard-container {
-    max-width: 800px;
-    margin: 30px auto;
+    max-width: 80%;
+    margin: 30px 30px;
     padding: 20px;
     background: $background-color-dark;
     border-radius: 5px;
@@ -12,14 +12,19 @@
   h1 {
     color: $text-color-inverse;
     text-align: center;
+    font-family: $font-title;
   }
   
   h2 {
     color: $text-color-inverse;
     text-align: center;
+    font-family: $font-title;
   }
   
   .tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
     overflow: hidden;
     margin-bottom: 20px;
   
@@ -30,8 +35,10 @@
       outline: none;
       cursor: pointer;
       padding: 14px 16px;
-      color: $background-color-light;
+      border-radius: 5px;
+      color: $white;
       transition: background-color 0.3s;
+      font-family: $font-navigation;
   
       &:hover,
       &.active {
@@ -50,6 +57,7 @@
   
   .section {
     margin-bottom: 20px;
+    font-family:$font-secondary;
   
     label {
       display: block;
@@ -75,9 +83,10 @@
       border: none;
       border-radius: 3px;
       cursor: pointer;
+      font-family: $font-navigation;
   
       &:hover {
-        background-color: #0056b3;
+        background-color: $button-active;
       }
     }
   }
@@ -107,14 +116,18 @@
   h1 {
     color: $text-color-inverse;
     text-align: center;
+    font-family: $font-title;
   }
   
   h2 {
     color: $text-color-inverse;
     text-align: center;
+    font-family: $font-title;
   }
   
   .tabs {
+    display: flex;
+    gap: 5px;
     overflow: hidden;
     margin-bottom: 20px;
   
@@ -126,7 +139,9 @@
       cursor: pointer;
       padding: 14px 16px;
       color: #fff;
+      border-radius: 5px;
       transition: background-color 0.3s;
+      font-family: $font-navigation;
   
       &:hover,
       &.active {
@@ -145,6 +160,7 @@
   
   .section {
     margin-bottom: 20px;
+    font-family:$font-secondary;
   
     label {
       display: block;
@@ -170,6 +186,7 @@
       border: none;
       border-radius: 3px;
       cursor: pointer;
+      font-family: $font-navigation;
   
       &:hover {
         background-color: $button-active;

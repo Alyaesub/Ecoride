@@ -179,7 +179,7 @@ $border-color: #ccc;
     justify-content: space-between;
     align-items: center;
     background-color: #4CAF50;
-    color: white;
+    color: #F0EAD6;
     text-align: center;
     padding: 5px;
     bottom: 0;
@@ -187,6 +187,7 @@ $border-color: #ccc;
   }
   .footer p {
     margin: 0;
+    font-family: "Readex Pro", sans-serif;
   }
   .footer .social-media,
   .footer .contact {
@@ -195,6 +196,7 @@ $border-color: #ccc;
   .footer .social-media h3 {
     margin-bottom: 10px;
     font-size: 1.2rem;
+    font-family: "DM Sans", sans-serif;
   }
   .footer .social-media a {
     margin: 0 10px;
@@ -202,18 +204,21 @@ $border-color: #ccc;
     color: #333;
     font-weight: bold;
     transition: color 0.3s ease;
+    font-family: "inter", sans-serif;
   }
   .footer .social-media a:hover {
-    color: #4d4d4d;
+    color: #fefdfb;
   }
 }
 .contact h3 {
   margin-bottom: 10px;
   font-size: 1.2rem;
+  font-family: "DM Sans", sans-serif;
 }
 .contact p {
   margin: 5px 0;
   font-size: 0.9rem;
+  font-family: "Readex Pro", sans-serif;
 }
 
 @media (max-width: 768px) {
@@ -686,7 +691,8 @@ $border-color: #ccc;
   form label {
     display: block;
     margin-top: 10px;
-    font-weight: bold;
+    font-weight: normal;
+    font-family: "Geologica", sans-serif;
   }
   form input {
     width: 100%;
@@ -705,6 +711,7 @@ $border-color: #ccc;
     border: none;
     border-radius: 8px;
     margin-top: 10px;
+    font-family: "inter", sans-serif;
     cursor: pointer;
     font-size: 16px;
   }
@@ -733,7 +740,8 @@ $border-color: #ccc;
   form label {
     display: block;
     margin-top: 10px;
-    font-weight: bold;
+    font-weight: normal;
+    font-family: "Geologica", sans-serif;
   }
   form input {
     width: 100%;
@@ -752,6 +760,8 @@ $border-color: #ccc;
     border: none;
     border-radius: 16px;
     margin-top: 10px;
+    font-family: "inter", sans-serif;
+    font-size: 14px;
     cursor: pointer;
     font-size: 16px;
   }
@@ -760,17 +770,42 @@ $border-color: #ccc;
   }
 }
 @media (max-width: 768px) {
+  .profile-container {
+    display: flex;
+    flex-direction: column;
+    align-content: space-between;
+    justify-content: flex-end;
+    align-items: center;
+  }
   .profile-container h1 {
     text-align: center;
+    font-family: "DM Sans", sans-serif;
+  }
+  .profile-container form {
+    width: 60%;
+    height: auto;
   }
   .profile-container .register-button {
-    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
   .profile-container .register-button a {
+    padding: 5px 10px;
+    background-color: #388E3C;
+    border-radius: 8px;
     text-decoration: none;
+    font-size: large;
+    font-family: "inter", sans-serif;
+    color: #F0EAD6;
+  }
+  .profile-container .register-button a:hover {
+    background-color: #4c95ae;
   }
   .profile-container .register-button p {
+    font-size: large;
     text-align: center;
+    font-family: "Readex Pro", sans-serif;
   }
 }
 @media (min-width: 768px) {
@@ -783,18 +818,25 @@ $border-color: #ccc;
   }
   .profile-container h1 {
     text-align: center;
+    font-family: "DM Sans", sans-serif;
   }
   .profile-container form {
-    width: 50%;
+    width: 60%;
+    height: auto;
+  }
+  .profile-container .register-button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
   .profile-container .register-button a {
-    width: 150px;
-    height: 20px;
     padding: 5px 10px;
     background-color: #388E3C;
+    color: #F0EAD6;
     border-radius: 8px;
     text-decoration: none;
     font-size: large;
+    font-family: "inter", sans-serif;
   }
   .profile-container .register-button a:hover {
     background-color: #4c95ae;
@@ -802,6 +844,7 @@ $border-color: #ccc;
   .profile-container .register-button p {
     font-size: large;
     text-align: center;
+    font-family: "Readex Pro", sans-serif;
   }
 }
 @media (max-width: 768px) {
@@ -858,7 +901,7 @@ $border-color: #ccc;
   .activite-section .historique-covoiturages,
   .activite-section .contacts-covoiturages {
     margin-top: 2rem;
-    background: #f8f8f8;
+    background: #a6ccd8;
     padding: 1rem;
     border-radius: 5px;
   }
@@ -891,16 +934,18 @@ $border-color: #ccc;
   .activite-section .historique-covoiturages h2,
   .activite-section .contacts-covoiturages h2 {
     font-size: 1.5rem;
+    font-family: "DM Sans", sans-serif;
   }
   .activite-section .historique-covoiturages p,
   .activite-section .contacts-covoiturages p {
     color: #666;
+    font-family: "Readex Pro", sans-serif;
   }
 }
 @media (max-width: 768px) {
   .dashboard-container {
-    max-width: 800px;
-    margin: 30px auto;
+    max-width: 80%;
+    margin: 30px 30px;
     padding: 20px;
     background: #274c59;
     border-radius: 5px;
@@ -909,12 +954,17 @@ $border-color: #ccc;
   h1 {
     color: #fff;
     text-align: center;
+    font-family: "DM Sans", sans-serif;
   }
   h2 {
     color: #fff;
     text-align: center;
+    font-family: "DM Sans", sans-serif;
   }
   .tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
     overflow: hidden;
     margin-bottom: 20px;
   }
@@ -925,8 +975,10 @@ $border-color: #ccc;
     outline: none;
     cursor: pointer;
     padding: 14px 16px;
-    color: #a6ccd8;
+    border-radius: 5px;
+    color: white;
     transition: background-color 0.3s;
+    font-family: "Poppins", sans-serif;
   }
   .tabs button:hover, .tabs button.active {
     background-color: #4c95ae;
@@ -939,6 +991,7 @@ $border-color: #ccc;
   }
   .section {
     margin-bottom: 20px;
+    font-family: "Geologica", sans-serif;
   }
   .section label {
     display: block;
@@ -962,9 +1015,10 @@ $border-color: #ccc;
     border: none;
     border-radius: 3px;
     cursor: pointer;
+    font-family: "Poppins", sans-serif;
   }
   .section button:hover {
-    background-color: #0056b3;
+    background-color: #4c95ae;
   }
   .display-box {
     background: #e9e9e9;
@@ -985,12 +1039,16 @@ $border-color: #ccc;
   h1 {
     color: #fff;
     text-align: center;
+    font-family: "DM Sans", sans-serif;
   }
   h2 {
     color: #fff;
     text-align: center;
+    font-family: "DM Sans", sans-serif;
   }
   .tabs {
+    display: flex;
+    gap: 5px;
     overflow: hidden;
     margin-bottom: 20px;
   }
@@ -1002,7 +1060,9 @@ $border-color: #ccc;
     cursor: pointer;
     padding: 14px 16px;
     color: #fff;
+    border-radius: 5px;
     transition: background-color 0.3s;
+    font-family: "Poppins", sans-serif;
   }
   .tabs button:hover, .tabs button.active {
     background-color: #4c95ae;
@@ -1015,6 +1075,7 @@ $border-color: #ccc;
   }
   .section {
     margin-bottom: 20px;
+    font-family: "Geologica", sans-serif;
   }
   .section label {
     display: block;
@@ -1038,6 +1099,7 @@ $border-color: #ccc;
     border: none;
     border-radius: 3px;
     cursor: pointer;
+    font-family: "Poppins", sans-serif;
   }
   .section button:hover {
     background-color: #4c95ae;

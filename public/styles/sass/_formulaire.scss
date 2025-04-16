@@ -20,7 +20,8 @@
         label {
             display: block;
             margin-top: 10px;
-            font-weight: bold;
+            font-weight: normal;
+            font-family: $font-secondary;
         }
     
         input {
@@ -41,6 +42,7 @@
             border: none;
             border-radius: 8px;
             margin-top: 10px;
+            font-family: $font-link;
 
             cursor: pointer;
             font-size: 16px;
@@ -76,7 +78,8 @@
         label {
             display: block;
             margin-top: 10px;
-            font-weight: bold;
+            font-weight: normal;
+            font-family: $font-secondary;
         }
     
         input {
@@ -97,6 +100,8 @@
             border: none;
             border-radius: 16px;
             margin-top: 10px;
+            font-family: $font-link;
+            font-size: $font-size-small;
 
             cursor: pointer;
             font-size: 16px;
