@@ -1,53 +1,58 @@
 /////////////////////// code mobile ///////////////
-.activite-section {
-  padding: 2rem;
-
-  h1 {
-    font-size: 2rem;
-    margin-bottom: 1rem;
-  }
-
-  .historique-covoiturages,
-  .contacts-covoiturages {
-    margin-top: 2rem;
-    background: #f8f8f8;
-    padding: 1rem;
-    border-radius: 5px;
-
-    h2 {
-      font-size: 1.5rem;
+@media (max-width: $max-width-mobile) {
+  .activite-section {
+    padding: 2rem;
+  
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      font-family: $font-title;
     }
-
-    p {
-      color: #666;
+  
+    .historique-covoiturages,
+    .contacts-covoiturages {
+      margin-top: 2rem;
+      background: #f8f8f8;
+      padding: 1rem;
+      border-radius: 5px;
+  
+      h2 {
+        font-size: 1.5rem;
+        font-family: $font-title;
+      }
+  
+      p {
+        color: #666;
+        font-family: $font-primary;
+      }
     }
   }
 }
 
-
-
 ///////////// code desktop////////////////////
-.activite-section {
-  padding: 2rem;
-
-  h1 {
-    font-size: 2rem;
-    margin-bottom: 1rem;
-  }
-
-  .historique-covoiturages,
-  .contacts-covoiturages {
-    margin-top: 2rem;
-    background: $background-color-light;
-    padding: 1rem;
-    border-radius: 5px;
-
-    h2 {
-      font-size: 1.5rem;
+@media (min-width: $min-width-desktop) {
+  .activite-section {
+    padding: 2rem;
+  
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
     }
-
-    p {
-      color: #666;
+  
+    .historique-covoiturages,
+    .contacts-covoiturages {
+      margin-top: 2rem;
+      background: $background-color-light;
+      padding: 1rem;
+      border-radius: 5px;
+  
+      h2 {
+        font-size: 1.5rem;
+      }
+  
+      p {
+        color: #666;
+      }
     }
   }
 }

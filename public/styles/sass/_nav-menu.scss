@@ -36,7 +36,7 @@
 
             a{
                 text-decoration: none;
-                color: $secondary-color;
+                /* color: $secondary-color; */
                 font-weight: bold;
             }
             
@@ -116,23 +116,10 @@
         .login {
             padding: 5px 10px;  
             margin-right: 20px;
-            background-color: $button;
-            border-radius: 8px;
-
-            &:hover {
-                background-color: $button-active;
-            }
-            a {
-                background-color: $button;
-
-                &:hover {
-                    background-color: $button-active;
-                }
-            }
-        }
-        
+        }   
     }
 }
+
 ////////////////////////////////////////////////////////////
 /// 
 // /// 

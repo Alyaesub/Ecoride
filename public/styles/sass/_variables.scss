@@ -51,7 +51,11 @@ $min-width-desktop: 768px;
 
 
 //Fonts
-$font-family: 'Roboto', sans-serif;
+$font-primary: 'Readex Pro', sans-serif;//accueil, pages, générale
+$font-secondary: 'Geologica', sans-serif;//profil et menu
+$font-title: 'DM Sans', sans-serif;//titre
+$font-navigation: 'Poppins', sans-serif;// navigation
+$font-link: 'inter', sans-serif;//liens
 $font-size: 16px;
 $font-size-small: 14px;
 $font-size-large: 18px;
