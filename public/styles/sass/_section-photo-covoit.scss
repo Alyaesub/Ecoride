@@ -130,12 +130,80 @@
             text-overflow: ellipsis; */
         }
     }
-}
 
+    .contact-mobile {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        flex-wrap: nowrap;
+        width: 90%; 
+        max-width: 300px; 
+        height: auto; 
+        background-color: $primary-color;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+        transition: all 0.3s ease-in-out;
+        text-decoration: none;
+        padding: 8px;
+        text-align: center;
+        flex-shrink: 0; /* rajouter pour faire fonctionner le scroll */
+
+        &:hover {
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        p {
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            line-clamp: 3; // Version standard pour les futurs navigateurs
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            width: 100%;
+            max-width: 100%;
+            color: black;
+        }
+    }
+
+    .social-media-mobile {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        width: 90%; 
+        max-width: 300px; 
+        height: auto; 
+        background-color: $primary-color;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+        transition: all 0.3s ease-in-out;
+        text-decoration: none;
+        padding: 8px;
+        text-align: center;
+        flex-shrink: 0; /* rajouter pour faire fonctionner le scroll */
+
+        &:hover {
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        p {
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            line-clamp: 3; // Version standard pour les futurs navigateurs
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            width: 100%;
+            max-width: 100%;
+            color: black;
+        }
+    }
+}
 
 ////////////////////////// Code Desktop /////////////////////////
 @media (min-width: $min-width-desktop) {
     .description-mobile{display: none;}
+    .contact-mobile{display: none;}
+    .social-media-mobile{display: none;}
     .section-photo-covoit{
         display: flex;
         align-items: center;
