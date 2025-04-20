@@ -20,12 +20,13 @@ class ConnexionDb
 
     // Récupère les paramètres depuis le tableau de configuration
     $host = $config['database']['DB_HOST'] ?? '127.0.0.1'; //les valeur apres la conditions ?? seront en enlever en mise en prod
+    $port = $config['database']['DB_PORT'] ?? '8889'; //les valeur apres la conditions ?? seront en enlever en mise en prod
     $dbname = $config['database']['DB_NAME'] ?? 'ecoride'; //les valeur apres la conditions ?? seront en enlever en mise en prod
     $user = $config['database']['DB_USER'] ?? 'root'; //les valeur apres la conditions ?? seront en enlever en mise en prod
     $pass = $config['database']['DB_PASS'] ?? 'root'; //les valeur apres la conditions ?? seront en enlever en mise en prod
 
     // Chaîne DSN pour PDO
-    $dsn = "mysql:host=$host;dbname=$dbname;charset=utf8";
+    $dsn = "mysql:host=$host;port=$port;dbname=$dbname;charset=utf8";
 
     // Crée et retourne l'objet PDO
     return new PDO($dsn, $user, $pass, [
