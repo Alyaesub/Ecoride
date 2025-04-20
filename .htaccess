@@ -1,0 +1,32 @@
+# Active la réécriture d’URL
+RewriteEngine On
+
+# Redirection vers index.php si le fichier ou dossier n’existe pas
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^ index.php [QSA,L]
+
+# Empêche l’accès aux fichiers sensibles
+<FilesMatch "\.(ini|env|sql|log|sh|bak|htaccess)$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# Gère les erreurs personnalisées
+ErrorDocument 404 /404.html
+ErrorDocument 403 /403.html
+
+# Encodage UTF-8
+AddDefaultCharset UTF-8
+
+#RewriteEngine On -> Active les réécritures d'URL pour faire du routing propre (ex : /trajets/12 au lieu de /trajets.php?id=12)
+#RewriteCond %{REQUEST_FILENAME} !-f -> Ignore les fichiers rÃ©els (ex : CSS, JS, images)
+#RewriteRule ^ index.php -> Redirige toutes les requétes vers un controleur unique 
+#FilesMatch -> Bloque les accÃ¨s Ã  des fichiers critiques (env, sql, htaccess etc.)
+#ErrorDocument -> Prépare des pages personnalises 
+#AddDefaultCharset UTF-8 -> Force un encodage propre (Ã©vite les bugs dâ€™accents)
+
+
+
+
+

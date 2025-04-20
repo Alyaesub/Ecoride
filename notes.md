@@ -162,3 +162,98 @@ Voici le récap de ce que tu as en place (et qui tourne au poil) :
 • balises <html>, <head>, <body> centralisées
 • chargement du CSS
 • affichage dynamique du contenu de chaque page
+
+shéma d'utilisation de config
+────────────────────────────────────────────
+🗂️ FICHIER │ UTILISATION
+────────────────────────────────────────────
+config/env.ini │ Stocke les infos sensibles
+│ (base de données, debug, env)
+────────────────────────────────────────────
+config/config.php │ Charge la config globale
+│ Active le mode DEBUG
+│ Définit des constantes
+│ À inclure dans TOUS les fichiers PHP
+────────────────────────────────────────────
+app/models/ConnexionDb.php
+│ Classe qui crée une connexion PDO
+│ À utiliser uniquement si tu fais des requêtes SQL
+────────────────────────────────────────────
+
+## ⚙️ `config/env.ini` (local)
+
+```ini
+[database]
+DB_HOST = 127.0.0.1
+DB_NAME = ecoride
+DB_USER = root
+DB_PASS = root
+
+[settings]
+APP_ENV = local
+DEBUG = true
+```
+
+✅ Permet de **séparer les infos sensibles** (connexion BDD, debug, env)  
+✅ Facile à adapter en production (ex : O2Switch)
+
+---
+
+## 📄 `config/config.php`
+
+-   Charge `env.ini` en tableau associatif
+-   Active le `DEBUG` si configuré
+-   Définit une constante `APP_ENV`
+-   Gère les cas où `env.ini` est manquant
+
+---
+
+## 🔐 `.htaccess`
+
+```
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^ index.php [QSA,L]
+
+<FilesMatch "\.(ini|env|sql|log|sh|bak|htaccess)$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+ErrorDocument 404 /404.html
+ErrorDocument 403 /403.html
+AddDefaultCharset UTF-8
+```
+
+✅ Redirection vers `index.php` (routing MVC)  
+✅ Protection des fichiers sensibles  
+✅ Encodage UTF-8  
+✅ Pages d’erreur personnalisables
+
+---
+
+## 🧠 `ConnexionDb.php`
+
+```php
+use App\Models\ConnexionDb;
+
+$pdo = ConnexionDb::getPdo();
+```
+
+-   Récupère les infos depuis `env.ini` via `config.php`
+-   Retourne un objet `PDO` prêt à l'emploi
+-   Centralise la connexion à la base (évite duplication)
+-   Tu pourras supprimer les fallback plus tard pour + de sécurité
+
+---
+
+## 🛠️ Bonnes pratiques mises en place
+
+-   ✅ Centralisation de la config
+-   ✅ Séparation env local / prod
+-   ✅ Connexion sécurisée à la BDD
+-   ✅ Ready pour le déploiement chez O2Switch
+-   ✅ Compatible avec PHP 8 et MVC propre
+
+---
