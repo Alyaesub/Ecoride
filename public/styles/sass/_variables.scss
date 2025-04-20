@@ -1,7 +1,7 @@
 // _variables.scss - Variables pour couleurs et dimensions
 
 //Couleurs
-$primary-color: #34a853;
+/* $primary-color: #34a853;
 $secondary-color: #4da6ff;
 $background-color: #BCE593;
 $background-color-light: "";
@@ -10,7 +10,19 @@ $link: #81ED4F;
 $white: white;
 $dark: #000000;
 $border-color: #ccc;
-
+ */
+//test de couleur
+$primary-color: #4CAF50;
+$secondary-color: #F0EAD6;
+$background-color: #4caeae;
+$button: #388E3C;
+$button-active: #4c95ae;
+$background-color-light: #a6ccd8; // Blanc cassé, fond léger et neutre
+$background-color-dark: #274c59; 
+$link: #2196F3;
+$white: white;
+$dark: #000000;
+$border-color: #ccc;
 
 
 //Couleurs de texte
@@ -39,7 +51,11 @@ $min-width-desktop: 768px;
 
 
 //Fonts
-$font-family: 'Roboto', sans-serif;
+$font-primary: 'Readex Pro', sans-serif;//accueil, pages, générale
+$font-secondary: 'Geologica', sans-serif;//profil et menu
+$font-title: 'DM Sans', sans-serif;//titre
+$font-navigation: 'Poppins', sans-serif;// navigation
+$font-link: 'inter', sans-serif;//liens
 $font-size: 16px;
 $font-size-small: 14px;
 $font-size-large: 18px;

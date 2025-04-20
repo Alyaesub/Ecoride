@@ -54,6 +54,6 @@ class UserController
     // $user = User::find($_SESSION['user_id']);
 
     // Charger la vue du profil
-    require __DIR__ . 'app\views\ProfilUsers.php';
+    require __DIR__ . 'app\views\profilUsers.php';
   }
 }

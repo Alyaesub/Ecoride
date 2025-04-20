@@ -22,9 +22,15 @@ $title = 'Accueil';
       <p>envie de voyager ? GO!!</p>
     </div>
   </a>
-  <div class=" photo-1 carousel-item">photo 1</div>
-  <div class=" photo-2 carousel-item">photo 2</div>
-  <div class=" photo-3 carousel-item">photo 3</div>
+  <div class=" photo-1 carousel-item">photo 1
+    <img class="" src="" alt="photo-voiture">
+  </div>
+  <div class=" photo-2 carousel-item">photo 2
+    <img class="" src="" alt="photo-voiture">
+  </div>
+  <div class=" photo-3 carousel-item">photo 3
+    <img class="" src="" alt="photo-voiture">
+  </div>
   <div class=" description-desktop carousel-item">
     <h2>Pourquoi choisir EcoRide ?</h2>
     <p>EcoRide est la plateforme idéale pour trouver des trajets en covoiturage.<br>
@@ -36,5 +42,18 @@ $title = 'Accueil';
     <h2>EcoRide en bref</h2>
     <p>Trouvez rapidement votre covoiturage et partagez vos trajets pour économiser.</p>
   </div>
+  <section class="contact-mobile caroussel-item">
+    </h3>Contactez-nous</h3>
+    <p>Pour toute question ou information, n'hésitez pas à nous contacter :</p>
+    <p>par e-mail : www.ecoride.com</p>
+    <p>par téléphone : 01 23 45 67 89</p>
+    <p>adresse : 123 Rue de l'Écologie, 75000 Paris, France</p>
+  </section>
+  <section class="social-media-mobile caroussel-item">
+    <h3>Suivez-nous sur les réseaux sociaux</h3>
+    <a href="https://www.facebook.com/EcoRide" target="_blank">Facebook</a>
+    <a href="https://www.twitter.com/EcoRide" target="_blank">Twitter</a>
+    <a href="https://www.instagram.com/EcoRide" target="_blank">Instagram</a>
+    <a href="https://www.linkedin.com/company/EcoRide" target="_blank">LinkedIn</a>
+  </section>
 </section>
-<!-- </main> -->

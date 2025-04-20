@@ -17,7 +17,7 @@
         justify-content: space-between;
         align-items: center;
         background-color: $primary-color;
-        color: white;
+        color: $secondary-color;
         text-align: center;
         padding: 5px;
         bottom: 0;
@@ -26,6 +26,7 @@
 
         p {
             margin: 0;
+            font-family: $font-primary;
         }
 
         // Section réseaux sociaux et contact avec un petit espace
@@ -39,6 +40,7 @@
             h3 {
                 margin-bottom: 10px;
                 font-size: 1.2rem;
+                font-family: $font-title;
             }
     
             a {
@@ -47,23 +49,25 @@
                 color: $text-color;
                 font-weight: bold;
                 transition: color 0.3s ease;
+                font-family: $font-link;
                 &:hover {
             // Pour l'effet hover, vous pouvez ajuster la luminosité ou utiliser une autre couleur
-                    color: lighten($text-color, 10%);
+                    color: lighten($secondary-color, 10%);
                 }
             }
         }
     }      
 }
 .contact {
-  h3 {
-    margin-bottom: 10px;
-    font-size: 1.2rem;
-  }
-  
+    h3 {
+        margin-bottom: 10px;
+        font-size: 1.2rem;
+        font-family: $font-title;
+    }
   p {
     margin: 5px 0;
     font-size: 0.9rem;
+    font-family: $font-primary;
   }
 }
 

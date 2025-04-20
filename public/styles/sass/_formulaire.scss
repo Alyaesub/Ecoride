@@ -20,7 +20,8 @@
         label {
             display: block;
             margin-top: 10px;
-            font-weight: bold;
+            font-weight: normal;
+            font-family: $font-secondary;
         }
     
         input {
@@ -36,16 +37,18 @@
         button {
             width: 100%;
             padding: 10px;
-            background-color: $link;
+            background-color: $button;
             color: white;
             border: none;
             border-radius: 8px;
+            margin-top: 10px;
+            font-family: $font-link;
 
             cursor: pointer;
             font-size: 16px;
     
             &:hover {
-                background-color: $secondary-color;
+                background-color: $button;
             }
         }
     }
@@ -75,7 +78,8 @@
         label {
             display: block;
             margin-top: 10px;
-            font-weight: bold;
+            font-weight: normal;
+            font-family: $font-secondary;
         }
     
         input {
@@ -91,16 +95,19 @@
         button {
             width: 100%;
             padding: 10px;
-            background-color: $link;
+            background-color: $button;
             color: white;
             border: none;
-            border-radius: 8px;
+            border-radius: 16px;
+            margin-top: 10px;
+            font-family: $font-link;
+            font-size: $font-size-small;
 
             cursor: pointer;
             font-size: 16px;
     
             &:hover {
-                background-color: $secondary-color;
+                background-color: $button-active;
             }
         }
     }

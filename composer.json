@@ -11,8 +11,8 @@
     "minimum-stability": "stable",
     "autoload": {
         "psr-4": {
-            "App\\Controllers\\": "app/controllers/",
-            "App\\Models\\": "app/models/",
+            "App\\Controllers\\": "app/Controllers/",
+            "App\\Models\\": "app/Models/",
             "App\\Helpers\\": "app/helpers/",
             "App\\Form\\": "app/form/",
             "App\\Functions\\": "app/functions/"

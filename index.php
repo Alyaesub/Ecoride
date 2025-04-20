@@ -43,6 +43,12 @@ switch ($page) {
         ]);
         break;
 
+    case 'register':
+        render(__DIR__ . '/app/views/pages/register.php', [
+            'title' => 'Créer votre profile'
+        ]);
+        break;
+
     case 'activites':
         render(__DIR__ . '/app/views/pages/activites.php', [
             'title' => 'Historique de vos activités'

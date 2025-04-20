@@ -15,11 +15,28 @@
             display: flex;
             align-items: center;
             list-style: none;
-            gap: 40px;
         
-            li a {
+            li  {
                 text-decoration: none;
-                color: white;
+                color: $secondary-color;
+                font-weight: bold;
+                margin: 0 10px;
+                padding: 5px 10px;    /* Ajoute de l'espace interne */
+                background-color: $button;  /* Couleur de fond */
+                color: #fff;            /* Couleur du texte */
+                border-radius: 4px;     /* Coins arrondis */
+                transition: background-color 0.3s;
+                &:hover {
+                    background-color: $button-active; /* Couleur de fond au survol */
+                }
+                &:active {
+                    background-color: $button; /* Couleur de fond au clic */
+                }
+            }
+
+            a{
+                text-decoration: none;
+                /* color: $secondary-color; */
                 font-weight: bold;
             }
             
@@ -73,19 +90,36 @@
             align-items: center;
             justify-content: space-evenly;
             padding: 0;
+
+            li {
+                margin: 0 20px;
+                padding: 5px 10px;    /* Ajoute de l'espace interne */
+                background-color: $button;  /* Couleur de fond */
+                color: #fff;            /* Couleur du texte */
+                border-radius: 4px;     /* Coins arrondis */
+                transition: background-color 0.3s;
+                &:hover {
+                    background-color: $button-active; /* Couleur de fond au survol */
+                }
+                &:active {
+                    background-color: $button; /* Couleur de fond au clic */
+                }
+            }
+
     
             a {
                 text-decoration: none;
-                color: $dark;
+                color: $text-color-inverse;
             }
         }
     
         .login {
+            padding: 5px 10px;  
             margin-right: 20px;
-        }
-        
+        }   
     }
 }
+
 ////////////////////////////////////////////////////////////
 /// 
 // /// 
