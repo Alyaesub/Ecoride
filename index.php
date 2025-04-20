@@ -3,7 +3,7 @@
 require_once __DIR__ . '/vendor/autoload.php';
 require_once __DIR__ . '/app/functions/view.php'; //pour appeler le moteur de rendu et la fonction render
 require_once __DIR__ . '/app/functions/helpers.php'; //pour appeler la fonction route
-
+require_once __DIR__ . '/config/config.php'; //apelle la config pour gérer erreur et bug et connexionDB
 
 use App\Controllers\HomeController; //pour appeler le controller de la page d'accueil
 use Whoops\Run;

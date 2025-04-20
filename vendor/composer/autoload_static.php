@@ -36,7 +36,7 @@ class ComposerStaticInit1a2012ceb5a454724fa2331cd94c71c7
         ),
         'App\\Models\\' => 
         array (
-            0 => __DIR__ . '/../..' . '/app/models',
+            0 => __DIR__ . '/../..' . '/app/Models',
         ),
         'App\\Helpers\\' => 
         array (
@@ -52,7 +52,7 @@ class ComposerStaticInit1a2012ceb5a454724fa2331cd94c71c7
         ),
         'App\\Controllers\\' => 
         array (
-            0 => __DIR__ . '/../..' . '/app/controllers',
+            0 => __DIR__ . '/../..' . '/app/Controllers',
         ),
     );
 

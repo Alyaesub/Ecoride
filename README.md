@@ -16,8 +16,8 @@ EcoRide est une application web de covoiturage écologique visant à faciliter l
 -   [x] Page d'accueil avec présentation et barre de recherche
 -   [x] Menu de navigation responsive
 -   [x] Vue des covoiturages disponibles
--   [ ] Système de filtres avancés
--   [ ] Page de détail des covoiturages
+-   [x] Système de filtres avancés
+-   [x] Page de détail des covoiturages
 -   [ ] Système de réservation
 -   [ ] Gestion des comptes utilisateurs
 -   [ ] Système de démarrage/arrêt des trajets
@@ -27,11 +27,9 @@ EcoRide est une application web de covoiturage écologique visant à faciliter l
 ### Back-end
 
 -   [ ] Base de données SQL & NoSQL
--   [ ] API RESTful
 -   [ ] Système d'authentification
 -   [ ] Gestion des trajets
 -   [ ] Système de crédits
--   [ ] Notifications par email
 -   [ ] Système de modération
 
 ## 🛠️ Technologies utilisées
@@ -54,7 +52,7 @@ npm install
 # [Instructions à venir]
 ```
 
-Voici le récap de ce que tu as en place (et qui tourne au poil) :
+Voici le récap de ce qui fonctionne :
 
 ⸻
 
@@ -108,27 +106,80 @@ Voici le récap de ce que tu as en place (et qui tourne au poil) :
 -   [Diagramme de séquence](https://www.figma.com/design/p2iUH1N3JGgNAPVyS23V2m/Diagramme-sequence-Ecoride)
 -   [Maquettes](https://www.figma.com/design/wzlnTb3rpsE1tW39XHNRj9/Maquettage-Ecoride)
 
-## 📝 État d'avancement
+## ⚙️ `config/env.ini` (local)
 
--   [ ] Phase 1 : Front-end de base
--   [ ] Phase 2 : Back-end et base de données
--   [ ] Phase 3 : Fonctionnalités avancées
--   [ ] Phase 4 : Tests et déploiement
+```ini
+[database]
+DB_HOST = 127.0.0.1
+DB_NAME = ecoride
+DB_USER = root
+DB_PASS = root
 
-## 🤝 Contribution
+[settings]
+APP_ENV = local
+DEBUG = true
+```
 
-Les contributions sont les bienvenues ! N'hésitez pas à :
-
-1. Fork le projet
-2. Créer une branche pour votre fonctionnalité
-3. Commiter vos changements
-4. Pousser vers la branche
-5. Ouvrir une Pull Request
-
-## 📄 Licence
-
-[À définir]
+✅ Permet de **séparer les infos sensibles** (connexion BDD, debug, env)  
+✅ Facile à adapter en production (ex : O2Switch)
 
 ---
 
-Dernière mise à jour : [Date]
+## 📄 `config/config.php`
+
+-   Charge `env.ini` en tableau associatif
+-   Active le `DEBUG` si configuré
+-   Définit une constante `APP_ENV`
+-   Gère les cas où `env.ini` est manquant
+
+---
+
+## 🔐 `.htaccess`
+
+```
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^ index.php [QSA,L]
+
+<FilesMatch "\.(ini|env|sql|log|sh|bak|htaccess)$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+ErrorDocument 404 /404.html
+ErrorDocument 403 /403.html
+AddDefaultCharset UTF-8
+```
+
+✅ Redirection vers `index.php` (routing MVC)  
+✅ Protection des fichiers sensibles  
+✅ Encodage UTF-8  
+✅ Pages d’erreur personnalisables
+
+---
+
+## 🧠 `ConnexionDb.php`
+
+```php
+use App\Models\ConnexionDb;
+
+$pdo = ConnexionDb::getPdo();
+```
+
+-   Récupère les infos depuis `env.ini` via `config.php`
+-   Retourne un objet `PDO` prêt à l'emploi
+-   Centralise la connexion à la base (évite duplication)
+-   Tu pourras supprimer les fallback plus tard pour + de sécurité
+
+---
+
+## 🛠️ Bonnes pratiques mises en place
+
+-   ✅ Centralisation de la config
+-   ✅ Séparation env local / prod
+-   ✅ Connexion sécurisée à la BDD
+-   ✅ Ready pour le déploiement chez O2Switch
+-   ✅ Compatible avec PHP 8 et MVC propre
+
+---

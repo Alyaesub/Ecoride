@@ -8,9 +8,9 @@ $baseDir = dirname($vendorDir);
 return array(
     'Whoops\\' => array($vendorDir . '/filp/whoops/src/Whoops'),
     'Psr\\Log\\' => array($vendorDir . '/psr/log/src'),
-    'App\\Models\\' => array($baseDir . '/app/models'),
+    'App\\Models\\' => array($baseDir . '/app/Models'),
     'App\\Helpers\\' => array($baseDir . '/app/helpers'),
     'App\\Functions\\' => array($baseDir . '/app/functions'),
     'App\\Form\\' => array($baseDir . '/app/form'),
-    'App\\Controllers\\' => array($baseDir . '/app/controllers'),
+    'App\\Controllers\\' => array($baseDir . '/app/Controllers'),
 );
