@@ -6,7 +6,7 @@
   <?php if (isset($_GET['error'])): ?>
     <p style="color: red;">Identifiants incorrects, merci de réessayer.</p>
   <?php endif; ?>
-  <form action="/app/controllers/traitement.php" method="post" class="formulaire" id="profileForm">
+  <form action="/app/Controllers/Traitement.php" method="post" class="formulaire" id="profileForm">
     <label for="email">Email :</label>
     <input type="email" name="email" id="email" required>
     <label for="password">Mot de passe :</label>
