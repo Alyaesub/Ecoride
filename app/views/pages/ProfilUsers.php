@@ -35,6 +35,9 @@ $title = 'Mon profil';
         <label for="motdepasse">Mot de passe :</label>
         <input type="password" id="motdepasse" name="motdepasse">
 
+        <label for="credits">Vos crédits :</label>
+        <input type="credits" id="credits" name="credits">
+
         <label for="photo">Photo :</label>
         <input type="file" id="photo" name="photo">
 
