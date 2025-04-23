@@ -1,5 +1,31 @@
 <?php
 $title = 'Mon profil';
+
+// Fake user
+$user = [
+  'pseudo' => 'JohnDoe42',
+  'email' => 'john.doe@example.com',
+  'nom' => 'Doe',
+  'prenom' => 'John'
+];
+
+// Fake véhicule
+$vehicule = [
+  'marque' => 'Peugeot',
+  'modele' => '208',
+  'immatriculation' => 'AB-123-CD',
+  'couleur' => 'Rouge',
+  'energie' => 'Essence'
+];
+
+// Fake covoiturage
+$covoiturage = [
+  'adresse_depart' => '123 Rue A',
+  'adresse_arrivee' => '456 Rue B',
+  'date_depart' => '2025-05-01',
+  'prix' => '10.00',
+  'places' => 3
+];
 ?>
 <div class="dashboard-container">
   <h1>bienvenue sur votre profil <!-- rajouter la variable usersession --></h1>
@@ -45,6 +71,7 @@ $title = 'Mon profil';
       </form>
       <div id="displayInfo" class="display-box">
         <!-- Affichage des informations personnelles enregistrées -->
+        <h2>Vos données enregistrées</h2>
       </div>
     </div>
   </div>
@@ -196,6 +223,9 @@ $title = 'Mon profil';
           <!-- D'autres lignes ici -->
         </tbody>
       </table>
+      <div id="displayGestionCovoiturage" class="display-box">
+        <!-- Affichage des préférences covoiturage enregistrées -->
+      </div>
     </div>
   </div>
 

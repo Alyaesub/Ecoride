@@ -92,12 +92,24 @@
   }
   
   .display-box {
-    background: #e9e9e9;
-    padding: 10px;
+    background: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 15px;
     margin-top: 15px;
-    border-radius: 3px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  
+    p {
+      margin: 5px 0;
+      font-size: 16px;
+      color: #333;
+    }
+  
+    strong {
+      color: #007BFF;
+    }
   }
-}
+} 
 
 
 
@@ -195,9 +207,21 @@
   }
   
   .display-box {
-    background: #e9e9e9;
-    padding: 10px;
+    background: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 15px;
     margin-top: 15px;
-    border-radius: 3px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  
+    p {
+      margin: 5px 0;
+      font-size: 16px;
+      color: #333;
+    }
+  
+    strong {
+      color: #007BFF;
+    }
   }
 }
