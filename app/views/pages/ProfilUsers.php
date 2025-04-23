@@ -1,31 +1,10 @@
 <?php
 $title = 'Mon profil';
 
-// Fake user
-$user = [
-  'pseudo' => 'JohnDoe42',
-  'email' => 'john.doe@example.com',
-  'nom' => 'Doe',
-  'prenom' => 'John'
-];
+use App\Models\ConnexionDb;
+use App\Models\UserController;
 
-// Fake véhicule
-$vehicule = [
-  'marque' => 'Peugeot',
-  'modele' => '208',
-  'immatriculation' => 'AB-123-CD',
-  'couleur' => 'Rouge',
-  'energie' => 'Essence'
-];
-
-// Fake covoiturage
-$covoiturage = [
-  'adresse_depart' => '123 Rue A',
-  'adresse_arrivee' => '456 Rue B',
-  'date_depart' => '2025-05-01',
-  'prix' => '10.00',
-  'places' => 3
-];
+require "../Ecoride/app/Controllers/DataTestController.php"
 ?>
 <div class="dashboard-container">
   <h1>bienvenue sur votre profil <!-- rajouter la variable usersession --></h1>
@@ -43,7 +22,22 @@ $covoiturage = [
   <!-- Contenu de l'onglet Info Utilisateur -->
   <div id="info" class="tab-content active">
     <div class="section" id="info-personnelle">
-      <h2>Informations Personnelles</h2>
+      <div id="displayInfo" class="display-box">
+        <!-- Affichage des informations personnelles enregistrées -->
+        <h2>Vos données enregistrées :</h2>
+        <div class="photo-profil">
+          <img class="pp" src="<?= htmlspecialchars($user['photo']) ?>" alt="photo de profil">
+        </div>
+        <ul>
+          <li><strong>Pseudo :</strong><?= htmlspecialchars($user['pseudo']) ?></li>
+          <li><strong>Nom :</strong><?= htmlspecialchars($user['nom']) ?></li>
+          <li><strong>Prénom :</strong><?= htmlspecialchars($user['prenom']) ?></li>
+          <li><strong>Email :</strong> <?= htmlspecialchars($user['email']) ?></li>
+          <li><strong>Mot de passe :</strong><?= htmlspecialchars($user['mot de passe']) ?></li>
+          <li><strong>Vos crédits :</strong><?= htmlspecialchars($user['credits']) ?></li>
+        </ul>
+      </div>
+      <h2>Mettez a jour vos donées personnelle</h2>
       <form id="formInfo" action="#" method="post" enctype="multipart/form-data">
 
         <label for="pseudo">Pseudo :</label>
@@ -69,16 +63,21 @@ $covoiturage = [
 
         <button type="submit">Mettre à jour votre profile</button>
       </form>
-      <div id="displayInfo" class="display-box">
-        <!-- Affichage des informations personnelles enregistrées -->
-        <h2>Vos données enregistrées</h2>
-      </div>
     </div>
   </div>
+
   <!-- contenue de l'onglet Paramètres -->
   <div id="parametres" class="tab-content">
     <div class="section">
-      <h2>Paramètres</h2>
+      <div id="displayParametres" class="display-box">
+        <!-- Affichage des paramètres enregistrés -->
+        <h2>Vos paramètres</h2>
+        <ul>
+          <li><strong>Langue :</strong><?= htmlspecialchars($parametre['langue']) ?></li>
+          <li><strong>Notifications :</strong><?= htmlspecialchars($parametre['notifications']) ?></li>
+        </ul>
+      </div>
+      <h2>Modifier vos parametres</h2>
       <form id="formParametres" action="#" method="post">
         <label for="langue">Langue :</label>
         <select id="langue" name="langue">
@@ -90,18 +89,26 @@ $covoiturage = [
         <label for="notifications">Notifications :</label>
         <input type="checkbox" id="notifications" name="notifications">
 
-        <button type="submit">Enregistrer les paramètres</button>
+        <button type="submit">Enregistrer les modifications</button>
       </form>
-      <div id="displayParametres" class="display-box">
-        <!-- Affichage des paramètres enregistrés -->
-      </div>
+
     </div>
   </div>
 
   <!-- Contenu de l'onglet Véhicule -->
   <div id="vehicule" class="tab-content">
     <div class="section">
-      <h2>Véhicule</h2>
+      <div id="displayVehicule" class="display-box">
+        <!-- Affichage des informations véhicule enregistrées -->
+        <h2>Votre Véhicule</h2>
+        <ul>
+          <li><strong>Marque :</strong><?= htmlspecialchars($vehicule['marque']) ?></li>
+          <li><strong>Modele :</strong><?= htmlspecialchars($vehicule['modele']) ?></li>
+          <li><strong>Immatriculation :</strong><?= htmlspecialchars($vehicule['immatriculation']) ?></li>
+          <li><strong>Couleur :</strong><?= htmlspecialchars($vehicule['couleur']) ?></li>
+          <li><strong>Energie :</strong><?= htmlspecialchars($vehicule['energie']) ?></li>
+        </ul>
+      </div>
       <form id="formVehicule" action="#" method="post">
         <?php $listeMarque = [
           ['id_marque' => 1, 'nom_marque' => 'Peugeot'],
@@ -118,6 +125,7 @@ $covoiturage = [
         <div id="divAutreMarque" style="display: none;">
           <label for="nouvelle_marque">Nouvelle Marque :</label>
           <input type="text" id="nouvelle_marque" name="nouvelle_marque" placeholder="Entrez la marque">
+          <!-- fair le chemin php qui entre la nouvelle marque dans la bdd -->
         </div>
 
         <label for="modele">Modèle :</label>
@@ -136,12 +144,8 @@ $covoiturage = [
           <option value="electrique">Électrique</option>
           <option value="hybride">Hybride</option>
         </select>
-
-        <button type="submit">Enregistrer</button>
+        <button type="submit">Enregistrer les modifications</button>
       </form>
-      <div id="displayVehicule" class="display-box">
-        <!-- Affichage des informations véhicule enregistrées -->
-      </div>
     </div>
   </div>
 
@@ -186,11 +190,9 @@ $covoiturage = [
 
         <label for="fumeur">Fumeur :</label>
         <input type="checkbox" id="fumeur" name="fumeur">
+
+        <button type="submit">Enregistrer le covoiturage</button>
       </form>
-      <button type="submit">Enregistrer le covoiturage</button>
-      <div id="displayCovoiturage" class="display-box">
-        <!-- Affichage des préférences covoiturage enregistrées -->
-      </div>
     </div>
   </div>
 
@@ -198,33 +200,57 @@ $covoiturage = [
   <div id="gestionCovoiturage" class="tab-content">
     <div class="section">
       <h2>Mes Covoiturages Enregistrés</h2>
-      <!-- Ici utiliser un tableau ou une liste pour afficher les covoiturages existants -->
-      <table id="tableCovoiturages">
+      <table class="tableCovoiturages" id="tableCovoiturages">
         <thead>
           <tr>
+            <th>Numéro du covoiturage</th>
             <th>Adresse départ</th>
             <th>Adresse arrivée</th>
             <th>Date départ</th>
-            <th>Prix</th>
+            <th>Prix unitaire</th>
             <th>Places</th>
             <th>Action</th>
           </tr>
         </thead>
         <tbody>
-          <!-- Exemple d'enregistrement, à remplacer par une boucle PHP -->
           <tr>
-            <td>123 Rue A</td>
-            <td>456 Rue B</td>
-            <td>2025-05-01</td>
-            <td>10.00 €</td>
-            <td>3</td>
+            <td><?= htmlspecialchars($covoiturage['id_covoiturage']) ?></td>
+            <td><?= htmlspecialchars($covoiturage['adresse_depart']) ?></td>
+            <td><?= htmlspecialchars($covoiturage['adresse_arrivee']) ?></td>
+            <td><?= htmlspecialchars($covoiturage['date_depart']) ?></td>
+            <td><?= htmlspecialchars($covoiturage['prix_personne']) ?></td>
+            <td><?= htmlspecialchars($covoiturage['places']) ?></td>
+            <!-- D'autres lignes ici -->
             <td><button class="cancel-covoiturage" data-id="1">Annuler</button></td>
           </tr>
-          <!-- D'autres lignes ici -->
         </tbody>
       </table>
+      <h2>Mes covoiturages annulés :</h2>
       <div id="displayGestionCovoiturage" class="display-box">
-        <!-- Affichage des préférences covoiturage enregistrées -->
+        <table class="tableCovoiturages" id="tableCovoiturages">
+          <tbody>
+            <thead>
+              <tr>
+                <th>Numéro du covoiturage</th>
+                <th>Adresse départ</th>
+                <th>Adresse arrivée</th>
+                <th>Date départ</th>
+                <th>Prix unitaire</th>
+                <th>Places</th>
+              </tr>
+            </thead>
+          <tbody>
+            <tr>
+              <td><?= htmlspecialchars($covoiturageAnnule['id_covoiturage']) ?></td>
+              <td><?= htmlspecialchars($covoiturageAnnule['adresse_depart']) ?></td>
+              <td><?= htmlspecialchars($covoiturageAnnule['adresse_arrivee']) ?></td>
+              <td><?= htmlspecialchars($covoiturageAnnule['date_depart']) ?></td>
+              <td><?= htmlspecialchars($covoiturageAnnule['prix_personne']) ?></td>
+              <td><?= htmlspecialchars($covoiturageAnnule['places']) ?></td>
+            </tr>
+          </tbody>
+        </table>
+        </tbody>
       </div>
     </div>
   </div>
@@ -233,9 +259,47 @@ $covoiturage = [
   <div id="avis" class="tab-content">
     <div class="section">
       <h2>Avis</h2>
-      <!-- Conteneur dédié qui sera rempli par avis.js -->
+      <section class="envoyer-avis">
+        <h2>Laisser nous votre avis sur vos experiences</h2>
+        <form method="POST" action="">
+          <div class="form-group">
+            <label for="note">Note (1 à 5) :</label>
+            <select name="note" id="note" class="form-control" required>
+              <option value="">-- Choisissez une note --</option>
+              <option value="1">1 - Mauvais</option>
+              <option value="2">2</option>
+              <option value="3">3 - Moyen</option>
+              <option value="4">4</option>
+              <option value="5">5 - Excellent</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="commentaire">Commentaire :</label>
+            <textarea name="commentaire" id="commentaire" class="form-control" placeholder="Votre avis en quelques mots..." required></textarea>
+          </div>
+          <button type="submit" class="btn btn-success">Envoyer l'avis</button>
+        </form>
+      </section>
+      <h2>Vos avies envoyés</h2>
       <ul id="listeAvis">
-        <!-- Les avis seront injectés ici en JSON via NoSQL -->
+        <?php
+        $fichier = '../data/avis.json';
+        if (file_exists($fichier)) {
+          $avisListe = json_decode(file_get_contents($fichier), true);
+          foreach ($avisListe as $avis) {
+            if ($avis['idUser'] == $idUser) {
+              echo '<li>';
+              echo 'Vous avez mis une note de ';
+              echo '<strong>' . htmlspecialchars($avis['note']) . '/5</strong> ';
+              echo 'avec le commentaire : "' . htmlspecialchars($avis['commentaire']) . '"';
+              echo ' <small>(' . htmlspecialchars($avis['date']) . ')</small>';
+              echo '</li>';
+            }
+          }
+        } else {
+          echo '<li>Aucun avis pour le moment.</li>';
+        }
+        ?>
       </ul>
     </div>
   </div>

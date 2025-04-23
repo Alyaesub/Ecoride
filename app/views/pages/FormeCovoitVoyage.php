@@ -1,37 +1,8 @@
 <?php $title = 'Formulaire de covoiturage';
-
-//ajout de data teste a mettre apres dans un fichier de logique au propre
-// Ajout de données test pour éviter que les variables soient undefined
-if (!isset($departAdresses)) {
-  $departAdresses = [
-    ['id' => 1, 'nom' => 'Paris'],
-    ['id' => 2, 'nom' => 'Lyon'],
-    ['id' => 3, 'nom' => 'Marseille']
-  ];
-}
-if (!isset($arriveeAdresses)) {
-  $arriveeAdresses = [
-    ['id' => 1, 'nom' => 'Nice'],
-    ['id' => 2, 'nom' => 'Bordeaux'],
-    ['id' => 3, 'nom' => 'Lille']
-  ];
-}
-if (!isset($datesDepart)) {
-  $datesDepart = [
-    '2025-05-01 08:00',
-    '2025-05-02 10:00',
-    '2025-05-03 14:00'
-  ];
-}
-if (!isset($prixMax)) {
-  $prixMax = [10, 20, 30];
-}
-if (!isset($places)) {
-  $places = [1, 2, 3, 4];
-}
-
-
+require "../Ecoride/app/Controllers/DataTestController.php"
 ?>
+
+
 <div class="voyage-page-container">
   <div class="title">
     <h1>Formulaire de recherche de Covoiturage</h1>

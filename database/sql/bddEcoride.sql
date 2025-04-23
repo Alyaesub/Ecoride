@@ -28,7 +28,7 @@ CREATE TABLE role (
 ) ENGINE=InnoDB;
 
 -- Création de la table Utilisateurs
-CREATE TABLE utilisateur (
+CREATE TABLE user (
     id_utilisateur INT PRIMARY KEY AUTO_INCREMENT,
     pseudo VARCHAR(30) NOT NULL UNIQUE,
     nom VARCHAR(30),
@@ -87,7 +87,7 @@ CREATE TABLE marque (
 ) ENGINE=InnoDB;
 
 -- Table de liaison UTILISATEUR_COVOITURAGE (relation Many-to-Many "participe")
-CREATE TABLE utilisateur_covoiturage (
+CREATE TABLE user_covoiturage (
     id_utilisateur INT NOT NULL,
     id_covoiturage INT NOT NULL,
     PRIMARY KEY (id_utilisateur, id_covoiturage),

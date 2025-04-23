@@ -20,6 +20,7 @@ class UserController
   {
 
     // 1. Récupérer les données du formulaire
+    $pseudo = $_POST['pseudo'] ?? '';
     $email = $_POST['email'] ?? '';
     $password = $_POST['password'] ?? '';
 
@@ -27,9 +28,9 @@ class UserController
     // $user = User::checkCredentials($email, $password);
 
     // 3. Si OK, enregistrer en session et rediriger vers le profil
-    if ($email === 'test@test.com' && $password === '1234') {
-      $_SESSION['user_id'] = 42; // par exemple
-      header('Location: /app\views\pages\login.php');
+    if ($pseudo === 'pseudo test' && $email === 'test@test.com' && $password === '1234') {
+      $_SESSION['user_id'] = "userId"; // par exemple
+      header('Location: /app/views/pages/login.php');
       exit;
     } else {
       // Gérer l'erreur (rester sur la page ou afficher un message)
@@ -54,6 +55,6 @@ class UserController
     // $user = User::find($_SESSION['user_id']);
 
     // Charger la vue du profil
-    require __DIR__ . 'app\views\profilUsers.php';
+    require __DIR__ . 'app/views/profilUsers.php';
   }
 }

@@ -1021,10 +1021,73 @@ $border-color: #ccc;
     background-color: #4c95ae;
   }
   .display-box {
-    background: #e9e9e9;
-    padding: 10px;
+    background: #4CAF50;
+    border: 2px solid #F0EAD6;
+    border-radius: 5px;
+    padding: 15px;
     margin-top: 15px;
-    border-radius: 3px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  .display-box h2 {
+    color: #333;
+    font-family: "DM Sans", sans-serif;
+  }
+  .display-box .pp {
+    width: 50px;
+    height: 50px;
+    border-radius: 50px;
+    margin-left: 20px;
+    margin-bottom: 20px;
+  }
+  .display-box .pp img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50px;
+  }
+  .display-box li {
+    padding: 8px 0;
+    border-bottom: 2px solid #F0EAD6;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .display-box li strong {
+    color: #000;
+    font-family: "Geologica", sans-serif;
+  }
+  .tableCovoiturages {
+    display: flex;
+    flex-direction: column;
+    background: #4CAF50;
+    border: 2px solid #F0EAD6;
+    border-radius: 5px;
+    padding: 15px;
+    margin-top: 15px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    border-collapse: collapse;
+  }
+  .tableCovoiturages th,
+  .tableCovoiturages td {
+    text-align: left;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+  }
+  .tableCovoiturages thead {
+    display: none;
+  }
+  .tableCovoiturages tr {
+    display: block;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
+  }
+  .tableCovoiturages td {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
   }
 }
 @media (min-width: 768px) {
@@ -1105,10 +1168,47 @@ $border-color: #ccc;
     background-color: #4c95ae;
   }
   .display-box {
-    background: #e9e9e9;
-    padding: 10px;
+    background: #4CAF50;
+    border: 2px solid #F0EAD6;
+    border-radius: 5px;
+    padding: 15px;
     margin-top: 15px;
-    border-radius: 3px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  .display-box h2 {
+    color: #333;
+    font-family: "DM Sans", sans-serif;
+  }
+  .display-box .pp {
+    width: 80px;
+    height: 80px;
+    border-radius: 50px;
+    margin-left: 20px;
+    margin-bottom: 20px;
+  }
+  .display-box .pp img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50px;
+  }
+  .display-box li {
+    padding: 8px 0;
+    border-bottom: 2px solid #F0EAD6;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .display-box li strong {
+    color: #000;
+    font-family: "Geologica", sans-serif;
+  }
+  .tableCovoiturages {
+    background: #4CAF50;
+    border: 2px solid #F0EAD6;
+    border-radius: 5px;
+    padding: 15px;
+    margin-top: 15px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }
 }
 @media (max-width: 768px) {
