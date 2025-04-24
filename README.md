@@ -99,8 +99,8 @@ npm install
 
 -   Maquettes : [Lien](https://www.figma.com/design/wzlnTb3rpsE1tW39XHNRj9/Maquettage-Ecoride?t=qEgEUtOSJ5wLQTr0-0)
 -   Diagramme d'utilisation : [Lien](https://www.figma.com/design/tDpcbYwymMGQ1bRDxAunYQ/Diagramme-d-utilisation-Ecoride?node-id=0-1&p=f&t=qEgEUtOSJ5wLQTr0-0)
--   Diagramme de classe (à refaire) : [Lien](https://www.figma.com/design/UErDXx2fShe8iPASCSTqLB/diagramme-classe-Ecoride)
--   MCP Ecoride (à refaire) : [Lien](https://www.figma.com/design/FiuUpMhBEJEVa6j3rrmASP/MCP-Ecoride)
+-   Diagramme de classe : [Lien](https://www.figma.com/design/UErDXx2fShe8iPASCSTqLB/diagramme-classe-Ecoride?node-id=0-1&p=f&t=7E1L6cUHexjM0Wb3-0)
+-   MCP Ecoride : [Lien](https://www.figma.com/design/FiuUpMhBEJEVa6j3rrmASP/MCP-Ecoride)
 -   Diagramme de séquence : [Lien](https://www.figma.com/design/p2iUH1N3JGgNAPVyS23V2m/Diagramme-sequence-Ecoride)
 
 ## ⚙️ Configuration
