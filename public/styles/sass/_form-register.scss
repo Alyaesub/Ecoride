@@ -1,0 +1,48 @@
+/////////////////// code mobilefirst //////////////
+@media (max-width: $max-width-mobile) {
+  .registerMain {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    flex-wrap: wrap;
+  }
+  .registerForm {
+        width: 60%;
+    }
+    .role-button {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+
+      select {
+        margin-top: 10px;
+      }
+    }
+}
+
+
+
+
+//////////code desktop /////////////////
+@media (min-width: $min-width-desktop) {
+  .registerMain {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    flex-wrap: wrap;
+  }
+  .registerForm {
+        width: 60%;
+    }
+    .role-button {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+
+      select {
+        margin-top: 10px;
+      }
+    }
+}
