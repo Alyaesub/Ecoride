@@ -81,28 +81,27 @@ $border-color: #ccc;
     display: flex;
     align-items: center;
     list-style: none;
+    font-family: "Poppins", sans-serif;
   }
   .navbar ul li {
     text-decoration: none;
     color: #F0EAD6;
-    font-weight: bold;
-    margin: 0 10px;
-    padding: 5px 10px; /* Ajoute de l'espace interne */
-    background-color: #388E3C; /* Couleur de fond */
-    color: #fff; /* Couleur du texte */
-    border-radius: 4px; /* Coins arrondis */
+    margin: 0 5px;
+    padding: 5px 5px;
+    background-color: #388E3C;
+    border-radius: 4px;
     transition: background-color 0.3s;
   }
   .navbar ul li:hover {
-    background-color: #4c95ae; /* Couleur de fond au survol */
+    background-color: #4c95ae;
   }
   .navbar ul li:active {
-    background-color: #388E3C; /* Couleur de fond au clic */
+    background-color: #388E3C;
   }
   .navbar ul a {
     text-decoration: none;
-    /* color: $secondary-color; */
-    font-weight: bold;
+    color: #F0EAD6;
+    font-weight: normal;
   }
 }
 .header {
@@ -142,6 +141,7 @@ $border-color: #ccc;
     align-items: center;
     justify-content: space-evenly;
     padding: 0;
+    font-family: "Poppins", sans-serif;
   }
   .header ul li {
     margin: 0 20px;
@@ -391,19 +391,24 @@ $border-color: #ccc;
     justify-content: center;
     width: 150px;
     height: 150px;
-    background-color: #4CAF50;
+    background-image: url("/public/assets/pexels-alena-koval-233944-886521.webp");
+    background-size: cover;
+    background-position: center;
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
     transition: all 0.3s ease-in-out;
     text-decoration: none;
     flex-shrink: 0; /* rajouter pour faire fonctionner le scroll */
+    font-family: "Poppins", sans-serif;
   }
   .section-photo-covoit a .link-covoit:hover {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
   }
   .section-photo-covoit a .link-covoit p {
-    color: black;
-    text-align: center;
+    color: #000000;
+    text-align: right;
+    font-size: 24px;
+    font-style: "Poppins", sans-serif;
   }
   .photo-1 {
     display: flex;
@@ -477,6 +482,7 @@ $border-color: #ccc;
     padding: 8px;
     text-align: center;
     flex-shrink: 0; /* rajouter pour faire fonctionner le scroll */
+    font-family: "Readex Pro", sans-serif;
   }
   .description-mobile:hover {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
@@ -490,8 +496,6 @@ $border-color: #ccc;
     width: 100%;
     max-width: 100%;
     color: black;
-    /* white-space: nowrap;
-    text-overflow: ellipsis; */
   }
   .contact-mobile {
     display: flex;
@@ -510,6 +514,7 @@ $border-color: #ccc;
     padding: 8px;
     text-align: center;
     flex-shrink: 0; /* rajouter pour faire fonctionner le scroll */
+    font-family: "Readex Pro", sans-serif;
   }
   .contact-mobile:hover {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
@@ -540,6 +545,7 @@ $border-color: #ccc;
     padding: 8px;
     text-align: center;
     flex-shrink: 0; /* rajouter pour faire fonctionner le scroll */
+    font-family: "Readex Pro", sans-serif;
   }
   .social-media-mobile:hover {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
@@ -584,18 +590,23 @@ $border-color: #ccc;
     justify-content: center;
     width: 150px;
     height: 150px;
-    background-color: #4CAF50;
+    background-image: url("/public/assets/pexels-alena-koval-233944-886521.webp");
+    background-size: cover;
+    background-position: center;
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
     transition: all 0.3s ease-in-out;
     text-decoration: none;
+    font-family: "Poppins", sans-serif;
   }
   .section-photo-covoit a .link-covoit:hover {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
   }
   .section-photo-covoit a .link-covoit p {
-    color: black;
+    color: #000000;
     text-align: center;
+    font-size: 24px;
+    font-style: "Poppins", sans-serif;
   }
   .photo-1 {
     display: flex;
@@ -656,6 +667,7 @@ $border-color: #ccc;
     text-decoration: none;
     padding: 10px;
     text-align: center;
+    font-family: "Readex Pro", sans-serif;
   }
   .description-desktop:hover {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
@@ -1239,6 +1251,7 @@ $border-color: #ccc;
     padding: 5px 10px 5px 10px;
     border-radius: 5px;
     background-color: #F0EAD6;
+    font-family: "Readex Pro", sans-serif;
   }
   .voyage-page-container .description-photo .photo-page-voyage {
     padding: 15px;
@@ -1278,6 +1291,7 @@ $border-color: #ccc;
     padding: 15px;
     border-radius: 5px;
     background-color: #F0EAD6;
+    font-family: "Readex Pro", sans-serif;
   }
   .voyage-page-container .description-photo .photo-page-voyage {
     padding: 15px;

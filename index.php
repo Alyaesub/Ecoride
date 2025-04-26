@@ -26,43 +26,55 @@ $test->hello(); */
 $page = $_GET['page'] ?? 'home';
 
 switch ($page) {
-    case 'home':
-        $controller = new HomeController();
-        $controller->index();
-        break;
+  case 'home':
+    $controller = new HomeController();
+    $controller->index();
+    break;
 
-    case 'covoitVoyage':
-        render(__DIR__ . '/app/views/pages/formeCovoitVoyage.php', [
-            'title' => 'Formulaire de covoiturage'
-        ]);
-        break;
+  case 'covoitVoyage':
+    render(__DIR__ . '/app/views/pages/formeCovoitVoyage.php', [
+      'title' => 'Formulaire de covoiturage'
+    ]);
+    break;
 
-    case 'login':
-        render(__DIR__ . '/app/views/pages/login.php', [
-            'title' => 'Connexion'
-        ]);
-        break;
+  case 'login':
+    render(__DIR__ . '/app/views/pages/login.php', [
+      'title' => 'Connexion'
+    ]);
+    break;
 
-    case 'register':
-        render(__DIR__ . '/app/views/pages/register.php', [
-            'title' => 'Créer votre profile'
-        ]);
-        break;
+  case 'register':
+    render(__DIR__ . '/app/views/pages/register.php', [
+      'title' => 'Créer votre profile'
+    ]);
+    break;
 
-    case 'activites':
-        render(__DIR__ . '/app/views/pages/activites.php', [
-            'title' => 'Historique de vos activités'
-        ]);
-        break;
+  case 'activites':
+    render(__DIR__ . '/app/views/pages/activites.php', [
+      'title' => 'Historique de vos activités'
+    ]);
+    break;
 
-    case 'profil':
-        render(__DIR__ . '/app/views/pages/profilUsers.php', [
-            'title' => 'Mon profil'
-        ]);
-        break;
-    default:
-        render(__DIR__ . '/app/views/pages/404.php', [
-            'title' => 'Page introuvable'
-        ]);
-        break;
+  case 'profil':
+    render(__DIR__ . '/app/views/pages/profilUsers.php', [
+      'title' => 'Mon profil'
+    ]);
+    break;
+
+  case 'dashboardAdmin':
+    render(__DIR__ . '/app/views/pages/administration/dashboardAdmin.php', [
+      'title' => 'Dashboard Administration'
+    ]);
+    break;
+
+  case 'dashboardEmploye':
+    render(__DIR__ . '/app/views/pages/administration/dashboardEmploye.php', [
+      'title' => 'Dashboard Employer'
+    ]);
+    break;
+  default:
+    render(__DIR__ . '/app/views/pages/404.php', [
+      'title' => 'Page introuvable'
+    ]);
+    break;
 }
