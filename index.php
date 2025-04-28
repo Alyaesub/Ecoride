@@ -8,6 +8,7 @@ require_once __DIR__ . '/config/config.php'; //apelle la config pour gérer erre
 use App\Controllers\HomeController; //pour appeler le controller de la page d'accueil
 use Whoops\Run;
 use Whoops\Handler\PrettyPageHandler;
+use App\Controllers\SearchCitiesController; //appelle le controller de la searchbar
 
 
 
@@ -16,33 +17,24 @@ $whoops = new Run();
 $whoops->pushHandler(new PrettyPageHandler());
 $whoops->register();
 
-// Test autoload
-/* $test = new TestController();
-$test->hello(); */
-
-// Test erreur Whoops (tu peux commenter après)
-/* throw new Exception("Oups, une belle erreur stylée !"); */
-
 $page = $_GET['page'] ?? 'home';
 
 switch ($page) {
+  //routes vers le views
   case 'home':
     $controller = new HomeController();
     $controller->index();
     break;
-
   case 'covoitVoyage':
     render(__DIR__ . '/app/views/pages/formeCovoitVoyage.php', [
       'title' => 'Formulaire de covoiturage'
     ]);
     break;
-
   case 'login':
     render(__DIR__ . '/app/views/pages/login.php', [
       'title' => 'Connexion'
     ]);
     break;
-
   case 'register':
     render(__DIR__ . '/app/views/pages/register.php', [
       'title' => 'Créer votre profile'
@@ -54,23 +46,25 @@ switch ($page) {
       'title' => 'Historique de vos activités'
     ]);
     break;
-
   case 'profil':
     render(__DIR__ . '/app/views/pages/profilUsers.php', [
       'title' => 'Mon profil'
     ]);
     break;
-
   case 'dashboardAdmin':
     render(__DIR__ . '/app/views/pages/administration/dashboardAdmin.php', [
       'title' => 'Dashboard Administration'
     ]);
     break;
-
   case 'dashboardEmploye':
     render(__DIR__ . '/app/views/pages/administration/dashboardEmploye.php', [
       'title' => 'Dashboard Employer'
     ]);
+    break;
+  //routes vers les controllers
+  case 'search-cities':
+    $controller = new SearchCitiesController();
+    $controller->index();
     break;
   default:
     render(__DIR__ . '/app/views/pages/404.php', [

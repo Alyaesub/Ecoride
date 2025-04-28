@@ -1,5 +1,5 @@
 //////////////////////////// Code Mobilfirst //////////////////////
-@media (max-width: 768px) {
+@media (max-width: $max-width-mobile) {
     .search-bar-section {
         display: flex;
         align-items: center;
@@ -7,6 +7,7 @@
         padding-top: 40px;
     }
     .search-bar {
+        position: relative; /*pour permettre à #results d'être positionné sous .search-bar */
         display: flex;
         align-items: center;
         background: #f4f4f4;
@@ -14,11 +15,11 @@
         padding: 5px;
         width: 100%; // Prend toute la largeur
         max-width: 250px;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
         transition: all 0.3s ease-in-out;
 
         &:hover {
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
         }
 
         input {
@@ -28,10 +29,11 @@
             padding: 10px;
             font-size: 1rem;
             flex: 1;
+            font-family: $font-secondary;
         }
     
         button {
-            background: #007bff;
+            background: $button;
             border: none;
             color: white;
             padding: 8px 8px;
@@ -40,18 +42,40 @@
             transition: background 0.3s;
     
             &:hover {
-                background: #0056b3;
+                background:  $button-active;
             }
         }
+        #results {
+          position: absolute; /* Permet de positionner les résultats sous l'input */
+          top: 100%; /* Décale les résultats juste en dessous de l'input */
+          left: 0;
+          width: 100%; 
+          margin-top: 10px;
+          background-color: $secondary-color; 
+          box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.5); 
+          border-radius: 4px; 
+          max-height: 300px; 
+          overflow-y: auto; /* Si trop de résultats, un scroll apparait */
+          display: none; /* Cacher les résultats par défaut */
+          z-index: 10; /* S'assurer que les résultats sont visibles par-dessus le reste*/
+        }
+          
+          #results div {
+            padding: 10px;
+            font-family: $font-secondary;
+            
+            cursor: pointer; 
+          }
+          
+          #results div:hover {
+            background-color: $button-active; 
+          }
     }
-}
+} 
 //////////////////////////////////////////////////////////////
 
-
-
-
 ///////////////////////////// Code Desktop ////////////////////////
-@media (min-width: 768px) {
+@media (min-width: $min-width-desktop) {
 
     .search-bar-section {
         display: flex;
@@ -60,17 +84,18 @@
         padding-top: 50px;
     }
     .search-bar {
+        position: relative; /*pour permettre à #results d'être positionné sous .search-bar */
         display: flex;
         align-items: center;
         background: #f4f4f4;
         border-radius: 25px;
         padding: 5px;
         width: 700px;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
         transition: all 0.3s ease-in-out;
     
         &:hover {
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
         }
     
         input {
@@ -80,10 +105,11 @@
             padding: 10px;
             font-size: 1rem;
             flex: 1;
+            font-family: $font-secondary;
         }
     
         button {
-            background: #007bff;
+            background: $button;
             border: none;
             color: white;
             padding: 8px 12px;
@@ -92,9 +118,33 @@
             transition: background 0.3s;
     
             &:hover {
-                background: #0056b3;
+                background: $button-active;
             }
         }
+        #results {
+          position: absolute; /* Permet de positionner les résultats sous l'input */
+          top: 100%; /* Décale les résultats juste en dessous de l'input */
+          left: 0;
+          width: 100%; 
+          margin-top: 10px;
+          background-color: $secondary-color; 
+          box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.5); 
+          border-radius: 4px; 
+          max-height: 300px; 
+          overflow-y: auto; /* Si trop de résultats, un scroll apparait */
+          display: none; /* Cacher les résultats par défaut */
+          z-index: 10; /* S'assurer que les résultats sont visibles par-dessus le reste*/
+        }
+          
+          #results div {
+            padding: 10px;
+            font-family: $font-secondary;
+            
+            cursor: pointer; 
+          }
+          
+          #results div:hover {
+            background-color: $button-active; 
+          }
     }
-    
 }    

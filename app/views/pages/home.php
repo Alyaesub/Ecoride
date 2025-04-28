@@ -5,7 +5,7 @@ $title = 'Accueil';
 <section class="title-search">
   <div class="title">
     <h1>Bienvenue sur EcoRide</h1>
-    <p>Trouvez votre covoiturage en toute simplicité.</p>
+    <h2>Trouvez votre covoiturage en toute simplicité.</h2>
   </div>
 </section>
 <!--Section de la seach-bar-->
