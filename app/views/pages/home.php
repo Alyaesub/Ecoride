@@ -9,10 +9,11 @@ $title = 'Accueil';
   </div>
 </section>
 <!--Section de la seach-bar-->
-<section class="search-bar-section">
+<section class="search-bar-section" id="searchBarSection">
   <div class="search-bar">
     <input type="text" placeholder="Rechercher..." id="searchInput">
-    <button type="submit">🔍</button>
+    <button type="submit" id="searchBtn">🔍</button>
+    <div id="results"></div>
   </div>
 </section>
 <!--Section general des pubs et de la section covoit-->
@@ -56,4 +57,5 @@ $title = 'Accueil';
     <a href="https://www.instagram.com/EcoRide" target="_blank">Instagram</a>
     <a href="https://www.linkedin.com/company/EcoRide" target="_blank">LinkedIn</a>
   </section>
+  <script src="/js/searchBar.js"></script>
 </section>
