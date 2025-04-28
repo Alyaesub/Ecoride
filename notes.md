@@ -257,3 +257,14 @@ $pdo = ConnexionDb::getPdo();
 -   ✅ Compatible avec PHP 8 et MVC propre
 
 ---
+
+Pour rendre le <table> scrollable sur mobile, j’ai simplement appliqué ces deux propriétés CSS :
+
+table {
+display: block; // passe le tableau en bloc pour qu’il ne prenne plus forcément 100 % du conteneur
+overflow-x: auto; // active le scroll horizontal si le contenu déborde
+-webkit-overflow-scrolling: touch; // (optionnel) pour un défilement plus fluide sur iOS
+}
+• display: block : sans ça, la plupart des navigateurs gardent le tableau en display: table, et l’overflow ne fonctionne pas comme on veut.
+• overflow-x: auto : c’est ce qui crée une barre de défilement horizontale quand les colonnes dépassent la largeur de l’écran.
+• -webkit-overflow-scrolling: touch (facultatif) : ça ajoute l’inertie de scroll sur Safari mobile, pour un effet plus “natif”.

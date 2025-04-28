@@ -1374,4 +1374,430 @@
   .role-button select {
     margin-top: 10px;
   }
+}
+@media (max-width: 768px) {
+  .main-admin {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+  }
+  .main-admin h1 {
+    font-family: "DM Sans", sans-serif;
+    color: #333;
+    font-size: 18px;
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+  .logout {
+    background-color: #e74c3c;
+    color: #fff;
+    padding: 0.5rem;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+    width: 100%;
+    text-align: center;
+    margin: 0.5rem 0;
+  }
+  .logout:hover {
+    background-color: #c0392b;
+  }
+  .sections-stats,
+  .employee-management,
+  .user-management {
+    background-color: #F0EAD6;
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    width: 100%;
+  }
+  .sections-stats h2,
+  .employee-management h2,
+  .user-management h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: #34495e;
+    text-align: center;
+  }
+  .stats {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    margin-bottom: 1rem;
+  }
+  .stats .stat-item {
+    text-align: center;
+    padding: 0.5rem 0;
+  }
+  .stats .stat-item p {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+    font-family: "Readex Pro", sans-serif;
+  }
+  .stats .stat-item span {
+    display: block;
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: #27ae60;
+  }
+  table {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    border-collapse: collapse;
+    background-color: #a6ccd8;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+  }
+  table thead {
+    background-color: #2980b9;
+    color: #fff;
+  }
+  table thead th {
+    padding: 0.75rem;
+    text-align: left;
+  }
+  table tbody tr {
+    border-bottom: 1px solid #ddd;
+  }
+  table tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  table tbody tr td {
+    padding: 0.75rem;
+  }
+  .suspend-btn,
+  button#create-employee {
+    display: block;
+    width: 100%;
+    padding: 0.7rem;
+    border: none;
+    border-radius: 4px;
+    color: #fff;
+    cursor: pointer;
+    text-align: center;
+    margin-bottom: 1rem;
+    transition: background-color 0.3s;
+  }
+  .suspend-btn {
+    background-color: #e67e22;
+  }
+  .suspend-btn:hover {
+    background-color: #d35400;
+  }
+  button#create-employee {
+    background-color: #3498db;
+  }
+  button#create-employee:hover {
+    background-color: #2980b9;
+  }
+}
+@media (min-width: 768px) {
+  .main-admin {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .main-admin h1 {
+    font-family: "DM Sans", sans-serif;
+    color: #333;
+    font-size: 32px;
+  }
+  .logout {
+    background-color: #e74c3c;
+    color: #fff;
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+    width: 80px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+  }
+  .logout:hover {
+    background-color: #c0392b;
+  }
+  .sections-stats {
+    background-color: #F0EAD6;
+    border-radius: 8px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    width: 80%;
+    align-items: center;
+  }
+  .sections-stats h2 {
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    color: #34495e;
+  }
+  .stats {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+  .stats .stat-item {
+    text-align: center;
+  }
+  .stats .stat-item p {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+    font-family: "Readex Pro", sans-serif;
+  }
+  .stats .stat-item span {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #27ae60;
+  }
+  .employee-management,
+  .user-management {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    background-color: #F0EAD6;
+    border-radius: 8px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    align-items: center;
+  }
+  .employee-management h2,
+  .user-management h2 {
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    color: #34495e;
+  }
+  table {
+    width: 80%;
+    border-collapse: collapse;
+    background-color: #a6ccd8;
+    border-radius: 8px;
+  }
+  table thead {
+    background-color: #2980b9;
+    color: #fff;
+  }
+  table thead th {
+    padding: 1rem;
+    text-align: left;
+  }
+  table tbody tr {
+    border-bottom: 1px solid #ddd;
+  }
+  table tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  table tbody tr td {
+    padding: 1rem;
+  }
+  table .user-management {
+    background-color: #F0EAD6;
+    border-radius: 8px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    align-items: center;
+  }
+  table .user-management h2 {
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    color: #34495e;
+  }
+  table .suspend-btn {
+    background-color: #e67e22;
+    color: #fff;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  table .suspend-btn:hover {
+    background-color: #d35400;
+  }
+  button#create-employee {
+    background-color: #3498db;
+    color: #fff;
+    padding: 0.7rem 1.2rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-bottom: 1.5rem;
+    transition: background-color 0.3s;
+  }
+  button#create-employee:hover {
+    background-color: #2980b9;
+  }
+}
+@media (max-width: 768px) {
+  .main-admin {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+  }
+  .main-admin h1 {
+    font-family: "DM Sans", sans-serif;
+    color: #333;
+    font-size: 18px;
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+  .logout {
+    background-color: #e74c3c;
+    color: #fff;
+    padding: 0.5rem;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+    width: 100%;
+    text-align: center;
+    margin: 0.5rem 0;
+  }
+  .logout:hover {
+    background-color: #c0392b;
+  }
+  .review-validation,
+  .problematic-rides {
+    background-color: #F0EAD6;
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    width: 100%;
+  }
+  .review-validation h2,
+  .problematic-rides h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: #34495e;
+    text-align: center;
+  }
+  .review {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+  }
+  .review p {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+    font-family: "Readex Pro", sans-serif;
+  }
+  table {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    border-collapse: collapse;
+    background-color: #a6ccd8;
+    margin-bottom: 1rem;
+  }
+  table thead {
+    background-color: #2980b9;
+    color: #fff;
+  }
+  table thead th {
+    padding: 0.75rem;
+    text-align: left;
+  }
+  table tbody tr {
+    border-bottom: 1px solid #ddd;
+  }
+  table tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  table tbody tr td {
+    padding: 0.75rem;
+  }
+}
+@media (min-width: 768px) {
+  .main-admin {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .main-admin h1 {
+    font-family: "DM Sans", sans-serif;
+    color: #333;
+    font-size: 32px;
+  }
+  .logout {
+    background-color: #e74c3c;
+    color: #fff;
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+    width: 80px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+  }
+  .logout:hover {
+    background-color: #c0392b;
+  }
+  .review-validation {
+    background-color: #F0EAD6;
+    border-radius: 8px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    width: 80%;
+    align-items: center;
+  }
+  .review-validation h2 {
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    color: #34495e;
+  }
+  .review {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+  .review p {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+    font-family: "Readex Pro", sans-serif;
+  }
+}
+.problematic-rides {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  background-color: #F0EAD6;
+  border-radius: 8px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  align-items: center;
+}
+.problematic-rides h2 {
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+  color: #34495e;
+}
+
+table {
+  width: 80%;
+  border-collapse: collapse;
+  background-color: #a6ccd8;
+}
+table thead {
+  background-color: #2980b9;
+  color: #fff;
+}
+table thead th {
+  padding: 1rem;
+  text-align: left;
+}
+table tbody tr {
+  border-bottom: 1px solid #ddd;
+}
+table tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+table tbody tr td {
+  padding: 1rem;
 }/*# sourceMappingURL=main.css.map */
