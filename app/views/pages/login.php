@@ -1,11 +1,5 @@
 <!-- page de la view du login -->
 <?php $title = 'Connexion à votre profil';
-session_start();
-// Si l'utilisateur est déjà connecté, rediriger vers le profil
-if (isset($_SESSION['user'])) {
-  header('Location: /views/profilUsers.php');
-  exit();
-}
 
 ?>
 

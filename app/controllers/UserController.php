@@ -88,17 +88,17 @@ class UserController
    */
   public function showProfile()
   {
+    session_start();
     // Vérifier si l’utilisateur est connecté
     if (!isset($_SESSION['user_id'])) {
       // Rediriger vers la connexion s’il n’est pas logué
       header('Location: /login');
       exit;
     }
-
     // Récupérer les infos de l’utilisateur si besoin
     /* $user = User::find($_SESSION['user_id']); */
 
     // Charger la vue du profil
-    require __DIR__ . 'app/views/profilUsers.php';
+    require __DIR__ . '/../views/profilUsers.php';
   }
 }

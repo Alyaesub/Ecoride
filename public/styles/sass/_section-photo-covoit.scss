@@ -57,9 +57,6 @@
         &:hover {
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
         }
-        p{
-            color: black;
-        }
     }
     .photo-2 {
         display: flex;
@@ -76,9 +73,6 @@
         &:hover {
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
         }
-        p{
-            color: black;
-        }
     }
     .photo-3 {
         display: flex;
@@ -94,9 +88,6 @@
         flex-shrink: 0; /* rajouter pour faire fonctionner le scroll */
         &:hover {
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-        }
-        p{
-            color: black;
         }
     }
     .description-mobile {

@@ -55,6 +55,10 @@ switch ($page) {
       'title' => 'Mon profil'
     ]);
     break;
+  case 'profil':
+    $controller = new \App\Controllers\UserController;
+    $controller->showProfile();
+    break;
   case 'dashboardAdmin':
     render(__DIR__ . '/app/views/pages/administration/dashboardAdmin.php', [
       'title' => 'Dashboard Administration'

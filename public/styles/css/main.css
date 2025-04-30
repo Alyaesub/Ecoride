@@ -455,9 +455,6 @@
   .photo-1:hover {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
   }
-  .photo-1 p {
-    color: black;
-  }
   .photo-2 {
     display: flex;
     align-items: center;
@@ -474,9 +471,6 @@
   .photo-2:hover {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
   }
-  .photo-2 p {
-    color: black;
-  }
   .photo-3 {
     display: flex;
     align-items: center;
@@ -492,9 +486,6 @@
   }
   .photo-3:hover {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-  }
-  .photo-3 p {
-    color: black;
   }
   .description-mobile {
     display: flex;
@@ -910,7 +901,7 @@
     flex: 0 0 auto;
     scroll-snap-align: start;
     background-color: #4CAF50;
-    padding: 1rem;
+    /* padding: 1rem; */
     border-radius: 10px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     min-width: 250px;
@@ -1285,13 +1276,13 @@
   }
   .voyage-page-container .description-photo .photo-page-voyage {
     padding: 15px;
-    background-color: #ddd;
     border-radius: 5px;
-    text-align: center;
+    background-color: #F0EAD6;
   }
   .voyage-page-container .description-photo .photo-page-voyage img.photo-voyage {
     display: block;
     max-width: 100%;
+    border-radius: 5px;
     height: auto;
     margin: 0 auto;
   }
@@ -1326,17 +1317,17 @@
   }
   .voyage-page-container .description-photo .description-page-voyage {
     padding: 10px;
-    border-radius: 5px;
+    border-radius: 8px;
     background-color: #F0EAD6;
     font-family: "Readex Pro", sans-serif;
   }
   .voyage-page-container .description-photo .photo-page-voyage {
     padding: 15px;
-    background-color: #ddd;
-    border-radius: 5px;
-    text-align: center;
+    border-radius: 8px;
+    background-color: #F0EAD6;
   }
   .voyage-page-container .description-photo .photo-page-voyage img.photo-voyage {
+    border-radius: 5px;
     display: block;
     max-width: 100%;
     height: auto;

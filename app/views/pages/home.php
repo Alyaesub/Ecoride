@@ -1,4 +1,5 @@
 <!-- page de la vue de la page d'accueil -->
+<p>site en construction</p>
 <?php
 $title = 'Accueil';
 ?>
@@ -23,14 +24,14 @@ $title = 'Accueil';
       <p>envie de voyager ? GO!!</p>
     </div>
   </a>
-  <div class=" photo-1 carousel-item">photo 1
-    <img class="" src="" alt="photo-voiture">
+  <div class=" photo-1 carousel-item">
+    <img class="photo-1 carousel-item" src="/public/assets/pexels-pripicart-620335 (1).webp" alt="photo-voiture">
   </div>
-  <div class=" photo-2 carousel-item">photo 2
-    <img class="" src="" alt="photo-voiture">
+  <div class=" photo-2 carousel-item">
+    <img class="photo-2 carousel-item" src="/public/assets/pexels-amar-31688476.webp" alt="photo-voiture">
   </div>
-  <div class=" photo-3 carousel-item">photo 3
-    <img class="" src="" alt="photo-voiture">
+  <div class=" photo-3 carousel-item">
+    <img class="photo-3 carousel-item" src="/public/assets/pexels-rachel-claire-7263902.webp" alt="photo-voiture">
   </div>
   <div class=" description-desktop carousel-item">
     <h2>Pourquoi choisir EcoRide ?</h2>
