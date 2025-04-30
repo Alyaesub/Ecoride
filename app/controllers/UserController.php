@@ -2,6 +2,7 @@
 //feuille de code pour l'objet userController avec les methodes de la page de connexion et de la page de profils
 namespace App\Controllers;
 
+use App\Models\User;
 
 class UserController
 {
@@ -11,7 +12,10 @@ class UserController
   public function showLoginForm()
   {
     // Charger la vue du formulaire de connexion
-    require __DIR__ . '/../views/pages/login.php';
+    render(__DIR__ . '/../views/pages/login.php', [
+      'title' => 'connectez vous'
+      // 'user' => $user, // à ajouter si tu veux utiliser dans la vue
+    ]);
   }
 
   /**
@@ -19,19 +23,20 @@ class UserController
    */
   public function login()
   {
-    session_start();
     // 1. Récupérer les données du formulaire
     $pseudo = $_POST['pseudo'] ?? '';
     $email = $_POST['email'] ?? '';
     $password = $_POST['password'] ?? '';
 
-    // 2. Vérifier l'authentification (via modèle User ou autre)
-    /* $user = User::checkCredentials($pseudo, $email, $password); */
+    // 2. Vérifier l'authentification via le modèle User
+    /*   $userModel = new User();
+    // findByCredentials(email, pseudo, password)
+    $user = $userModel->findByCredentials($email, $pseudo, $password); */
 
     // 3. Si OK, enregistrer en session et rediriger vers le profil
     if ($pseudo === 'pseudo test' && $email === 'test@test.com' && $password === '1234') {
       $_SESSION['user_id'] = "userId"; // par exemple
-      header('Location: /app/views/pages/profilUsers.php');
+      header('Location: ' . route('profil'));
       exit;
     } else {
       // Gérer l'erreur (rester sur la page ou afficher un message)
@@ -55,14 +60,6 @@ class UserController
       }
         
 /////////////mettre la requete sql dans model en fais une classe user
-
-      //Récupérer les utilisateurs 
-      $query = "SELECT * FROM users WHERE email = :email";
-      $stmt = $pdo->prepare($query);
-      $stmt->bindParam(':email', $emailForm);
-      $stmt->execute();
-
-
       //Est-ce que l’utilisateur (mail) existe ?
       if ($stmt->rowCount() == 1) {
         $monUser = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -88,17 +85,21 @@ class UserController
    */
   public function showProfile()
   {
-    session_start();
+
     // Vérifier si l’utilisateur est connecté
     if (!isset($_SESSION['user_id'])) {
       // Rediriger vers la connexion s’il n’est pas logué
-      header('Location: /login');
+      header('Location: ?page=login');
       exit;
     }
     // Récupérer les infos de l’utilisateur si besoin
     /* $user = User::find($_SESSION['user_id']); */
 
     // Charger la vue du profil
-    require __DIR__ . '/../views/profilUsers.php';
+
+    render(__DIR__ . '/../views/pages/profilUsers.php', [
+      'title' => 'Mon profil'
+      //'user' => $user, // à ajouter si tu veux utiliser dans la vue
+    ]);
   }
 }

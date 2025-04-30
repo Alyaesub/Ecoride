@@ -26,7 +26,7 @@ CREATE TABLE role (
 ) ENGINE=InnoDB;
 
 -- Création de la table Utilisateurs
-CREATE TABLE user (
+CREATE TABLE utilisateur (
     id_utilisateur INT PRIMARY KEY AUTO_INCREMENT,
     pseudo VARCHAR(30) NOT NULL UNIQUE,
     nom VARCHAR(30),

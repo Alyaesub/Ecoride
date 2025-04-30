@@ -4,10 +4,13 @@ require_once __DIR__ . '/vendor/autoload.php';
 require_once __DIR__ . '/app/functions/view.php'; //pour appeler le moteur de rendu et la fonction render
 require_once __DIR__ . '/app/functions/helpers.php'; //pour appeler la fonction route
 require_once __DIR__ . '/config/config.php'; //apelle la config pour gérer erreur et bug et connexionDB
+require_once __DIR__ . '/app/functions/session.php'; // démarre la scession automatiquement
 
 use App\Controllers\HomeController; //pour appeler le controller de la page d'accueil
 use Whoops\Run;
 use Whoops\Handler\PrettyPageHandler;
+use App\Controllers\LogoutController;
+use App\Controllers\UserController;
 use App\Controllers\SearchCitiesController; //appelle le controller de la searchbar
 
 
@@ -36,8 +39,13 @@ switch ($page) {
     ]);
     break;
   case 'login-user':
-    $controller = new \App\Controllers\UserController;
+    $controller = new UserController;
+    echo "Déconnexion en cours...<br>";
     $controller->login();
+    break;
+  case 'logout':
+    $controller = new LogoutController;
+    $controller->logout();
     break;
   case 'register':
     render(__DIR__ . '/app/views/pages/register.php', [
@@ -51,12 +59,7 @@ switch ($page) {
     ]);
     break;
   case 'profil':
-    render(__DIR__ . '/app/views/pages/profilUsers.php', [
-      'title' => 'Mon profil'
-    ]);
-    break;
-  case 'profil':
-    $controller = new \App\Controllers\UserController;
+    $controller = new UserController;
     $controller->showProfile();
     break;
   case 'dashboardAdmin':

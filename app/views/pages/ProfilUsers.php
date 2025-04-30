@@ -4,11 +4,11 @@ $title = 'Mon profil';
 use App\Models\ConnexionDb;
 use App\Models\UserController;
 
-require_once "../Ecoride/app/Controllers/DataTestController.php"
+require_once __DIR__ . '/../../controllers/DataTestController.php';
 ?>
 <div class="dashboard-container">
-  <h1>bienvenue sur votre profil <!-- $_SESSION['user_id']--></h1>
-
+  <h1>Bienvenue, <?= htmlspecialchars($user['pseudo']) ?> !</h1>
+  <button><a href="?page=logout" class="logout-link">Se déconnecter</a></button>
   <!-- Navigation par onglets -->
   <div class="tabs">
     <button class="tab-link active" data-tab="info">Info Utilisateur</button>
