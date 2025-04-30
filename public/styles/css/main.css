@@ -864,6 +864,7 @@
   .profile-container form {
     width: 60%;
     height: auto;
+    gap: 20px;
   }
   .profile-container .register-button {
     display: flex;
@@ -1305,8 +1306,14 @@
     gap: 20px;
   }
   .voyage-page-container .formulaire {
-    /* flex: 1 1 40%; */
-    padding: 20px;
+    flex: 1 1 40%;
+    padding: 10px;
+    width: 80%;
+    height: max-content;
+  }
+  .voyage-page-container h1 {
+    font-family: 32px;
+    font-family: "DM Sans", sans-serif;
   }
   .voyage-page-container .description-photo {
     display: flex;
@@ -1315,9 +1322,10 @@
     padding: 20px;
     margin-right: 20px;
     background-color: #4CAF50;
+    margin-bottom: 10px;
   }
   .voyage-page-container .description-photo .description-page-voyage {
-    padding: 15px;
+    padding: 10px;
     border-radius: 5px;
     background-color: #F0EAD6;
     font-family: "Readex Pro", sans-serif;

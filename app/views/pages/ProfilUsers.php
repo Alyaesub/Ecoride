@@ -4,10 +4,10 @@ $title = 'Mon profil';
 use App\Models\ConnexionDb;
 use App\Models\UserController;
 
-require "../Ecoride/app/Controllers/DataTestController.php"
+require_once "../Ecoride/app/Controllers/DataTestController.php"
 ?>
 <div class="dashboard-container">
-  <h1>bienvenue sur votre profil <!-- rajouter la variable usersession --></h1>
+  <h1>bienvenue sur votre profil <!-- $_SESSION['user_id']--></h1>
 
   <!-- Navigation par onglets -->
   <div class="tabs">
@@ -60,6 +60,14 @@ require "../Ecoride/app/Controllers/DataTestController.php"
 
         <label for="photo">Photo :</label>
         <input type="file" id="photo" name="photo">
+
+        <div class="role-button">
+          <label>Vous êtes :</label>
+          <select name="id_role" required>
+            <option value="1">Chauffeur</option>
+            <option value="2">Passager</option>
+          </select><br>
+        </div>
 
         <button type="submit">Mettre à jour votre profile</button>
       </form>

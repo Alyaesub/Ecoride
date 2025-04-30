@@ -1,0 +1,10 @@
+#Indique à Docker quels fichiers ne pas inclure dans la construction de l’image
+
+node_modules
+vendor
+debug.log
+.git
+.gitignore
+Dockerfile
+docker-compose.yml
+README.md

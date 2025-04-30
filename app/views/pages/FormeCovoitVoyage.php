@@ -4,12 +4,12 @@ require "../Ecoride/app/Controllers/DataTestController.php"
 
 
 <div class="voyage-page-container">
-  <div class="title">
+  <!--  <div class="title">
     <h1>Formulaire de recherche de Covoiturage</h1>
-  </div>
+  </div> -->
   <section class="formulaire">
     <section class="search-covoit ">
-      <h2>trouver un covoiturage</h2>
+      <h1>trouver un covoiturage</h1>
       <form id="searchCovoiturageForm" action="/app/Controllers/Traitement.php" method="get">
         <label for="adresse_depart">Adresse de départ :</label>
         <select id="adresse_depart" name="adresse_depart" required>
@@ -75,6 +75,6 @@ require "../Ecoride/app/Controllers/DataTestController.php"
       </p>
     </div>
     <div class="photo-page-voyage">
-      <img class="photo-voyage" src="" alt="photo-voiture">
+      <img class="photo-voyage" src="/public/assets/pexels-cottonbro-5329298.webp" alt="photo-voiture">
     </div>
   </section>

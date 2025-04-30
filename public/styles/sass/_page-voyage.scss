@@ -65,8 +65,14 @@
 
     // Bloc de gauche – le formulaire
     .formulaire {
-      /* flex: 1 1 40%; */ // occupe environ 40% de la largeur
-      padding: 20px;
+      flex: 1 1 40%;// occupe environ 40% de la largeur 
+      padding: 10px;
+      width: 80%;
+      height: max-content;
+    }
+    h1 {
+      font-family: $font-size-xxlarge;
+      font-family: $font-title;
     }
   
     // Bloc de droite – description et photo
@@ -77,10 +83,11 @@
       padding: 20px;
       margin-right: 20px;
       background-color: $primary-color;
+      margin-bottom: 10px;
   
       // Bloc description en haut
       .description-page-voyage {
-        padding: 15px;
+        padding: 10px;
         border-radius: 5px;
         background-color: $secondary-color;
         font-family: $font-primary;

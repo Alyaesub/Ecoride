@@ -1,7 +1,5 @@
 CREATE DATABASE ecoride;
 
-/* Pour les clés étrangères, assure-toi que la table référencée est créée avant la table qui la référence. Par exemple, il vaudrait mieux créer la table role avant celle de utilisateur, pour éviter des erreurs de dépendance.
- */
 
 -- Table CONFIGURATION
 CREATE TABLE configuration (

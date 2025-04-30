@@ -35,6 +35,10 @@ switch ($page) {
       'title' => 'Connexion'
     ]);
     break;
+  case 'login-user':
+    $controller = new \App\Controllers\UserController;
+    $controller->login();
+    break;
   case 'register':
     render(__DIR__ . '/app/views/pages/register.php', [
       'title' => 'Créer votre profile'
@@ -61,7 +65,6 @@ switch ($page) {
       'title' => 'Dashboard Employer'
     ]);
     break;
-  //routes vers les controllers
   case 'search-cities':
     $controller = new SearchCitiesController();
     $controller->index();
