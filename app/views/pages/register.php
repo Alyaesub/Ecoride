@@ -19,15 +19,6 @@ $title = 'Créer votre profile';
     <label>Mot de passe :</label>
     <input type="password" name="mot_de_passe" required><br>
 
-    <div class="role-button">
-      <label>Vous êtes :</label>
-      <select name="id_role" required>
-        <option value="1">Chauffeur</option>
-        <option value="2">Passager</option>
-      </select><br>
-    </div>
-
-
     <button type="submit">Créer mon profil</button>
   </form>
 </section>

@@ -16,7 +16,7 @@ function route(string $page): string
 function requireLogin(): void
 {
   if (!isset($_SESSION['user_id'])) {
-    header('Location: ?page=login');
+    header('Location: ' . route('login'));
     exit;
   }
 }

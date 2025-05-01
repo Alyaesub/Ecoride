@@ -24,6 +24,10 @@ CREATE TABLE role (
     id_role INT AUTO_INCREMENT PRIMARY KEY,
     libelle VARCHAR(30) NOT NULL
 ) ENGINE=InnoDB;
+INSERT INTO role (libelle) VALUES
+('administrateur'),
+('employe'),
+('utilisateur');
 
 -- Création de la table Utilisateurs
 CREATE TABLE utilisateur (
@@ -78,6 +82,7 @@ CREATE TABLE marque (
     est_ecologique BOOLEAN DEFAULT FALSE,
     animaux_autoriser BOOLEAN DEFAULT FALSE,
     fumeur BOOLEAN DEFAULT FALSE,
+    est_annule BOOLEAN DEFAULT FALSE,
     FOREIGN KEY (id_utilisateur) REFERENCES utilisateur (id_utilisateur),
     FOREIGN KEY (id_vehicule) REFERENCES vehicule(id_vehicule),
     CONSTRAINT chk_places CHECK (places_disponibles >= 0),
@@ -88,6 +93,7 @@ CREATE TABLE marque (
 CREATE TABLE user_covoiturage (
     id_utilisateur INT NOT NULL,
     id_covoiturage INT NOT NULL,
+    role_utilisateur ENUM('conducteur', 'passager') NOT NULL,
     PRIMARY KEY (id_utilisateur, id_covoiturage),
     CONSTRAINT fk_uc_utilisateur
     FOREIGN KEY (id_utilisateur)

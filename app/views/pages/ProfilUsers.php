@@ -4,7 +4,7 @@ $title = 'Mon profil';
 use App\Models\ConnexionDb;
 use App\Models\UserController;
 
-require_once __DIR__ . '/../../controllers/DataTestController.php';
+
 ?>
 <div class="dashboard-container">
   <h1>Bienvenue, <?= htmlspecialchars($user['pseudo']) ?> !</h1>
@@ -26,19 +26,20 @@ require_once __DIR__ . '/../../controllers/DataTestController.php';
         <!-- Affichage des informations personnelles enregistrées -->
         <h2>Vos données enregistrées :</h2>
         <div class="photo-profil">
-          <img class="pp" src="<?= htmlspecialchars($user['photo']) ?>" alt="photo de profil">
+          <img class="pp" src="/uploads/<?= htmlspecialchars($user['photo']) ?>" alt="photo de profil">
         </div>
         <ul>
           <li><strong>Pseudo :</strong><?= htmlspecialchars($user['pseudo']) ?></li>
           <li><strong>Nom :</strong><?= htmlspecialchars($user['nom']) ?></li>
-          <li><strong>Prénom :</strong><?= htmlspecialchars($user['prenom']) ?></li>
+          <li><strong>Prénom :</strong><?= htmlspecialchars($user['prenom'] ?? '') ?></li>
           <li><strong>Email :</strong> <?= htmlspecialchars($user['email']) ?></li>
-          <li><strong>Mot de passe :</strong><?= htmlspecialchars($user['mot de passe']) ?></li>
+          <li><strong>Mot de passe :</strong><?= htmlspecialchars($user['mot_de_passe']) ?></li>
           <li><strong>Vos crédits :</strong><?= htmlspecialchars($user['credits']) ?></li>
         </ul>
       </div>
       <h2>Mettez a jour vos donées personnelle</h2>
       <form id="formInfo" action="#" method="post" enctype="multipart/form-data">
+        <input type="hidden" name="id_role" value="3">
 
         <label for="pseudo">Pseudo :</label>
         <input type="text" id="pseudo" name="pseudo">
@@ -56,18 +57,10 @@ require_once __DIR__ . '/../../controllers/DataTestController.php';
         <input type="password" id="motdepasse" name="motdepasse">
 
         <label for="credits">Vos crédits :</label>
-        <input type="credits" id="credits" name="credits">
+        <input type="number" id="credits" name="credits" min="20">
 
         <label for="photo">Photo :</label>
         <input type="file" id="photo" name="photo">
-
-        <div class="role-button">
-          <label>Vous êtes :</label>
-          <select name="id_role" required>
-            <option value="1">Chauffeur</option>
-            <option value="2">Passager</option>
-          </select><br>
-        </div>
 
         <button type="submit">Mettre à jour votre profile</button>
       </form>
@@ -77,35 +70,40 @@ require_once __DIR__ . '/../../controllers/DataTestController.php';
   <!-- contenue de l'onglet Paramètres -->
   <div id="parametres" class="tab-content">
     <div class="section">
+      <p><em>Les paramètres seront affichés ici une fois configurés.</em></p>
+      <?php /*
       <div id="displayParametres" class="display-box">
         <!-- Affichage des paramètres enregistrés -->
         <h2>Vos paramètres</h2>
         <ul>
-          <li><strong>Langue :</strong><?= htmlspecialchars($parametre['langue']) ?></li>
-          <li><strong>Notifications :</strong><?= htmlspecialchars($parametre['notifications']) ?></li>
+          <li><strong>Langue :</strong></li>
+          <li><strong>Notifications :</strong></li>
         </ul>
       </div>
       <h2>Modifier vos parametres</h2>
       <form id="formParametres" action="#" method="post">
-        <label for="langue">Langue :</label>
-        <select id="langue" name="langue">
-          <option value="fr">Français</option>
-          <option value="en">Anglais</option>
-          <option value="es">Espagnol</option>
-        </select>
+        <input type="hidden" name="id_configuration" value="<!-- ID config actif -->">
+      <label for="langue">Langue :</label>
+      <select id="langue" name="langue">
+        <option value="fr">Français</option>
+        <option value="en">Anglais</option>
+        <option value="es">Espagnol</option>
+      </select>
 
-        <label for="notifications">Notifications :</label>
-        <input type="checkbox" id="notifications" name="notifications">
+      <label for="notifications">Notifications :</label>
+      <input type="checkbox" id="notifications" name="notifications">
 
-        <button type="submit">Enregistrer les modifications</button>
+      <button type="submit">Enregistrer les modifications</button>
       </form>
-
+      */ ?>
     </div>
   </div>
 
   <!-- Contenu de l'onglet Véhicule -->
   <div id="vehicule" class="tab-content">
     <div class="section">
+      <p><em>Les informations véhicule seront affichées ici une fois ajoutées.</em></p>
+      <?php /*
       <div id="displayVehicule" class="display-box">
         <!-- Affichage des informations véhicule enregistrées -->
         <h2>Votre Véhicule</h2>
@@ -137,7 +135,7 @@ require_once __DIR__ . '/../../controllers/DataTestController.php';
         </div>
 
         <label for="modele">Modèle :</label>
-        <input type="text" id="modele" name="modele">
+        <input type="text" id="modele" name="modele" require>
 
         <label for="immatriculation">Immatriculation :</label>
         <input type="text" id="immatriculation" name="immatriculation">
@@ -154,6 +152,7 @@ require_once __DIR__ . '/../../controllers/DataTestController.php';
         </select>
         <button type="submit">Enregistrer les modifications</button>
       </form>
+      */ ?>
     </div>
   </div>
 
@@ -199,6 +198,14 @@ require_once __DIR__ . '/../../controllers/DataTestController.php';
         <label for="fumeur">Fumeur :</label>
         <input type="checkbox" id="fumeur" name="fumeur">
 
+        <div class="role-button">
+          <label>Vous êtes :</label>
+          <select name="role_utilisateur" required>
+            <option value="conducteur">Conducteur</option>
+            <option value="passager">Passager</option>
+          </select><br>
+        </div>
+
         <button type="submit">Enregistrer le covoiturage</button>
       </form>
     </div>
@@ -208,6 +215,8 @@ require_once __DIR__ . '/../../controllers/DataTestController.php';
   <div id="gestionCovoiturage" class="tab-content">
     <div class="section">
       <h2>Mes Covoiturages Enregistrés</h2>
+      <p><em>Les covoiturages enregistrés et annulés apparaîtront ici.</em></p>
+      <?php /*
       <table class="tableCovoiturages" id="tableCovoiturages">
         <thead>
           <tr>
@@ -227,9 +236,9 @@ require_once __DIR__ . '/../../controllers/DataTestController.php';
             <td><?= htmlspecialchars($covoiturage['adresse_arrivee']) ?></td>
             <td><?= htmlspecialchars($covoiturage['date_depart']) ?></td>
             <td><?= htmlspecialchars($covoiturage['prix_personne']) ?></td>
-            <td><?= htmlspecialchars($covoiturage['places']) ?></td>
+            <td><?= htmlspecialchars($covoiturage['places_disponibles']) ?></td>
             <!-- D'autres lignes ici -->
-            <td><button class="cancel-covoiturage" data-id="1">Annuler</button></td>
+            <td><button class="cancel-covoiturage" data-id="<?= $covoiturage['id_covoiturage'] ?>">Annuler</button>td>
           </tr>
         </tbody>
       </table>
@@ -260,6 +269,7 @@ require_once __DIR__ . '/../../controllers/DataTestController.php';
         </table>
         </tbody>
       </div>
+      */ ?>
     </div>
   </div>
 
@@ -289,6 +299,8 @@ require_once __DIR__ . '/../../controllers/DataTestController.php';
         </form>
       </section>
       <h2>Vos avies envoyés</h2>
+      <p><em>Les avis envoyés apparaîtront ici.</em></p>
+      <?php /*
       <ul id="listeAvis">
         <?php
         $fichier = '../data/avis.json';
@@ -309,6 +321,7 @@ require_once __DIR__ . '/../../controllers/DataTestController.php';
         }
         ?>
       </ul>
+      */ ?>
     </div>
   </div>
   <!-- Inclusion des scripts JavaScript -->
