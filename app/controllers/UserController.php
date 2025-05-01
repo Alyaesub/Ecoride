@@ -12,10 +12,7 @@ class UserController
   public function showLoginForm()
   {
     // Charger la vue du formulaire de connexion
-    render(__DIR__ . '/../views/pages/login.php', [
-      'title' => 'connectez vous'
-      // 'user' => $user, // à ajouter si tu veux utiliser dans la vue
-    ]);
+    render(__DIR__ . '/../views/pages/login.php', []);
   }
 
   /**
@@ -29,12 +26,11 @@ class UserController
     $password = $_POST['password'] ?? '';
 
     // 2. Vérifier l'authentification via le modèle User
-    /*   $userModel = new User();
-    // findByCredentials(email, pseudo, password)
+    /* $userModel = new User();
     $user = $userModel->findByCredentials($email, $pseudo, $password); */
 
     // 3. Si OK, enregistrer en session et rediriger vers le profil
-    if ($pseudo === 'pseudo test' && $email === 'test@test.com' && $password === '1234') {
+    if ($pseudo === 'bob' && $email === 'bob@test.com' && $password === 'password123') {
       $_SESSION['user_id'] = "userId"; // par exemple
       header('Location: ' . route('profil'));
       exit;
@@ -46,7 +42,7 @@ class UserController
     /* echo "Tentative de connexion avec l'utilisateur : $username";
 
     try {
-      $pdo = new PDO("mysql:host=$host;port=$port;dbname=$dbname", $username, $password);
+      $pdo = $pdo = ConnexionDb::getPdo();
       $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
       $pseudoForm = $_POST['pseudo'];
@@ -58,8 +54,7 @@ class UserController
         echo "Adresse email invalide";
         exit();
       }
-        
-/////////////mettre la requete sql dans model en fais une classe user
+
       //Est-ce que l’utilisateur (mail) existe ?
       if ($stmt->rowCount() == 1) {
         $monUser = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -77,7 +72,7 @@ class UserController
       }
     } catch (PDOException $e) {
       echo "Erreur de connexion à la base de données : " . $e->getMessage();
-    }*/
+    } */
   }
 
   /**
@@ -97,9 +92,6 @@ class UserController
 
     // Charger la vue du profil
 
-    render(__DIR__ . '/../views/pages/profilUsers.php', [
-      'title' => 'Mon profil'
-      //'user' => $user, // à ajouter si tu veux utiliser dans la vue
-    ]);
+    render(__DIR__ . '/../views/pages/profilUsers.php', []);
   }
 }

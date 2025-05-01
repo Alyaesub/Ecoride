@@ -1,5 +1,5 @@
 <?php
-// Connexion à la base de données
+// Connexion à la base de données syntaxe a utiliser $pdo = ConnexionDb::getPdo();
 // Ce fichier est utilisé pour établir une connexion à la base de données
 namespace App\Models;
 

@@ -6,11 +6,13 @@ require_once __DIR__ . '/app/functions/helpers.php'; //pour appeler la fonction 
 require_once __DIR__ . '/config/config.php'; //apelle la config pour gérer erreur et bug et connexionDB
 require_once __DIR__ . '/app/functions/session.php'; // démarre la scession automatiquement
 
-use App\Controllers\HomeController; //pour appeler le controller de la page d'accueil
+
 use Whoops\Run;
 use Whoops\Handler\PrettyPageHandler;
-use App\Controllers\LogoutController;
-use App\Controllers\UserController;
+
+use App\Controllers\HomeController; //pour appeler le controller de la page d'accueil
+use App\Controllers\LogoutController; //appelle le logout
+use App\Controllers\UserController; //applle le user controller
 use App\Controllers\SearchCitiesController; //appelle le controller de la searchbar
 
 
@@ -40,11 +42,11 @@ switch ($page) {
     break;
   case 'login-user':
     $controller = new UserController;
-    echo "Déconnexion en cours...<br>";
     $controller->login();
     break;
   case 'logout':
     $controller = new LogoutController;
+    echo "Déconnexion en cours...<br>";
     $controller->logout();
     break;
   case 'register':

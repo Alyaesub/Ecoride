@@ -1,6 +1,6 @@
 <?php
-//class qui gére la connexion de l'usera la bdd
-namespace App\Model;
+//class qui gére la connexion de l'user a la bdd
+namespace App\Models;
 
 use App\Models\ConnexionDb;
 use PDO;
@@ -20,7 +20,7 @@ class User
     $stmt->bindParam(':id', $id, PDO::PARAM_INT);
     $stmt->execute();
     $user = $stmt->fetch(PDO::FETCH_ASSOC);
-    return $user ?: null;
+    return $user;
   }
 
   //fonction qui gére la connexion de l'user via le pseudo le mail et le mdp
