@@ -26,7 +26,7 @@ use App\Models\UserController;
         <!-- Affichage des informations personnelles enregistrées -->
         <h2>Vos données enregistrées :</h2>
         <div class="photo-profil">
-          <img class="pp" src="/uploads/<?= htmlspecialchars($user['photo']) ?>" alt="photo de profil">
+          <img class="pp" src="uploads/<?= htmlspecialchars($user['photo']) ?>" alt="photo de profil">
         </div>
         <ul>
           <li><strong>Pseudo :</strong><?= htmlspecialchars($user['pseudo']) ?></li>
