@@ -76,8 +76,6 @@ class UserController
       exit;
     }
     // Récupérer les infos de l’utilisateur
-
-
     // Charger la vue du profil
     $userModel = new \App\Models\User();
     $user = $userModel->findById($_SESSION['user_id']);
