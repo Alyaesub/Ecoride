@@ -994,6 +994,40 @@
     text-align: center;
     font-family: "DM Sans", sans-serif;
   }
+  .profil-actions {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+  .profil-actions .logout-button {
+    background-color: #388E3C;
+    border: none;
+    padding: 0.6rem 1.2rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  .profil-actions .logout-button .logout-link {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+  }
+  .profil-actions .logout-button:hover {
+    background-color: #4c95ae;
+  }
+  .profil-actions .admin-return-link {
+    align-self: center;
+    background-color: #388E3C;
+    color: white;
+    padding: 0.6rem 1.2rem;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s;
+  }
+  .profil-actions .admin-return-link:hover {
+    background-color: #4c95ae;
+  }
   .tabs {
     display: flex;
     flex-wrap: wrap;
@@ -1141,6 +1175,40 @@
     color: #fff;
     text-align: center;
     font-family: "DM Sans", sans-serif;
+  }
+  .profil-actions {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+  .profil-actions .logout-button {
+    background-color: #388E3C;
+    border: none;
+    padding: 0.6rem 1.2rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  .profil-actions .logout-button .logout-link {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+  }
+  .profil-actions .logout-button:hover {
+    background-color: #4c95ae;
+  }
+  .profil-actions .admin-return-link {
+    align-self: center;
+    background-color: #388E3C;
+    color: white;
+    padding: 0.6rem 1.2rem;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s;
+  }
+  .profil-actions .admin-return-link:hover {
+    background-color: #4c95ae;
   }
   .tabs {
     display: flex;

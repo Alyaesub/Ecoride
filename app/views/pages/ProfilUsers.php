@@ -8,7 +8,18 @@ use App\Models\UserController;
 ?>
 <div class="dashboard-container">
   <h1>Bienvenue, <?= htmlspecialchars($user['pseudo']) ?> !</h1>
-  <button><a href="?page=logout" class="logout-link">Se déconnecter</a></button>
+  <div class="profil-actions">
+    <button class="logout-button">
+      <a href="?page=logout" class="logout-link">Se déconnecter</a>
+    </button>
+    <?php if (isset($_SESSION['user'])): ?>
+      <?php if ($_SESSION['user']['role'] === 1): ?>
+        <a href="index.php?page=dashboardAdmin" class="admin-return-link">↩ Retour au Dashboard Admin</a>
+      <?php elseif ($_SESSION['user']['role'] === 2): ?>
+        <a href="index.php?page=dashboardEmploye" class="admin-return-link">↩ Retour au Dashboard Employé</a>
+      <?php endif; ?>
+    <?php endif; ?>
+  </div>
   <!-- Navigation par onglets -->
   <div class="tabs">
     <button class="tab-link active" data-tab="info">Info Utilisateur</button>
@@ -26,7 +37,7 @@ use App\Models\UserController;
         <!-- Affichage des informations personnelles enregistrées -->
         <h2>Vos données enregistrées :</h2>
         <div class="photo-profil">
-          <img class="pp" src="uploads/<?= htmlspecialchars($user['photo']) ?>" alt="photo de profil">
+          <img class="pp" src="uploads/<?= ($user['photo']) ?>" alt="photo de profil">
         </div>
         <ul>
           <li><strong>Pseudo :</strong><?= htmlspecialchars($user['pseudo']) ?></li>

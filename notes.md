@@ -68,6 +68,41 @@ ecoride/
 ├─ README.md
 └─ composer.json (si tu utilises Composer)
 
+🔹 1. One-to-One (1:1)
+
+🧍‍♂️ ↔️ 🧍‍♀️
+👉 Un enregistrement A correspond à un seul B
+
+📌 Exemple :
+• Un utilisateur ↔️ une carte d’identité
+
+🛠️ Comment faire :
+• Une clé étrangère (FOREIGN KEY) dans l’une des deux tables, souvent avec UNIQUE
+
+⸻
+
+🔹 2. One-to-Many (1:N)
+
+🧍‍♂️ ↔️ 👥👥👥
+👉 Un A peut avoir plusieurs B, mais chaque B a un seul A
+
+📌 Exemple :
+• Un auteur ↔️ plusieurs articles
+
+🛠️ Comment faire :
+• Dans la table B (ex: posts), on ajoute user_id avec une FOREIGN KEY vers users(id)
+
+⸻
+
+🔹 3. Many-to-Many (N:N)
+
+👥 ↔️ 👥
+👉 Plusieurs A peuvent être liés à plusieurs B
+
+📌 Exemple :
+• Un article ↔️ plusieurs catégories
+• Une catégorie ↔️ plusieurs articles
+
 probleme de carosuel:
 
 Voici l’explication claire et visuelle de ce qui se passait et pourquoi les éléments ne scrollaient pas comme prévu :
