@@ -37,14 +37,14 @@ use App\Models\UserController;
         <!-- Affichage des informations personnelles enregistrées -->
         <h2>Vos données enregistrées :</h2>
         <div class="photo-profil">
-          <img class="pp" src="uploads/<?= ($user['photo']) ?>" alt="photo de profil">
+          <img class="pp" src="/public/uploads/<?= ($user['photo']) ?>" alt="photo de profil">
         </div>
         <ul>
           <li><strong>Pseudo :</strong><?= htmlspecialchars($user['pseudo']) ?></li>
           <li><strong>Nom :</strong><?= htmlspecialchars($user['nom']) ?></li>
           <li><strong>Prénom :</strong><?= htmlspecialchars($user['prenom'] ?? '') ?></li>
           <li><strong>Email :</strong> <?= htmlspecialchars($user['email']) ?></li>
-          <li><strong>Mot de passe :</strong><?= htmlspecialchars($user['mot_de_passe']) ?></li>
+          <li><strong>Mot de passe :</strong>*******</li>
           <li><strong>Vos crédits :</strong><?= htmlspecialchars($user['credits']) ?></li>
         </ul>
       </div>
@@ -81,8 +81,6 @@ use App\Models\UserController;
   <!-- contenue de l'onglet Paramètres -->
   <div id="parametres" class="tab-content">
     <div class="section">
-      <p><em>Les paramètres seront affichés ici une fois configurés.</em></p>
-      <?php /*
       <div id="displayParametres" class="display-box">
         <!-- Affichage des paramètres enregistrés -->
         <h2>Vos paramètres</h2>
@@ -94,19 +92,18 @@ use App\Models\UserController;
       <h2>Modifier vos parametres</h2>
       <form id="formParametres" action="#" method="post">
         <input type="hidden" name="id_configuration" value="<!-- ID config actif -->">
-      <label for="langue">Langue :</label>
-      <select id="langue" name="langue">
-        <option value="fr">Français</option>
-        <option value="en">Anglais</option>
-        <option value="es">Espagnol</option>
-      </select>
+        <label for="langue">Langue :</label>
+        <select id="langue" name="langue">
+          <option value="fr">Français</option>
+          <option value="en">Anglais</option>
+          <option value="es">Espagnol</option>
+        </select>
 
-      <label for="notifications">Notifications :</label>
-      <input type="checkbox" id="notifications" name="notifications">
+        <label for="notifications">Notifications :</label>
+        <input type="checkbox" id="notifications" name="notifications">
 
-      <button type="submit">Enregistrer les modifications</button>
+        <button type="submit">Enregistrer les modifications</button>
       </form>
-      */ ?>
     </div>
   </div>
 
@@ -163,7 +160,6 @@ use App\Models\UserController;
         </select>
         <button type="submit">Enregistrer les modifications</button>
       </form>
-      */ ?>
     </div>
   </div>
 

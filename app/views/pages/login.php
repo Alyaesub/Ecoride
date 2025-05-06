@@ -19,7 +19,7 @@
 
     <div class="register-button">
       <p>Ou : </p>
-      <a href="<?= route('register') ?>" class="regis-btn" id="btn-register">Créer votre profil</a>
+      <a href="<?= route('registerUser') ?>" class="regis-btn" id="btn-register">Créer votre profil</a>
     </div>
   </form>
 </div>

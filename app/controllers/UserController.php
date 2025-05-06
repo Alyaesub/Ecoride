@@ -41,7 +41,6 @@ class UserController
         'pseudo' => $user['pseudo'],
         'role' => $user['id_role']
       ];
-
       // Redirection selon le rôle
       switch ($user['id_role']) {
         case 1:
@@ -68,7 +67,6 @@ class UserController
    */
   public function showProfile()
   {
-
     // Vérifier si l’utilisateur est connecté
     if (!isset($_SESSION['user_id'])) {
       // Rediriger vers la connexion s’il n’est pas logué
@@ -83,5 +81,52 @@ class UserController
     render(__DIR__ . '/../views/pages/profilUsers.php', [
       'user' => $user
     ]);
+  }
+
+  /**
+   * Traite le formulaire registerUser.
+   */
+  public function registerUser()
+  {
+    // Si on est en POST, on traite la soumission
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+      // Récupération et assainissement
+      $pseudo       = htmlspecialchars($_POST['pseudo']);
+      $nom          = htmlspecialchars($_POST['nom']);
+      $prenom       = htmlspecialchars($_POST['prenom']);
+      $email        = filter_var($_POST['email'], FILTER_VALIDATE_EMAIL);
+      $motDePasse   = $_POST['mot_de_passe'];
+
+      // Validation simple
+      if (!$email) {
+        $error = "Email invalide.";
+      } else if (empty($motDePasse)) {
+        $error = "Le mot de passe ne peut pas être vide.";
+      } else {
+        // Hash du mot de passe
+        $hashed = password_hash($motDePasse, PASSWORD_DEFAULT);
+
+        // On appelle le modèle
+        $model = new User();
+        $created = $model->createUser($pseudo, $nom, $prenom, $email, $hashed);
+
+        if ($created) {
+          // tout est bon redirection vers la page de login
+          $success = "Votre profil a été créé avec succès. Vous pouvez maintenant vous connecter.";
+          $old = []; // pour vider les champs
+        } else {
+          $error = "Cet email est déjà utilisé.";
+        }
+      }
+    }
+    render(
+      __DIR__ . '/../views/pages/registerUser.php',
+      [
+        'title' => 'Créer votre profil',
+        'error'   => $error   ?? null, //variable qui sert a affihcer les messages d'erreurs
+        'success' => $success ?? null, //pareil mais pour le succes
+        'old'     => $_POST   ?? [] //sert à conserver les données que l’utilisateur a déjà saisies pour les réafficher automatiquement si une erreur survient.
+      ]
+    );
   }
 }

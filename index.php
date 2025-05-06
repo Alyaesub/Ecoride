@@ -25,7 +25,7 @@ $whoops->register();
 $page = $_GET['page'] ?? 'home';
 
 switch ($page) {
-  //routes vers le views
+  //routes vers le views et controlleurs
   case 'home':
     $controller = new HomeController();
     $controller->index();
@@ -46,15 +46,12 @@ switch ($page) {
     break;
   case 'logout':
     $controller = new LogoutController;
-    echo "Déconnexion en cours...<br>";
     $controller->logout();
     break;
-  case 'register':
-    render(__DIR__ . '/app/views/pages/register.php', [
-      'title' => 'Créer votre profile'
-    ]);
+  case 'registerUser':
+    $controller = new UserController;
+    $controller->registerUser();
     break;
-
   case 'activites':
     render(__DIR__ . '/app/views/pages/activites.php', [
       'title' => 'Historique de vos activités'

@@ -15,14 +15,22 @@
     -   `pseudo`: bob / `mail`: bob@test.com / `mot de passe`: password123
     -   `pseudo`: alice / `mail`: alice@test.com / `mot de passe`: password123
 -   **Administrateur** :
+
     -   `pseudo`: satoshi / `mail`: satoshiAdmin@test.com / `mot de passe`: password123
+
 -   **Employé** :
 
     -   `pseudo`: hal / `mail`: hal@test.com / `mot de passe`: password123
 
--   **Formulaire** : Création d’un utilisateur via le formulaire d’inscription.
+-   **Formulaire** : Création d’un utilisateur via le formulaire registerUser.
+
+    -   `pseudo`: aly / `mail`: aly@test.com / `mot de passe`: password123
+    -   `pseudo`: matthieu / `mail`: matthieu@test.com / `mot de passe`: password123
+    -   `pseudo`: marie / `mail`: marie@test.com / `mot de passe`: password123
+    -   `pseudo`: claudia / `mail`: claudi@test.com / `mot de passe`: password123
     -   `pseudo`: / `mail`: @test.com / `mot de passe`: password123
-    -   `pseudo`: / `mail`: @test.com / `mot de passe`: password123
+
+-   **Formulaire** : Création d’employes via le formulaire registerEmploye.
     -   `pseudo`: / `mail`: @test.com / `mot de passe`: password123
     -   `pseudo`: / `mail`: @test.com / `mot de passe`: password123
 
