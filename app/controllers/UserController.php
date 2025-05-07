@@ -178,4 +178,60 @@ class UserController
       ]
     );
   }
+
+  /**
+   * Traite le formulaire de mise a jour des donnné utilisateur via le form dans le dashboard.
+   */
+  public function updateUser()
+  {
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+      $id = $_SESSION['user_id'] ?? null;
+
+      if (!$id) {
+        $error = "Utilisateur non connecté.";
+      } else {
+        // Récupération et nettoyage des données
+        $pseudo     = !empty($_POST['pseudo']) ? htmlspecialchars($_POST['pseudo']) : null;
+        $nom        = htmlspecialchars($_POST['nom']);
+        $prenom     = htmlspecialchars($_POST['prenom']);
+        $email      = filter_var($_POST['email'], FILTER_VALIDATE_EMAIL);
+        $motdepasse = $_POST['motdepasse'];
+        $photo      = $_FILES['photo'] ?? null;
+        $hashedPassword = password_hash($motdepasse, PASSWORD_DEFAULT);
+
+        if (!$pseudo || !$email || !$motdepasse) {
+          $error = "Tous les champs sont obligatoires.";
+        } else {
+          // Traitement de la photo 
+          $photoPath = null;
+          if ($photo && $photo['error'] === UPLOAD_ERR_OK) {
+            $fileName = uniqid() . '_' . basename($photo['name']);
+            $uploadPath = __DIR__ . '/../../public/uploads/' . $fileName;
+            if (move_uploaded_file($photo['tmp_name'], $uploadPath)) {
+              $photoPath = $fileName;
+            }
+          }
+
+          $model = new \App\Models\User();
+          $updated = $model->updateUser($id, $pseudo, $nom, $prenom, $email, $hashedPassword, $photoPath);
+
+          if ($updated) {
+            $success = "Profil mis à jour avec succès.";
+          } else {
+            $error = "Erreur lors de la mise à jour.";
+          }
+        }
+      }
+    }
+
+    $userModel = new \App\Models\User();
+    $user = $userModel->findById($_SESSION['user_id']);
+
+    render(__DIR__ . '/../views/pages/profilUsers.php', [
+      'title'   => 'Modifier votre profil',
+      'error'   => $error   ?? null,
+      'success' => $success ?? null,
+      'user'    => $user
+    ]);
+  }
 }

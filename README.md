@@ -28,7 +28,7 @@
     -   `pseudo`: matthieu / `mail`: matthieu@test.com / `mot de passe`: password123
     -   `pseudo`: marie / `mail`: marie@test.com / `mot de passe`: password123
     -   `pseudo`: claudia / `mail`: claudi@test.com / `mot de passe`: password123
-    -   `pseudo`: / `mail`: @test.com / `mot de passe`: password123
+    -   `pseudo`: testmaj/ `mail`: testmaj@test.com / `mot de passe`: testmaj
 
 -   **Formulaire** : Création d’employes via le formulaire registerEmploye.
     -   `pseudo`: vitalik/ `mail`: vitalik@test.com / `poste` : moderateur/ `numéro de badge` : 12 / `mot de passe`: password123

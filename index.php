@@ -52,6 +52,10 @@ switch ($page) {
     $controller = new UserController;
     $controller->registerUser();
     break;
+  case 'updateUser':
+    $controller = new UserController;
+    $controller->updateUser();
+    break;
   case 'registerEmploye':
     $controller = new UserController;
     $controller->registerEmploye();

@@ -14,7 +14,27 @@ class User
     $this->pdo = ConnexionDb::getPdo();
   }
 
-  //fonction qui crée un nouvel utilisateur en base de données
+  /**
+   * fonction qui gére la connexion de l'user via le pseudo le mail et le mdp
+   */
+  public function findByCredentials(string $email, string $pseudo, string $password): ?array
+  {
+    $stmt = $this->pdo->prepare("SELECT * FROM utilisateur WHERE email = :email AND pseudo = :pseudo");
+    $stmt->bindParam(':email', $email);
+    $stmt->bindParam(':pseudo', $pseudo);
+    $stmt->execute();
+
+    $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if ($user && password_verify($password, $user['mot_de_passe'])) {
+      return $user;
+    }
+    return null;
+  }
+
+  /**
+   * fonction qui crée un nouvel utilisateur en base de données
+   */
   public function createUser(string $pseudo, string $nom, string $prenom, string $email, string $hashedPassword): bool
   {
     // Vérifie si l'email existe déjà
@@ -38,7 +58,55 @@ class User
     return $stmt->execute();
   }
 
-  //fonction qui gére la création d'employer
+  /**
+   * fonction qui met a jours les data user via le formulaire
+   */
+  public function updateUser($id, $pseudo, $nom, $prenom, $email, $hashedPassword, $photo): bool
+  {
+    $fields = [
+      'pseudo'     => $pseudo,
+      'nom'        => $nom,
+      'prenom'     => $prenom,
+      'email'      => $email,
+    ];
+    if ($hashedPassword) {
+      $fields['mot_de_passe'] = $hashedPassword;
+    }
+    if ($photo) {
+      $fields['photo'] = $photo;
+    }
+
+    $set = [];
+    foreach ($fields as $key => $value) {
+      $set[] = "$key = :$key";
+    }
+
+    $sql = "UPDATE utilisateur SET " . implode(', ', $set) . " WHERE id_utilisateur = :id";
+    $stmt = $this->pdo->prepare($sql);
+
+    foreach ($fields as $key => $value) {
+      $stmt->bindValue(":$key", $value);
+    }
+    $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+
+    return $stmt->execute();
+  }
+
+  /**
+   * fonction qui va chercher dans la table user la ligne où id_utilisateur vaut l’ID passé en paramètre
+   */
+  public function findById(int $id): ?array
+  {
+    $stmt = $this->pdo->prepare("SELECT * FROM utilisateur WHERE id_utilisateur = :id");
+    $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+    $stmt->execute();
+    $user = $stmt->fetch(PDO::FETCH_ASSOC);
+    return $user;
+  }
+
+  /**
+   * fonction qui gére la création d'employer
+   */
   public function createEmploye($pseudo, $nom, $prenom, $email, $hashedPassword, $poste, $numeroBadge): bool
   {
     // Vérifie si l'email existe déjà
@@ -65,32 +133,5 @@ class User
     $stmt->bindParam(':numero_badge', $numeroBadge);
 
     return $stmt->execute();
-  }
-
-
-  //fonction qui va chercher dans la table user la ligne où id_utilisateur vaut l’ID passé en paramètre
-  public function findById(int $id): ?array
-  {
-    $stmt = $this->pdo->prepare("SELECT * FROM utilisateur WHERE id_utilisateur = :id");
-    $stmt->bindParam(':id', $id, PDO::PARAM_INT);
-    $stmt->execute();
-    $user = $stmt->fetch(PDO::FETCH_ASSOC);
-    return $user;
-  }
-
-  //fonction qui gére la connexion de l'user via le pseudo le mail et le mdp
-  public function findByCredentials(string $email, string $pseudo, string $password): ?array
-  {
-    $stmt = $this->pdo->prepare("SELECT * FROM utilisateur WHERE email = :email AND pseudo = :pseudo");
-    $stmt->bindParam(':email', $email);
-    $stmt->bindParam(':pseudo', $pseudo);
-    $stmt->execute();
-
-    $user = $stmt->fetch(PDO::FETCH_ASSOC);
-
-    if ($user && password_verify($password, $user['mot_de_passe'])) {
-      return $user;
-    }
-    return null;
   }
 }

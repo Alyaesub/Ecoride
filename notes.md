@@ -233,3 +233,13 @@ un formulaire complet ✅
 
 les donné de connectionde a la bdd :
 le fichier config et env ont etais créé pour sépare et securiser les acces au donné de connexion a la bdd dans env.ini elle sont stocker puis appelle via config.php et ces le models connexionDB qui ensuite prend le relai pour les distribuer au fonction en aillant besoin via getpdo et la fonction de créé
+
+Mise a jour des data User via le form dans dansboardUser
+Méthode updateUser() dans UserController
+
+Elle devra :
+• récupérer l’id_utilisateur via $\_SESSION['user_id']
+• valider les champs
+• hasher le mot de passe si non vide
+• gérer l’upload de photo
+• appeler une méthode updateUser() dans le modèle

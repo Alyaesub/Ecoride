@@ -1410,7 +1410,7 @@
     flex-wrap: wrap;
   }
   .registerForm {
-    width: 60%;
+    width: "";
   }
   .role-button {
     display: flex;
@@ -1445,10 +1445,11 @@
     display: flex;
     flex-direction: column;
     align-content: center;
+    align-content: center;
     flex-wrap: wrap;
   }
   .registerForm {
-    width: 60%;
+    width: "";
   }
   .role-button {
     display: flex;

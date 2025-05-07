@@ -1,10 +1,5 @@
 <?php
 $title = 'Mon profil';
-
-use App\Models\ConnexionDb;
-use App\Models\UserController;
-
-
 ?>
 <div class="dashboard-container">
   <h1>Bienvenue, <?= htmlspecialchars($user['pseudo']) ?> !</h1>
@@ -49,32 +44,35 @@ use App\Models\UserController;
         </ul>
       </div>
       <h2>Mettez a jour vos donées personnelle</h2>
-      <form id="formInfo" action="#" method="post" enctype="multipart/form-data">
+      <form id="formInfo" class="registerForm" action="<?= route('updateUser') ?>" method="post" enctype="multipart/form-data">
         <input type="hidden" name="id_role" value="3">
 
         <label for="pseudo">Pseudo :</label>
-        <input type="text" id="pseudo" name="pseudo">
+        <input type="text" id="pseudo" name="pseudo" require>
 
         <label for="nom">Nom :</label>
-        <input type="text" id="nom" name="nom">
+        <input type="text" id="nom" name="nom" require>
 
         <label for="prenom">Prénom :</label>
-        <input type="text" id="prenom" name="prenom">
+        <input type="text" id="prenom" name="prenom" require>
 
         <label for="email">Email :</label>
-        <input type="email" id="email" name="email">
+        <input type="email" id="email" name="email" require>
 
         <label for="motdepasse">Mot de passe :</label>
-        <input type="password" id="motdepasse" name="motdepasse">
-
-        <label for="credits">Vos crédits :</label>
-        <input type="number" id="credits" name="credits" min="20">
+        <input type="password" id="motdepasse" name="motdepasse" require>
 
         <label for="photo">Photo :</label>
         <input type="file" id="photo" name="photo">
 
         <button type="submit">Mettre à jour votre profile</button>
       </form>
+      <?php if (!empty($success)): ?>
+        <div class="alert message-success"><?= htmlspecialchars($success) ?></div>
+      <?php endif; ?>
+      <?php if (!empty($error)): ?>
+        <div class="message-error"><?= htmlspecialchars($error) ?></div>
+      <?php endif; ?>
     </div>
   </div>
 
