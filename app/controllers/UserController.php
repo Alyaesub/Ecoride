@@ -129,4 +129,53 @@ class UserController
       ]
     );
   }
+
+  /**
+   * Traite le formulaire registerEmploye.
+   */
+  public function registerEmploye()
+  {
+    // Si on est en POST, on traite la soumission
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+      // Récupération et assainissement
+      $pseudo       = htmlspecialchars($_POST['pseudo']);
+      $nom          = htmlspecialchars($_POST['nom']);
+      $prenom       = htmlspecialchars($_POST['prenom']);
+      $poste        = htmlspecialchars($_POST['poste']);
+      $numeroBadge  = htmlspecialchars($_POST['numero_badge']);
+      $email        = filter_var($_POST['email'], FILTER_VALIDATE_EMAIL);
+      $motDePasse   = $_POST['mot_de_passe'];
+
+      // Validation simple
+      if (!$email) {
+        $error = "Email invalide.";
+      } else if (empty($motDePasse)) {
+        $error = "Le mot de passe ne peut pas être vide.";
+      } else {
+        // Hash du mot de passe
+        $hashed = password_hash($motDePasse, PASSWORD_DEFAULT);
+
+        // On appelle le modèle
+        $model = new User();
+        $created = $model->createEmploye($pseudo, $nom, $prenom, $email, $hashed, $poste, $numeroBadge);
+
+        if ($created) {
+          // tout est bon redirection vers la page de login
+          $success = "Le profil de l'employé a été créé avec succès. Il peut maintenant se connecter.";
+          $old = []; // pour vider les champs
+        } else {
+          $error = "Cet email est déjà utilisé.";
+        }
+      }
+    }
+    render(
+      __DIR__ . '/../views/pages/administration/registerEmploye.php',
+      [
+        'title' => 'Créer un profil employes',
+        'error'   => $error   ?? null, //variable qui sert a affihcer les messages d'erreurs
+        'success' => $success ?? null, //pareil mais pour le succes
+        'old'     => $_POST   ?? [] //sert à conserver les données que l’utilisateur a déjà saisies pour les réafficher automatiquement si une erreur survient.
+      ]
+    );
+  }
 }

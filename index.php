@@ -52,6 +52,10 @@ switch ($page) {
     $controller = new UserController;
     $controller->registerUser();
     break;
+  case 'registerEmploye':
+    $controller = new UserController;
+    $controller->registerEmploye();
+    break;
   case 'activites':
     render(__DIR__ . '/app/views/pages/activites.php', [
       'title' => 'Historique de vos activités'

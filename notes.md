@@ -153,13 +153,6 @@ forcÃ© Ã  partir du dÃ©but
 Items compressÃ©s
 ajout de flex-shrink: 0
 
-✅ Un layout général propre
-✅ Un système de vues dynamique
-✅ Un moteur de rendu centralisé
-✅ Un HomeController qui respecte le MVC
-✅ Un SCSS bien structuré en mobile-first
-✅ Et un footer stable, qui reste à sa place, même quand le contenu est court
-
 Voici le récap de ce que tu as en place (et qui tourne au poil) :
 
 ⸻
@@ -215,84 +208,6 @@ app/models/ConnexionDb.php
 │ À utiliser uniquement si tu fais des requêtes SQL
 ────────────────────────────────────────────
 
-## ⚙️ `config/env.ini` (local)
-
-```ini
-[database]
-DB_HOST = 127.0.0.1
-DB_NAME = ecoride
-DB_USER = root
-DB_PASS = root
-
-[settings]
-APP_ENV = local
-DEBUG = true
-```
-
-✅ Permet de **séparer les infos sensibles** (connexion BDD, debug, env)  
-✅ Facile à adapter en production (ex : O2Switch)
-
----
-
-## 📄 `config/config.php`
-
--   Charge `env.ini` en tableau associatif
--   Active le `DEBUG` si configuré
--   Définit une constante `APP_ENV`
--   Gère les cas où `env.ini` est manquant
-
----
-
-## 🔐 `.htaccess`
-
-```
-RewriteEngine On
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^ index.php [QSA,L]
-
-<FilesMatch "\.(ini|env|sql|log|sh|bak|htaccess)$">
-    Order allow,deny
-    Deny from all
-</FilesMatch>
-
-ErrorDocument 404 /404.html
-ErrorDocument 403 /403.html
-AddDefaultCharset UTF-8
-```
-
-✅ Redirection vers `index.php` (routing MVC)  
-✅ Protection des fichiers sensibles  
-✅ Encodage UTF-8  
-✅ Pages d’erreur personnalisables
-
----
-
-## 🧠 `ConnexionDb.php`
-
-```php
-use App\Models\ConnexionDb;
-
-$pdo = ConnexionDb::getPdo();
-```
-
--   Récupère les infos depuis `env.ini` via `config.php`
--   Retourne un objet `PDO` prêt à l'emploi
--   Centralise la connexion à la base (évite duplication)
--   Tu pourras supprimer les fallback plus tard pour + de sécurité
-
----
-
-## 🛠️ Bonnes pratiques mises en place
-
--   ✅ Centralisation de la config
--   ✅ Séparation env local / prod
--   ✅ Connexion sécurisée à la BDD
--   ✅ Ready pour le déploiement chez O2Switch
--   ✅ Compatible avec PHP 8 et MVC propre
-
----
-
 Pour rendre le <table> scrollable sur mobile, j’ai simplement appliqué ces deux propriétés CSS :
 
 table {
@@ -303,3 +218,18 @@ overflow-x: auto; // active le scroll horizontal si le contenu déborde
 • display: block : sans ça, la plupart des navigateurs gardent le tableau en display: table, et l’overflow ne fonctionne pas comme on veut.
 • overflow-x: auto : c’est ce qui crée une barre de défilement horizontale quand les colonnes dépassent la largeur de l’écran.
 • -webkit-overflow-scrolling: touch (facultatif) : ça ajoute l’inertie de scroll sur Safari mobile, pour un effet plus “natif”.
+
+création des user et employer et administrateur
+creation et mise en place des function creatUser et creatEmploye dans le models User pour regrouper toutes les fonctions qui entour les utilisateur dans une mem classe
+création de la logique metier avec des controller que j'ai mis dans UserController pareil pour la meme chose que les models centraliser les function qui entour et sont utiliser pour les utilisateur création de registerUser() et registerEmploye() les 2 fonction sont identique a la difference que l'une renvoie 2 pour le role de l'employer et l'autre 3
+pour le role utilisateur 1 etant pour l'admin,
+
+les 2 formulaire on etait mis dans des view differente pour bien tous sépare et securiser et le formlulaire employer a etait adapter pour ajouter le poste et le numero de badge
+un formulaire complet ✅
+• un contrôleur propre ✅
+• une insertion SQL avec les nouveaux champs ✅
+• des messages clairs pour l’utilisateur ✅
+• des tests validés avec succès ✅
+
+les donné de connectionde a la bdd :
+le fichier config et env ont etais créé pour sépare et securiser les acces au donné de connexion a la bdd dans env.ini elle sont stocker puis appelle via config.php et ces le models connexionDB qui ensuite prend le relai pour les distribuer au fonction en aillant besoin via getpdo et la fonction de créé

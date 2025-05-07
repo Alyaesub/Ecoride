@@ -21,11 +21,11 @@ $title = 'Créer votre profile';
     <input type="password" name="mot_de_passe" required><br>
 
     <button type="submit">Créer mon profil</button>
-    <?php if (!empty($success)): ?>
-      <div class="alert alert-success"><?= htmlspecialchars($success) ?></div>
-    <?php endif; ?>
-    <?php if (!empty($error)): ?>
-      <div class="message-error"><?= htmlspecialchars($error) ?></div>
-    <?php endif; ?>
   </form>
+  <?php if (!empty($success)): ?>
+    <div class="alert message-success"><?= htmlspecialchars($success) ?></div>
+  <?php endif; ?>
+  <?php if (!empty($error)): ?>
+    <div class="message-error"><?= htmlspecialchars($error) ?></div>
+  <?php endif; ?>
 </section>

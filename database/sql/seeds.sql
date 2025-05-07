@@ -21,3 +21,9 @@ VALUES ('alice', 'nakamoto', 'alice', 'alice@test.com', '$2y$12$2s50yS7QpCu/4t4E
 #5 creation du 1er EMPLOYER
 INSERT INTO utilisateur (pseudo, nom, prenom, email, mot_de_passe, id_role)
 VALUES ('hal', 'finney', 'hal', 'hal@test.com', '$2y$12$2s50yS7QpCu/4t4EKlsbhuzzTq.RKMu4jk0s4Nn/nJENPq9YdmJai', 2);
+
+#6 UPDATE de ADMINISTRATEUR SATOSHI
+UPDATE `utilisateur` SET `poste` = 'administrateur', `numero_badge` = '10' WHERE `utilisateur`.`id_utilisateur` = 2;
+
+#7 UPDATE de EMPLOYE HAL
+UPDATE `utilisateur` SET `poste` = 'moderateur', `numero_badge` = '11' WHERE `utilisateur`.`id_utilisateur` = 3;

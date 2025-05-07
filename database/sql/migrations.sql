@@ -25,3 +25,8 @@ CREATE TABLE utilisateur (
     CONSTRAINT fk_utilisateur_role
     FOREIGN KEY (id_role) REFERENCES role(id_role)
 ) ENGINE=InnoDB;
+
+#3 Ajout des 2 colonnes pour les employer
+ALTER TABLE utilisateur
+    ADD COLUMN poste VARCHAR(50),
+    ADD COLUMN numero_badge VARCHAR(20);

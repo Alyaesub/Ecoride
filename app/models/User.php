@@ -37,6 +37,37 @@ class User
 
     return $stmt->execute();
   }
+
+  //fonction qui gére la création d'employer
+  public function createEmploye($pseudo, $nom, $prenom, $email, $hashedPassword, $poste, $numeroBadge): bool
+  {
+    // Vérifie si l'email existe déjà
+    $check = $this->pdo->prepare("SELECT id_utilisateur FROM utilisateur WHERE email = :email");
+    $check->bindParam(':email', $email);
+    $check->execute();
+    if ($check->fetch()) {
+      return false;
+    }
+
+    // Insertion avec rôle employé (id_role = 2)
+    $stmt = $this->pdo->prepare("
+        INSERT INTO utilisateur 
+        (pseudo, nom, prenom, email, mot_de_passe, id_role, poste, numero_badge)
+        VALUES 
+        (:pseudo, :nom, :prenom, :email, :mot_de_passe, 2, :poste, :numero_badge)
+    ");
+    $stmt->bindParam(':pseudo', $pseudo);
+    $stmt->bindParam(':nom', $nom);
+    $stmt->bindParam(':prenom', $prenom);
+    $stmt->bindParam(':email', $email);
+    $stmt->bindParam(':mot_de_passe', $hashedPassword);
+    $stmt->bindParam(':poste', $poste);
+    $stmt->bindParam(':numero_badge', $numeroBadge);
+
+    return $stmt->execute();
+  }
+
+
   //fonction qui va chercher dans la table user la ligne où id_utilisateur vaut l’ID passé en paramètre
   public function findById(int $id): ?array
   {

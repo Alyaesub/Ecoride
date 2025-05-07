@@ -31,8 +31,9 @@
     -   `pseudo`: / `mail`: @test.com / `mot de passe`: password123
 
 -   **Formulaire** : Création d’employes via le formulaire registerEmploye.
-    -   `pseudo`: / `mail`: @test.com / `mot de passe`: password123
-    -   `pseudo`: / `mail`: @test.com / `mot de passe`: password123
+    -   `pseudo`: vitalik/ `mail`: vitalik@test.com / `poste` : moderateur/ `numéro de badge` : 12 / `mot de passe`: password123
+    -   `pseudo`: albert/ `mail`: albert@test.com / `poste` : informaticien / `numéro de badge` : 13 / `mot de passe`: password123
+    -   `pseudo`: magalie/ `mail`: magalie@test.com / `poste` : moderatrice / `numéro de badge` : 14 / `mot de passe`: password123
 
 ## 🚀 Fonctionnalités
 
