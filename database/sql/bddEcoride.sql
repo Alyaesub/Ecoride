@@ -1,20 +1,18 @@
 CREATE DATABASE ecoride;
 
 
--- Table CONFIGURATION
+/* -- Table CONFIGURATION
 CREATE TABLE configuration (
     id_configuration INT AUTO_INCREMENT PRIMARY KEY
-) ENGINE=InnoDB;
+) ENGINE=InnoDB; */
 
 -- Table PARAMETRE
 CREATE TABLE parametre (
     id_parametre INT AUTO_INCREMENT PRIMARY KEY,
-    id_configuration INT,
+    id_utilisateur INT NOT NULL,
     propriete VARCHAR(50) NOT NULL,
     valeur VARCHAR(50),
-    CONSTRAINT fk_parametre_configuration
-    FOREIGN KEY (id_configuration)
-    REFERENCES configuration(id_configuration)
+    FOREIGN KEY (id_utilisateur) REFERENCES utilisateur(id_utilisateur)
     ON DELETE CASCADE
     ON UPDATE CASCADE
 ) ENGINE=InnoDB;

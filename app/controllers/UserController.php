@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\User;
+use App\Models\ParametreModel;
 
 class UserController
 {
@@ -73,12 +74,34 @@ class UserController
       header('Location: ' . route('login'));
       exit;
     }
-    // Récupérer les infos de l’utilisateur
+    // Récupérer les infos de l’utilisateur pour afficher les parametres
+    $model = new ParametreModel();
+    $parametres = $model->getParametresByUserId($_SESSION['id_utilisateur'] ?? 0);
+
+    // Préparation propre pour affichage
+    $parametres_assoc = [];
+    foreach ($parametres as $param) {
+      $parametres_assoc[$param['propriete']] = $param['valeur'];
+    }
+
+    $traduction_langue = [
+      'fr' => 'Français',
+      'en' => 'Anglais',
+      'es' => 'Espagnol'
+    ];
+    $langue_code = $parametres_assoc['langue'] ?? 'non défini';
+    $langue_affichee = $traduction_langue[$langue_code] ?? ucfirst($langue_code);
+    $notifications = ($parametres_assoc['notifications'] ?? 'non') === 'oui' ? 'Activées' : 'Désactivées';
+
     // Charger la vue du profil
-    $userModel = new \App\Models\User();
+    $userModel = new User();
     $user = $userModel->findById($_SESSION['user_id']);
 
     render(__DIR__ . '/../views/pages/profilUsers.php', [
+      'title'        => 'Votre profil',
+      'parametres'   => $parametres,
+      'langue'       => $langue_affichee,
+      'notifications' => $notifications,
       'user' => $user
     ]);
   }
@@ -212,7 +235,7 @@ class UserController
             }
           }
 
-          $model = new \App\Models\User();
+          $model = new User();
           $updated = $model->updateUser($id, $pseudo, $nom, $prenom, $email, $hashedPassword, $photoPath);
 
           if ($updated) {
@@ -224,7 +247,7 @@ class UserController
       }
     }
 
-    $userModel = new \App\Models\User();
+    $userModel = new User();
     $user = $userModel->findById($_SESSION['user_id']);
 
     render(__DIR__ . '/../views/pages/profilUsers.php', [

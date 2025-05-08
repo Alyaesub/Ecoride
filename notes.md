@@ -243,3 +243,58 @@ Elle devra :
 • hasher le mot de passe si non vide
 • gérer l’upload de photo
 • appeler une méthode updateUser() dans le modèle
+
+Ce qui est parfaitement fait :
+• ✔️ Vérification de session avec $\_SESSION['user_id']
+• ✔️ Sanitation des champs avec htmlspecialchars() et filter_var()
+• ✔️ Mot de passe hashé (même si ce champ est requis)
+• ✔️ Vérification de champs vides (pseudo, email, motdepasse)
+• ✔️ Upload de la photo géré proprement avec chemin unique
+• ✔️ Appel au modèle updateUser() avec les bons paramètres
+• ✔️ Retour utilisateur (succès ou erreur)
+• ✔️ Récupération de $user pour réaffichage du profil
+• ✔️ Appel de la bonne vue avec toutes les variables nécessaires
+
+pour la gestion des paramtres
+
+Oui Pascal, ton fichier ParametreModel.php est parfaitement bon ✅
+
+Tu respectes tous les points essentiels :
+
+✅ Ce qui est bien fait :
+• ✔️ Connexion PDO via ConnexionDb::getPdo()
+• ✔️ Utilisation du bon nom de colonne (id_utilisateur) cohérent avec ta BDD
+• ✔️ Requêtes préparées et sécurisées
+• ✔️ Logique clean pour UPDATE si le paramètre existe, INSERT sinon
+• ✔️ Retour structuré avec fetchAll(PDO::FETCH_ASSOC) pour les paramètres
+✅ 1. index.php
+• Tous tes require_once sont bien placés
+• Les contrôleurs sont bien importés
+• La route 'parametres' appelle correctement ParametreController::gererParametres() ✅
+• Ton système de routing est clair et fonctionnel
+
+⸻
+
+✅ 2. ParametreModel.php
+• Connexion à la BDD via ConnexionDb::getPdo() : ✅
+• Méthode getParametresByUserId() propre et sécurisée : ✅
+• Méthode updateParametre() qui gère insert/update selon l’existence : ✅
+• Requêtes bien préparées et protégées contre l’injection SQL : ✅
+
+⸻
+
+✅ 3. ParametreController.php
+• Vérification de session : ✅
+• Utilisation correcte du modèle : ✅
+• Ajout du message de succès dans $\_SESSION : ✅
+• Redirection propre vers route('profil') : ✅
+• Tu passes bien $success à la vue : ✅
+• Tu récupères les paramètres + l’utilisateur avant affichage : ✅
+
+⸻
+
+✅ 4. Formulaire HTML + Vue
+• Formulaire bien structuré (langue en select, notifications en checkbox) : ✅
+• Méthode POST correcte : ✅
+• Message de succès bien affiché avec une condition : ✅
+• Tu peux désormais afficher dynamiquement les valeurs des paramètres (si besoin, je peux t’aider à préremplir les champs)

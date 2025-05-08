@@ -14,6 +14,7 @@ use App\Controllers\HomeController; //pour appeler le controller de la page d'ac
 use App\Controllers\LogoutController; //appelle le logout
 use App\Controllers\UserController; //applle le user controller
 use App\Controllers\SearchCitiesController; //appelle le controller de la searchbar
+use App\Controllers\ParametreController;
 
 
 
@@ -55,6 +56,10 @@ switch ($page) {
   case 'updateUser':
     $controller = new UserController;
     $controller->updateUser();
+    break;
+  case 'parametres':
+    $controller = new ParametreController();
+    $controller->gererParametres();
     break;
   case 'registerEmploye':
     $controller = new UserController;

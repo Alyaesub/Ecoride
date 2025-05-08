@@ -97,7 +97,12 @@
         width: 90%; 
         max-width: 300px; 
         height: auto; 
-        background-color: $primary-color;
+        background: radial-gradient(
+            circle at center,
+            $secondary-color 0%,
+            lighten($background-color, 10%) 40%,
+            $primary-color 100%
+        );
         border-radius: 10px;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
         transition: all 0.3s ease-in-out;
@@ -132,7 +137,12 @@
         width: 90%; 
         max-width: 300px; 
         height: auto; 
-        background-color: $primary-color;
+        background: radial-gradient(
+            circle at center,
+            $secondary-color 0%,
+            lighten($background-color, 10%) 40%,
+            $primary-color 100%
+        );
         border-radius: 10px;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
         transition: all 0.3s ease-in-out;
@@ -166,7 +176,12 @@
         width: 90%; 
         max-width: 300px; 
         height: auto; 
-        background-color: $primary-color;
+        background: radial-gradient(
+            circle at center,
+            $secondary-color 0%,
+            lighten($background-color, 10%) 40%,
+            $primary-color 100%
+        );
         border-radius: 10px;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
         transition: all 0.3s ease-in-out;
@@ -291,7 +306,12 @@
         width: 100%;
         max-width: 400px; // Ajuste selon la taille souhaitée
         height: auto; // Ajuste automatiquement selon le texte
-        background-color: $primary-color;
+        background: radial-gradient(
+            circle at center,
+            $secondary-color 0%,
+            lighten($background-color, 10%) 40%,
+            $primary-color 100%
+        );
         border-radius: 10px;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
         transition: all 0.3s ease-in-out;

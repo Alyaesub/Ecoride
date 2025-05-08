@@ -35,29 +35,6 @@
     -   `pseudo`: albert/ `mail`: albert@test.com / `poste` : informaticien / `numéro de badge` : 13 / `mot de passe`: password123
     -   `pseudo`: magalie/ `mail`: magalie@test.com / `poste` : moderatrice / `numéro de badge` : 14 / `mot de passe`: password123
 
-## 🚀 Fonctionnalités
-
-### Front-end
-
--   ✅ Page d’accueil avec présentation et barre de recherche
--   ✅ Menu de navigation responsive
--   ✅ Vue des covoiturages disponibles
--   ✅ Système de filtres avancés
--   ✅ Page de détail des covoiturages
--   ⏳ Système de réservation (en cours)
--   ✅ Gestion des comptes utilisateurs
--   ⏳ Système de démarrage/arrêt des trajets
--   ⏳ Interface employé
--   ⏳ Interface administrateur
-
-### Back-end
-
--   ✅ Base de données SQL & NoSQL
--   ✅ Système d’authentification
--   ⏳ Gestion des trajets
--   ⏳ Système de crédits
--   ⏳ Système de modération
-
 ## 🛠️ Technologies
 
 -   **Front-end** : HTML5, SCSS, JavaScript (ES6+)

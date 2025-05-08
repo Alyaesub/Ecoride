@@ -83,13 +83,12 @@ $title = 'Mon profil';
         <!-- Affichage des paramètres enregistrés -->
         <h2>Vos paramètres</h2>
         <ul>
-          <li><strong>Langue :</strong></li>
-          <li><strong>Notifications :</strong></li>
+          <li><strong>Langue :</strong> <?= htmlspecialchars($langue) ?></li>
+          <li><strong>Notifications :</strong> <?= htmlspecialchars($notifications) ?></li>
         </ul>
       </div>
       <h2>Modifier vos parametres</h2>
-      <form id="formParametres" action="#" method="post">
-        <input type="hidden" name="id_configuration" value="<!-- ID config actif -->">
+      <form id="formParametres" action="<?= route("parametres") ?>" method="post">
         <label for="langue">Langue :</label>
         <select id="langue" name="langue">
           <option value="fr">Français</option>
@@ -102,6 +101,9 @@ $title = 'Mon profil';
 
         <button type="submit">Enregistrer les modifications</button>
       </form>
+      <?php if (!empty($success)) : ?>
+        <div class="success-message"><?= htmlspecialchars($success) ?></div>
+      <?php endif; ?>
     </div>
   </div>
 
