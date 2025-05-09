@@ -157,5 +157,3 @@ $pdo = ConnexionDb::getPdo();
 -   Connexion BDD fiable via PDO
 -   Architecture MVC propre et maintenable
 -   Projet prêt pour la mise en ligne
-
----
