@@ -255,8 +255,6 @@ Ce qui est parfaitement fait :
 • ✔️ Récupération de $user pour réaffichage du profil
 • ✔️ Appel de la bonne vue avec toutes les variables nécessaires
 
-pour la gestion des paramtres
-
 Tu respectes tous les points essentiels :
 
 ✅ Ce qui est bien fait :
