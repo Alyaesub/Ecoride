@@ -257,8 +257,6 @@ Ce qui est parfaitement fait :
 
 pour la gestion des paramtres
 
-Oui Pascal, ton fichier ParametreModel.php est parfaitement bon ✅
-
 Tu respectes tous les points essentiels :
 
 ✅ Ce qui est bien fait :
