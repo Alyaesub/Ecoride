@@ -295,4 +295,4 @@ Tu respectes tous les points essentiels :
 • Formulaire bien structuré (langue en select, notifications en checkbox) : ✅
 • Méthode POST correcte : ✅
 • Message de succès bien affiché avec une condition : ✅
-• Tu peux désormais afficher dynamiquement les valeurs des paramètres (si besoin, je peux t’aider à préremplir les champs)
+• Tu peux désormais afficher dynamiquement les valeurs des paramètres
