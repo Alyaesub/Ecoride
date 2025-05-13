@@ -32,7 +32,7 @@ $title = 'Mon profil';
         <!-- Affichage des informations personnelles enregistrées -->
         <h2>Vos données enregistrées :</h2>
         <div class="photo-profil">
-          <img class="pp" src="/public/uploads/profils<?= ($user['photo']) ?>" alt="photo de profil">
+          <img class="pp" src="/public/<?= htmlspecialchars($user['photo']) ?>" alt="photo de profil">
         </div>
         <ul>
           <li><strong>Pseudo :</strong><?= htmlspecialchars($user['pseudo']) ?></li>
@@ -67,11 +67,14 @@ $title = 'Mon profil';
 
         <button type="submit">Mettre à jour votre profile</button>
       </form>
-      <?php if (!empty($success)): ?>
-        <div class="alert message-success"><?= htmlspecialchars($success) ?></div>
+      <?php if (!empty($_SESSION['success'])) : ?>
+        <div class="message-success"><?= htmlspecialchars($_SESSION['success']) ?></div>
+        <?php unset($_SESSION['success']); ?>
       <?php endif; ?>
-      <?php if (!empty($error)): ?>
-        <div class="message-error"><?= htmlspecialchars($error) ?></div>
+
+      <?php if (!empty($_SESSION['error'])) : ?>
+        <div class="message-error"><?= htmlspecialchars($_SESSION['error']) ?></div>
+        <?php unset($_SESSION['error']); ?>
       <?php endif; ?>
     </div>
   </div>

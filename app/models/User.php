@@ -73,7 +73,7 @@ class User
       $fields['mot_de_passe'] = $hashedPassword;
     }
     if ($photo) {
-      $fields['photo'] = $photo;
+      $fields['photo'] = 'uploads/profils/' . $photo;
     }
 
     $set = [];
