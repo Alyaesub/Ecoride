@@ -68,6 +68,15 @@ class UserController
    */
   public function showProfile()
   {
+    ///////////////:DEBUG
+    /*   echo '<pre>';
+    echo 'Session ID: ' . session_id() . "\n";
+    print_r($_SESSION);
+    echo 'Expire à : ' . date('H:i:s', time() + ini_get('session.cookie_lifetime'));
+    echo '</pre>';
+    echo 'session.gc_maxlifetime = ' . ini_get('session.gc_maxlifetime');
+    echo 'session.cookie_lifetime = ' . ini_get('session.cookie_lifetime'); */
+
     // Vérifier si l’utilisateur est connecté
     if (!isset($_SESSION['user_id'])) {
       // Rediriger vers la connexion s’il n’est pas logué
@@ -76,7 +85,7 @@ class UserController
     }
     // Récupérer les infos de l’utilisateur pour afficher les parametres
     $model = new ParametreModel();
-    $parametres = $model->getParametresByUserId($_SESSION['id_utilisateur'] ?? 0);
+    $parametres = $model->getParametresByUserId($_SESSION['user_id'] ?? 0);
 
     // Préparation propre pour affichage
     $parametres_assoc = [];
