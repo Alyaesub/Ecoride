@@ -238,7 +238,7 @@ class UserController
           $photoPath = null;
           if ($photo && $photo['error'] === UPLOAD_ERR_OK) {
             $fileName = uniqid() . '_' . basename($photo['name']);
-            $uploadPath = __DIR__ . '/../../public/uploads/' . $fileName;
+            $uploadPath = __DIR__ . '/../../public/uploads/profils' . $fileName;
             if (move_uploaded_file($photo['tmp_name'], $uploadPath)) {
               $photoPath = $fileName;
             }
