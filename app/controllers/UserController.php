@@ -3,7 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\User;
-use App\Models\ParametreModel;
+use App\Models\Parametre;
 use App\Models\Marque;
 use App\Models\Vehicule;
 
@@ -92,7 +92,7 @@ class UserController
     $marques = $marqueModel->findAll();
 
     // Récupérer les infos de l’utilisateur pour afficher les parametres
-    $model = new ParametreModel();
+    $model = new Parametre();
     $parametres = $model->getParametresByUserId($_SESSION['user_id'] ?? 0);
 
     // Préparation propre pour affichage

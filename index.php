@@ -45,6 +45,10 @@ switch ($page) {
     $controller = new UserController;
     $controller->login();
     break;
+  case 'profil':
+    $controller = new UserController;
+    $controller->showProfile();
+    break;
   case 'logout':
     $controller = new LogoutController;
     $controller->logout();
@@ -87,10 +91,6 @@ switch ($page) {
     render(__DIR__ . '/app/views/pages/activites.php', [
       'title' => 'Historique de vos activités'
     ]);
-    break;
-  case 'profil':
-    $controller = new UserController;
-    $controller->showProfile();
     break;
   case 'dashboardAdmin':
     render(__DIR__ . '/app/views/pages/administration/dashboardAdmin.php', [

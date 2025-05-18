@@ -2,7 +2,7 @@
 
 namespace App\Controllers;
 
-use App\Models\ParametreModel;
+use App\Models\Parametre;
 use App\Models\User;
 
 class ParametreController
@@ -19,7 +19,7 @@ class ParametreController
       return;
     }
 
-    $model = new ParametreModel();
+    $model = new Parametre();
 
     // Traitement du formulaire envoyé en méthode POST
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {

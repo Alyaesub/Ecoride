@@ -271,7 +271,7 @@ Tu respectes tous les points essentiels :
 
 ⸻
 
-✅ 2. ParametreModel.php
+✅ 2. Parametre.php
 • Connexion à la BDD via ConnexionDb::getPdo() : ✅
 • Méthode getParametresByUserId() propre et sécurisée : ✅
 • Méthode updateParametre() qui gère insert/update selon l’existence : ✅
