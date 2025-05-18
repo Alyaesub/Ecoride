@@ -4,6 +4,8 @@ namespace App\Controllers;
 
 use App\Models\User;
 use App\Models\ParametreModel;
+use App\Models\Marque;
+use App\Models\Vehicule;
 
 class UserController
 {
@@ -83,6 +85,12 @@ class UserController
       header('Location: ' . route('login'));
       exit;
     }
+    //récupere les donné des vehicules pour l'afficher dans la view
+    $vehiculeModel = new Vehicule();
+    $marqueModel = new Marque();
+    $vehicules = $vehiculeModel->findAllByUserId($_SESSION['user_id']);
+    $marques = $marqueModel->findAll();
+
     // Récupérer les infos de l’utilisateur pour afficher les parametres
     $model = new ParametreModel();
     $parametres = $model->getParametresByUserId($_SESSION['user_id'] ?? 0);
@@ -111,6 +119,8 @@ class UserController
       'parametres'   => $parametres,
       'langue'       => $langue_affichee,
       'notifications' => $notifications,
+      'vehicules' => $vehicules,
+      'marques' => $marques,
       'user' => $user
     ]);
   }

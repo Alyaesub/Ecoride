@@ -113,120 +113,124 @@ $title = 'Mon profil';
   <!-- Contenu de l'onglet Véhicule -->
   <div id="vehicule" class="tab-content">
     <div class="section">
-      <p><em>Les informations véhicule seront affichées ici une fois ajoutées.</em></p>
-      <?php /*
       <div id="displayVehicule" class="display-box">
         <!-- Affichage des informations véhicule enregistrées -->
-        <h2>Votre Véhicule</h2>
-        <ul>
-          <li><strong>Marque :</strong><?= htmlspecialchars($vehicule['marque']) ?></li>
-          <li><strong>Modele :</strong><?= htmlspecialchars($vehicule['modele']) ?></li>
-          <li><strong>Immatriculation :</strong><?= htmlspecialchars($vehicule['immatriculation']) ?></li>
-          <li><strong>Couleur :</strong><?= htmlspecialchars($vehicule['couleur']) ?></li>
-          <li><strong>Energie :</strong><?= htmlspecialchars($vehicule['energie']) ?></li>
-        </ul>
-      </div>
-      <form id="formVehicule" action="#" method="post">
-        <?php $listeMarque = [
-          ['id_marque' => 1, 'nom_marque' => 'Peugeot'],
-          ['id_marque' => 2, 'nom_marque' => 'Renault'],
-          ['id_marque' => 3, 'nom_marque' => 'Citroën']
-        ]; ?> <!-- // Récupération de la liste des marques depuis le modèle -->
-        <label for="id_marque">Marque :</label>
-        <select id="id_marque" name="id_marque" onchange="toggleMarqueAutre(this)">
-          <?php foreach ($listeMarque as $marque): ?>
-            <option value="<?= $marque['id_marque'] ?>"><?= htmlspecialchars($marque['nom_marque']) ?></option>
-          <?php endforeach; ?>
-          <option value="autre">Autre</option>
-        </select>
+        <!-- Liste des véhicules -->
+        <?php if (!empty($vehicules)) : ?>
+          <ul>
+            <?php foreach ($vehicules as $vehicule) : ?>
+              <li>
+                <?= htmlspecialchars($vehicule['nom_marque']) ?> -
+                <?= htmlspecialchars($vehicule['modele']) ?> -
+                <?= htmlspecialchars($vehicule['couleur']) ?> -
+                <?= htmlspecialchars($vehicule['energie']) ?>
+                (<?= htmlspecialchars($vehicule['immatriculation']) ?>)
+                <form action="<?= route('deleteVehicule') ?>" method="post" style="display:inline;">
+                  <input type="hidden" name="id_vehicule" value="<?= $vehicule['id_vehicule'] ?>">
+                  <button type="submit">Supprimer</button>
+                </form>
+              </li>
+            <?php endforeach; ?>
+          </ul>
+        <?php else : ?>
+          <p>Aucun véhicule enregistré.</p>
+        <?php endif; ?>
+
         <div id="divAutreMarque" style="display: none;">
           <label for="nouvelle_marque">Nouvelle Marque :</label>
           <input type="text" id="nouvelle_marque" name="nouvelle_marque" placeholder="Entrez la marque">
           <!-- fair le chemin php qui entre la nouvelle marque dans la bdd -->
         </div>
+        <h3>Ajouter un véhicule</h3>
+        <form action="<?= route('ajouterVehicule') ?>" method="post">
+          <label for="marque">Marque :</label>
+          <select name="id_marque" required>
+            <?php foreach ($marques as $marque) : ?>
+              <option value="<?= $marque['id_marque'] ?>"><?= htmlspecialchars($marque['nom_marque']) ?></option>
+            <?php endforeach; ?>
+          </select>
+          <label for="modele">Modèle :</label>
+          <input type="text" id="modele" name="modele" require>
 
-        <label for="modele">Modèle :</label>
-        <input type="text" id="modele" name="modele" require>
+          <label for="immatriculation">Immatriculation :</label>
+          <input type="text" id="immatriculation" name="immatriculation">
 
-        <label for="immatriculation">Immatriculation :</label>
-        <input type="text" id="immatriculation" name="immatriculation">
+          <label for="couleur">Couleur :</label>
+          <input type="text" id="couleur" name="couleur">
 
-        <label for="couleur">Couleur :</label>
-        <input type="text" id="couleur" name="couleur">
-
-        <label for="energie">Énergie utilisée :</label>
-        <select id="energie" name="energie">
-          <option value="essence">Essence</option>
-          <option value="diesel">Diesel</option>
-          <option value="electrique">Électrique</option>
-          <option value="hybride">Hybride</option>
-        </select>
-        <button type="submit">Enregistrer les modifications</button>
-      </form>
+          <label for="energie">Énergie :</label>
+          <select name="energie" required>
+            <option value="essence">Essence</option>
+            <option value="diesel">Diesel</option>
+            <option value="electrique">Électrique</option>
+            <option value="hybride">Hybride</option>
+          </select>
+          <button type="submit">Ajouter un vehicule</button>
+        </form>
+      </div>
     </div>
-  </div>
 
-  <!-- Contenu de l'onglet Covoiturage -->
-  <div id="covoiturage" class="tab-content">
-    <div class="section">
-      <h2>Covoiturage</h2>
-      <form id="formCovoiturage" action="#" method="post">
-        <!-- Ces champs cachés pourront être renseignés automatiquement par votre système -->
-        <input type="hidden" name="id_utilisateur" value="<!-- insérer l'id de l'utilisateur -->">
-        <input type="hidden" name="id_vehicule" value="<!-- insérer l'id du véhicule -->">
+    <!-- Contenu de l'onglet Covoiturage -->
+    <div id="covoiturage" class="tab-content">
+      <div class="section">
+        <h2>Covoiturage</h2>
+        <form id="formCovoiturage" action="#" method="post">
+          <!-- Ces champs cachés pourront être renseignés automatiquement par votre système -->
+          <input type="hidden" name="id_utilisateur" value="<!-- insérer l'id de l'utilisateur -->">
+          <input type="hidden" name="id_vehicule" value="<!-- insérer l'id du véhicule -->">
 
-        <label for="adresse_depart">Adresse de départ :</label>
-        <input type="text" id="adresse_depart" name="adresse_depart" required>
+          <label for="adresse_depart">Adresse de départ :</label>
+          <input type="text" id="adresse_depart" name="adresse_depart" required>
 
-        <label for="adresse_arrivee">Adresse d'arrivée :</label>
-        <input type="text" id="adresse_arrivee" name="adresse_arrivee" required>
+          <label for="adresse_arrivee">Adresse d'arrivée :</label>
+          <input type="text" id="adresse_arrivee" name="adresse_arrivee" required>
 
-        <label for="date_depart">Date de départ :</label>
-        <input type="date" id="date_depart" name="date_depart" required>
+          <label for="date_depart">Date de départ :</label>
+          <input type="date" id="date_depart" name="date_depart" required>
 
-        <label for="heure_depart">Heure de départ :</label>
-        <input type="time" id="heure_depart" name="heure_depart">
+          <label for="heure_depart">Heure de départ :</label>
+          <input type="time" id="heure_depart" name="heure_depart">
 
-        <label for="date_arrivee">Date d'arrivée :</label>
-        <input type="date" id="date_arrivee" name="date_arrivee" required>
+          <label for="date_arrivee">Date d'arrivée :</label>
+          <input type="date" id="date_arrivee" name="date_arrivee" required>
 
-        <label for="heure_arrive">Heure d'arrivée :</label>
-        <input type="time" id="heure_arrive" name="heure_arrive">
+          <label for="heure_arrive">Heure d'arrivée :</label>
+          <input type="time" id="heure_arrive" name="heure_arrive">
 
-        <label for="prix_personne">Prix par personne (€) :</label>
-        <input type="number" id="prix_personne" name="prix_personne" step="0.01" required>
+          <label for="prix_personne">Prix par personne (€) :</label>
+          <input type="number" id="prix_personne" name="prix_personne" step="0.01" required>
 
-        <label for="places_disponibles">Places disponibles :</label>
-        <input type="number" id="places_disponibles" name="places_disponibles" min="0" required>
+          <label for="places_disponibles">Places disponibles :</label>
+          <input type="number" id="places_disponibles" name="places_disponibles" min="0" required>
 
-        <label for="est_ecologique">Est écologique :</label>
-        <input type="checkbox" id="est_ecologique" name="est_ecologique">
+          <label for="est_ecologique">Est écologique :</label>
+          <input type="checkbox" id="est_ecologique" name="est_ecologique">
 
-        <label for="animaux_autoriser">Animaux autorisés :</label>
-        <input type="checkbox" id="animaux_autoriser" name="animaux_autoriser">
+          <label for="animaux_autoriser">Animaux autorisés :</label>
+          <input type="checkbox" id="animaux_autoriser" name="animaux_autoriser">
 
-        <label for="fumeur">Fumeur :</label>
-        <input type="checkbox" id="fumeur" name="fumeur">
+          <label for="fumeur">Fumeur :</label>
+          <input type="checkbox" id="fumeur" name="fumeur">
 
-        <div class="role-button">
-          <label>Vous êtes :</label>
-          <select name="role_utilisateur" required>
-            <option value="conducteur">Conducteur</option>
-            <option value="passager">Passager</option>
-          </select><br>
-        </div>
+          <div class="role-button">
+            <label>Vous êtes :</label>
+            <select name="role_utilisateur" required>
+              <option value="conducteur">Conducteur</option>
+              <option value="passager">Passager</option>
+            </select><br>
+          </div>
 
-        <button type="submit">Enregistrer le covoiturage</button>
-      </form>
+          <button type="submit">Enregistrer le covoiturage</button>
+        </form>
+      </div>
     </div>
-  </div>
 
-  <!-- contenu de l'onglet Gérer Covoiturages -->
-  <div id="gestionCovoiturage" class="tab-content">
-    <div class="section">
-      <h2>Mes Covoiturages Enregistrés</h2>
-      <p><em>Les covoiturages enregistrés et annulés apparaîtront ici.</em></p>
-      <?php /*
+    <!-- contenu de l'onglet Gérer Covoiturages -->
+    <div id="gestionCovoiturage" class="tab-content">
+      <div class="section">
+        <h2>Mes Covoiturages Enregistrés</h2>
+        <p><em>Les covoiturages enregistrés et annulés apparaîtront ici.</em></p>
+        <?php /*
       <table class="tableCovoiturages" id="tableCovoiturages">
         <thead>
           <tr>
@@ -280,37 +284,37 @@ $title = 'Mon profil';
         </tbody>
       </div>
       */ ?>
+      </div>
     </div>
-  </div>
 
-  <!-- Contenu de l'onglet Avis -->
-  <div id="avis" class="tab-content">
-    <div class="section">
-      <h2>Avis</h2>
-      <section class="envoyer-avis">
-        <h2>Laisser nous votre avis sur vos experiences</h2>
-        <form method="POST" action="">
-          <div class="form-group">
-            <label for="note">Note (1 à 5) :</label>
-            <select name="note" id="note" class="form-control" required>
-              <option value="">-- Choisissez une note --</option>
-              <option value="1">1 - Mauvais</option>
-              <option value="2">2</option>
-              <option value="3">3 - Moyen</option>
-              <option value="4">4</option>
-              <option value="5">5 - Excellent</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="commentaire">Commentaire :</label>
-            <textarea name="commentaire" id="commentaire" class="form-control" placeholder="Votre avis en quelques mots..." required></textarea>
-          </div>
-          <button type="submit" class="btn btn-success">Envoyer l'avis</button>
-        </form>
-      </section>
-      <h2>Vos avies envoyés</h2>
-      <p><em>Les avis envoyés apparaîtront ici.</em></p>
-      <?php /*
+    <!-- Contenu de l'onglet Avis -->
+    <div id="avis" class="tab-content">
+      <div class="section">
+        <h2>Avis</h2>
+        <section class="envoyer-avis">
+          <h2>Laisser nous votre avis sur vos experiences</h2>
+          <form method="POST" action="">
+            <div class="form-group">
+              <label for="note">Note (1 à 5) :</label>
+              <select name="note" id="note" class="form-control" required>
+                <option value="">-- Choisissez une note --</option>
+                <option value="1">1 - Mauvais</option>
+                <option value="2">2</option>
+                <option value="3">3 - Moyen</option>
+                <option value="4">4</option>
+                <option value="5">5 - Excellent</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="commentaire">Commentaire :</label>
+              <textarea name="commentaire" id="commentaire" class="form-control" placeholder="Votre avis en quelques mots..." required></textarea>
+            </div>
+            <button type="submit" class="btn btn-success">Envoyer l'avis</button>
+          </form>
+        </section>
+        <h2>Vos avies envoyés</h2>
+        <p><em>Les avis envoyés apparaîtront ici.</em></p>
+        <?php /*
       <ul id="listeAvis">
         <?php
         $fichier = '../data/avis.json';
@@ -332,11 +336,11 @@ $title = 'Mon profil';
         ?>
       </ul>
       */ ?>
+      </div>
     </div>
+    <!-- Inclusion des scripts JavaScript -->
+    <!-- script general pour le dashboard -->
+    <script src="/js/dashboard.js"></script>
+    <!-- Le script avis.js s'occupe de charger et d'afficher les avis depuis le fichier JSON -->
+    <script src="/js/avis.js"></script>
   </div>
-  <!-- Inclusion des scripts JavaScript -->
-  <!-- script general pour le dashboard -->
-  <script src="/js/dashboard.js"></script>
-  <!-- Le script avis.js s'occupe de charger et d'afficher les avis depuis le fichier JSON -->
-  <script src="/js/avis.js"></script>
-</div>

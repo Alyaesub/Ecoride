@@ -15,7 +15,7 @@ use App\Controllers\LogoutController; //appelle le logout
 use App\Controllers\UserController; //applle le user controller
 use App\Controllers\SearchCitiesController; //appelle le controller de la searchbar
 use App\Controllers\ParametreController;
-
+use App\Controllers\VehiculeController;
 
 
 // Init Whoops
@@ -56,6 +56,24 @@ switch ($page) {
   case 'updateUser':
     $controller = new UserController;
     $controller->updateUser();
+    break;
+  case 'vehicules':
+    $controller = new VehiculeController;
+    $controller->showVehicule(); // affiche  les véhicules
+    break;
+
+  case 'ajouterVehicule':
+    $controller = new VehiculeController;
+    $controller->create(); // enregistre un véhicule
+    break;
+
+  case 'deleteVehicule':
+    $controller = new VehiculeController;
+    $controller->delete(); // supprime un véhicule
+    break;
+  case 'modifierVehicule':
+    $controller = new VehiculeController;
+    $controller->update();
     break;
   case 'parametres':
     $controller = new ParametreController();
