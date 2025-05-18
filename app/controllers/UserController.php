@@ -271,12 +271,5 @@ class UserController
 
     header('Location: ' . route('profil'));
     exit;
-
-    /*   render(__DIR__ . '/../views/pages/profilUsers.php', [
-      'title'   => 'Modifier votre profil',
-      'error'   => $error   ?? null,
-      'success' => $success ?? null,
-      'user'    => $user
-    ]); */
   }
 }

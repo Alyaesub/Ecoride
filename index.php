@@ -63,21 +63,15 @@ switch ($page) {
     break;
   case 'vehicules':
     $controller = new VehiculeController;
-    $controller->showVehicule(); // affiche  les véhicules
+    $controller->showVehicule();
     break;
-
   case 'ajouterVehicule':
     $controller = new VehiculeController;
-    $controller->create(); // enregistre un véhicule
+    $controller->create();
     break;
-
   case 'deleteVehicule':
     $controller = new VehiculeController;
-    $controller->delete(); // supprime un véhicule
-    break;
-  case 'modifierVehicule':
-    $controller = new VehiculeController;
-    $controller->update();
+    $controller->delete();
     break;
   case 'parametres':
     $controller = new ParametreController();
