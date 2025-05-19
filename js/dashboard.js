@@ -19,7 +19,7 @@ tabs.forEach((tab) => {
 // Fonction pour afficher ou masquer le champ "Autre" pour la marque
 // Cette fonction est appelée lorsque l'utilisateur sélectionne une marque dans le menu déroulant
 function toggleMarqueAutre(selectObj) {
-	const divAutre = document.getElementById("divAutreMarque");
+	const divAutre = document.getElementById("autre_marque_container");
 	if (selectObj.value === "autre") {
 		divAutre.style.display = "block";
 	} else {

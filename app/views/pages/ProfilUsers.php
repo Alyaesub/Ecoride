@@ -119,15 +119,15 @@ $title = 'Mon profil';
         <?php if (!empty($vehicules)) : ?>
           <ul>
             <?php foreach ($vehicules as $vehicule) : ?>
+              <li><strong>Marque :</strong> <?= htmlspecialchars($vehicule['nom_marque']) ?></li>
+              <li><strong>Modèle :</strong> <?= htmlspecialchars($vehicule['modele']) ?></li>
+              <li><strong>Couleur :</strong> <?= htmlspecialchars($vehicule['couleur']) ?></li>
+              <li><strong>Énergie :</strong> <?= htmlspecialchars($vehicule['energie']) ?></li>
+              <li><strong>Immatriculation :</strong> <?= htmlspecialchars($vehicule['immatriculation']) ?></li>
               <li>
-                <?= htmlspecialchars($vehicule['nom_marque']) ?> -
-                <?= htmlspecialchars($vehicule['modele']) ?> -
-                <?= htmlspecialchars($vehicule['couleur']) ?> -
-                <?= htmlspecialchars($vehicule['energie']) ?>
-                (<?= htmlspecialchars($vehicule['immatriculation']) ?>)
                 <form action="<?= route('deleteVehicule') ?>" method="post" style="display:inline;">
                   <input type="hidden" name="id_vehicule" value="<?= $vehicule['id_vehicule'] ?>">
-                  <button type="submit">Supprimer</button>
+                  <button type="submit" onclick="return confirm('Supprimer ce véhicule ?')">Supprimer</button>
                 </form>
               </li>
             <?php endforeach; ?>
@@ -136,14 +136,11 @@ $title = 'Mon profil';
           <h2>Aucun véhicule enregistré.</h2>
         <?php endif; ?>
         <h2>Ajouter un véhicule</h2>
-        <form action="<?= route('ajouterVehicule') ?>" method="post">
-          <label for="marque">Marque :</label>
-          <input type="text" id="modele" name="modele" require>
-          <select name="id_marque" required>
-            <?php foreach ($marques as $marque) : ?>
-              <option value="<?= $marque['id_marque'] ?>"><?= htmlspecialchars($marque['nom_marque']) ?></option>
-            <?php endforeach; ?>
-          </select>
+        <form action=" <?= route('ajouterVehicule') ?>" method="post">
+
+          <label for="nom_marque">Marque :</label>
+          <input type="text" name="nom_marque" id="nom_marque" required>
+
           <label for="modele">Modèle :</label>
           <input type="text" id="modele" name="modele" require>
 

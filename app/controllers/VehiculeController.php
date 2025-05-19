@@ -44,23 +44,52 @@ class VehiculeController
     }
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-      $data = [
-        'id_utilisateur' => $_SESSION['user_id'],
-        'id_marque' => $_POST['id_marque'] ?? null,
-        'modele' => $_POST['modele'] ?? '',
-        'couleur' => $_POST['couleur'] ?? '',
-        'energie' => $_POST['energie'] ?? '',
-        'immatriculation' => $_POST['immatriculation'] ?? '',
-      ];
+      $marqueModel = new Marque();
 
+      $nom_marque = strtolower(trim($_POST['nom_marque'] ?? ''));
+      $modele = $_POST['modele'] ?? '';
+      $couleur = $_POST['couleur'] ?? '';
+      $energie = $_POST['energie'] ?? '';
+      $immatriculation = $_POST['immatriculation'] ?? '';
+
+      // Blocage si champ vide
+      if (empty($nom_marque)) {
+        $_SESSION['error'] = "Le champ marque est obligatoire.";
+        header('Location: ' . route('profil'));
+        exit();
+      }
+
+      // Rechercher ou insérer la marque
+      $marqueExistante = $marqueModel->findByName($nom_marque);
+
+      if ($marqueExistante) {
+        $id_marque = $marqueExistante['id_marque'];
+      } else {
+        $id_marque = $marqueModel->create($nom_marque);
+      }
+
+      // Si on  pas d’ID => erreur
+      if (!$id_marque) {
+        $_SESSION['error'] = "Impossible de créer ou retrouver la marque.";
+        header('Location: ' . route('profil'));
+        exit();
+      }
+
+      // Ajout du véhicule
       $vehiculeModel = new Vehicule();
-      $vehiculeModel->create($data);
+      $vehiculeModel->create([
+        'id_utilisateur' => $_SESSION['user_id'],
+        'id_marque' => $id_marque,
+        'modele' => $modele,
+        'couleur' => $couleur,
+        'energie' => $energie,
+        'immatriculation' => $immatriculation
+      ]);
 
       $_SESSION['success'] = "Véhicule ajouté avec succès.";
+      header('Location: ' . route('profil'));
+      exit();
     }
-
-    header('Location: ' . route('profil'));
-    exit();
   }
 
   /**

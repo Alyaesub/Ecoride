@@ -47,7 +47,7 @@ class Vehicule
   }
 
   /**
-   * Supprime un véhicule appartenant à un utilisateur.
+   * Supprime un véhicule
    */
   public function delete(int $idVehicule, int $userId): void
   {
