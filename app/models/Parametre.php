@@ -6,7 +6,7 @@ use App\Models\ConnexionDb;
 use PDO;
 
 
-class ParametreModel
+class Parametre
 {
   private PDO $pdo;
   public function __construct()

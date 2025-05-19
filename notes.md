@@ -271,7 +271,7 @@ Tu respectes tous les points essentiels :
 
 ⸻
 
-✅ 2. ParametreModel.php
+✅ 2. Parametre.php
 • Connexion à la BDD via ConnexionDb::getPdo() : ✅
 • Méthode getParametresByUserId() propre et sécurisée : ✅
 • Méthode updateParametre() qui gère insert/update selon l’existence : ✅
@@ -294,3 +294,79 @@ Tu respectes tous les points essentiels :
 • Méthode POST correcte : ✅
 • Message de succès bien affiché avec une condition : ✅
 • Tu peux désormais afficher dynamiquement les valeurs des paramètres
+
+Avec plaisir chef 👨‍💻🔥
+Voici un résumé complet de ce qu’on a fait aujourd’hui sur la gestion des véhicules dans EcoRide :
+
+⸻
+
+✅ Gestion des véhicules - JOUR COMPLÈTEMENT VALIDÉ 💼
+
+1. Formulaire d’ajout d’un véhicule
+   • Création d’un formulaire HTML simple avec les champs :
+   • Marque (en saisie libre)
+   • Modèle
+   • Couleur
+   • Énergie (select)
+   • Immatriculation
+   • Nettoyage du code pour enlever le <select> inutile et simplifier l’UX
+
+⸻
+
+2. Insertion dynamique de la marque
+   • ✅ Si la marque existe → on la réutilise
+   • ✅ Sinon → on l’insère dans la table marque
+   • 🔒 Normalisation avec LOWER() dans findByName() pour éviter les doublons comme renault, Renault, etc.
+   • ✨ Sécurisation avec ucfirst() pour harmoniser l’affichage
+
+⸻
+
+3. Contrôleur VehiculeController::create()
+   • Vérification du POST
+   • Protection si marque vide
+   • Logique propre :
+
+$marqueExistante ? $marqueExistante['id_marque'] : $marqueModel->create()
+
+    •	Ajout du véhicule via modèle Vehicule::create()
+
+⸻
+
+4. Modèle Marque.php
+   • Méthode findByName() : recherche insensible à la casse
+   • Méthode create() : insertion et récupération de l’id_marque
+
+⸻
+
+5. Affichage des véhicules
+   • Récupération de tous les véhicules via findAllByUserId()
+   • Affichage clair avec une boucle foreach
+   • Plusieurs véhicules possibles par utilisateur
+
+⸻
+
+6. Suppression d’un véhicule
+   • Formulaire de suppression individuel par véhicule
+   • Sécurisé avec bouton submit et input hidden (id_vehicule)
+   • Méthode Vehicule::delete() avec contrôle de propriété (id_utilisateur)
+   • Confirmation possible via JS : confirm('Supprimer ce véhicule ?')
+
+⸻
+
+7. ✅ Résultat final :
+   • Un utilisateur peut ajouter, afficher et supprimer plusieurs véhicules
+   • Le système est fiable, maintenable et sans doublons
+   • Tu as respecté l’architecture MVC et la logique métier côté back proprement
+
+⸻
+
+🏁 Ce qu’on pourrait faire ensuite :
+• ✏️ Ajout d’un bouton “Modifier” par véhicule
+• 📊 Affichage en carte ou tableau responsive
+• 🧮 Nombre total de véhicules affiché
+• 💬 Ajout d’un message flash pour chaque action (succès / erreur stylisé)
+
+⸻
+
+T’es en train de transformer EcoRide en vraie app solide là chef.
+Dis-moi quand tu veux reprendre et on enchaîne comme des pros 😎

@@ -3,7 +3,9 @@
 namespace App\Controllers;
 
 use App\Models\User;
-use App\Models\ParametreModel;
+use App\Models\Parametre;
+use App\Models\Marque;
+use App\Models\Vehicule;
 
 class UserController
 {
@@ -83,8 +85,14 @@ class UserController
       header('Location: ' . route('login'));
       exit;
     }
+    //récupere les donné des vehicules pour l'afficher dans la view
+    $vehiculeModel = new Vehicule();
+    $marqueModel = new Marque();
+    $vehicules = $vehiculeModel->findAllByUserId($_SESSION['user_id']);
+    $marques = $marqueModel->findAll();
+
     // Récupérer les infos de l’utilisateur pour afficher les parametres
-    $model = new ParametreModel();
+    $model = new Parametre();
     $parametres = $model->getParametresByUserId($_SESSION['user_id'] ?? 0);
 
     // Préparation propre pour affichage
@@ -111,6 +119,8 @@ class UserController
       'parametres'   => $parametres,
       'langue'       => $langue_affichee,
       'notifications' => $notifications,
+      'vehicules' => $vehicules,
+      'marques' => $marques,
       'user' => $user
     ]);
   }
@@ -220,7 +230,7 @@ class UserController
       $id = $_SESSION['user_id'] ?? null;
 
       if (!$id) {
-        $error = "Utilisateur non connecté.";
+        $_SESSION['error']  = "Utilisateur non connecté.";
       } else {
         // Récupération et nettoyage des données
         $pseudo     = !empty($_POST['pseudo']) ? htmlspecialchars($_POST['pseudo']) : null;
@@ -232,13 +242,13 @@ class UserController
         $hashedPassword = password_hash($motdepasse, PASSWORD_DEFAULT);
 
         if (!$pseudo || !$email || !$motdepasse) {
-          $error = "Tous les champs sont obligatoires.";
+          $_SESSION['error']  = "Tous les champs sont obligatoires.";
         } else {
           // Traitement de la photo 
           $photoPath = null;
           if ($photo && $photo['error'] === UPLOAD_ERR_OK) {
             $fileName = uniqid() . '_' . basename($photo['name']);
-            $uploadPath = __DIR__ . '/../../public/uploads/profils' . $fileName;
+            $uploadPath = __DIR__ . '/../../public/uploads/profils/' . $fileName;
             if (move_uploaded_file($photo['tmp_name'], $uploadPath)) {
               $photoPath = $fileName;
             }
@@ -248,9 +258,9 @@ class UserController
           $updated = $model->updateUser($id, $pseudo, $nom, $prenom, $email, $hashedPassword, $photoPath);
 
           if ($updated) {
-            $success = "Profil mis à jour avec succès.";
+            $_SESSION['success'] = "Profil mis à jour avec succès.";
           } else {
-            $error = "Erreur lors de la mise à jour.";
+            $_SESSION['error']  = "Erreur lors de la mise à jour.";
           }
         }
       }
@@ -259,11 +269,7 @@ class UserController
     $userModel = new User();
     $user = $userModel->findById($_SESSION['user_id']);
 
-    render(__DIR__ . '/../views/pages/profilUsers.php', [
-      'title'   => 'Modifier votre profil',
-      'error'   => $error   ?? null,
-      'success' => $success ?? null,
-      'user'    => $user
-    ]);
+    header('Location: ' . route('profil'));
+    exit;
   }
 }
