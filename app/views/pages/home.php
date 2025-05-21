@@ -68,8 +68,12 @@ $title = 'Accueil';
         <p><strong>Arrivée :</strong> <?= htmlspecialchars($covoit['adresse_arrivee']) ?></p>
         <p><strong>Date :</strong> <?= date('d/m/Y H:i', strtotime($covoit['date_depart'])) ?></p>
         <p><strong>Prix :</strong> <?= $covoit['prix_personne'] ?> crédits</p>
+        <a class="btn-details" href="/detail-covoiturage.php?id=<?= $covoit['id_covoiturage'] ?>">Voir le détail</a>
       </div>
     <?php endforeach; ?>
+  </div>
+  <div class="popular-covoits-actions">
+    <a class="btn-voir-plus" href="/covoiturages-populaires.php">Voir plus de covoiturages</a>
   </div>
 </section>
 <script src="/js/searchBar.js"></script>

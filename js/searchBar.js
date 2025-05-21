@@ -1,3 +1,5 @@
+console.log("test");
+
 //fiche JS qui gére la searchbar
 // Sélectionne les éléments du DOM
 const searchInput = document.getElementById("searchInput"); // Champ de saisie utilisateur
