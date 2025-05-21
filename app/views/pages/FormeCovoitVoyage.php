@@ -39,7 +39,7 @@ require "../Ecoride/app/Controllers/DataTestController.php"
         <select id="prix_max" name="prix_max">
           <option value="">Sélectionnez un prix maximum</option>
           <?php foreach ($prixMax as $prix): ?>
-            <option value="<?= $prix ?>"><?= $prix ?> €</option>
+            <option value="<?= $prix ?>"><?= $prix ?> crédits</option>
           <?php endforeach; ?>
         </select><br>
 
