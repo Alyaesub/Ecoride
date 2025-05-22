@@ -3,7 +3,7 @@
   <section class="section-mentions">
     <h2>Éditeur du site</h2>
     <p><strong>Nom du projet :</strong> EcoRide</p>
-    <p><strong>Responsable de la publication :</strong> Pascal Reynier</p>
+    <p><strong>Responsable de la publication :</strong> Satoshi</p>
     <p><strong>Adresse :</strong> Arles, France</p>
     <p><strong>Email :</strong> contact@ecoride.site</p>
   </section>

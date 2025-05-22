@@ -18,6 +18,6 @@ class HomeController
 
   public function showMentions()
   {
-    render(__DIR__ . '/../views/pages/mentionsCgu .php', ['title' => 'Mentions Légales & CGV']);
+    render(__DIR__ . '/../views/pages/mentionsCgu.php', ['title' => 'Mentions Légales & CGV']);
   }
 }
