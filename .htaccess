@@ -8,6 +8,8 @@
 
 RewriteEngine on
 RewriteCond %{REQUEST_URI} !public/
+RewriteCond %{REQUEST_URI} !js/
+RewriteCond %{REQUEST_URI} !database/
 RewriteRule (.*) index.php [L]
 
 # Empêche l’accès aux fichiers sensibles

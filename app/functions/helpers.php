@@ -4,7 +4,7 @@
 // et permet de changer facilement la structure de l’URL si besoin.
 function route(string $page): string
 {
-  return htmlentities("index.php?page=" . urlencode($page));
+  return htmlentities(urlencode($page));
 }
 
 //function qui verifie l'eta de connexion de l'user peut servire pour remplacer
