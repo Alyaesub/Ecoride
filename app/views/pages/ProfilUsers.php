@@ -178,18 +178,12 @@ $title = 'Mon profil';
         <input type="text" id="adresse_arrivee" name="adresse_arrivee" required>
 
         <label for="date_depart">Date de départ :</label>
-        <input type="date" id="date_depart" name="date_depart" required>
-
-        <label for="heure_depart">Heure de départ :</label>
-        <input type="time" id="heure_depart" name="heure_depart">
+        <input type="datetime-local" id="date_depart" name="date_depart" required>
 
         <label for="date_arrivee">Date d'arrivée :</label>
-        <input type="date" id="date_arrivee" name="date_arrivee" required>
+        <input type="datetime-local" id="date_arrivee" name="date_arrivee" required>
 
-        <label for="heure_arrive">Heure d'arrivée :</label>
-        <input type="time" id="heure_arrive" name="heure_arrive">
-
-        <label for="prix_personne">Prix par personne (€) :</label>
+        <label for="prix_personne">Prix par personne (crédits) :</label>
         <input type="number" id="prix_personne" name="prix_personne" step="0.01" required>
 
         <label for="places_disponibles">Places disponibles :</label>

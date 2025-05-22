@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", function () {
 		""; /* récupère ici l'id de l'utilisateur connecté, par exemple depuis une variable globale ou un data-attribute */
 	const listeAvis = document.getElementById("listeAvis");
 
-	fetch("/data/nosql/avis.json")
+	fetch("/database/nosql/avis.json")
 		.then((response) => response.json())
 		.then((data) => {
 			// Filtrer les avis correspondant à l'utilisateur

@@ -1,10 +1,16 @@
 # Active la réécriture d’URL
-RewriteEngine On
+#RewriteEngine On
 
 # Redirection vers index.php si le fichier ou dossier n’existe pas
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^ index.php [QSA,L]
+# RewriteCond %{REQUEST_FILENAME} !-f
+#RewriteCond %{REQUEST_FILENAME} !-d
+#RewriteRule ^ index.php [QSA,L]  
+
+RewriteEngine on
+RewriteCond %{REQUEST_URI} !public/
+RewriteCond %{REQUEST_URI} !js/
+RewriteCond %{REQUEST_URI} !database/
+RewriteRule (.*) index.php [L]
 
 # Empêche l’accès aux fichiers sensibles
 <FilesMatch "\.(ini|env|sql|log|sh|bak|htaccess)$">

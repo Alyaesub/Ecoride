@@ -23,13 +23,25 @@ $whoops = new Run();
 $whoops->pushHandler(new PrettyPageHandler());
 $whoops->register();
 
-$page = $_GET['page'] ?? 'home';
+/* $page = $_GET['page'] ?? 'home'; */
+$path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+
+if ($path === false) {
+  exit;
+}
+
+$page = ltrim($path, '/');
+
 
 switch ($page) {
   //routes vers le views et controlleurs
   case 'home':
     $controller = new HomeController();
     $controller->index();
+    break;
+  case 'mentions':
+    $controller = new HomeController();
+    $controller->showMentions();
     break;
   case 'covoitVoyage':
     render(__DIR__ . '/app/views/pages/formeCovoitVoyage.php', [

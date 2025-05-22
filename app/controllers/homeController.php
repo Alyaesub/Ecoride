@@ -15,4 +15,9 @@ class HomeController
       'title' => 'Accueil'
     ]);
   }
+
+  public function showMentions()
+  {
+    render(__DIR__ . '/../views/pages/mentionsCgu.php', ['title' => 'Mentions Légales & CGV']);
+  }
 }

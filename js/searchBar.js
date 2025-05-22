@@ -1,3 +1,5 @@
+console.log("test");
+
 //fiche JS qui gére la searchbar
 // Sélectionne les éléments du DOM
 const searchInput = document.getElementById("searchInput"); // Champ de saisie utilisateur
@@ -16,7 +18,7 @@ searchInput.addEventListener("input", function () {
 
 	// Appelle le contrôleur SearchCitiesController via Fetch pour récupérer les suggestions
 	// index.php?page=search-cities&q sert de route pour aller chercher le controller 'searchCitiesController.php'
-	fetch(`index.php?page=search-cities&q=${encodeURIComponent(query)}`)
+	fetch(`/search-cities?q=${encodeURIComponent(query)}`)
 		.then((response) => response.json()) // Convertit la réponse en JSON
 		.then((data) => {
 			resultsDiv.innerHTML = ""; // Vide les anciens résultats

@@ -7,6 +7,7 @@ use App\Models\Parametre;
 use App\Models\Marque;
 use App\Models\Vehicule;
 
+echo "test";
 class UserController
 {
   /**

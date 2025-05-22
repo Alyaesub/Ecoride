@@ -1,0 +1,185 @@
+///////////////code mobile ////////////////
+@media (max-width: $max-width-mobile) {
+
+  #popular-covoits {
+  margin: 3rem 1.5rem;
+  padding: 2rem 1.5rem;
+  box-sizing: border-box;
+  max-width: 1200px;
+  background-color: $secondary-color;
+  border-top: 2px solid $secondary-color;
+  border-radius: 12px;
+
+  h2 {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    color: $color-primary-popular;
+    font-family: $font-title;
+  }
+
+  .popular-covoits-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    justify-content: center;
+  }
+
+  .covoit-card {
+    background: white;
+    border: 1px solid #d3e5e0;
+    padding: 1rem 1.2rem;
+    border-radius: 10px;
+    width: 260px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s ease;
+
+    &:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 6px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    p {
+      margin: 0.4rem 0;
+      font-size: 0.95rem;
+      color: #333;
+      font-family: $font-primary;
+
+      strong {
+        color: $color-primary-popular;
+        font-family: $font-primary;
+      }
+    }
+
+    .btn-details {
+      display: inline-block;
+      margin-top: 0.8rem;
+      padding: 0.4rem 0.9rem;
+      background-color: $color-primary-popular;
+      color: white;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.9rem;
+      font-family: $font-navigation;
+
+      &:hover {
+        background-color: #256c50;
+      }
+    }
+  }
+
+  .popular-covoits-actions {
+    margin-top: 2rem;
+    text-align: center;
+
+    .btn-voir-plus {
+      padding: 0.7rem 1.5rem;
+      background-color: $button;
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-family: $font-navigation;
+
+      &:hover {
+        background-color: $button-active;
+      }
+    }
+  }
+}
+}
+
+
+
+////////////////code desktop//////////////
+@media (min-width: $min-width-desktop) {
+  #popular-covoits {
+  margin: 3rem 2rem;
+  padding: 2rem 1.5rem;
+  background-color: $secondary-color;
+  border-top: 2px solid $secondary-color;
+  border-radius: 12px;
+
+  h2 {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    color: $color-primary-popular;
+    font-family: $font-title;
+  }
+
+  .popular-covoits-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    justify-content: center;
+  }
+
+  .covoit-card {
+    background: white;
+    border: 1px solid #d3e5e0;
+    padding: 1rem 1.2rem;
+    border-radius: 10px;
+    width: 260px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s ease;
+
+    &:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 6px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    p {
+      margin: 0.4rem 0;
+      font-size: 0.95rem;
+      color: #333;
+      font-family: $font-primary;
+
+      strong {
+        color: $color-primary-popular;
+        font-family: $font-primary;
+      }
+    }
+
+    .btn-details {
+      display: inline-block;
+      margin-top: 0.8rem;
+      padding: 0.4rem 0.9rem;
+      background-color: $color-primary-popular;
+      color: white;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.9rem;
+      font-family: $font-navigation;
+
+      &:hover {
+        background-color: #256c50;
+      }
+    }
+  }
+
+  .popular-covoits-actions {
+    margin-top: 2rem;
+    text-align: center;
+
+    .btn-voir-plus {
+      padding: 0.7rem 1.5rem;
+      background-color: $button;
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-family: $font-navigation;
+
+      &:hover {
+        background-color: $button-active;
+      }
+    }
+  }
+}
+}
+
