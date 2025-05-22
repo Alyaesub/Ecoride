@@ -1,6 +1,7 @@
 <!-- partial du footer de l'application -->
 <footer class="footer">
     <p>&copy; 2024 EcoRide. Tous droits réservés.</p>
+    <a class="cgv" href="<?= route('mentions') ?>">Mentions légales & CGV</a>
     <section class="social-media">
         <h3>Suivez-nous sur les réseaux sociaux</h3>
         <a href="https://www.facebook.com/EcoRide" target="_blank">Facebook</a>

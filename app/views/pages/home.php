@@ -49,6 +49,7 @@ $title = 'Accueil';
     <p>par e-mail : www.ecoride.com</p>
     <p>par téléphone : 01 23 45 67 89</p>
     <p>adresse : 123 Rue de l'Écologie, 75000 Paris, France</p>
+    <a class="cgv" href="<?= route('mentions') ?>">Mentions légales & CGV</a>
   </section>
   <section class="social-media-mobile caroussel-item">
     <h3>Suivez-nous sur les réseaux sociaux</h3>

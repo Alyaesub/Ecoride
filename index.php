@@ -31,6 +31,10 @@ switch ($page) {
     $controller = new HomeController();
     $controller->index();
     break;
+  case 'mentions':
+    $controller = new HomeController();
+    $controller->showMentions();
+    break;
   case 'covoitVoyage':
     render(__DIR__ . '/app/views/pages/formeCovoitVoyage.php', [
       'title' => 'Formulaire de covoiturage'

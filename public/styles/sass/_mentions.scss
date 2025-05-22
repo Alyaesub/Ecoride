@@ -1,0 +1,58 @@
+.mentions{
+  max-width: 900px;
+  margin: 3rem auto;
+  padding: 2rem;
+  font-family: 'Segoe UI', sans-serif;
+  font-size: 1.1rem;
+  line-height: 1.7;
+  background-color: #f9f9f9;
+  color: #333;
+
+  h1 {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  color: #005ecb;
+}
+}
+
+
+
+.section-mentions {
+  margin-bottom: 2.5rem;
+  background-color: #ffffff;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+
+  h2 {
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+    color: #2c3e50;
+  }
+
+  p, li {
+    margin-bottom: 0.75rem;
+  }
+
+  ul {
+    list-style: disc;
+    padding-left: 1.5rem;
+  }
+
+  a {
+    color: #0077cc;
+    text-decoration: underline;
+
+    &:hover {
+      text-decoration: none;
+    }
+  }
+}
+
+.footer-mentions {
+  text-align: center;
+  font-size: 0.9rem;
+  margin-top: 3rem;
+  color: #777;
+}
