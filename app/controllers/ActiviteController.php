@@ -45,6 +45,14 @@ class ActiviteController
       $notation->ajouter($id_conducteur, $id_auteur, $id_covoiturage, $note);
     }
 
+
+    // Enregistrer l'avis NoSQL CODE POUR LES AVIS EN NOSQL
+    /*  if (!empty($commentaire)) {
+      require_once __DIR__ . '/../../MongoDb/avisFunctions.php';
+      ajouterAvisMongo($id_auteur, $id_conducteur, $id_covoiturage, $commentaire);
+    } */
+
+
     header('Location: /activite');
     exit();
   }

@@ -94,6 +94,10 @@ switch ($page) {
     $controller = new ActiviteController;
     $controller->showActivites();
     break;
+  case 'activites-notes':
+    $controller = new ActiviteController;
+    $controller->ajouterNote();
+    break;
   case 'dashboardAdmin':
     render(__DIR__ . '/app/views/pages/administration/dashboardAdmin.php', [
       'title' => 'Dashboard Administration'
