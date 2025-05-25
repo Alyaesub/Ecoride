@@ -3,7 +3,6 @@
 namespace App\Controllers;
 
 use App\Models\User;
-/* use App\Models\Parametre; */
 use App\Models\Marque;
 use App\Models\Vehicule;
 

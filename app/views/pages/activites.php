@@ -1,5 +1,3 @@
-<?php $title = 'Historique de vos activités'; ?>
-
 <section class="activite-section">
   <h1>Historique de vos covoiturages</h1>
 

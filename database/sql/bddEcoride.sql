@@ -103,7 +103,21 @@ CREATE TABLE user_covoiturage (
     ON UPDATE CASCADE
 ) ENGINE=InnoDB;
 
--- Création de la table Avis 
+#table pour les notes 
+CREATE TABLE notation (
+    id_notation INT AUTO_INCREMENT PRIMARY KEY,
+    id_utilisateur_cible INT NOT NULL,
+    id_utilisateur_auteur INT NOT NULL,
+    id_covoiturage INT NOT NULL,
+    note TINYINT NOT NULL CHECK (note BETWEEN 1 AND 5),
+    date_notation DATETIME DEFAULT CURRENT_TIMESTAMP,
+    UNIQUE(id_utilisateur_auteur, id_covoiturage),
+    FOREIGN KEY (id_utilisateur_cible) REFERENCES utilisateur(id_utilisateur),
+    FOREIGN KEY (id_utilisateur_auteur) REFERENCES utilisateur(id_utilisateur),
+    FOREIGN KEY (id_covoiturage) REFERENCES covoiturage(id_covoiturage)
+);
+
+-- Création de la table Avis NoSql
     CREATE TABLE avis(
     id_avis INT AUTO_INCREMENT PRIMARY KEY,
     id_covoiturage INT NOT NULL,
@@ -114,6 +128,17 @@ CREATE TABLE user_covoiturage (
     FOREIGN KEY (id_covoiturage) REFERENCES covoiturage (id_covoiturage),
     FOREIGN KEY (id_utilisateur) REFERENCES utilisateur (id_utilisateur)
 ) ENGINE=InnoDB;
+
+#collection NoSQl pour les avis
+{
+  "_id": ObjectId("..."),
+  "id_utilisateur_cible": 3,         // ID du conducteur noté
+  "id_utilisateur_auteur": 5,        // ID de l'utilisateur qui laisse l'avis
+  "id_covoiturage": 7,               // Pour faire le lien si besoin
+  "commentaire": "Conducteur très sympa, trajet agréable !",
+  "date_avis": "2025-05-24T17:34:00Z",
+  "valide": false                    // Par défaut à false → modéré par un employé
+}
 
 --Relations entre les tables :
 

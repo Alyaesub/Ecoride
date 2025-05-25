@@ -14,7 +14,7 @@ use App\Controllers\HomeController; //pour appeler le controller de la page d'ac
 use App\Controllers\LogoutController; //appelle le logout
 use App\Controllers\UserController; //applle le user controller
 use App\Controllers\SearchCitiesController; //appelle le controller de la searchbar
-use App\Controllers\ParametreController;
+use App\Controllers\ActiviteController;
 use App\Controllers\VehiculeController;
 
 
@@ -91,9 +91,8 @@ switch ($page) {
     $controller->registerEmploye();
     break;
   case 'activites':
-    render(__DIR__ . '/app/views/pages/activites.php', [
-      'title' => 'Historique de vos activités'
-    ]);
+    $controller = new ActiviteController;
+    $controller->showActivites();
     break;
   case 'dashboardAdmin':
     render(__DIR__ . '/app/views/pages/administration/dashboardAdmin.php', [
