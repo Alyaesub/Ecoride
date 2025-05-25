@@ -85,10 +85,7 @@ switch ($page) {
     $controller = new VehiculeController;
     $controller->delete();
     break;
-  case 'parametres':
-    $controller = new ParametreController();
-    $controller->gererParametres();
-    break;
+
   case 'registerEmploye':
     $controller = new UserController;
     $controller->registerEmploye();

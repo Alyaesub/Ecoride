@@ -3,7 +3,7 @@
 <section class="main-admin">
   <h1>Dashboard Employé</h1>
 
-  <a class="logout" href="logout.php">Déconnexion</a>
+  <a class="logout" href="<?= route("logout") ?>">Déconnexion</a>
 
   <section class="review-validation">
     <h2>Validation des avis</h2>
