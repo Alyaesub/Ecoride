@@ -70,5 +70,15 @@
     font-family: $font-primary;
   }
 }
+.cgv {
+    margin: 5px 0;
+    font-size: 0.9rem;
+    font-family: $font-primary;
+    text-decoration: none;
+    color: $secondary-color;
+    &:hover {
+                color: lighten($secondary-color, 10%);
+            }
+}
 
 ////////////////////////////////////////////////////////////////

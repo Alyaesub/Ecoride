@@ -26,12 +26,46 @@ $vehicule = [
 
 // Fake covoiturage
 $covoiturage = [
-  'id_covoiturage' => '231',
-  'adresse_depart' => '123 Rue A',
-  'adresse_arrivee' => '456 Rue B',
-  'date_depart' => '2025-05-01',
-  'prix_personne' => '10.00',
-  'places' => 3
+  [
+    'id_covoiturage' => '231',
+    'adresse_depart' => '123 Rue A',
+    'adresse_arrivee' => '456 Rue B',
+    'date_depart' => '2025-05-01',
+    'prix_personne' => '10.00',
+    'places' => 3
+  ],
+  [
+    'id_covoiturage' => '231',
+    'adresse_depart' => '123 Rue A, Marseille',
+    'adresse_arrivee' => '456 Rue B, Aix-en-Provence',
+    'date_depart' => '2025-05-21 08:30:00',
+    'prix_personne' => '10.00',
+    'places' => 3
+  ],
+  [
+    'id_covoiturage' => '232',
+    'adresse_depart' => '10 Boulevard National, Lyon',
+    'adresse_arrivee' => '22 Rue des Alpes, Grenoble',
+    'date_depart' => '2025-05-22 07:15:00',
+    'prix_personne' => '12.50',
+    'places' => 2
+  ],
+  [
+    'id_covoiturage' => '233',
+    'adresse_depart' => 'Place Bellecour, Lyon',
+    'adresse_arrivee' => 'Gare de Valence TGV',
+    'date_depart' => '2025-05-23 09:45:00',
+    'prix_personne' => '8.00',
+    'places' => 4
+  ],
+  [
+    'id_covoiturage' => '234',
+    'adresse_depart' => '1 Rue de la République, Avignon',
+    'adresse_arrivee' => 'Parc du Mercantour, Nice',
+    'date_depart' => '2025-05-24 06:00:00',
+    'prix_personne' => '15.00',
+    'places' => 1
+  ]
 ];
 
 $covoiturageAnnule = [

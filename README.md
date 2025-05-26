@@ -1,141 +1,125 @@
 # 🌱 EcoRide - Application de Covoiturage Écologique
 
-## 📋 À propos du projet
+## 📋 À propos
 
-EcoRide est une application web de covoiturage écologique. Elle facilite les déplacements tout en réduisant l'empreinte carbone, permettant aux utilisateurs de proposer et réserver des trajets partagés.
+**EcoRide** est une application web de covoiturage écoresponsable. Elle permet aux utilisateurs de proposer, réserver et gérer des trajets partagés afin de réduire leur empreinte carbone.
 
 ## 🗂️ Structure du projet
 
--   `/database/sql` : scripts d'installation et de test de la base relationnelle.
--   `/database/nosql` : données utilisateurs (avis) au format JSON.
+-   `/database/sql` : Scripts SQL d’installation et de test de la base relationnelle.
+-   `/database/nosql` : Données utilisateurs (avis) au format JSON.
 
-## 🚀 Fonctionnalités
+## 👤 Comptes de test
 
-### Front-end
+-   **Utilisateur** :
+    -   `pseudo`: bob / `mail`: bob@test.com / `mot de passe`: password123
+    -   `pseudo`: alice / `mail`: alice@test.com / `mot de passe`: password123
+-   **Administrateur** :
 
--   [x] Page d'accueil avec présentation et barre de recherche
--   [x] Menu de navigation responsive
--   [x] Vue des covoiturages disponibles
--   [x] Système de filtres avancés
--   [x] Page de détail des covoiturages
--   [ ] Système de réservation (en cours)
--   [ ] Gestion des comptes utilisateurs (en cours)
--   [ ] Système de démarrage/arrêt des trajets (en cours)
--   [ ] Interface employé (en cours)
--   [ ] Interface administrateur (en cours)
+    -   `pseudo`: satoshi / `mail`: satoshiAdmin@test.com / `mot de passe`: password123
 
-### Back-end
+-   **Employé** :
 
--   [ ] Base de données SQL & NoSQL (en cours)
--   [ ] Système d'authentification (en cours)
--   [ ] Gestion des trajets (en cours)
--   [ ] Système de crédits (en cours)
--   [ ] Système de modération (en cours)
+    -   `pseudo`: hal / `mail`: hal@test.com / `mot de passe`: password123
+
+-   **Formulaire** : Création d’un utilisateur via le formulaire registerUser.
+
+    -   `pseudo`: aly / `mail`: aly@test.com / `mot de passe`: password123
+    -   `pseudo`: matthieu / `mail`: matthieu@test.com / `mot de passe`: password123
+    -   `pseudo`: marie / `mail`: marie@test.com / `mot de passe`: password123
+    -   `pseudo`: claudia / `mail`: claudi@test.com / `mot de passe`: password123
+    -   `pseudo`: testmaj/ `mail`: testmaj@test.com / `mot de passe`: testmaj
+
+-   **Formulaire** : Création d’employes via le formulaire registerEmploye.
+    -   `pseudo`: vitalik/ `mail`: vitalik@test.com / `poste` : moderateur/ `numéro de badge` : 12 / `mot de passe`: password123
+    -   `pseudo`: albert/ `mail`: albert@test.com / `poste` : informaticien / `numéro de badge` : 13 / `mot de passe`: password123
+    -   `pseudo`: magalie/ `mail`: magalie@test.com / `poste` : moderatrice / `numéro de badge` : 14 / `mot de passe`: password123
 
 ## 🛠️ Technologies
 
--   Front-end : HTML5, SCSS, JavaScript (ES6+)
--   Back-end : PHP 8, MySQL
--   Outils : Node.js, npm, Composer
--   Déploiement : O2Switch (prévu)
+-   **Front-end** : HTML5, SCSS, JavaScript (ES6+)
+-   **Back-end** : PHP 8, MySQL, Mongodb
+-   **Outils** : Node.js, npm, Composer
+-   **Déploiement** : O2Switch
 
-## ⚙️ Installation du projet
+## ⚙️ Installation
 
 ```bash
-# Cloner le repository
+# Cloner le projet
 git clone https://github.com/Alyaesub/Ecoride.git
 
-# Installer les dépendances
+# Installer les dépendances front
 npm install
 
-# Configurer la base de données via les scripts SQL et ajuster le fichier config/env.ini
+# Configurer la base de données
+# → Exécuter les scripts SQL dans /database/sql
+# → Adapter les infos dans config/env.ini
 ```
 
-## 🔍 État d'avancement
+## 📦 Architecture
 
-### Structure MVC
+### MVC
 
-• app/ structuré avec : controllers, models, views, functions.
+-   Structure `app/` : `controllers/`, `models/`, `views/`, `functions/`
+-   `public/` : racine propre avec `index.php` central
 
-### Public / racine
+### Autoload
 
-• public/ ou racine bien propre avec un index.php central.
+-   Autoload via Composer (`vendor/`, `composer.json`, `dump-autoload` ✅)
+-   Chargement automatique des classes avec `require 'vendor/autoload.php'`
 
-### Autoload Composer
+### Débogage
 
-• composer.json configuré proprement  
-• dossier vendor/ bien généré  
-• `composer dump-autoload` réalisé ✅  
-• Les classes sont automatiquement chargées via `require 'vendor/autoload.php'`.
+-   Whoops installé et activé (`index.php`) pour une gestion élégante des erreurs
 
-### Whoops
+### Vue & Layout
 
-• Installé via Composer  
-• Activé dans index.php  
-• Affiche des erreurs jolies et utiles si besoin ✅
+-   Fonction `render()` (dans `functions/view.php`) pour charger dynamiquement les pages
+-   Layout unique (`layout.php`) avec `html`, `head`, `body` centralisés et dynamiques
 
-### Fonction render()
+## 🔗 Ressources
 
-• Dans app/functions/view.php  
-• Utilisée partout via `require_once` (ou bientôt via namespace)  
-• Injecte le contenu + le layout avec `$pageContent` & `$title`.
-
-### Layout général
-
-• layout.php propre avec :  
- • balises `<html>`, `<head>`, `<body>` centralisées  
- • chargement du CSS  
- • affichage dynamique du contenu de chaque page
-
-✅ Et maintenant… des liens centralisés et dynamiques !
-
-## 🔗 Liens utiles
-
--   [GitHub Repository](https://github.com/Alyaesub/Ecoride.git)
--   [Trello Board](https://trello.com/invite/b/674dfbcb0c1b62a2c6577364/ATTI5bbb7e636c9c9aac07b4b2c4cb037469670CFCA8/ecf-ecoride)
+-   [GitHub](https://github.com/Alyaesub/Ecoride.git)
+-   [Trello](https://trello.com/invite/b/674dfbcb0c1b62a2c6577364/ATTI5bbb7e636c9c9aac07b4b2c4cb037469670CFCA8/ecf-ecoride)
 -   [Documentation](https://github.com/Alyaesub/Ecoride/wiki)
 
-## 📚 Documentation
+## 📚 Documentation technique
 
--   Maquettes : [Lien](https://www.figma.com/design/wzlnTb3rpsE1tW39XHNRj9/Maquettage-Ecoride?t=qEgEUtOSJ5wLQTr0-0)
--   Diagramme d'utilisation : [Lien](https://www.figma.com/design/tDpcbYwymMGQ1bRDxAunYQ/Diagramme-d-utilisation-Ecoride?node-id=0-1&p=f&t=qEgEUtOSJ5wLQTr0-0)
--   Diagramme de classe : [Lien](https://www.figma.com/design/UErDXx2fShe8iPASCSTqLB/diagramme-classe-Ecoride?node-id=0-1&p=f&t=7E1L6cUHexjM0Wb3-0)
--   MCP Ecoride : [Lien](https://www.figma.com/design/FiuUpMhBEJEVa6j3rrmASP/MCP-Ecoride)
--   Diagramme de séquence : [Lien](https://www.figma.com/design/p2iUH1N3JGgNAPVyS23V2m/Diagramme-sequence-Ecoride)
+-   [Maquettes Figma](https://www.figma.com/design/wzlnTb3rpsE1tW39XHNRj9/Maquettage-Ecoride)
+-   [Diagramme d’utilisation](https://www.figma.com/design/tDpcbYwymMGQ1bRDxAunYQ/Diagramme-d-utilisation-Ecoride)
+-   [Diagramme de classe](https://www.figma.com/design/UErDXx2fShe8iPASCSTqLB/diagramme-classe-Ecoride)
+-   [MCP - Modèle de Conceptualisation du Projet](https://www.figma.com/design/FiuUpMhBEJEVa6j3rrmASP/MCP-Ecoride)
+-   [Diagramme de séquence](https://www.figma.com/design/p2iUH1N3JGgNAPVyS23V2m/Diagramme-sequence-Ecoride)
 
-## ⚙️ Configuration
+## 🔐 Configuration
 
-### `config/env.ini` (local)
+### `config/env.ini`
 
 ```ini
 [database]
 DB_HOST = 127.0.0.1
 DB_NAME = ecoride
-DB_USER = root
-DB_PASS = root
+DB_USER =
+DB_PASS =
 
 [settings]
 APP_ENV = local
 DEBUG = true
 ```
 
-✅ Permet de **séparer les infos sensibles** (connexion BDD, debug, env)  
-✅ Facile à adapter en production (ex : O2Switch)
-
----
+-   Séparation des infos sensibles
+-   Adaptable pour un déploiement en production
 
 ### `config/config.php`
 
--   Charge `env.ini` en tableau associatif
--   Active le `DEBUG` si configuré
--   Définit une constante `APP_ENV`
--   Gère les cas où `env.ini` est manquant
-
----
+-   Charge `env.ini`
+-   Active le mode `DEBUG`
+-   Définit la constante `APP_ENV`
+-   Gère l’absence de fichier de config
 
 ### `.htaccess`
 
-```
+```apache
 RewriteEngine On
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
@@ -151,14 +135,11 @@ ErrorDocument 403 /403.html
 AddDefaultCharset UTF-8
 ```
 
-✅ Redirection vers `index.php` (routing MVC)  
-✅ Protection des fichiers sensibles  
-✅ Encodage UTF-8  
-✅ Pages d’erreur personnalisables
+-   Redirection vers `index.php` (MVC)
+-   Protection des fichiers sensibles
+-   Personnalisation des erreurs
 
----
-
-### `ConnexionDb.php`
+### Connexion à la base
 
 ```php
 use App\Models\ConnexionDb;
@@ -166,17 +147,13 @@ use App\Models\ConnexionDb;
 $pdo = ConnexionDb::getPdo();
 ```
 
--   Récupère les infos depuis `env.ini` via `config.php`
--   Retourne un objet `PDO` prêt à l'emploi
--   Centralise la connexion à la base (évite duplication)
--   Tu pourras supprimer les fallback plus tard pour plus de sécurité
+-   Connexion centralisée via `ConnexionDb`
+-   Requêtes prêtes à l’emploi avec PDO
 
-## 🧰 Bonnes pratiques appliquées
+## ✅ Bonnes pratiques
 
--   ✅ Centralisation de la configuration
--   ✅ Séparation env local / prod
--   ✅ Connexion sécurisée à la base de données
--   ✅ Prêt pour le déploiement chez O2Switch
--   ✅ Compatible avec PHP 8 et architecture MVC propre
-
----
+-   Configuration centralisée et sécurisée
+-   Séparation environnement local / prod
+-   Connexion BDD fiable via PDO
+-   Architecture MVC propre et maintenable
+-   Projet prêt pour la mise en ligne

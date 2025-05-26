@@ -1,20 +1,18 @@
 CREATE DATABASE ecoride;
 
 
--- Table CONFIGURATION
+/* -- Table CONFIGURATION
 CREATE TABLE configuration (
     id_configuration INT AUTO_INCREMENT PRIMARY KEY
-) ENGINE=InnoDB;
+) ENGINE=InnoDB; */
 
 -- Table PARAMETRE
 CREATE TABLE parametre (
     id_parametre INT AUTO_INCREMENT PRIMARY KEY,
-    id_configuration INT,
+    id_utilisateur INT NOT NULL,
     propriete VARCHAR(50) NOT NULL,
     valeur VARCHAR(50),
-    CONSTRAINT fk_parametre_configuration
-    FOREIGN KEY (id_configuration)
-    REFERENCES configuration(id_configuration)
+    FOREIGN KEY (id_utilisateur) REFERENCES utilisateur(id_utilisateur)
     ON DELETE CASCADE
     ON UPDATE CASCADE
 ) ENGINE=InnoDB;
@@ -24,9 +22,13 @@ CREATE TABLE role (
     id_role INT AUTO_INCREMENT PRIMARY KEY,
     libelle VARCHAR(30) NOT NULL
 ) ENGINE=InnoDB;
+INSERT INTO role (libelle) VALUES
+('administrateur'),
+('employe'),
+('utilisateur');
 
 -- Création de la table Utilisateurs
-CREATE TABLE user (
+CREATE TABLE utilisateur (
     id_utilisateur INT PRIMARY KEY AUTO_INCREMENT,
     pseudo VARCHAR(30) NOT NULL UNIQUE,
     nom VARCHAR(30),
@@ -70,14 +72,13 @@ CREATE TABLE marque (
     adresse_depart VARCHAR (255) NOT NULL,
     adresse_arrivee VARCHAR (255) NOT NULL,
     date_depart DATETIME NOT NULL,
-    heure_depart TIME,
     date_arrivee DATETIME NOT NULL,
-    heure_arrive TIME,
     prix_personne DECIMAL (10, 2) NOT NULL,
     places_disponibles INT NOT NULL,
     est_ecologique BOOLEAN DEFAULT FALSE,
-    animaux_autoriser BOOLEAN DEFAULT FALSE,
+    animaux_autorises BOOLEAN DEFAULT FALSE,
     fumeur BOOLEAN DEFAULT FALSE,
+    est_annule BOOLEAN DEFAULT FALSE,
     FOREIGN KEY (id_utilisateur) REFERENCES utilisateur (id_utilisateur),
     FOREIGN KEY (id_vehicule) REFERENCES vehicule(id_vehicule),
     CONSTRAINT chk_places CHECK (places_disponibles >= 0),
@@ -88,6 +89,7 @@ CREATE TABLE marque (
 CREATE TABLE user_covoiturage (
     id_utilisateur INT NOT NULL,
     id_covoiturage INT NOT NULL,
+    role_utilisateur ENUM('conducteur', 'passager') NOT NULL,
     PRIMARY KEY (id_utilisateur, id_covoiturage),
     CONSTRAINT fk_uc_utilisateur
     FOREIGN KEY (id_utilisateur)
@@ -101,7 +103,21 @@ CREATE TABLE user_covoiturage (
     ON UPDATE CASCADE
 ) ENGINE=InnoDB;
 
--- Création de la table Avis 
+#table pour les notes 
+CREATE TABLE notation (
+    id_notation INT AUTO_INCREMENT PRIMARY KEY,
+    id_utilisateur_cible INT NOT NULL,
+    id_utilisateur_auteur INT NOT NULL,
+    id_covoiturage INT NOT NULL,
+    note TINYINT NOT NULL CHECK (note BETWEEN 1 AND 5),
+    date_notation DATETIME DEFAULT CURRENT_TIMESTAMP,
+    UNIQUE(id_utilisateur_auteur, id_covoiturage),
+    FOREIGN KEY (id_utilisateur_cible) REFERENCES utilisateur(id_utilisateur),
+    FOREIGN KEY (id_utilisateur_auteur) REFERENCES utilisateur(id_utilisateur),
+    FOREIGN KEY (id_covoiturage) REFERENCES covoiturage(id_covoiturage)
+);
+
+-- Création de la table Avis NoSql
     CREATE TABLE avis(
     id_avis INT AUTO_INCREMENT PRIMARY KEY,
     id_covoiturage INT NOT NULL,
@@ -112,6 +128,17 @@ CREATE TABLE user_covoiturage (
     FOREIGN KEY (id_covoiturage) REFERENCES covoiturage (id_covoiturage),
     FOREIGN KEY (id_utilisateur) REFERENCES utilisateur (id_utilisateur)
 ) ENGINE=InnoDB;
+
+#collection NoSQl pour les avis
+{
+  "_id": ObjectId("..."),
+  "id_utilisateur_cible": 3,         // ID du conducteur noté
+  "id_utilisateur_auteur": 5,        // ID de l'utilisateur qui laisse l'avis
+  "id_covoiturage": 7,               // Pour faire le lien si besoin
+  "commentaire": "Conducteur très sympa, trajet agréable !",
+  "date_avis": "2025-05-24T17:34:00Z",
+  "valide": false                    // Par défaut à false → modéré par un employé
+}
 
 --Relations entre les tables :
 

@@ -3,7 +3,7 @@
 <section class="main-admin">
   <h1>Dashboard Administrateur</h1>
 
-  <a class="logout" href="logout.php">Déconnexion</a>
+  <a class="logout" href="<?= route("logout") ?>">Déconnexion</a>
 
   <section class="sections-stats">
     <section class="stats">
@@ -19,10 +19,11 @@
     </section>
   </section>
 
-  <section class=""></section>
   <section class="employee-management">
     <h2>Gestion des employés</h2>
-    <button id="create-employee">Créer un compte employé</button>
+    <div class="register-button">
+      <a href="<?= route('registerEmploye') ?>" class="regis-btn" id="btn-register">Créer un profil employés</a>
+    </div>
     <table>
       <thead>
         <tr>

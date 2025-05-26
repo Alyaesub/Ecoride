@@ -1,9 +1,10 @@
 <?php
 $title = 'Créer votre profile';
+
 ?>
 <section class="registerMain">
   <h1>Créer votre profil</h1>
-  <form class="registerForm" action="" method="post">
+  <form class="registerForm" action="<?= route('registerUser') ?>" method="post">
     <label>Pseudo :</label>
     <input type="text" name="pseudo" required><br>
 
@@ -19,15 +20,12 @@ $title = 'Créer votre profile';
     <label>Mot de passe :</label>
     <input type="password" name="mot_de_passe" required><br>
 
-    <div class="role-button">
-      <label>Vous êtes :</label>
-      <select name="id_role" required>
-        <option value="1">Chauffeur</option>
-        <option value="2">Passager</option>
-      </select><br>
-    </div>
-
-
     <button type="submit">Créer mon profil</button>
   </form>
+  <?php if (!empty($success)): ?>
+    <div class="alert message-success"><?= htmlspecialchars($success) ?></div>
+  <?php endif; ?>
+  <?php if (!empty($error)): ?>
+    <div class="message-error"><?= htmlspecialchars($error) ?></div>
+  <?php endif; ?>
 </section>

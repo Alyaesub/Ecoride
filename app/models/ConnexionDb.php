@@ -1,36 +1,39 @@
 <?php
-// Connexion à la base de données
+// Connexion à la base de données syntaxe a utiliser $pdo = ConnexionDb::getPdo();
 // Ce fichier est utilisé pour établir une connexion à la base de données
 namespace App\Models;
 
-use PDO; //importation de la classe PDO pour la connexion à la base de données   
+use PDO;
 
-//classe pour la connexion à la base de données utilisée dans les controllers et les models 
 class ConnexionDb
 {
+  private static ?PDO $pdo = null;
+
   public static function getPdo(): PDO
   {
-    // Inclure le fichier de configuration globale
-    require_once __DIR__ . '/../../config/config.php';
+    if (self::$pdo === null) {
+      $configPath = __DIR__ . '/../../config/env.ini';
 
-    // Vérifie que les informations de connexion existent dans la config
-    if (!isset($config['database'])) {
-      throw new \Exception("Configuration de la base de données manquante.");
+      if (!file_exists($configPath)) {
+        throw new \Exception("Configuration de la base de données manquante.");
+      }
+
+      $config = parse_ini_file($configPath, true);
+
+      if (!isset($config['database'])) {
+        throw new \Exception("Section [database] introuvable dans env.ini");
+      }
+
+      $db = $config['database'];
+
+      $dsn = "mysql:host={$db['DB_HOST']};port={$db['DB_PORT']};dbname={$db['DB_NAME']};charset=utf8mb4";
+
+      self::$pdo = new PDO($dsn, $db['DB_USER'], $db['DB_PASS'], [
+        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+      ]);
     }
 
-    // Récupère les paramètres depuis le tableau de configuration
-    $host = $config['database']['DB_HOST'] ?? '127.0.0.1'; //les valeur apres la conditions ?? seront en enlever en mise en prod
-    $port = $config['database']['DB_PORT'] ?? '8889'; //les valeur apres la conditions ?? seront en enlever en mise en prod
-    $dbname = $config['database']['DB_NAME'] ?? 'ecoride'; //les valeur apres la conditions ?? seront en enlever en mise en prod
-    $user = $config['database']['DB_USER'] ?? 'root'; //les valeur apres la conditions ?? seront en enlever en mise en prod
-    $pass = $config['database']['DB_PASS'] ?? 'root'; //les valeur apres la conditions ?? seront en enlever en mise en prod
-
-    // Chaîne DSN pour PDO
-    $dsn = "mysql:host=$host;port=$port;dbname=$dbname;charset=utf8";
-
-    // Crée et retourne l'objet PDO
-    return new PDO($dsn, $user, $pass, [
-      PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
-    ]);
+    return self::$pdo;
   }
 }

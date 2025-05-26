@@ -1,5 +1,4 @@
 <!-- page de la vue de la page d'accueil -->
-<p>site en construction</p>
 <?php
 $title = 'Accueil';
 ?>
@@ -50,6 +49,7 @@ $title = 'Accueil';
     <p>par e-mail : www.ecoride.com</p>
     <p>par téléphone : 01 23 45 67 89</p>
     <p>adresse : 123 Rue de l'Écologie, 75000 Paris, France</p>
+    <a class="cgv" href="<?= route('mentions') ?>">Mentions légales & CGV</a>
   </section>
   <section class="social-media-mobile caroussel-item">
     <h3>Suivez-nous sur les réseaux sociaux</h3>
@@ -58,5 +58,23 @@ $title = 'Accueil';
     <a href="https://www.instagram.com/EcoRide" target="_blank">Instagram</a>
     <a href="https://www.linkedin.com/company/EcoRide" target="_blank">LinkedIn</a>
   </section>
-  <script src="/js/searchBar.js"></script>
 </section>
+<section id="popular-covoits">
+  <?php require "../Ecoride/app/Controllers/DataTestController.php" ?>
+  <h2>🚗 Covoiturages les plus populaires</h2>
+  <div class="popular-covoits-container">
+    <?php foreach ($covoiturage as $covoit) : ?>
+      <div class="covoit-card">
+        <p><strong>Départ :</strong> <?= htmlspecialchars($covoit['adresse_depart']) ?></p>
+        <p><strong>Arrivée :</strong> <?= htmlspecialchars($covoit['adresse_arrivee']) ?></p>
+        <p><strong>Date :</strong> <?= date('d/m/Y H:i', strtotime($covoit['date_depart'])) ?></p>
+        <p><strong>Prix :</strong> <?= $covoit['prix_personne'] ?> crédits</p>
+        <a class="btn-details" href="/detail-covoiturage.php?id=<?= $covoit['id_covoiturage'] ?>">Voir le détail</a>
+      </div>
+    <?php endforeach; ?>
+  </div>
+  <div class="popular-covoits-actions">
+    <a class="btn-voir-plus" href="/covoiturages-populaires.php">Voir plus de covoiturages</a>
+  </div>
+</section>
+<script src="/js/searchBar.js"></script>

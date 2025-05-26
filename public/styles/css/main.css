@@ -6,7 +6,7 @@
     height: 100%;
   }
   body {
-    height: 100vh;
+    height: 100%;
     min-height: 100%;
     background-color: #4caeae;
   }
@@ -200,6 +200,17 @@
   margin: 5px 0;
   font-size: 0.9rem;
   font-family: "Readex Pro", sans-serif;
+}
+
+.cgv {
+  margin: 5px 0;
+  font-size: 0.9rem;
+  font-family: "Readex Pro", sans-serif;
+  text-decoration: none;
+  color: #F0EAD6;
+}
+.cgv:hover {
+  color: #fefdfb;
 }
 
 @media (max-width: 768px) {
@@ -494,7 +505,7 @@
     width: 90%;
     max-width: 300px;
     height: auto;
-    background-color: #4CAF50;
+    background: radial-gradient(circle at center, #F0EAD6 0%, #6ebfbf 40%, #4CAF50 100%);
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
     transition: all 0.3s ease-in-out;
@@ -526,7 +537,7 @@
     width: 90%;
     max-width: 300px;
     height: auto;
-    background-color: #4CAF50;
+    background: radial-gradient(circle at center, #F0EAD6 0%, #6ebfbf 40%, #4CAF50 100%);
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
     transition: all 0.3s ease-in-out;
@@ -557,7 +568,7 @@
     width: 90%;
     max-width: 300px;
     height: auto;
-    background-color: #4CAF50;
+    background: radial-gradient(circle at center, #F0EAD6 0%, #6ebfbf 40%, #4CAF50 100%);
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
     transition: all 0.3s ease-in-out;
@@ -680,7 +691,7 @@
     width: 100%;
     max-width: 400px;
     height: auto;
-    background-color: #4CAF50;
+    background: radial-gradient(circle at center, #F0EAD6 0%, #6ebfbf 40%, #4CAF50 100%);
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
     transition: all 0.3s ease-in-out;
@@ -948,6 +959,40 @@
     color: #666;
     font-family: "Readex Pro", sans-serif;
   }
+  .covoit-passe-block {
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+  }
+  .covoit-passe-block .infos-trajet {
+    margin-bottom: 1rem;
+  }
+  .covoit-passe-block .infos-trajet p {
+    margin: 0.25rem 0;
+  }
+  .covoit-passe-block .note-existante {
+    font-weight: bold;
+    color: green;
+    margin-top: 1rem;
+  }
+  .covoit-passe-block .envoyer-avis {
+    margin-top: 1rem;
+  }
+  .covoit-passe-block .envoyer-avis h3 {
+    margin-bottom: 0.5rem;
+  }
+  .covoit-passe-block .envoyer-avis .form-note .form-group {
+    margin-bottom: 1rem;
+  }
+  .covoit-passe-block .envoyer-avis .form-note textarea {
+    resize: vertical;
+    min-height: 80px;
+  }
+  .covoit-passe-block .envoyer-avis .form-note button {
+    margin-top: 0.5rem;
+  }
 }
 @media (min-width: 768px) {
   .activite-section {
@@ -974,6 +1019,40 @@
     color: #666;
     font-family: "Readex Pro", sans-serif;
   }
+  .covoit-passe-block {
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+  }
+  .covoit-passe-block .infos-trajet {
+    margin-bottom: 1rem;
+  }
+  .covoit-passe-block .infos-trajet p {
+    margin: 0.25rem 0;
+  }
+  .covoit-passe-block .note-existante {
+    font-weight: bold;
+    color: green;
+    margin-top: 1rem;
+  }
+  .covoit-passe-block .envoyer-avis {
+    margin-top: 1rem;
+  }
+  .covoit-passe-block .envoyer-avis h3 {
+    margin-bottom: 0.5rem;
+  }
+  .covoit-passe-block .envoyer-avis .form-note .form-group {
+    margin-bottom: 1rem;
+  }
+  .covoit-passe-block .envoyer-avis .form-note textarea {
+    resize: vertical;
+    min-height: 80px;
+  }
+  .covoit-passe-block .envoyer-avis .form-note button {
+    margin-top: 0.5rem;
+  }
 }
 @media (max-width: 768px) {
   .dashboard-container {
@@ -993,6 +1072,40 @@
     color: #fff;
     text-align: center;
     font-family: "DM Sans", sans-serif;
+  }
+  .profil-actions {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+  .profil-actions .logout-button {
+    background-color: #388E3C;
+    border: none;
+    padding: 0.6rem 1.2rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  .profil-actions .logout-button .logout-link {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+  }
+  .profil-actions .logout-button:hover {
+    background-color: #4c95ae;
+  }
+  .profil-actions .admin-return-link {
+    align-self: center;
+    background-color: #388E3C;
+    color: white;
+    padding: 0.6rem 1.2rem;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s;
+  }
+  .profil-actions .admin-return-link:hover {
+    background-color: #4c95ae;
   }
   .tabs {
     display: flex;
@@ -1141,6 +1254,40 @@
     color: #fff;
     text-align: center;
     font-family: "DM Sans", sans-serif;
+  }
+  .profil-actions {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+  .profil-actions .logout-button {
+    background-color: #388E3C;
+    border: none;
+    padding: 0.6rem 1.2rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  .profil-actions .logout-button .logout-link {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+  }
+  .profil-actions .logout-button:hover {
+    background-color: #4c95ae;
+  }
+  .profil-actions .admin-return-link {
+    align-self: center;
+    background-color: #388E3C;
+    color: white;
+    padding: 0.6rem 1.2rem;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s;
+  }
+  .profil-actions .admin-return-link:hover {
+    background-color: #4c95ae;
   }
   .tabs {
     display: flex;
@@ -1342,7 +1489,7 @@
     flex-wrap: wrap;
   }
   .registerForm {
-    width: 60%;
+    width: "";
   }
   .role-button {
     display: flex;
@@ -1352,6 +1499,24 @@
   }
   .role-button select {
     margin-top: 10px;
+  }
+  .message-success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 15px;
+    font-weight: bold;
+  }
+  .message-error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 15px;
+    font-weight: bold;
   }
 }
 @media (min-width: 768px) {
@@ -1359,10 +1524,11 @@
     display: flex;
     flex-direction: column;
     align-content: center;
+    align-content: center;
     flex-wrap: wrap;
   }
   .registerForm {
-    width: 60%;
+    width: "";
   }
   .role-button {
     display: flex;
@@ -1372,6 +1538,24 @@
   }
   .role-button select {
     margin-top: 10px;
+  }
+  .message-success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 15px;
+    font-weight: bold;
+  }
+  .message-error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 15px;
+    font-weight: bold;
   }
 }
 @media (max-width: 768px) {
@@ -1401,6 +1585,26 @@
   }
   .logout:hover {
     background-color: #c0392b;
+  }
+  .register-button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .register-button a {
+    padding: 5px 10px;
+    background-color: #3498db;
+    color: #F0EAD6;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: large;
+    font-family: "inter", sans-serif;
+    cursor: pointer;
+    margin-bottom: 1.5rem;
+    transition: background-color 0.3s;
+  }
+  .register-button a:hover {
+    background-color: #2980b9;
   }
   .sections-stats,
   .employee-management,
@@ -1486,12 +1690,6 @@
   .suspend-btn:hover {
     background-color: #d35400;
   }
-  button#create-employee {
-    background-color: #3498db;
-  }
-  button#create-employee:hover {
-    background-color: #2980b9;
-  }
 }
 @media (min-width: 768px) {
   .main-admin {
@@ -1517,6 +1715,26 @@
   }
   .logout:hover {
     background-color: #c0392b;
+  }
+  .register-button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .register-button a {
+    padding: 5px 10px;
+    background-color: #3498db;
+    color: #F0EAD6;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: large;
+    font-family: "inter", sans-serif;
+    cursor: pointer;
+    margin-bottom: 1.5rem;
+    transition: background-color 0.3s;
+  }
+  .register-button a:hover {
+    background-color: #2980b9;
   }
   .sections-stats {
     background-color: #F0EAD6;
@@ -1615,19 +1833,6 @@
   }
   table .suspend-btn:hover {
     background-color: #d35400;
-  }
-  button#create-employee {
-    background-color: #3498db;
-    color: #fff;
-    padding: 0.7rem 1.2rem;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    margin-bottom: 1.5rem;
-    transition: background-color 0.3s;
-  }
-  button#create-employee:hover {
-    background-color: #2980b9;
   }
 }
 @media (max-width: 768px) {
@@ -1799,4 +2004,211 @@ table tbody tr:nth-child(even) {
 }
 table tbody tr td {
   padding: 1rem;
+}
+
+@media (max-width: 768px) {
+  #popular-covoits {
+    margin: 3rem 1.5rem;
+    padding: 2rem 1.5rem;
+    box-sizing: border-box;
+    max-width: 1200px;
+    background-color: #F0EAD6;
+    border-top: 2px solid #F0EAD6;
+    border-radius: 12px;
+  }
+  #popular-covoits h2 {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    color: #2d7f5e;
+    font-family: "DM Sans", sans-serif;
+  }
+  #popular-covoits .popular-covoits-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    justify-content: center;
+  }
+  #popular-covoits .covoit-card {
+    background: white;
+    border: 1px solid #d3e5e0;
+    padding: 1rem 1.2rem;
+    border-radius: 10px;
+    width: 260px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s ease;
+  }
+  #popular-covoits .covoit-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.1);
+  }
+  #popular-covoits .covoit-card p {
+    margin: 0.4rem 0;
+    font-size: 0.95rem;
+    color: #333;
+    font-family: "Readex Pro", sans-serif;
+  }
+  #popular-covoits .covoit-card p strong {
+    color: #2d7f5e;
+    font-family: "Readex Pro", sans-serif;
+  }
+  #popular-covoits .covoit-card .btn-details {
+    display: inline-block;
+    margin-top: 0.8rem;
+    padding: 0.4rem 0.9rem;
+    background-color: #2d7f5e;
+    color: white;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.9rem;
+    font-family: "Poppins", sans-serif;
+  }
+  #popular-covoits .covoit-card .btn-details:hover {
+    background-color: #256c50;
+  }
+  #popular-covoits .popular-covoits-actions {
+    margin-top: 2rem;
+    text-align: center;
+  }
+  #popular-covoits .popular-covoits-actions .btn-voir-plus {
+    padding: 0.7rem 1.5rem;
+    background-color: #388E3C;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-family: "Poppins", sans-serif;
+  }
+  #popular-covoits .popular-covoits-actions .btn-voir-plus:hover {
+    background-color: #4c95ae;
+  }
+}
+@media (min-width: 768px) {
+  #popular-covoits {
+    margin: 3rem 2rem;
+    padding: 2rem 1.5rem;
+    background-color: #F0EAD6;
+    border-top: 2px solid #F0EAD6;
+    border-radius: 12px;
+  }
+  #popular-covoits h2 {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    color: #2d7f5e;
+    font-family: "DM Sans", sans-serif;
+  }
+  #popular-covoits .popular-covoits-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    justify-content: center;
+  }
+  #popular-covoits .covoit-card {
+    background: white;
+    border: 1px solid #d3e5e0;
+    padding: 1rem 1.2rem;
+    border-radius: 10px;
+    width: 260px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s ease;
+  }
+  #popular-covoits .covoit-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.1);
+  }
+  #popular-covoits .covoit-card p {
+    margin: 0.4rem 0;
+    font-size: 0.95rem;
+    color: #333;
+    font-family: "Readex Pro", sans-serif;
+  }
+  #popular-covoits .covoit-card p strong {
+    color: #2d7f5e;
+    font-family: "Readex Pro", sans-serif;
+  }
+  #popular-covoits .covoit-card .btn-details {
+    display: inline-block;
+    margin-top: 0.8rem;
+    padding: 0.4rem 0.9rem;
+    background-color: #2d7f5e;
+    color: white;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.9rem;
+    font-family: "Poppins", sans-serif;
+  }
+  #popular-covoits .covoit-card .btn-details:hover {
+    background-color: #256c50;
+  }
+  #popular-covoits .popular-covoits-actions {
+    margin-top: 2rem;
+    text-align: center;
+  }
+  #popular-covoits .popular-covoits-actions .btn-voir-plus {
+    padding: 0.7rem 1.5rem;
+    background-color: #388E3C;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-family: "Poppins", sans-serif;
+  }
+  #popular-covoits .popular-covoits-actions .btn-voir-plus:hover {
+    background-color: #4c95ae;
+  }
+}
+.mentions {
+  max-width: 900px;
+  margin: 3rem auto;
+  padding: 2rem;
+  font-family: "Segoe UI", sans-serif;
+  font-size: 1.1rem;
+  line-height: 1.7;
+  background-color: #f9f9f9;
+  color: #333;
+}
+.mentions h1 {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  color: #005ecb;
+}
+
+.section-mentions {
+  margin-bottom: 2.5rem;
+  background-color: #ffffff;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+.section-mentions h2 {
+  font-size: 1.4rem;
+  margin-bottom: 1rem;
+  color: #2c3e50;
+}
+.section-mentions p, .section-mentions li {
+  margin-bottom: 0.75rem;
+}
+.section-mentions ul {
+  list-style: disc;
+  padding-left: 1.5rem;
+}
+.section-mentions a {
+  color: #0077cc;
+  text-decoration: underline;
+}
+.section-mentions a:hover {
+  text-decoration: none;
+}
+
+.footer-mentions {
+  text-align: center;
+  font-size: 0.9rem;
+  margin-top: 3rem;
+  color: #777;
 }/*# sourceMappingURL=main.css.map */
