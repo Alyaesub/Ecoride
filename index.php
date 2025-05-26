@@ -14,8 +14,9 @@ use App\Controllers\HomeController; //pour appeler le controller de la page d'ac
 use App\Controllers\LogoutController; //appelle le logout
 use App\Controllers\UserController; //applle le user controller
 use App\Controllers\SearchCitiesController; //appelle le controller de la searchbar
-use App\Controllers\ParametreController;
+use App\Controllers\ActiviteController;
 use App\Controllers\VehiculeController;
+use App\Controllers\CovoiturageController;
 
 
 // Init Whoops
@@ -53,6 +54,10 @@ switch ($page) {
       'title' => 'Connexion'
     ]);
     break;
+  case 'search-cities':
+    $controller = new SearchCitiesController();
+    $controller->index();
+    break;
   case 'login-user':
     $controller = new UserController;
     $controller->login();
@@ -85,32 +90,31 @@ switch ($page) {
     $controller = new VehiculeController;
     $controller->delete();
     break;
-  case 'parametres':
-    $controller = new ParametreController();
-    $controller->gererParametres();
-    break;
-  case 'registerEmploye':
-    $controller = new UserController;
-    $controller->registerEmploye();
-    break;
   case 'activites':
-    render(__DIR__ . '/app/views/pages/activites.php', [
-      'title' => 'Historique de vos activités'
-    ]);
+    $controller = new ActiviteController;
+    $controller->showActivites();
+    break;
+  case 'ajouterCovoiturage':
+    $controller = new CovoiturageController;
+    $controller->create();
+    break;
+  case 'activites-notes':
+    $controller = new ActiviteController;
+    $controller->ajouterNote();
     break;
   case 'dashboardAdmin':
     render(__DIR__ . '/app/views/pages/administration/dashboardAdmin.php', [
       'title' => 'Dashboard Administration'
     ]);
     break;
+  case 'registerEmploye':
+    $controller = new UserController;
+    $controller->registerEmploye();
+    break;
   case 'dashboardEmploye':
     render(__DIR__ . '/app/views/pages/administration/dashboardEmploye.php', [
       'title' => 'Dashboard Employer'
     ]);
-    break;
-  case 'search-cities':
-    $controller = new SearchCitiesController();
-    $controller->index();
     break;
   default:
     render(__DIR__ . '/app/views/pages/404.php', [

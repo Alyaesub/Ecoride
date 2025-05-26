@@ -3,7 +3,7 @@
 <section class="main-admin">
   <h1>Dashboard Administrateur</h1>
 
-  <a class="logout" href="logout.php">Déconnexion</a>
+  <a class="logout" href="<?= route("logout") ?>">Déconnexion</a>
 
   <section class="sections-stats">
     <section class="stats">

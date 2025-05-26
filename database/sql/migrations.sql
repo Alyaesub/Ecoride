@@ -51,3 +51,56 @@ CREATE TABLE vehicule (
     CONSTRAINT fk_voiture_marque
     FOREIGN KEY (id_marque) REFERENCES marque(id_marque)
 ) ENGINE=InnoDB
+
+#6 ajout de la table covoiturage
+CREATE TABLE covoiturage (
+    id_covoiturage INT AUTO_INCREMENT PRIMARY KEY,
+    id_utilisateur INT NOT NULL,
+    id_vehicule INT NOT NULL,
+    adresse_depart VARCHAR (255) NOT NULL,
+    adresse_arrivee VARCHAR (255) NOT NULL,
+    date_depart DATETIME NOT NULL,
+    date_arrivee DATETIME NOT NULL,
+    prix_personne DECIMAL (10, 2) NOT NULL,
+    places_disponibles INT NOT NULL,
+    est_ecologique BOOLEAN DEFAULT FALSE,
+    animaux_autorises BOOLEAN DEFAULT FALSE,
+    fumeur BOOLEAN DEFAULT FALSE,
+    est_annule BOOLEAN DEFAULT FALSE,
+    FOREIGN KEY (id_utilisateur) REFERENCES utilisateur (id_utilisateur),
+    FOREIGN KEY (id_vehicule) REFERENCES vehicule(id_vehicule),
+    CONSTRAINT chk_places CHECK (places_disponibles >= 0),
+    CONSTRAINT chk_prix CHECK (prix_personne >= 0)
+) ENGINE=InnoDB;
+
+#7 ajout de la table user_covoiturage
+CREATE TABLE user_covoiturage (
+    id_utilisateur INT NOT NULL,
+    id_covoiturage INT NOT NULL,
+    role_utilisateur ENUM('conducteur', 'passager') NOT NULL,
+    PRIMARY KEY (id_utilisateur, id_covoiturage),
+    CONSTRAINT fk_uc_utilisateur
+    FOREIGN KEY (id_utilisateur)
+    REFERENCES utilisateur(id_utilisateur)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+    CONSTRAINT fk_uc_covoiturage
+    FOREIGN KEY (id_covoiturage)
+    REFERENCES covoiturage(id_covoiturage)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE
+) ENGINE=InnoDB;
+
+#8 ajout de la table notation
+CREATE TABLE notation (
+    id_notation INT AUTO_INCREMENT PRIMARY KEY,
+    id_utilisateur_cible INT NOT NULL,
+    id_utilisateur_auteur INT NOT NULL,
+    id_covoiturage INT NOT NULL,
+    note TINYINT NOT NULL CHECK (note BETWEEN 1 AND 5),
+    date_notation DATETIME DEFAULT CURRENT_TIMESTAMP,
+    UNIQUE(id_utilisateur_auteur, id_covoiturage),
+    FOREIGN KEY (id_utilisateur_cible) REFERENCES utilisateur(id_utilisateur),
+    FOREIGN KEY (id_utilisateur_auteur) REFERENCES utilisateur(id_utilisateur),
+    FOREIGN KEY (id_covoiturage) REFERENCES covoiturage(id_covoiturage)
+);ENGINE=InnoDB;

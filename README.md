@@ -38,7 +38,7 @@
 ## 🛠️ Technologies
 
 -   **Front-end** : HTML5, SCSS, JavaScript (ES6+)
--   **Back-end** : PHP 8, MySQL
+-   **Back-end** : PHP 8, MySQL, Mongodb
 -   **Outils** : Node.js, npm, Composer
 -   **Déploiement** : O2Switch
 

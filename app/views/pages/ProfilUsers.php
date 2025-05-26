@@ -5,7 +5,7 @@ $title = 'Mon profil';
   <h1>Bienvenue, <?= htmlspecialchars($user['pseudo']) ?> !</h1>
   <div class="profil-actions">
     <button class="logout-button">
-      <a href="?page=logout" class="logout-link">Se déconnecter</a>
+      <a href="<?= route("logout") ?>" class="logout-link">Se déconnecter</a>
     </button>
     <?php if (isset($_SESSION['user'])): ?>
       <?php if ($_SESSION['user']['role'] === 1): ?>
@@ -18,7 +18,6 @@ $title = 'Mon profil';
   <!-- Navigation par onglets -->
   <div class="tabs">
     <button class="tab-link active" data-tab="info">Info Utilisateur</button>
-    <button class="tab-link" data-tab="parametres">Paramètres</button>
     <button class="tab-link" data-tab="vehicule">Véhicule</button>
     <button class="tab-link" data-tab="covoiturage">Covoiturage</button>
     <button class="tab-link" data-tab="gestionCovoiturage">Gérer Covoiturages</button>
@@ -32,12 +31,12 @@ $title = 'Mon profil';
         <!-- Affichage des informations personnelles enregistrées -->
         <h2>Vos données enregistrées :</h2>
         <div class="photo-profil">
-          <img class="pp" src="/public/<?= htmlspecialchars($user['photo']) ?>" alt="photo de profil">
+          <img class="pp" src="/public/<?= htmlspecialchars($user['photo'] ?? '') ?>" alt="photo de profil">
         </div>
         <ul>
           <li><strong>Pseudo :</strong><?= htmlspecialchars($user['pseudo']) ?></li>
           <li><strong>Nom :</strong><?= htmlspecialchars($user['nom']) ?></li>
-          <li><strong>Prénom :</strong><?= htmlspecialchars($user['prenom'] ?? '') ?></li>
+          <li><strong>Prénom :</strong><?= htmlspecialchars($user['prenom']) ?></li>
           <li><strong>Email :</strong> <?= htmlspecialchars($user['email']) ?></li>
           <li><strong>Mot de passe :</strong>*******</li>
           <li><strong>Vos crédits :</strong><?= htmlspecialchars($user['credits']) ?></li>
@@ -75,37 +74,6 @@ $title = 'Mon profil';
       <?php if (!empty($_SESSION['error'])) : ?>
         <div class="message-error"><?= htmlspecialchars($_SESSION['error']) ?></div>
         <?php unset($_SESSION['error']); ?>
-      <?php endif; ?>
-    </div>
-  </div>
-
-  <!-- contenue de l'onglet Paramètres -->
-  <div id="parametres" class="tab-content">
-    <div class="section">
-      <div id="displayParametres" class="display-box">
-        <!-- Affichage des paramètres enregistrés -->
-        <h2>Vos paramètres</h2>
-        <ul>
-          <li><strong>Langue :</strong> <?= htmlspecialchars($langue) ?></li>
-          <li><strong>Notifications :</strong> <?= htmlspecialchars($notifications) ?></li>
-        </ul>
-      </div>
-      <h2>Modifier vos parametres</h2>
-      <form id="formParametres" action="<?= route("parametres") ?>" method="post">
-        <label for="langue">Langue :</label>
-        <select id="langue" name="langue">
-          <option value="fr">Français</option>
-          <option value="en">Anglais</option>
-          <option value="es">Espagnol</option>
-        </select>
-
-        <label for="notifications">Notifications :</label>
-        <input type="checkbox" id="notifications" name="notifications">
-
-        <button type="submit">Enregistrer les modifications</button>
-      </form>
-      <?php if (!empty($success)) : ?>
-        <div class="success-message"><?= htmlspecialchars($success) ?></div>
       <?php endif; ?>
     </div>
   </div>
@@ -167,9 +135,7 @@ $title = 'Mon profil';
   <div id="covoiturage" class="tab-content">
     <div class="section">
       <h2>Covoiturage</h2>
-      <form id="formCovoiturage" action="#" method="post">
-        <input type="hidden" name="id_utilisateur" value="<!-- insérer l'id de l'utilisateur -->">
-        <input type="hidden" name="id_vehicule" value="<!-- insérer l'id du véhicule -->">
+      <form id="formCovoiturage" action="<?= route("ajouterCovoiturage") ?>" method="post">
 
         <label for="adresse_depart">Adresse de départ :</label>
         <input type="text" id="adresse_depart" name="adresse_depart" required>
@@ -205,9 +171,17 @@ $title = 'Mon profil';
             <option value="passager">Passager</option>
           </select><br>
         </div>
-
         <button type="submit">Enregistrer le covoiturage</button>
       </form>
+      <?php if (!empty($_SESSION['success'])) : ?>
+        <div class="message-success"><?= htmlspecialchars($_SESSION['success']) ?></div>
+        <?php unset($_SESSION['success']); ?>
+      <?php endif; ?>
+
+      <?php if (!empty($_SESSION['error'])) : ?>
+        <div class="message-error"><?= htmlspecialchars($_SESSION['error']) ?></div>
+        <?php unset($_SESSION['error']); ?>
+      <?php endif; ?>
     </div>
   </div>
 
@@ -277,27 +251,7 @@ $title = 'Mon profil';
   <div id="avis" class="tab-content">
     <div class="section">
       <h2>Avis</h2>
-      <section class="envoyer-avis">
-        <h2>Laisser nous votre avis sur vos experiences</h2>
-        <form method="POST" action="">
-          <div class="form-group">
-            <label for="note">Note (1 à 5) :</label>
-            <select name="note" id="note" class="form-control" required>
-              <option value="">-- Choisissez une note --</option>
-              <option value="1">1 - Mauvais</option>
-              <option value="2">2</option>
-              <option value="3">3 - Moyen</option>
-              <option value="4">4</option>
-              <option value="5">5 - Excellent</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="commentaire">Commentaire :</label>
-            <textarea name="commentaire" id="commentaire" class="form-control" placeholder="Votre avis en quelques mots..." required></textarea>
-          </div>
-          <button type="submit" class="btn btn-success">Envoyer l'avis</button>
-        </form>
-      </section>
+      <h2>Votres notes : ★★★★★</h2>
       <h2>Vos avies envoyés</h2>
       <p><em>Les avis envoyés apparaîtront ici.</em></p>
       <?php /*
@@ -323,9 +277,34 @@ $title = 'Mon profil';
       </ul>
       */ ?>
     </div>
+    <h2>Vos avies reçus</h2>
+    <p><em>Les avis envoyés apparaîtront ici.</em></p>
+    <?php /*
+      <ul id="listeAvis">
+        <?php
+        $fichier = '../data/avis.json';
+        if (file_exists($fichier)) {
+          $avisListe = json_decode(file_get_contents($fichier), true);
+          foreach ($avisListe as $avis) {
+            if ($avis['idUser'] == $idUser) {
+              echo '<li>';
+              echo 'Vous avez mis une note de ';
+              echo '<strong>' . htmlspecialchars($avis['note']) . '/5</strong> ';
+              echo 'avec le commentaire : "' . htmlspecialchars($avis['commentaire']) . '"';
+              echo ' <small>(' . htmlspecialchars($avis['date']) . ')</small>';
+              echo '</li>';
+            }
+          }
+        } else {
+          echo '<li>Aucun avis pour le moment.</li>';
+        }
+        ?>
+      </ul>
+      */ ?>
   </div>
-  <!-- Inclusion des scripts JavaScript -->
-  <!-- script general pour le dashboard -->
-  <script src="/js/dashboard.js"></script>
-  <!-- Le script avis.js s'occupe de charger et d'afficher les avis depuis le fichier JSON -->
-  <script src="/js/avis.js"></script>
+</div>
+<!-- Inclusion des scripts JavaScript -->
+<!-- script general pour le dashboard -->
+<script src="/js/dashboard.js"></script>
+<!-- Le script avis.js s'occupe de charger et d'afficher les avis depuis le fichier JSON -->
+<script src="/js/avis.js"></script>
