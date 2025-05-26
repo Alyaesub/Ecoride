@@ -16,6 +16,7 @@ use App\Controllers\UserController; //applle le user controller
 use App\Controllers\SearchCitiesController; //appelle le controller de la searchbar
 use App\Controllers\ActiviteController;
 use App\Controllers\VehiculeController;
+use App\Controllers\CovoiturageController;
 
 
 // Init Whoops
@@ -53,6 +54,10 @@ switch ($page) {
       'title' => 'Connexion'
     ]);
     break;
+  case 'search-cities':
+    $controller = new SearchCitiesController();
+    $controller->index();
+    break;
   case 'login-user':
     $controller = new UserController;
     $controller->login();
@@ -85,14 +90,13 @@ switch ($page) {
     $controller = new VehiculeController;
     $controller->delete();
     break;
-
-  case 'registerEmploye':
-    $controller = new UserController;
-    $controller->registerEmploye();
-    break;
   case 'activites':
     $controller = new ActiviteController;
     $controller->showActivites();
+    break;
+  case 'ajouterCovoiturage':
+    $controller = new CovoiturageController;
+    $controller->create();
     break;
   case 'activites-notes':
     $controller = new ActiviteController;
@@ -103,14 +107,14 @@ switch ($page) {
       'title' => 'Dashboard Administration'
     ]);
     break;
+  case 'registerEmploye':
+    $controller = new UserController;
+    $controller->registerEmploye();
+    break;
   case 'dashboardEmploye':
     render(__DIR__ . '/app/views/pages/administration/dashboardEmploye.php', [
       'title' => 'Dashboard Employer'
     ]);
-    break;
-  case 'search-cities':
-    $controller = new SearchCitiesController();
-    $controller->index();
     break;
   default:
     render(__DIR__ . '/app/views/pages/404.php', [

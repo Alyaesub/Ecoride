@@ -135,9 +135,7 @@ $title = 'Mon profil';
   <div id="covoiturage" class="tab-content">
     <div class="section">
       <h2>Covoiturage</h2>
-      <form id="formCovoiturage" action="#" method="post">
-        <input type="hidden" name="id_utilisateur" value="<!-- insérer l'id de l'utilisateur -->">
-        <input type="hidden" name="id_vehicule" value="<!-- insérer l'id du véhicule -->">
+      <form id="formCovoiturage" action="<?= route("ajouterCovoiturage") ?>" method="post">
 
         <label for="adresse_depart">Adresse de départ :</label>
         <input type="text" id="adresse_depart" name="adresse_depart" required>
@@ -173,9 +171,17 @@ $title = 'Mon profil';
             <option value="passager">Passager</option>
           </select><br>
         </div>
-
         <button type="submit">Enregistrer le covoiturage</button>
       </form>
+      <?php if (!empty($_SESSION['success'])) : ?>
+        <div class="message-success"><?= htmlspecialchars($_SESSION['success']) ?></div>
+        <?php unset($_SESSION['success']); ?>
+      <?php endif; ?>
+
+      <?php if (!empty($_SESSION['error'])) : ?>
+        <div class="message-error"><?= htmlspecialchars($_SESSION['error']) ?></div>
+        <?php unset($_SESSION['error']); ?>
+      <?php endif; ?>
     </div>
   </div>
 
