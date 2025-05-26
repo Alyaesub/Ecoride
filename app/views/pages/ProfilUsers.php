@@ -31,12 +31,12 @@ $title = 'Mon profil';
         <!-- Affichage des informations personnelles enregistrées -->
         <h2>Vos données enregistrées :</h2>
         <div class="photo-profil">
-          <img class="pp" src="/public/<?= htmlspecialchars($user['photo']) ?>" alt="photo de profil">
+          <img class="pp" src="/public/<?= htmlspecialchars($user['photo'] ?? '') ?>" alt="photo de profil">
         </div>
         <ul>
           <li><strong>Pseudo :</strong><?= htmlspecialchars($user['pseudo']) ?></li>
           <li><strong>Nom :</strong><?= htmlspecialchars($user['nom']) ?></li>
-          <li><strong>Prénom :</strong><?= htmlspecialchars($user['prenom'] ?? '') ?></li>
+          <li><strong>Prénom :</strong><?= htmlspecialchars($user['prenom']) ?></li>
           <li><strong>Email :</strong> <?= htmlspecialchars($user['email']) ?></li>
           <li><strong>Mot de passe :</strong>*******</li>
           <li><strong>Vos crédits :</strong><?= htmlspecialchars($user['credits']) ?></li>
