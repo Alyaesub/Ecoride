@@ -188,62 +188,24 @@ $title = 'Mon profil';
   <!-- contenu de l'onglet Gérer Covoiturages -->
   <div id="gestionCovoiturage" class="tab-content">
     <div class="section">
-      <h2>Mes Covoiturages Enregistrés</h2>
-      <p><em>Les covoiturages enregistrés et annulés apparaîtront ici.</em></p>
-      <?php /*
-      <table class="tableCovoiturages" id="tableCovoiturages">
-        <thead>
-          <tr>
-            <th>Numéro du covoiturage</th>
-            <th>Adresse départ</th>
-            <th>Adresse arrivée</th>
-            <th>Date départ</th>
-            <th>Prix unitaire</th>
-            <th>Places</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><?= htmlspecialchars($covoiturage['id_covoiturage']) ?></td>
-            <td><?= htmlspecialchars($covoiturage['adresse_depart']) ?></td>
-            <td><?= htmlspecialchars($covoiturage['adresse_arrivee']) ?></td>
-            <td><?= htmlspecialchars($covoiturage['date_depart']) ?></td>
-            <td><?= htmlspecialchars($covoiturage['prix_personne']) ?></td>
-            <td><?= htmlspecialchars($covoiturage['places_disponibles']) ?></td>
-            <!-- D'autres lignes ici -->
-            <td><button class="cancel-covoiturage" data-id="<?= $covoiturage['id_covoiturage'] ?>">Annuler</button>td>
-          </tr>
-        </tbody>
-      </table>
-      <h2>Mes covoiturages annulés :</h2>
-      <div id="displayGestionCovoiturage" class="display-box">
-        <table class="tableCovoiturages" id="tableCovoiturages">
-          <tbody>
-            <thead>
-              <tr>
-                <th>Numéro du covoiturage</th>
-                <th>Adresse départ</th>
-                <th>Adresse arrivée</th>
-                <th>Date départ</th>
-                <th>Prix unitaire</th>
-                <th>Places</th>
-              </tr>
-            </thead>
-          <tbody>
-            <tr>
-              <td><?= htmlspecialchars($covoiturageAnnule['id_covoiturage']) ?></td>
-              <td><?= htmlspecialchars($covoiturageAnnule['adresse_depart']) ?></td>
-              <td><?= htmlspecialchars($covoiturageAnnule['adresse_arrivee']) ?></td>
-              <td><?= htmlspecialchars($covoiturageAnnule['date_depart']) ?></td>
-              <td><?= htmlspecialchars($covoiturageAnnule['prix_personne']) ?></td>
-              <td><?= htmlspecialchars($covoiturageAnnule['places']) ?></td>
-            </tr>
-          </tbody>
-        </table>
-        </tbody>
+      <div id="displayCovoit" class="display-box">
+        <h2>Mes Covoiturages Enregistrés</h2>
+        <?php if (!empty($covoiturages)) : ?>
+          <?php foreach ($covoiturages as $covoiturage) : ?>
+            <ul>
+              <li><strong>ID :</strong><?= htmlspecialchars($covoiturage['id_covoiturage']) ?></li>
+              <li><strong>Rôle :</strong><?= htmlspecialchars($covoiturage['role_utilisateur']) ?></li>
+              <li><strong>Départ :</strong><?= htmlspecialchars($covoiturage['adresse_depart']) ?></li>
+              <li><strong>Arrivée :</strong><?= htmlspecialchars($covoiturage['adresse_arrivee']) ?></li>
+              <li><strong>Date :</strong><?= date('d/m/Y H:i', strtotime($covoiturage['date_depart'])) ?></li>
+              <li><strong>Détails :</strong> <a class="btn-details" href="">🔍 Voir détails</a></li>
+              <li><strong>Actions :</strong><?= "" ?></li>
+            </ul>
+          <?php endforeach; ?>
+        <?php else : ?>
+          <p>Aucun covoiturage enregistré pour le moment.</p>
+        <?php endif; ?>
       </div>
-      */ ?>
     </div>
   </div>
 

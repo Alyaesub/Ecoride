@@ -139,6 +139,19 @@
     margin-top: 15px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 
+      a {
+                margin: 0 10px;
+                text-decoration: none;
+                color: $text-color;
+                font-weight: bold;
+                transition: color 0.3s ease;
+                font-family: $font-link;
+                &:hover {
+            // Pour l'effet hover, vous pouvez ajuster la luminosité ou utiliser une autre couleur
+                    color: lighten($secondary-color, 10%);
+                }
+            }
+
     h2 {
       color: $text-color;
       font-family: $font-title;
@@ -314,6 +327,7 @@
   .section {
     margin-bottom: 20px;
     font-family:$font-secondary;
+
   
     label {
       display: block;
@@ -380,7 +394,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-  
+
       strong {
         color: $text-color-dark;
         font-family: $font-secondary;
@@ -395,5 +409,6 @@
     padding: 15px;
     margin-top: 15px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    
   }
 }
