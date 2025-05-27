@@ -75,4 +75,32 @@ class Covoiturage
 
     return $vehicule ? $vehicule['id_vehicule'] : null;
   }
+
+  /**
+   * fonction qui recuépre les covoit pour chauqe user et son role 
+   */
+  public function getCovoitAndRoleByUser(int $id_utilisateur): array
+  {
+    $stmt = $this->pdo->prepare("SELECT c.*, uc.role_utilisateur
+    FROM covoiturage c
+    JOIN user_covoiturage uc ON c.id_covoiturage = uc.id_covoiturage
+    WHERE uc.id_utilisateur = :id AND c.est_annule = 0
+    ORDER BY c.date_depart DESC");
+    $stmt->execute(['id' => $id_utilisateur]);
+    return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+  }
+
+  /**
+   * function qui supprime le covoit en bdd
+   */
+  public function supprimeCovoit(int $id): void
+  {
+    // Supprime d’abord les liens dans user_covoiturage (clé étrangère)
+    $this->pdo->prepare("DELETE FROM user_covoiturage WHERE id_covoiturage = :id")
+      ->execute(['id' => $id]);
+
+    // Supprime ensuite le covoiturage
+    $this->pdo->prepare("DELETE FROM covoiturage WHERE id_covoiturage = :id")
+      ->execute(['id' => $id]);
+  }
 }

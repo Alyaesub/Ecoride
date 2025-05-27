@@ -6,6 +6,9 @@ use App\Models\Covoiturage;
 
 class CovoiturageController
 {
+  /**
+   * fonction qui crée un covoiturage 
+   */
   public function create()
   {
 
@@ -49,5 +52,26 @@ class CovoiturageController
       header('Location: ' . route('profil'));
       exit;
     }
+  }
+
+  /**
+   * function qui supprime un covoit 
+   */
+  public function supprimeCovoit()
+  {
+    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id_covoiturage'])) {
+      $id = intval($_POST['id_covoiturage']);
+      $model = new Covoiturage();
+
+      try {
+        $model->supprimeCovoit($id);
+        $_SESSION['success'] = "Covoiturage supprimé avec succès.";
+      } catch (\Exception $e) {
+        $_SESSION['error'] = "Erreur lors de la suppression : " . $e->getMessage();
+      }
+    }
+
+    header('Location: ' . route('profil'));
+    exit;
   }
 }

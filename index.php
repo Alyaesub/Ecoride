@@ -98,6 +98,10 @@ switch ($page) {
     $controller = new CovoiturageController;
     $controller->create();
     break;
+  case 'supprimeCovoiturage':
+    $controller = new CovoiturageController;
+    $controller->supprimeCovoit();
+    break;
   case 'activites-notes':
     $controller = new ActiviteController;
     $controller->ajouterNote();

@@ -1174,6 +1174,17 @@
     margin-top: 15px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }
+  .display-box a {
+    margin: 0 10px;
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+    transition: color 0.3s ease;
+    font-family: "inter", sans-serif;
+  }
+  .display-box a:hover {
+    color: #fefdfb;
+  }
   .display-box h2 {
     color: #333;
     font-family: "DM Sans", sans-serif;
