@@ -26,10 +26,10 @@ searchInput.addEventListener("input", function () {
 				// Pour chaque ville reçue, crée un div affichant le nom de la ville A ADAPTER POUR LES BDD!!!!!!!!!!!
 				data.forEach((city) => {
 					const div = document.createElement("div");
-					div.textContent = city.name;
+					div.textContent = city.adresse_depart;
 					div.classList.add("result-item");
 					div.addEventListener("click", () => {
-						searchInput.value = city.name; // Remplit l'input avec la ville cliquée
+						searchInput.value = city.adresse_depart; // Remplit l'input avec la ville cliquée
 						resultsDiv.style.display = "none"; // Cache les suggestions après sélection
 					});
 					resultsDiv.appendChild(div); // Ajoute le div à la liste des résultats

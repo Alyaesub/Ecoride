@@ -89,4 +89,18 @@ class Covoiturage
     $stmt->execute(['id' => $id_utilisateur]);
     return $stmt->fetchAll(\PDO::FETCH_ASSOC);
   }
+
+  /**
+   * function qui supprime le covoit en bdd
+   */
+  public function supprimeCovoit(int $id): void
+  {
+    // Supprime d’abord les liens dans user_covoiturage (clé étrangère)
+    $this->pdo->prepare("DELETE FROM user_covoiturage WHERE id_covoiturage = :id")
+      ->execute(['id' => $id]);
+
+    // Supprime ensuite le covoiturage
+    $this->pdo->prepare("DELETE FROM covoiturage WHERE id_covoiturage = :id")
+      ->execute(['id' => $id]);
+  }
 }

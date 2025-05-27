@@ -1,12 +1,5 @@
-<?php $title = 'Formulaire de covoiturage';
-require "../Ecoride/app/Controllers/DataTestController.php"
-?>
-
-
 <div class="voyage-page-container">
-  <!--  <div class="title">
-    <h1>Formulaire de recherche de Covoiturage</h1>
-  </div> -->
+
   <section class="formulaire">
     <section class="search-covoit ">
       <h1>trouver un covoiturage</h1>
@@ -34,34 +27,30 @@ require "../Ecoride/app/Controllers/DataTestController.php"
             <option value="<?= $date ?>"><?= $date ?></option>
           <?php endforeach; ?>
         </select><br>
-
-        <label for="prix_max">Prix maximum :</label>
-        <select id="prix_max" name="prix_max">
-          <option value="">Sélectionnez un prix maximum</option>
-          <?php foreach ($prixMax as $prix): ?>
-            <option value="<?= $prix ?>"><?= $prix ?> crédits</option>
-          <?php endforeach; ?>
-        </select><br>
-
-        <label for="places_disponibles">Places disponibles :</label>
-        <select id="places_disponibles" name="places_disponibles">
-          <option value="">Sélectionnez le nombre de places</option>
-          <?php foreach ($places as $place): ?>
-            <option value="<?= $place ?>"><?= $place ?></option>
-          <?php endforeach; ?>
-        </select><br>
-
-        <label for="est_ecologique">Trajet écologique ? :</label>
-        <select id="est_ecologique" name="est_ecologique">
-          <option value="">Sélectionnez</option>
-          <option value="1">Oui</option>
-          <option value="0">Non</option>
-        </select><br>
-
         <button type="submit">Afficher les covoiturage</button> <!-- affiche les covoit si user est log sinon redirection form register -->
       </form>
       <div id="displayInfo" class="display-box">
         <!-- Affichage des informations personnelles enregistrées -->
+        <h2>Résultats de la recherche</h2>
+        <?php if (empty($covoiturages)) : ?>
+          <p>Aucun covoiturage trouvé.</p>
+        <?php else: ?>
+          <?php foreach ($covoiturages as $covoit): ?>
+            <div class="covoit-result">
+              <p><strong>Départ :</strong> <?= $covoit['adresse_depart'] ?></p>
+              <p><strong>Arrivée :</strong> <?= $covoit['adresse_arrivee'] ?></p>
+              <p><strong>Date :</strong> <?= $covoit['date_depart'] ?></p>
+              <p><strong>Prix :</strong> <?= $covoit['prix'] ?> crédits</p>
+              <p><strong>Places :</strong> <?= $covoit['places_disponibles'] ?></p>
+
+              <?php if (isset($_SESSION['user'])): ?>
+                <a href="<?= route('voirDetails', ['id' => $covoit['id_covoiturage']]) ?>">Voir</a>
+              <?php else: ?>
+                <a href="<?= route('login') ?>">Connecte-toi pour voir ce covoiturage</a>
+              <?php endif; ?>
+            </div>
+          <?php endforeach; ?>
+        <?php endif; ?>
       </div>
     </section>
   </section>
