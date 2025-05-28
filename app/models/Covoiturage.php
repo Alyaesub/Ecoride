@@ -103,6 +103,71 @@ class Covoiturage
     $this->pdo->prepare("DELETE FROM covoiturage WHERE id_covoiturage = :id")
       ->execute(['id' => $id]);
   }
+
+  /**
+   * function qui gére la recherhce pour le formCovoit page voyage
+   */
+  public function rechercherCovoiturages(array $filters): array
+  {
+    $conditions = [];
+    $params = [];
+
+    if (!empty($filters['adresse_depart'])) {
+      $conditions[] = 'adresse_depart = :adresse_depart';
+      $params['adresse_depart'] = $filters['adresse_depart'];
+    }
+
+    if (!empty($filters['adresse_arrivee'])) {
+      $conditions[] = 'adresse_arrivee = :adresse_arrivee';
+      $params['adresse_arrivee'] = $filters['adresse_arrivee'];
+    }
+
+    if (!empty($filters['date_depart'])) {
+      $conditions[] = 'DATE(date_depart) = :date_depart';
+      $params['date_depart'] = $filters['date_depart'];
+    }
+
+    $sql = "SELECT * FROM covoiturage";
+    if (!empty($conditions)) {
+      $sql .= ' WHERE ' . implode(' AND ', $conditions);
+    }
+
+    $stmt = $this->pdo->prepare($sql);
+    $stmt->execute($params);
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+  }
+
+  public function getAdressesDepart(): array
+  {
+    $stmt = $this->pdo->query("SELECT DISTINCT adresse_depart AS nom FROM covoiturage");
+    $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    // on rajoute un ID fictif pour le select
+    foreach ($results as $index => $row) {
+      $results[$index]['id'] = $index + 1;
+    }
+
+    return $results;
+  }
+
+  public function getAdressesArrivee(): array
+  {
+    $stmt = $this->pdo->query("SELECT DISTINCT adresse_arrivee AS nom FROM covoiturage");
+    $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    foreach ($results as $index => $row) {
+      $results[$index]['id'] = $index + 1;
+    }
+
+    return $results;
+  }
+
+  public function getDatesDepart(): array
+  {
+    $stmt = $this->pdo->query("SELECT DISTINCT DATE(date_depart) AS date_depart FROM covoiturage ORDER BY date_depart ASC");
+    return array_column($stmt->fetchAll(PDO::FETCH_ASSOC), 'date_depart');
+  }
+
   /**
    * function qui gére la recherche pour la searchBAr
    */
@@ -118,7 +183,6 @@ class Covoiturage
     $stmt->execute([
       'motCle' => '%' . $motCle . '%'
     ]);
-
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
   }
 }

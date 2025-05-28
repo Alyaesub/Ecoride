@@ -1,14 +1,20 @@
+<!-- <?php
+      /* var_dump(isset($departAdresses));
+exit; */
+      ?> -->
+
+
 <div class="voyage-page-container">
 
   <section class="formulaire">
     <section class="search-covoit ">
       <h1>trouver un covoiturage</h1>
-      <form id="searchCovoiturageForm" action="/app/Controllers/Traitement.php" method="get">
+      <form id="searchCovoiturageForm" action="<?= route('search-covoit-form') ?>" method="get">
         <label for="adresse_depart">Adresse de départ :</label>
         <select id="adresse_depart" name="adresse_depart" required>
           <option value="">Sélectionnez une adresse de départ</option>
           <?php foreach ($departAdresses as $adresse): ?>
-            <option value="<?= $adresse['id'] ?>"><?= $adresse['nom'] ?></option>
+            <option value="<?= htmlspecialchars($adresse['nom']) ?>"><?= htmlspecialchars($adresse['nom']) ?></option>
           <?php endforeach; ?>
         </select><br>
 
@@ -16,7 +22,7 @@
         <select id="adresse_arrivee" name="adresse_arrivee" required>
           <option value="">Sélectionnez une adresse d'arrivée</option>
           <?php foreach ($arriveeAdresses as $adresse): ?>
-            <option value="<?= $adresse['id'] ?>"><?= $adresse['nom'] ?></option>
+            <option value="<?= htmlspecialchars($adresse['nom']) ?>"><?= htmlspecialchars($adresse['nom']) ?></option>
           <?php endforeach; ?>
         </select><br>
 
@@ -24,7 +30,7 @@
         <select id="date_depart" name="date_depart" required>
           <option value="">Sélectionnez date et heure</option>
           <?php foreach ($datesDepart as $date): ?>
-            <option value="<?= $date ?>"><?= $date ?></option>
+            <option value="<?= htmlspecialchars($date) ?>"><?= htmlspecialchars($date) ?></option>
           <?php endforeach; ?>
         </select><br>
         <button type="submit">Afficher les covoiturage</button> <!-- affiche les covoit si user est log sinon redirection form register -->
@@ -40,13 +46,11 @@
               <p><strong>Départ :</strong> <?= $covoit['adresse_depart'] ?></p>
               <p><strong>Arrivée :</strong> <?= $covoit['adresse_arrivee'] ?></p>
               <p><strong>Date :</strong> <?= $covoit['date_depart'] ?></p>
-              <p><strong>Prix :</strong> <?= $covoit['prix'] ?> crédits</p>
-              <p><strong>Places :</strong> <?= $covoit['places_disponibles'] ?></p>
 
               <?php if (isset($_SESSION['user'])): ?>
-                <a href="<?= route('voirDetails', ['id' => $covoit['id_covoiturage']]) ?>">Voir</a>
+                <a href="<?= route('voirDetails', ['id' => $covoit['id_covoiturage']]) ?>">🔍 Voir détails</a>
               <?php else: ?>
-                <a href="<?= route('login') ?>">Connecte-toi pour voir ce covoiturage</a>
+                <a href="<?= route('login') ?>"> Connectez vous pour 🔍 Voir détails</a>
               <?php endif; ?>
             </div>
           <?php endforeach; ?>

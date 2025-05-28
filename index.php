@@ -44,11 +44,11 @@ switch ($page) {
     $controller = new HomeController();
     $controller->showMentions();
     break;
-  case 'covoitVoyage':
+  /*  case 'covoitVoyage':
     render(__DIR__ . '/app/views/pages/formeCovoitVoyage.php', [
       'title' => 'Formulaire de covoiturage'
     ]);
-    break;
+    break; */
   case 'login':
     render(__DIR__ . '/app/views/pages/login.php', [
       'title' => 'Connexion'
@@ -57,6 +57,14 @@ switch ($page) {
   case 'search-cities':
     $controller = new SearchCitiesController();
     $controller->searchCitiesBar();
+    break;
+  case 'covoitVoyage':
+    $controller = new CovoiturageController;
+    $controller->showForm();
+    break;
+  case 'search-covoit-form':
+    $controller = new CovoiturageController;
+    $controller->searchCovoitForm();
     break;
   case 'login-user':
     $controller = new UserController;

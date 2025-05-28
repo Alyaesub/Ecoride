@@ -74,4 +74,42 @@ class CovoiturageController
     header('Location: ' . route('profil'));
     exit;
   }
+
+  /**
+   * function controller qui gére la recherche via le formCovoit dans voyages
+   */
+
+  public function showForm()
+  {
+    $model = new Covoiturage();
+
+    $departAdresses = $model->getAdressesDepart();
+    $arriveeAdresses = $model->getAdressesArrivee();
+    $datesDepart = $model->getDatesDepart();
+
+    render(__DIR__ . '/../views/pages/formeCovoitVoyage.php', [
+      'departAdresses' => $departAdresses,
+      'arriveeAdresses' => $arriveeAdresses,
+      'datesDepart' => $datesDepart,
+      'covoiturages' => [] // vide au début
+    ]);
+  }
+
+  public function searchCovoitForm()
+  {
+    $model = new Covoiturage();
+    $filters = $_GET;
+    $covoiturages = $model->rechercherCovoiturages($filters);
+
+    $departAdresses = $model->getAdressesDepart();
+    $arriveeAdresses = $model->getAdressesArrivee();
+    $datesDepart = $model->getDatesDepart();
+
+    render(__DIR__ . '/../views/pages/formeCovoitVoyage.php', [
+      'covoiturages' => $covoiturages,
+      'departAdresses' => $departAdresses,
+      'arriveeAdresses' => $arriveeAdresses,
+      'datesDepart' => $datesDepart
+    ]);
+  }
 }
