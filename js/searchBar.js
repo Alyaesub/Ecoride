@@ -31,6 +31,7 @@ searchInput.addEventListener("input", function () {
 					div.addEventListener("click", () => {
 						searchInput.value = city.adresse_depart; // Remplit l'input avec la ville cliquée
 						resultsDiv.style.display = "none"; // Cache les suggestions après sélection
+						window.location.href = `/details-covoiturage?id=${city.id}`;
 					});
 					resultsDiv.appendChild(div); // Ajoute le div à la liste des résultats
 				});

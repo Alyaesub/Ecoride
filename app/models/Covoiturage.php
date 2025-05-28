@@ -103,4 +103,22 @@ class Covoiturage
     $this->pdo->prepare("DELETE FROM covoiturage WHERE id_covoiturage = :id")
       ->execute(['id' => $id]);
   }
+  /**
+   * function qui gére la recherche pour la searchBAr
+   */
+  public function searchCitiesBar(string $motCle): array
+  {
+    $sql = "SELECT * FROM covoiturage
+            WHERE adresse_depart LIKE :motCle
+              OR adresse_arrivee LIKE :motCle
+            ORDER BY date_depart ASC
+            LIMIT 10";
+
+    $stmt = $this->pdo->prepare($sql);
+    $stmt->execute([
+      'motCle' => '%' . $motCle . '%'
+    ]);
+
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+  }
 }

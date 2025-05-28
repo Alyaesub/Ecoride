@@ -3,7 +3,6 @@
 namespace App\Controllers;
 
 use App\Models\User;
-use App\Models\ConnexionDb;
 use App\Models\Notation;
 
 

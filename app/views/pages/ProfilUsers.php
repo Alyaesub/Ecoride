@@ -205,7 +205,6 @@ $title = 'Mon profil';
                   <button type="submit" onclick="return confirm('Supprimer définitivement ce covoiturage ?')">❌ Supprimer</button>
                 </form>
               </li>
-
             </ul>
           <?php endforeach; ?>
         <?php else : ?>

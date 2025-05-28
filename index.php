@@ -56,7 +56,7 @@ switch ($page) {
     break;
   case 'search-cities':
     $controller = new SearchCitiesController();
-    $controller->index();
+    $controller->searchCitiesBar();
     break;
   case 'login-user':
     $controller = new UserController;
