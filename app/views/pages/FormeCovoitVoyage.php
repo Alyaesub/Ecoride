@@ -48,7 +48,7 @@ exit; */
               <p><strong>Date :</strong> <?= $covoit['date_depart'] ?></p>
 
               <?php if (isset($_SESSION['user'])): ?>
-                <a href="<?= route('detailsCovoit', ['id' => $covoit['id_covoiturage']]) ?>">🔍 Voir détails</a>
+                <a href="/detailsCovoit?id=<?= $covoit['id_covoiturage'] ?>">🔍 Voir détails</a>
               <?php else: ?>
                 <a href="<?= route('login') ?>"> Connectez vous pour 🔍 Voir détails</a>
               <?php endif; ?>

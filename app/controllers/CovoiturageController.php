@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\Covoiturage;
+use App\Models\Notation;
 
 class CovoiturageController
 {
@@ -11,10 +12,8 @@ class CovoiturageController
    */
   public function create()
   {
-
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       $model = new Covoiturage();
-
 
       $id_utilisateur = $_SESSION['user']['id'];
       $id_vehicule = $model->getVehiculeByUser($id_utilisateur);
@@ -32,7 +31,6 @@ class CovoiturageController
         'animaux_autorises' => isset($_POST['animaux_autoriser']) ? 1 : 0,
         'fumeur' => isset($_POST['fumeur']) ? 1 : 0
       ];
-
 
       if (!$id_vehicule) {
         $_SESSION['error'] = "Aucun véhicule trouvé pour votre compte.";
@@ -62,7 +60,6 @@ class CovoiturageController
     if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id_covoiturage'])) {
       $id = intval($_POST['id_covoiturage']);
       $model = new Covoiturage();
-
       try {
         $model->supprimeCovoit($id);
         $_SESSION['success'] = "Covoiturage supprimé avec succès.";
@@ -70,7 +67,6 @@ class CovoiturageController
         $_SESSION['error'] = "Erreur lors de la suppression : " . $e->getMessage();
       }
     }
-
     header('Location: ' . route('profil'));
     exit;
   }
@@ -110,6 +106,52 @@ class CovoiturageController
       'departAdresses' => $departAdresses,
       'arriveeAdresses' => $arriveeAdresses,
       'datesDepart' => $datesDepart
+    ]);
+  }
+
+  /**
+   * function qui controlle l'affichage de la page détailsCovoit
+   */
+  public function showCovoitDetails()
+  {
+    if (!isset($_GET['id'])) {
+      header('Location: ' . route('home'));
+      exit;
+    }
+
+    $id = intval($_GET['id']);
+    $model = new Covoiturage();
+    $notationModel = new Notation();
+
+    // Récupère les infos du covoiturage
+    $covoit = $model->findById($id);
+
+    if (!$covoit) {
+      $_SESSION['error'] = "Covoiturage introuvable.";
+      header('Location: ' . route('home'));
+      exit;
+    }
+
+    // Moyenne des notes du conducteur
+    $moyenne = $notationModel->getMoyenneParUtilisateur($covoit['id_utilisateur']);
+    $covoit['note_conducteur'] = $moyenne;
+
+    // Optionnel : déterminer si l'utilisateur peut participer
+    $covoit['peut_participer'] = true; // à ajuster selon ta logique métier
+
+    // Optionnel : déterminer si le covoit est terminé (par rapport à la date)
+    $covoit['est_termine'] = strtotime($covoit['date_depart']) < time();
+
+    // Est-ce que l'utilisateur a déjà noté ce covoit ?
+    $idUser = $_SESSION['user_id'] ?? null;
+    $covoit['deja_note'] = $idUser ? $notationModel->existeDeja($idUser, $id) : false;
+
+    // Liste des passagers
+    $passagers = $model->getPassagersByCovoiturage($id);
+
+    render(__DIR__ . '/../views/pages/detailsCovoit.php', [
+      'covoiturage' => $covoit,
+      'passagers' => $passagers
     ]);
   }
 }

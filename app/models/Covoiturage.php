@@ -111,27 +111,22 @@ class Covoiturage
   {
     $conditions = [];
     $params = [];
-
     if (!empty($filters['adresse_depart'])) {
       $conditions[] = 'adresse_depart = :adresse_depart';
       $params['adresse_depart'] = $filters['adresse_depart'];
     }
-
     if (!empty($filters['adresse_arrivee'])) {
       $conditions[] = 'adresse_arrivee = :adresse_arrivee';
       $params['adresse_arrivee'] = $filters['adresse_arrivee'];
     }
-
     if (!empty($filters['date_depart'])) {
       $conditions[] = 'DATE(date_depart) = :date_depart';
       $params['date_depart'] = $filters['date_depart'];
     }
-
     $sql = "SELECT * FROM covoiturage";
     if (!empty($conditions)) {
       $sql .= ' WHERE ' . implode(' AND ', $conditions);
     }
-
     $stmt = $this->pdo->prepare($sql);
     $stmt->execute($params);
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -141,12 +136,9 @@ class Covoiturage
   {
     $stmt = $this->pdo->query("SELECT DISTINCT adresse_depart AS nom FROM covoiturage");
     $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-    // on rajoute un ID fictif pour le select
     foreach ($results as $index => $row) {
       $results[$index]['id'] = $index + 1;
     }
-
     return $results;
   }
 
@@ -154,11 +146,9 @@ class Covoiturage
   {
     $stmt = $this->pdo->query("SELECT DISTINCT adresse_arrivee AS nom FROM covoiturage");
     $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
     foreach ($results as $index => $row) {
       $results[$index]['id'] = $index + 1;
     }
-
     return $results;
   }
 
@@ -183,6 +173,40 @@ class Covoiturage
     $stmt->execute([
       'motCle' => '%' . $motCle . '%'
     ]);
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+  }
+
+  /**
+   * methode qui gére pour la recherche de covoit part l'id user pour detailsCovit
+   */
+  public function findById(int $id): ?array
+  {
+    $pdo = ConnexionDb::getPdo();
+    $stmt = $pdo->prepare("
+    SELECT c.*, u.pseudo AS pseudo_conducteur
+    FROM covoiturage c
+    JOIN utilisateur u ON c.id_utilisateur = u.id_utilisateur
+    WHERE c.id_covoiturage = :id
+  ");
+    $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+    $stmt->execute();
+
+    return $stmt->fetch(PDO::FETCH_ASSOC) ?: null;
+  }
+
+  /**
+   * methode qui gére la rehcerche des passager via l'id covoit
+   */
+  public function getPassagersByCovoiturage($id_covoit): array
+  {
+    $pdo = ConnexionDb::getPdo();
+    $stmt = $pdo->prepare("
+    SELECT u.pseudo
+    FROM user_covoiturage uc
+    JOIN utilisateur u ON uc.id_utilisateur = u.id_utilisateur
+    WHERE uc.id_covoiturage = ?
+  ");
+    $stmt->execute([$id_covoit]);
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
   }
 }

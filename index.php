@@ -41,6 +41,7 @@ $routes = [
   'search-covoit-form' => [CovoiturageController::class, 'searchCovoitForm'],
   'ajouterCovoiturage' => [CovoiturageController::class, 'create'],
   'supprimeCovoiturage' => [CovoiturageController::class, 'supprimeCovoit'],
+  'detailsCovoit' => [CovoiturageController::class, 'showCovoitDetails'],
   // Utilisateur : login, profil, enregistrement, mise à jour
   'login-user' => [UserController::class, 'login'],
   'profil' => [UserController::class, 'showProfile'],

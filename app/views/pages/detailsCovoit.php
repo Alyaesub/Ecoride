@@ -11,15 +11,15 @@
         <?= date('H:i', strtotime($covoiturage['date_arrivee'])) ?>
       </p>
       <p><strong>Conducteur :</strong> <?= htmlspecialchars($covoiturage['pseudo_conducteur']) ?>
-        <?php if (!empty($covoiturage['note_conducteur'])) : ?>
+        <?php if (!empty($notation['note_conducteur'])) : ?>
           <span class="note-conducteur">— Moyenne : <?= $covoiturage['note_conducteur'] ?> ⭐</span>
         <?php endif; ?>
       </p>
       <p><strong>Places disponibles :</strong> <?= $covoiturage['places_disponibles'] ?></p>
-      <p><strong>Écologique :</strong> <?= $covoiturage['ecologique'] ? '✅ Oui' : '❌ Non' ?></p>
-      <p><strong>Animaux acceptés :</strong> <?= $covoiturage['animaux_acceptes'] ? '✅ Oui' : '❌ Non' ?></p>
+      <p><strong>Écologique :</strong> <?= $covoiturage['est_ecologique'] ? '✅ Oui' : '❌ Non' ?></p>
+      <p><strong>Animaux acceptés :</strong> <?= $covoiturage['animaux_autorises'] ? '✅ Oui' : '❌ Non' ?></p>
       <p><strong>Fumeur :</strong> <?= $covoiturage['fumeur'] ? '🚬 Oui' : '🚭 Non' ?></p>
-      <p><strong>Prix :</strong> <?= number_format($covoiturage['prix'], 2) ?> €</p>
+      <p><strong>Prix :</strong> <?= number_format($covoiturage['prix_personne'], 2) ?> €</p>
     </div>
 
     <?php if (!empty($passagers)) : ?>
@@ -49,7 +49,7 @@
 
           <form action="<?= route('noter-covoiturage') ?>" method="post" onsubmit="return verifierFormulaire();">
             <input type="hidden" name="id_covoiturage" value="<?= $covoiturage['id_covoiturage'] ?>">
-            <input type="hidden" name="conducteur_id" value="<?= $covoiturage['conducteur_id'] ?>">
+            <input type="hidden" name="conducteur_id" value="<?= $covoiturage['id_utilisateur'] ?>">
 
             <label for="note">Note (1 à 5) :</label>
             <select name="note" id="note">

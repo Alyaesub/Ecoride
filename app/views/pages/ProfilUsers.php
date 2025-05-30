@@ -198,9 +198,9 @@ $title = 'Mon profil';
               <li><strong>Départ :</strong><?= htmlspecialchars($covoiturage['adresse_depart']) ?></li>
               <li><strong>Arrivée :</strong><?= htmlspecialchars($covoiturage['adresse_arrivee']) ?></li>
               <li><strong>Date :</strong><?= date('d/m/Y H:i', strtotime($covoiturage['date_depart'])) ?></li>
-              <li><strong>Détails :</strong> <a class="btn-details" href=" <?= route('detailsCovoit', ['id' => $covoiturage['id_covoiturage']]) ?>">🔍 Voir détails</a></li>
+              <li><strong>Détails :</strong> <a class="btn-details" href="/detailsCovoit?id=<?= $covoiturage['id_covoiturage'] ?>">🔍 Voir détails</a></li>
               <li>
-                <form action="<?= route('supprimeCovoiturage') ?>" method="post" style="display:inline;">
+                <form action=" <?= route('supprimeCovoiturage') ?>" method="post" style="display:inline;">
                   <input type="hidden" name="id_covoiturage" value="<?= $covoiturage['id_covoiturage'] ?>">
                   <button type="submit" onclick="return confirm('Supprimer définitivement ce covoiturage ?')">❌ Supprimer</button>
                 </form>
