@@ -17,21 +17,22 @@ searchInput.addEventListener("input", function () {
 	}
 
 	// Appelle le contrôleur SearchCitiesController via Fetch pour récupérer les suggestions
-	// index.php?page=search-cities&q sert de route pour aller chercher le controller 'searchCitiesController.php'
+	// search-cities&q sert de route pour aller chercher le controller 'searchCitiesController.php'
 	fetch(`/search-cities?q=${encodeURIComponent(query)}`)
 		.then((response) => response.json()) // Convertit la réponse en JSON
 		.then((data) => {
 			resultsDiv.innerHTML = ""; // Vide les anciens résultats
 			if (data.length > 0) {
-				// Pour chaque ville reçue, crée un div affichant le nom de la ville A ADAPTER POUR LES BDD!!!!!!!!!!!
+				// Pour chaque ville reçue, crée un div affichant le nom de la ville
 				data.forEach((city) => {
 					const div = document.createElement("div");
 					div.textContent = city.adresse_depart;
 					div.classList.add("result-item");
+
 					div.addEventListener("click", () => {
 						searchInput.value = city.adresse_depart; // Remplit l'input avec la ville cliquée
 						resultsDiv.style.display = "none"; // Cache les suggestions après sélection
-						window.location.href = `/details-covoiturage?id=${city.id}`;
+						window.location.href = `/detailsCovoit?id=${city.id}`;
 					});
 					resultsDiv.appendChild(div); // Ajoute le div à la liste des résultats
 				});

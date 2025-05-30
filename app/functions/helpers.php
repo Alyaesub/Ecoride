@@ -5,6 +5,7 @@
 function route(string $page): string
 {
   return htmlentities(urlencode($page));
+  /* return '/' . ltrim(htmlentities(urlencode($page)), '/'); */
 }
 
 //function qui verifie l'eta de connexion de l'user peut servire pour remplacer
