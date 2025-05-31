@@ -44,6 +44,7 @@ $routes = [
   'detailsCovoit' => [CovoiturageController::class, 'showCovoitDetails'],
   'modifierCovoiturage' => [CovoiturageController::class, 'modifierCovoiturage'],
   'validerModifCovoit' => [CovoiturageController::class, 'validerModifCovoit'],
+  'annulerCovoiturage' => [CovoiturageController::class, 'annulerCovoiturage'],
   // Utilisateur : login, profil, enregistrement, mise à jour
   'login-user' => [UserController::class, 'login'],
   'profil' => [UserController::class, 'showProfile'],

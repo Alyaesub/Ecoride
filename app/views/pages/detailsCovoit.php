@@ -2,9 +2,19 @@
 
   <h1>Détails du covoiturage</h1>
 
+  <?php if (!empty($_SESSION['success'])) : ?>
+    <div class="message-success"><?= htmlspecialchars($_SESSION['success']) ?></div>
+    <?php unset($_SESSION['success']); ?>
+  <?php endif; ?>
+
+  <?php if (!empty($_SESSION['error'])) : ?>
+    <div class="message-error"><?= htmlspecialchars($_SESSION['error']) ?></div>
+    <?php unset($_SESSION['error']); ?>
+  <?php endif; ?>
+
   <?php if (!empty($covoiturage)) : ?>
     <div class="covoiturage-infos">
-      <p><strong>Statut :</strong> <?= ucfirst($covoiturage['statut']) ?></p>
+      <p class="statut-covoit <?= $covoiturage['statut'] ?>"><strong>Statut :</strong> <?= ucfirst($covoiturage['statut']) ?></p>
       <p><strong>Départ :</strong> <?= htmlspecialchars($covoiturage['adresse_depart']) ?></p>
       <p><strong>Arrivée :</strong> <?= htmlspecialchars($covoiturage['adresse_arrivee']) ?></p>
       <p><strong>Date & Heure :</strong>
@@ -43,23 +53,25 @@
         </form>
       <?php endif; ?>
 
-      <?php if (!empty($isAuthor)) : ?>
-        <div class="gestion-covoit">
-          <form action="<?= route('modifierCovoiturage') ?>" method="post" style="display:inline;">
-            <input type="hidden" name="id_covoiturage" value="<?= $covoiturage['id_covoiturage'] ?>">
-            <button type="submit" class="btn">✏️ Modifier</button>
-          </form>
+      <?php if ($covoiturage['statut'] === 'actif') : ?>
+        <?php if (!empty($isAuthor)) : ?>
+          <div class="gestion-covoit">
+            <form action="<?= route('modifierCovoiturage') ?>" method="post" style="display:inline;">
+              <input type="hidden" name="id_covoiturage" value="<?= $covoiturage['id_covoiturage'] ?>">
+              <button type="submit" class="btn">✏️ Modifier</button>
+            </form>
 
-          <form action="<?= route('annulerCovoiturage') ?>" method="post" style="display:inline;">
-            <input type="hidden" name="id_covoiturage" value="<?= $covoiturage['id_covoiturage'] ?>">
-            <button type="submit" class="btn">❌ Annuler</button>
-          </form>
+            <form action="<?= route('annulerCovoiturage') ?>" method="post" style="display:inline;">
+              <input type="hidden" name="id_covoiturage" value="<?= $covoiturage['id_covoiturage'] ?>">
+              <button type="submit" class="btn">❌ Annuler</button>
+            </form>
 
-          <form action="<?= route('terminerCovoiturage') ?>" method="post" style="display:inline;">
-            <input type="hidden" name="id_covoiturage" value="<?= $covoiturage['id_covoiturage'] ?>">
-            <button type="submit" class="btn">✅ Terminer</button>
-          </form>
-        </div>
+            <form action="<?= route('terminerCovoiturage') ?>" method="post" style="display:inline;">
+              <input type="hidden" name="id_covoiturage" value="<?= $covoiturage['id_covoiturage'] ?>">
+              <button type="submit" class="btn">✅ Terminer</button>
+            </form>
+          </div>
+        <?php endif; ?>
       <?php endif; ?>
 
       <!-- Noter -->

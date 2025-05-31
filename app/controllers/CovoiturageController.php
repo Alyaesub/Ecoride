@@ -142,7 +142,7 @@ class CovoiturageController
     $id_user = $_SESSION['user_id'] ?? null;
     $covoit['peut_participer'] = ($id_user && $covoit['id_utilisateur'] != $id_user);
 
-    // Optionnel : déterminer si le covoit est terminé (par rapport à la date)
+    // détermine si le covoit est terminé (par rapport à la date)
     $covoit['est_termine'] = strtotime($covoit['date_depart']) < time();
 
     // Est-ce que l'utilisateur a déjà noté ce covoit ?
@@ -174,12 +174,6 @@ class CovoiturageController
       $notation = new Notation();
       $notation->ajouter($id_conducteur, $id_auteur, $id_covoiturage, $note);
     }
-
-    // Enregistrer l'avis NoSQL CODE POUR LES AVIS EN NOSQL
-    /*  if (!empty($commentaire)) {
-      require_once __DIR__ . '/../../MongoDb/avisFunctions.php';
-      ajouterAvisMongo($id_auteur, $id_conducteur, $id_covoiturage, $commentaire);
-    } */
 
     header('Location: /activite');
     exit();
@@ -257,6 +251,36 @@ class CovoiturageController
     $model->updateById($id, $data); //gére avec le model
 
     $_SESSION['success'] = "Le covoiturage a été modifié.";
+    header('Location: ' . route('detailsCovoit') . '?id=' . $id);
+    exit;
+  }
+  /**
+   * function qui gére l'annulation du covoit
+   */
+  public function annulerCovoiturage()
+  {
+    requireLogin();
+
+    $id = $_POST['id_covoiturage'] ?? null;
+    $userId = $_SESSION['user_id'] ?? null;
+
+    if (!$id) {
+      $_SESSION['error'] = "ID manquant.";
+      header('Location: ' . route('home'));
+      exit;
+    }
+
+    $model = new Covoiturage();
+    $covoit = $model->findById($id);
+
+    if (!$covoit || $covoit['id_utilisateur'] != $userId) {
+      $_SESSION['error'] = "Tu n’as pas l'autorisation d'annuler ce covoit.";
+      header('Location: ' . route('home'));
+      exit;
+    }
+
+    $model->updateStatut($id, 'annule');
+    $_SESSION['success'] = "Covoiturage annulé avec succès.";
     header('Location: ' . route('detailsCovoit') . '?id=' . $id);
     exit;
   }

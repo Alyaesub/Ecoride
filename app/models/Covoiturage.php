@@ -84,7 +84,7 @@ class Covoiturage
     $stmt = $this->pdo->prepare("SELECT c.*, uc.role_utilisateur
     FROM covoiturage c
     JOIN user_covoiturage uc ON c.id_covoiturage = uc.id_covoiturage
-    WHERE uc.id_utilisateur = :id AND c.est_annule = 0
+    WHERE uc.id_utilisateur = :id AND statut != 'annule'
     ORDER BY c.date_depart DESC");
     $stmt->execute(['id' => $id_utilisateur]);
     return $stmt->fetchAll(\PDO::FETCH_ASSOC);
@@ -244,5 +244,35 @@ class Covoiturage
       'fumeur' => isset($data['fumeur']) ? 1 : 0,
       'id' => $id
     ]);
+  }
+
+  /**
+   * methode qui change le statut du covoit (actif, anuller,terminer)
+   */
+  public function updateStatut($id, $nouveauStatut)
+  {
+    $pdo = ConnexionDb::getPdo();
+    $stmt = $pdo->prepare("UPDATE covoiturage SET statut = :statut WHERE id_covoiturage = :id");
+    $stmt->bindParam(':statut', $nouveauStatut);
+    $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+    return $stmt->execute();
+  }
+
+  public function getHistoriqueCovoiturages($id_utilisateur)
+  {
+    $pdo = ConnexionDb::getPdo();
+
+    $sql = "
+    SELECT c.*
+    FROM covoiturage c
+    INNER JOIN user_covoiturage uc ON c.id_covoiturage = uc.id_covoiturage
+    WHERE uc.id_utilisateur = :id_utilisateur
+      AND (c.statut = 'termine' OR c.statut = 'annule')
+    ORDER BY c.date_depart DESC
+  ";
+
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute(['id_utilisateur' => $id_utilisateur]); // ✅ Nom correct
+    return $stmt->fetchAll();
   }
 }
