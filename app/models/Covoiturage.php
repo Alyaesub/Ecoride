@@ -209,4 +209,40 @@ class Covoiturage
     $stmt->execute([$id_covoit]);
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
   }
+
+  /**
+   * methode qui gére la modif des covoit
+   */
+  public function updateById(int $id, array $data): void
+  {
+    $pdo = ConnexionDb::getPdo();
+
+    $stmt = $pdo->prepare("
+      UPDATE covoiturage 
+      SET 
+        adresse_depart = :adresse_depart,
+        adresse_arrivee = :adresse_arrivee,
+        date_depart = :date_depart,
+        date_arrivee = :date_arrivee,
+        prix_personne = :prix_personne,
+        places_disponibles = :places_disponibles,
+        est_ecologique = :est_ecologique,
+        animaux_autorises = :animaux_autorises,
+        fumeur = :fumeur
+      WHERE id_covoiturage = :id
+    ");
+
+    $stmt->execute([
+      'adresse_depart' => $data['adresse_depart'],
+      'adresse_arrivee' => $data['adresse_arrivee'],
+      'date_depart' => $data['date_depart'],
+      'date_arrivee' => $data['date_arrivee'],
+      'prix_personne' => $data['prix_personne'],
+      'places_disponibles' => $data['places_disponibles'],
+      'est_ecologique' => isset($data['est_ecologique']) ? 1 : 0,
+      'animaux_autorises' => isset($data['animaux_autoriser']) ? 1 : 0,
+      'fumeur' => isset($data['fumeur']) ? 1 : 0,
+      'id' => $id
+    ]);
+  }
 }

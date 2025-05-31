@@ -118,10 +118,10 @@ class CovoiturageController
       header('Location: ' . route('home'));
       exit;
     }
-
     $id = intval($_GET['id']);
     $model = new Covoiturage();
     $notationModel = new Notation();
+
 
     // Récupère les infos du covoiturage
     $covoit = $model->findById($id);
@@ -132,12 +132,16 @@ class CovoiturageController
       exit;
     }
 
+    $id_user = $_SESSION['user_id'] ?? null;
+    $isAuthor = ($id_user && $covoit['id_utilisateur'] == $id_user);
+
     // Moyenne des notes du conducteur
     $moyenne = $notationModel->getMoyenneParUtilisateur($covoit['id_utilisateur']);
     $covoit['note_conducteur'] = $moyenne;
 
-    // Optionnel : déterminer si l'utilisateur peut participer
-    $covoit['peut_participer'] = true; // à ajuster selon ta logique métier
+    // bouton pour l'utilisateur peut participer
+    $id_user = $_SESSION['user_id'] ?? null;
+    $covoit['peut_participer'] = ($id_user && $covoit['id_utilisateur'] != $id_user);
 
     // Optionnel : déterminer si le covoit est terminé (par rapport à la date)
     $covoit['est_termine'] = strtotime($covoit['date_depart']) < time();
@@ -151,7 +155,110 @@ class CovoiturageController
 
     render(__DIR__ . '/../views/pages/detailsCovoit.php', [
       'covoiturage' => $covoit,
-      'passagers' => $passagers
+      'passagers' => $passagers,
+      'isAuthor' => $isAuthor
     ]);
+  }
+
+  /**
+   * function Controller qui ajoute une notes
+   */
+  public function ajouterNote()
+  {
+
+    $id_auteur = $_SESSION['user_id'];
+    $id_conducteur = $_POST['conducteur_id'] ?? null;
+    $id_covoiturage = $_POST['covoiturage_id'] ?? null;
+    $note = $_POST['note'] ?? null;
+
+    if ($id_conducteur && $id_covoiturage && $note >= 1 && $note <= 5) {
+      $notation = new Notation();
+      $notation->ajouter($id_conducteur, $id_auteur, $id_covoiturage, $note);
+    }
+
+    // Enregistrer l'avis NoSQL CODE POUR LES AVIS EN NOSQL
+    /*  if (!empty($commentaire)) {
+      require_once __DIR__ . '/../../MongoDb/avisFunctions.php';
+      ajouterAvisMongo($id_auteur, $id_conducteur, $id_covoiturage, $commentaire);
+    } */
+
+    header('Location: /activite');
+    exit();
+  }
+
+  /**
+   * fonction qui permet de modifier un covoiturage
+   */
+  public function modifierCovoiturage()
+  {
+    requireLogin();
+
+    $id = $_POST['id_covoiturage'] ?? null;
+    $user_id = $_SESSION['user_id'];
+
+    if (!$id) {
+      $_SESSION['error'] = "Aucun ID fourni.";
+      header('Location: ' . route('home'));
+      exit;
+    }
+
+    $model = new Covoiturage();
+    $covoit = $model->findById($id);
+
+    if (!$covoit || $covoit['id_utilisateur'] != $user_id) {
+      $_SESSION['error'] = "Accès refusé.";
+      header('Location: ' . route('home'));
+      exit;
+    }
+
+    render(__DIR__ . '/../views/pages/modifierCovoit.php', [
+      'title' => 'Modifier un covoiturage',
+      'covoiturage' => $covoit
+    ]);
+  }
+
+  /**
+   * function qui valide la modif du covoit
+   */
+  public function validerModifCovoit()
+  {
+    requireLogin();
+
+    $id = $_POST['id_covoiturage'] ?? null;
+    $user_id = $_SESSION['user_id'];
+
+    if (!$id) {
+      $_SESSION['error'] = "Covoiturage invalide.";
+      header('Location: ' . route('home'));
+      exit;
+    }
+
+    $model = new Covoiturage();
+    $covoit = $model->findById($id);
+
+    if (!$covoit || $covoit['id_utilisateur'] != $user_id) {
+      $_SESSION['error'] = "Tu ne peux pas modifier ce covoit.";
+      header('Location: ' . route('home'));
+      exit;
+    }
+
+    // Données modifiables
+    $data = [
+      'adresse_depart' => $_POST['adresse_depart'],
+      'adresse_arrivee' => $_POST['adresse_arrivee'],
+      'date_depart' => $_POST['date_depart'],
+      'date_arrivee' => $_POST['date_arrivee'],
+      'prix_personne' => $_POST['prix_personne'],
+      'places_disponibles' => $_POST['places_disponibles'],
+      'est_ecologique' => $_POST['est_ecologique'] ?? null,
+      'animaux_autoriser' => $_POST['animaux_autoriser'] ?? null,
+      'fumeur' => $_POST['fumeur'] ?? null,
+    ];
+
+    $model->updateById($id, $data);
+
+    $_SESSION['success'] = "Le covoiturage a été modifié.";
+    header('Location: ' . route('detailsCovoit') . '?id=' . $id);
+    exit;
   }
 }

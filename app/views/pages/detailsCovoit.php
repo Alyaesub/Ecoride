@@ -4,6 +4,7 @@
 
   <?php if (!empty($covoiturage)) : ?>
     <div class="covoiturage-infos">
+      <p><strong>Statut :</strong> <?= ucfirst($covoiturage['statut']) ?></p>
       <p><strong>Départ :</strong> <?= htmlspecialchars($covoiturage['adresse_depart']) ?></p>
       <p><strong>Arrivée :</strong> <?= htmlspecialchars($covoiturage['adresse_arrivee']) ?></p>
       <p><strong>Date & Heure :</strong>
@@ -42,12 +43,31 @@
         </form>
       <?php endif; ?>
 
+      <?php if (!empty($isAuthor)) : ?>
+        <div class="gestion-covoit">
+          <form action="<?= route('modifierCovoiturage') ?>" method="post" style="display:inline;">
+            <input type="hidden" name="id_covoiturage" value="<?= $covoiturage['id_covoiturage'] ?>">
+            <button type="submit" class="btn">✏️ Modifier</button>
+          </form>
+
+          <form action="<?= route('annulerCovoiturage') ?>" method="post" style="display:inline;">
+            <input type="hidden" name="id_covoiturage" value="<?= $covoiturage['id_covoiturage'] ?>">
+            <button type="submit" class="btn">❌ Annuler</button>
+          </form>
+
+          <form action="<?= route('terminerCovoiturage') ?>" method="post" style="display:inline;">
+            <input type="hidden" name="id_covoiturage" value="<?= $covoiturage['id_covoiturage'] ?>">
+            <button type="submit" class="btn">✅ Terminer</button>
+          </form>
+        </div>
+      <?php endif; ?>
+
       <!-- Noter -->
       <?php if (!empty($covoiturage['est_termine']) && empty($covoiturage['deja_note'])) : ?>
         <div class="form-notation">
           <h2>Laisser une note et un commentaire</h2>
 
-          <form action="<?= route('noter-covoiturage') ?>" method="post" onsubmit="return verifierFormulaire();">
+          <form action="<?= route('ajouterNote') ?>" method="post" onsubmit="return verifierFormulaire();">
             <input type="hidden" name="id_covoiturage" value="<?= $covoiturage['id_covoiturage'] ?>">
             <input type="hidden" name="conducteur_id" value="<?= $covoiturage['id_utilisateur'] ?>">
 
@@ -68,7 +88,9 @@
       <?php endif; ?>
 
       <!-- Retour -->
-      <a href="javascript:history.back()" class="btn-retour">↩ Retour</a>
+      <button>
+        <a href="javascript:history.back()" class="btn">↩ Retour</a>
+      </button>
     </div>
 
   <?php else : ?>

@@ -27,32 +27,4 @@ class ActiviteController
       'user' => $user
     ]);
   }
-
-  /**
-   * function Controller qui ajoute une notes
-   */
-  public function ajouterNote()
-  {
-
-    $id_auteur = $_SESSION['user_id'];
-    $id_conducteur = $_POST['conducteur_id'] ?? null;
-    $id_covoiturage = $_POST['covoiturage_id'] ?? null;
-    $note = $_POST['note'] ?? null;
-
-    if ($id_conducteur && $id_covoiturage && $note >= 1 && $note <= 5) {
-      $notation = new Notation();
-      $notation->ajouter($id_conducteur, $id_auteur, $id_covoiturage, $note);
-    }
-
-
-    // Enregistrer l'avis NoSQL CODE POUR LES AVIS EN NOSQL
-    /*  if (!empty($commentaire)) {
-      require_once __DIR__ . '/../../MongoDb/avisFunctions.php';
-      ajouterAvisMongo($id_auteur, $id_conducteur, $id_covoiturage, $commentaire);
-    } */
-
-
-    header('Location: /activite');
-    exit();
-  }
 }

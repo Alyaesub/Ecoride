@@ -78,6 +78,7 @@ CREATE TABLE marque (
     est_ecologique BOOLEAN DEFAULT FALSE,
     animaux_autorises BOOLEAN DEFAULT FALSE,
     fumeur BOOLEAN DEFAULT FALSE,
+    statut ENUM('actif', 'termine', 'annule') NOT NULL DEFAULT 'actif',
     est_annule BOOLEAN DEFAULT FALSE,
     FOREIGN KEY (id_utilisateur) REFERENCES utilisateur (id_utilisateur),
     FOREIGN KEY (id_vehicule) REFERENCES vehicule(id_vehicule),
