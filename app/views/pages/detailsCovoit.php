@@ -20,7 +20,7 @@
       <p><strong>Écologique :</strong> <?= $covoiturage['est_ecologique'] ? '✅ Oui' : '❌ Non' ?></p>
       <p><strong>Animaux acceptés :</strong> <?= $covoiturage['animaux_autorises'] ? '✅ Oui' : '❌ Non' ?></p>
       <p><strong>Fumeur :</strong> <?= $covoiturage['fumeur'] ? '🚬 Oui' : '🚭 Non' ?></p>
-      <p><strong>Prix :</strong> <?= number_format($covoiturage['prix_personne'], 2) ?> €</p>
+      <p><strong>Prix :</strong> <?= number_format($covoiturage['prix_personne'], 2) ?> Crédits</p>
     </div>
 
     <?php if (!empty($passagers)) : ?>
@@ -86,8 +86,6 @@
           </form>
         </div>
       <?php endif; ?>
-
-      <!-- Retour -->
       <button>
         <a href="javascript:history.back()" class="btn">↩ Retour</a>
       </button>
