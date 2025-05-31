@@ -114,10 +114,9 @@ class CovoiturageController
    */
   public function showCovoitDetails()
   {
-    if (!isset($_GET['id'])) {
-      header('Location: ' . route('home'));
-      exit;
-    }
+
+    requireLogin();
+
     $id = intval($_GET['id']);
     $model = new Covoiturage();
     $notationModel = new Notation();
@@ -255,7 +254,7 @@ class CovoiturageController
       'fumeur' => $_POST['fumeur'] ?? null,
     ];
 
-    $model->updateById($id, $data);
+    $model->updateById($id, $data); //gére avec le model
 
     $_SESSION['success'] = "Le covoiturage a été modifié.";
     header('Location: ' . route('detailsCovoit') . '?id=' . $id);
