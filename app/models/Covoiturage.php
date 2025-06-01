@@ -23,11 +23,11 @@ class Covoiturage
       INSERT INTO covoiturage (
         id_utilisateur, id_vehicule, adresse_depart, adresse_arrivee,
         date_depart, date_arrivee, prix_personne, places_disponibles,
-        est_ecologique, animaux_autorises, fumeur, est_annule
+        est_ecologique, animaux_autorises, fumeur, statut
       ) VALUES (
         :id_utilisateur, :id_vehicule, :adresse_depart, :adresse_arrivee,
         :date_depart, :date_arrivee, :prix_personne, :places_disponibles,
-        :est_ecologique, :animaux_autorises, :fumeur, 0
+        :est_ecologique, :animaux_autorises, :fumeur, :statut
       )
     ");
 
@@ -42,7 +42,8 @@ class Covoiturage
       'places_disponibles' => $data['places_disponibles'],
       'est_ecologique' => $data['est_ecologique'],
       'animaux_autorises' => $data['animaux_autorises'],
-      'fumeur' => $data['fumeur']
+      'fumeur' => $data['fumeur'],
+      'statut' => 'actif'
     ]);
 
     return $this->pdo->lastInsertId();
@@ -84,7 +85,7 @@ class Covoiturage
     $stmt = $this->pdo->prepare("SELECT c.*, uc.role_utilisateur
     FROM covoiturage c
     JOIN user_covoiturage uc ON c.id_covoiturage = uc.id_covoiturage
-    WHERE uc.id_utilisateur = :id AND statut != 'annule'
+    WHERE uc.id_utilisateur = :id AND c.statut NOT IN ('annule', 'termine')
     ORDER BY c.date_depart DESC");
     $stmt->execute(['id' => $id_utilisateur]);
     return $stmt->fetchAll(\PDO::FETCH_ASSOC);
@@ -258,6 +259,9 @@ class Covoiturage
     return $stmt->execute();
   }
 
+  /**
+   * methode qui gére l'historique (annuler terminer) des covoit
+   */
   public function getHistoriqueCovoiturages($id_utilisateur)
   {
     $pdo = ConnexionDb::getPdo();
@@ -272,7 +276,7 @@ class Covoiturage
   ";
 
     $stmt = $pdo->prepare($sql);
-    $stmt->execute(['id_utilisateur' => $id_utilisateur]); // ✅ Nom correct
+    $stmt->execute(['id_utilisateur' => $id_utilisateur]);
     return $stmt->fetchAll();
   }
 }

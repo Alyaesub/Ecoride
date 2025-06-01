@@ -13,10 +13,7 @@ class ActiviteController
    */
   public function showActivites()
   {
-    if (!isset($_SESSION['user_id'])) {
-      header("Location: /login");
-      exit();
-    }
+    requireLogin();
 
     $id_utilisateur = $_SESSION['user_id'];
 

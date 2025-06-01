@@ -29,7 +29,7 @@ class CovoiturageController
         'places_disponibles' => intval($_POST['places_disponibles']),
         'est_ecologique' => isset($_POST['est_ecologique']) ? 1 : 0,
         'animaux_autorises' => isset($_POST['animaux_autoriser']) ? 1 : 0,
-        'fumeur' => isset($_POST['fumeur']) ? 1 : 0
+        'fumeur' => isset($_POST['fumeur']) ? 1 : 0,
       ];
 
       if (!$id_vehicule) {
@@ -281,6 +281,43 @@ class CovoiturageController
 
     $model->updateStatut($id, 'annule');
     $_SESSION['success'] = "Covoiturage annulé avec succès.";
+
+    header('Location: ' . route('detailsCovoit') . '?id=' . $id);
+    exit;
+  }
+
+  /**
+   * fonction qui gére si le covoit est terminer
+   */
+  public function terminerCovoiturage()
+  {
+    requireLogin();
+
+    $id = $_POST['id_covoiturage'] ?? null;
+    $userId = $_SESSION['user_id'] ?? null;
+
+    if (!$id) {
+      $_SESSION['error'] = "ID manquant.";
+      header('Location: ' . route('home'));
+      exit;
+    }
+
+    $model = new Covoiturage();
+    $covoit = $model->findById($id);
+
+    if (!$covoit || $covoit['id_utilisateur'] != $userId) {
+      $_SESSION['error'] = "Tu n’as pas l'autorisation de termoiner ce covoit.";
+      header('Location: ' . route('home'));
+      exit;
+    }
+
+    if (strtotime($covoit['date_depart']) < time()) {
+      $model->updateStatut($id, 'termine');
+    }
+
+    $model->updateStatut($id, 'termine');
+    $_SESSION['success'] = "Covoiturage terminé avec succès.";
+
     header('Location: ' . route('detailsCovoit') . '?id=' . $id);
     exit;
   }
