@@ -14,6 +14,7 @@
             <p><strong>Départ :</strong> <?= htmlspecialchars($covoit['date_depart']) ?></p>
             <p><strong>Arrivée :</strong> <?= htmlspecialchars($covoit['date_arrivee']) ?></p>
             <p class="statut-covoit">Statut : <strong><?= ucfirst($covoit['statut']) ?></strong></p>
+            <p><strong>Détails :</strong> <a class="btn-details" href="/detailsCovoit?id=<?= $covoit['id_covoiturage'] ?>">🔍 Voir détails</a></p>
           </div>
         </div>
       <?php endforeach; ?>

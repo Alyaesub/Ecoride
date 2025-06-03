@@ -46,6 +46,8 @@ $routes = [
   'validerModifCovoit' => [CovoiturageController::class, 'validerModifCovoit'],
   'annulerCovoiturage' => [CovoiturageController::class, 'annulerCovoiturage'],
   'terminerCovoiturage' => [CovoiturageController::class, 'terminerCovoiturage'],
+  'participeCovoiturage' => [CovoiturageController::class, 'participeCovoiturage'],
+  'annuleParticipation' => [CovoiturageController::class, 'annuleParticipation'],
   // Utilisateur : login, profil, enregistrement, mise à jour
   'login-user' => [UserController::class, 'login'],
   'profil' => [UserController::class, 'showProfile'],

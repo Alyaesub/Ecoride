@@ -279,4 +279,77 @@ class Covoiturage
     $stmt->execute(['id_utilisateur' => $id_utilisateur]);
     return $stmt->fetchAll();
   }
+
+  /**
+   * methode qui gére la participation
+   */
+  public function verifieParticipation(int $id_utilisateur, int $id_covoiturage): bool
+  {
+    $stmt = $this->pdo->prepare("SELECT COUNT(*) FROM user_covoiturage WHERE id_utilisateur = :user AND id_covoiturage = :covoit");
+    $stmt->execute([
+      'user' => $id_utilisateur,
+      'covoit' => $id_covoiturage
+    ]);
+    return $stmt->fetchColumn() > 0;
+  }
+
+  /**
+   * methode qui supprime la participation d'un passager
+   */
+  public function supprimerParticipation(int $id_utilisateur, int $id_covoiturage): void
+  {
+    $stmt = $this->pdo->prepare("
+    DELETE FROM user_covoiturage
+    WHERE id_utilisateur = :id_utilisateur AND id_covoiturage = :id_covoiturage
+  ");
+    $stmt->execute([
+      'id_utilisateur' => $id_utilisateur,
+      'id_covoiturage' => $id_covoiturage
+    ]);
+  }
+
+  /**
+   * methode qui decrémente le nombre de place dispo
+   */
+  public function decrementePlacesDispo(int $id_covoiturage): bool
+  {
+    $stmt = $this->pdo->prepare("
+    UPDATE covoiturage 
+    SET places_disponibles = places_disponibles - 1 
+    WHERE id_covoiturage = :id AND places_disponibles > 0
+  ");
+    return $stmt->execute(['id' => $id_covoiturage]);
+  }
+
+  /**
+   * methode qui incrémente le nombre de place en cas d'annulation de participation
+   */
+  public function incrementePlacesDispo(int $id_covoiturage): void
+  {
+    $stmt = $this->pdo->prepare("
+    UPDATE covoiturage 
+    SET places_disponibles = places_disponibles + 1 
+    WHERE id_covoiturage = :id
+  ");
+    $stmt->execute(['id' => $id_covoiturage]);
+  }
+
+  /**
+   * Récupère les infos d’un covoiturage + le rôle du user connecté + le pseudo du conducteur
+   */
+  public function getCovoitWithRoleById(int $id_covoiturage, int $id_utilisateur): ?array
+  {
+    $stmt = $this->pdo->prepare("
+      SELECT c.*, uc.role_utilisateur, u.pseudo AS pseudo_conducteur
+      FROM covoiturage c
+      JOIN user_covoiturage uc ON c.id_covoiturage = uc.id_covoiturage
+      JOIN utilisateur u ON u.id_utilisateur = c.id_utilisateur
+      WHERE c.id_covoiturage = :id_covoit AND uc.id_utilisateur = :id_user
+    ");
+    $stmt->execute([
+      'id_covoit' => $id_covoiturage,
+      'id_user' => $id_utilisateur
+    ]);
+    return $stmt->fetch(\PDO::FETCH_ASSOC) ?: null;
+  }
 }

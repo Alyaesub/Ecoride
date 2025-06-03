@@ -46,10 +46,22 @@
 
     <div class="actions">
       <!-- Participer -->
-      <?php if (!empty($covoiturage['peut_participer'])) : ?>
-        <form action="<?= route('participer-covoiturage') ?>" method="post">
+      <?php if (!empty($covoiturage['peut_participer']) && (
+        $covoiturage['statut'] !== 'termine' &&
+        $covoiturage['statut'] !== 'annule' &&
+        $covoiturage['places_disponibles'] > 0 &&
+        $_SESSION['user_id'] !== $covoiturage['id_utilisateur']
+      )) : ?>
+        <form action="<?= route('participeCovoiturage') ?>" method="post">
           <input type="hidden" name="id_covoiturage" value="<?= $covoiturage['id_covoiturage'] ?>">
           <button type="submit" class="btn">Participer</button>
+        </form>
+      <?php endif; ?>
+
+      <?php if (!empty($covoiturage['role_utilisateur']) && $covoiturage['role_utilisateur'] === 'passager') : ?>
+        <form action="<?= route('annuleParticipation') ?>" method="post">
+          <input type="hidden" name="id_covoiturage" value="<?= $covoiturage['id_covoiturage'] ?>">
+          <button type="submit" class="btn btn-danger">Annuler ma participation</button>
         </form>
       <?php endif; ?>
 
@@ -75,7 +87,7 @@
       <?php endif; ?>
 
       <!-- Noter -->
-      <?php if (!empty($covoiturage['est_termine']) && empty($covoiturage['deja_note'])) : ?>
+      <?php if (empty($covoiturage['deja_note'])) : ?>
         <div class="form-notation">
           <h2>Laisser une note et un commentaire</h2>
 
