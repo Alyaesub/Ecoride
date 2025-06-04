@@ -1,11 +1,5 @@
 CREATE DATABASE ecoride;
 
-
-/* -- Table CONFIGURATION
-CREATE TABLE configuration (
-    id_configuration INT AUTO_INCREMENT PRIMARY KEY
-) ENGINE=InnoDB; */
-
 -- Table PARAMETRE
 CREATE TABLE parametre (
     id_parametre INT AUTO_INCREMENT PRIMARY KEY,
@@ -78,7 +72,7 @@ CREATE TABLE marque (
     est_ecologique BOOLEAN DEFAULT FALSE,
     animaux_autorises BOOLEAN DEFAULT FALSE,
     fumeur BOOLEAN DEFAULT FALSE,
-    est_annule BOOLEAN DEFAULT FALSE,
+    statut ENUM('actif', 'termine', 'annule') NOT NULL DEFAULT 'actif',
     FOREIGN KEY (id_utilisateur) REFERENCES utilisateur (id_utilisateur),
     FOREIGN KEY (id_vehicule) REFERENCES vehicule(id_vehicule),
     CONSTRAINT chk_places CHECK (places_disponibles >= 0),
@@ -132,18 +126,10 @@ CREATE TABLE notation (
 #collection NoSQl pour les avis
 {
   "_id": ObjectId("..."),
-  "id_utilisateur_cible": 3,         // ID du conducteur noté
-  "id_utilisateur_auteur": 5,        // ID de l'utilisateur qui laisse l'avis
-  "id_covoiturage": 7,               // Pour faire le lien si besoin
+  "id_utilisateur_cible": 3,          /* ID du conducteur noté */
+  "id_utilisateur_auteur": 5,         /* ID de l'utilisateur qui laisse l'avis */
+  "id_covoiturage": 7,                /* Pour faire le lien si besoin */
   "commentaire": "Conducteur très sympa, trajet agréable !",
   "date_avis": "2025-05-24T17:34:00Z",
-  "valide": false                    // Par défaut à false → modéré par un employé
+  "valide": false                     /* Par défaut à false → modéré par un employé */
 }
-
---Relations entre les tables :
-
--- Utilisateurs → Covoiturages : Un utilisateur (conducteur) peut proposer plusieurs covoiturages.
--- Utilisateurs → Vehicules : Un utilisateur peut posséder plusieurs véhicules.
--- Covoiturages → Vehicules : Un covoiturage est associé à un véhicule.
--- Covoiturages → Avis : Un covoiturage peut recevoir plusieurs avis.
--- Utilisateurs → Avis : Un utilisateur peut laisser plusieurs avis.

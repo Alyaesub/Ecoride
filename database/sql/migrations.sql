@@ -104,3 +104,7 @@ CREATE TABLE notation (
     FOREIGN KEY (id_utilisateur_auteur) REFERENCES utilisateur(id_utilisateur),
     FOREIGN KEY (id_covoiturage) REFERENCES covoiturage(id_covoiturage)
 );ENGINE=InnoDB;
+
+#9 modification de la table covoiturage pour ajouter l'état des covoit
+ALTER TABLE covoiturage
+ADD statut ENUM('actif', 'termine', 'annule') NOT NULL DEFAULT 'actif';

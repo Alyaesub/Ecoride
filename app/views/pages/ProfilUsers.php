@@ -1,8 +1,14 @@
-<?php
-$title = 'Mon profil';
-?>
 <div class="dashboard-container">
   <h1>Bienvenue, <?= htmlspecialchars($user['pseudo']) ?> !</h1>
+  <?php if (!empty($_SESSION['success'])) : ?>
+    <div class="message-success"><?= htmlspecialchars($_SESSION['success']) ?></div>
+    <?php unset($_SESSION['success']); ?>
+  <?php endif; ?>
+
+  <?php if (!empty($_SESSION['error'])) : ?>
+    <div class="message-error"><?= htmlspecialchars($_SESSION['error']) ?></div>
+    <?php unset($_SESSION['error']); ?>
+  <?php endif; ?>
   <div class="profil-actions">
     <button class="logout-button">
       <a href="<?= route("logout") ?>" class="logout-link">Se déconnecter</a>
@@ -66,15 +72,6 @@ $title = 'Mon profil';
 
         <button type="submit">Mettre à jour votre profile</button>
       </form>
-      <?php if (!empty($_SESSION['success'])) : ?>
-        <div class="message-success"><?= htmlspecialchars($_SESSION['success']) ?></div>
-        <?php unset($_SESSION['success']); ?>
-      <?php endif; ?>
-
-      <?php if (!empty($_SESSION['error'])) : ?>
-        <div class="message-error"><?= htmlspecialchars($_SESSION['error']) ?></div>
-        <?php unset($_SESSION['error']); ?>
-      <?php endif; ?>
     </div>
   </div>
 
@@ -188,62 +185,31 @@ $title = 'Mon profil';
   <!-- contenu de l'onglet Gérer Covoiturages -->
   <div id="gestionCovoiturage" class="tab-content">
     <div class="section">
-      <h2>Mes Covoiturages Enregistrés</h2>
-      <p><em>Les covoiturages enregistrés et annulés apparaîtront ici.</em></p>
-      <?php /*
-      <table class="tableCovoiturages" id="tableCovoiturages">
-        <thead>
-          <tr>
-            <th>Numéro du covoiturage</th>
-            <th>Adresse départ</th>
-            <th>Adresse arrivée</th>
-            <th>Date départ</th>
-            <th>Prix unitaire</th>
-            <th>Places</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><?= htmlspecialchars($covoiturage['id_covoiturage']) ?></td>
-            <td><?= htmlspecialchars($covoiturage['adresse_depart']) ?></td>
-            <td><?= htmlspecialchars($covoiturage['adresse_arrivee']) ?></td>
-            <td><?= htmlspecialchars($covoiturage['date_depart']) ?></td>
-            <td><?= htmlspecialchars($covoiturage['prix_personne']) ?></td>
-            <td><?= htmlspecialchars($covoiturage['places_disponibles']) ?></td>
-            <!-- D'autres lignes ici -->
-            <td><button class="cancel-covoiturage" data-id="<?= $covoiturage['id_covoiturage'] ?>">Annuler</button>td>
-          </tr>
-        </tbody>
-      </table>
-      <h2>Mes covoiturages annulés :</h2>
-      <div id="displayGestionCovoiturage" class="display-box">
-        <table class="tableCovoiturages" id="tableCovoiturages">
-          <tbody>
-            <thead>
-              <tr>
-                <th>Numéro du covoiturage</th>
-                <th>Adresse départ</th>
-                <th>Adresse arrivée</th>
-                <th>Date départ</th>
-                <th>Prix unitaire</th>
-                <th>Places</th>
-              </tr>
-            </thead>
-          <tbody>
-            <tr>
-              <td><?= htmlspecialchars($covoiturageAnnule['id_covoiturage']) ?></td>
-              <td><?= htmlspecialchars($covoiturageAnnule['adresse_depart']) ?></td>
-              <td><?= htmlspecialchars($covoiturageAnnule['adresse_arrivee']) ?></td>
-              <td><?= htmlspecialchars($covoiturageAnnule['date_depart']) ?></td>
-              <td><?= htmlspecialchars($covoiturageAnnule['prix_personne']) ?></td>
-              <td><?= htmlspecialchars($covoiturageAnnule['places']) ?></td>
-            </tr>
-          </tbody>
-        </table>
-        </tbody>
+      <div id="displayCovoit" class="display-box">
+        <h2>Mes Covoiturages Enregistrés</h2>
+        <?php if (!empty($covoiturages)) : ?>
+          <?php foreach ($covoiturages as $covoiturage) : ?>
+            <ul>
+              <li><strong>ID :</strong><?= htmlspecialchars($covoiturage['id_covoiturage']) ?></li>
+              <li><strong>Rôle :</strong><?= htmlspecialchars($covoiturage['role_utilisateur']) ?></li>
+              <li><strong>Départ :</strong><?= htmlspecialchars($covoiturage['adresse_depart']) ?></li>
+              <li><strong>Arrivée :</strong><?= htmlspecialchars($covoiturage['adresse_arrivee']) ?></li>
+              <li><strong>Date :</strong><?= date('d/m/Y H:i', strtotime($covoiturage['date_depart'])) ?></li>
+              <li><strong>Détails :</strong> <a class="btn-details" href="/detailsCovoit?id=<?= $covoiturage['id_covoiturage'] ?>">🔍 Voir détails</a></li>
+              <li>
+                <?php if ($covoiturage['role_utilisateur'] === 'conducteur') : ?>
+                  <form action=" <?= route('supprimeCovoiturage') ?>" method="post" style="display:inline;">
+                    <input type="hidden" name="id_covoiturage" value="<?= $covoiturage['id_covoiturage'] ?>">
+                    <button type="submit" onclick="return confirm('Supprimer définitivement ce covoiturage ?')">❌ Supprimer</button>
+                  </form>
+                <?php endif; ?>
+              </li>
+            </ul>
+          <?php endforeach; ?>
+        <?php else : ?>
+          <p>Aucun covoiturage enregistré pour le moment.</p>
+        <?php endif; ?>
       </div>
-      */ ?>
     </div>
   </div>
 
@@ -251,7 +217,40 @@ $title = 'Mon profil';
   <div id="avis" class="tab-content">
     <div class="section">
       <h2>Avis</h2>
-      <h2>Votres notes : ★★★★★</h2>
+      <h2 class="moyenne-note">Votre note :
+        <?php if (!empty($moyenneUtilisateur)) : ?>
+          <?php
+          $fullStars = floor($moyenneUtilisateur);
+          $halfStar = ($moyenneUtilisateur - $fullStars) >= 0.5;
+          ?>
+          <?php for ($i = 1; $i <= $fullStars; $i++) : ?>
+            ⭐
+          <?php endfor; ?>
+          <?= $halfStar ? '⭐️' : '' ?>
+          (<?= $moyenneUtilisateur ?>/5)
+        <?php else : ?>
+          Pas encore noté
+        <?php endif; ?>
+      </h2>
+      <?php if (!empty($notesRecues)) : ?>
+        <section class="notes-recues">
+          <h2>Vos notes reçus</h2>
+          <ul>
+            <?php foreach ($notesRecues as $note) : ?>
+              <li>
+                <strong><?= htmlspecialchars($note['auteur']) ?></strong> a donné
+                <strong><?= $note['note'] ?> ⭐</strong>
+                le <?= date('d/m/Y', strtotime($note['date_notation'])) ?><br>
+                <?php if (!empty($note['commentaire'])) : ?>
+                  <em>"<?= htmlspecialchars($note['commentaire']) ?>"</em>
+                <?php endif; ?>
+              </li>
+            <?php endforeach; ?>
+          </ul>
+        </section>
+      <?php else : ?>
+        <p>Pas encore d’avis reçus.</p>
+      <?php endif; ?>
       <h2>Vos avies envoyés</h2>
       <p><em>Les avis envoyés apparaîtront ici.</em></p>
       <?php /*

@@ -5,6 +5,8 @@ namespace App\Controllers;
 use App\Models\User;
 use App\Models\Marque;
 use App\Models\Vehicule;
+use App\Models\Covoiturage;
+use App\Models\Notation;
 
 
 class UserController
@@ -70,15 +72,6 @@ class UserController
    */
   public function showProfile()
   {
-    ///////////////:DEBUG
-    /*   echo '<pre>';
-    echo 'Session ID: ' . session_id() . "\n";
-    print_r($_SESSION);
-    echo 'Expire à : ' . date('H:i:s', time() + ini_get('session.cookie_lifetime'));
-    echo '</pre>';
-    echo 'session.gc_maxlifetime = ' . ini_get('session.gc_maxlifetime');
-    echo 'session.cookie_lifetime = ' . ini_get('session.cookie_lifetime'); */
-
     // Vérifier si l’utilisateur est connecté
     if (!isset($_SESSION['user_id'])) {
       // Rediriger vers la connexion s’il n’est pas logué
@@ -91,15 +84,36 @@ class UserController
     $vehicules = $vehiculeModel->findAllByUserId($_SESSION['user_id']);
     $marques = $marqueModel->findAll();
 
-
-    // Charger la vue du profil
+    // recupére pour afficher du profil utilisateur
     $userModel = new User();
     $user = $userModel->findById($_SESSION['user_id']);
 
+    //recupere pour charge la vue pour les covoit des user
+    $covoitModel = new Covoiturage();
+    $covoiturages = $covoitModel->getCovoitAndRoleByUser($_SESSION['user_id']);
+
+    // vérifie chaque covoit et mets à jour le statut si la date est passée
+    foreach ($covoiturages as $covoit) {
+      if ($covoit['statut'] === 'actif' && strtotime($covoit['date_depart']) < time()) {
+        $covoitModel->updateStatut($covoit['id_covoiturage'], 'termine');
+      }
+    }
+    // Recharge les covoiturages pour exclure ceux terminés/annulés (car le modèle les filtre)
+    $covoiturages = $covoitModel->getCovoitAndRoleByUser($_SESSION['user_id']);
+
+    $notationModel = new \App\Models\Notation();
+    $notesRecues = $notationModel->getNotesRecues($_SESSION['user_id']);
+
+    $notationModel = new \App\Models\Notation();
+    $moyenneUtilisateur = $notationModel->getMoyenneParUtilisateur($_SESSION['user_id']);
+
     render(__DIR__ . '/../views/pages/profilUsers.php', [
       'title'        => 'Votre profil',
+      'covoiturages' => $covoiturages,
       'vehicules' => $vehicules,
       'marques' => $marques,
+      'notesRecues' => $notesRecues,
+      'moyenneUtilisateur' => $moyenneUtilisateur,
       'user' => $user
     ]);
   }

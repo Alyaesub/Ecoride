@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="fr">
-<!-- page de code qui gére le layout qui sert a l'affichage des pages -->
 
 <head>
   <meta charset="UTF-8">
