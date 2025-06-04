@@ -15,6 +15,7 @@
     flex-direction: column;
     flex: 1;
     padding-bottom: 50px;
+    margin-bottom: 50px;
   }
 }
 @media (min-width: 768px) {
@@ -169,6 +170,7 @@
   .footer p {
     margin: 0;
     font-family: "Readex Pro", sans-serif;
+    color: #F0EAD6;
   }
   .footer .social-media,
   .footer .contact {
@@ -937,6 +939,17 @@
   .activite-section {
     padding: 2rem;
   }
+  .activite-section a {
+    margin: 0 10px;
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+    transition: color 0.3s ease;
+    font-family: "inter", sans-serif;
+  }
+  .activite-section a:hover {
+    color: #fefdfb;
+  }
   .activite-section h1 {
     font-size: 2rem;
     margin-bottom: 1rem;
@@ -960,7 +973,7 @@
     font-family: "Readex Pro", sans-serif;
   }
   .covoit-passe-block {
-    background-color: white;
+    background-color: #F0EAD6;
     border: 1px solid #ddd;
     border-radius: 8px;
     margin-bottom: 1.5rem;
@@ -998,6 +1011,17 @@
   .activite-section {
     padding: 2rem;
   }
+  .activite-section a {
+    margin: 0 10px;
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+    transition: color 0.3s ease;
+    font-family: "inter", sans-serif;
+  }
+  .activite-section a:hover {
+    color: #fefdfb;
+  }
   .activite-section h1 {
     font-size: 2rem;
     margin-bottom: 1rem;
@@ -1020,7 +1044,7 @@
     font-family: "Readex Pro", sans-serif;
   }
   .covoit-passe-block {
-    background-color: white;
+    background-color: #F0EAD6;
     border: 1px solid #ddd;
     border-radius: 8px;
     margin-bottom: 1.5rem;
@@ -1062,6 +1086,7 @@
     background: #274c59;
     border-radius: 5px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 50px;
   }
   h1 {
     color: #fff;
@@ -1246,6 +1271,48 @@
     justify-content: space-between;
     padding: 8px 0;
   }
+  .moyenne-note {
+    display: flex;
+    align-items: center;
+    font-size: 1.2rem;
+    color: #f39c12;
+  }
+  .moyenne-note span.note-chiffre {
+    margin-left: 0.5rem;
+    font-weight: bold;
+    color: #34495e;
+  }
+  .notes-recues {
+    margin-top: 1.5rem;
+    background-color: #F0EAD6;
+    padding: 1rem;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  }
+  .notes-recues ul {
+    list-style-type: none;
+    padding-left: 0;
+  }
+  .notes-recues ul li {
+    padding: 0.75rem;
+    border-bottom: 1px solid #e0e0e0;
+  }
+  .notes-recues ul li strong {
+    color: #4CAF50;
+  }
+  .notes-recues ul li em {
+    display: block;
+    margin-top: 0.5rem;
+    color: #555;
+    font-style: "Geologica", sans-serif;
+  }
+  .notes-recues ul li:last-child {
+    border-bottom: none;
+  }
+  p {
+    font-size: 0.95rem;
+    color: #666;
+  }
 }
 @media (min-width: 768px) {
   .dashboard-container {
@@ -1366,6 +1433,17 @@
     margin-top: 15px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }
+  .display-box a {
+    margin: 0 10px;
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+    transition: color 0.3s ease;
+    font-family: "inter", sans-serif;
+  }
+  .display-box a:hover {
+    color: #fefdfb;
+  }
   .display-box h2 {
     color: #333;
     font-family: "DM Sans", sans-serif;
@@ -1400,6 +1478,53 @@
     padding: 15px;
     margin-top: 15px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  .moyenne-note {
+    display: flex;
+    align-items: center;
+    font-size: 1.2rem;
+    color: #f39c12;
+  }
+  .moyenne-note span.note-chiffre {
+    margin-left: 0.5rem;
+    font-weight: bold;
+    color: #34495e;
+  }
+  .notes-recues {
+    margin-top: 1.5rem;
+    background-color: #F0EAD6;
+    padding: 1rem;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  }
+  .notes-recues h2 {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    color: #2c3e50;
+  }
+  .notes-recues ul {
+    list-style-type: none;
+    padding-left: 0;
+  }
+  .notes-recues ul li {
+    padding: 0.75rem;
+    border-bottom: 1px solid #e0e0e0;
+  }
+  .notes-recues ul li strong {
+    color: #4CAF50;
+  }
+  .notes-recues ul li em {
+    display: block;
+    margin-top: 0.5rem;
+    color: #555;
+    font-family: "Geologica", sans-serif;
+  }
+  .notes-recues ul li:last-child {
+    border-bottom: none;
+  }
+  p {
+    font-size: 0.95rem;
+    color: #666;
   }
 }
 @media (max-width: 768px) {
@@ -2222,4 +2347,132 @@ table tbody tr td {
   font-size: 0.9rem;
   margin-top: 3rem;
   color: #777;
+}
+
+.detail-covoiturage-section {
+  padding: 1.5rem;
+  font-family: "Readex Pro", sans-serif;
+}
+.detail-covoiturage-section .covoiturage-infos {
+  background: #F0EAD6;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+}
+.detail-covoiturage-section .covoiturage-infos p {
+  margin: 0.5rem 0;
+}
+.detail-covoiturage-section .covoiturage-infos .statut-covoit {
+  font-weight: bold;
+}
+.detail-covoiturage-section .covoiturage-infos .statut-covoit.termine {
+  color: gray;
+}
+.detail-covoiturage-section .covoiturage-infos .statut-covoit.annule {
+  color: red;
+}
+.detail-covoiturage-section .covoiturage-infos .statut-covoit.actif {
+  color: green;
+}
+.detail-covoiturage-section .covoiturage-infos .note-conducteur {
+  font-size: 0.9rem;
+  color: #ffaa00;
+  margin-left: 0.5rem;
+}
+.detail-covoiturage-section .passagers-liste {
+  margin-bottom: 1.5rem;
+}
+.detail-covoiturage-section .passagers-liste h2 {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+}
+.detail-covoiturage-section .passagers-liste ul {
+  list-style: none;
+  padding-left: 0;
+}
+.detail-covoiturage-section .passagers-liste ul li {
+  background: #F0EAD6;
+  padding: 0.5rem;
+  margin-bottom: 0.25rem;
+  border-radius: 5px;
+}
+.detail-covoiturage-section .actions {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.detail-covoiturage-section .actions form {
+  display: flex;
+  flex-direction: column;
+}
+.detail-covoiturage-section .actions form .btn {
+  font-family: "Poppins", sans-serif;
+  padding: 0.6rem;
+  border: none;
+  background-color: #388E3C;
+  color: white;
+  font-weight: bold;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.detail-covoiturage-section .actions form .btn:hover {
+  background-color: #4c95ae;
+}
+.detail-covoiturage-section .actions form .btn.btn-danger {
+  background-color: #dc3545;
+}
+.detail-covoiturage-section .actions a.btn {
+  text-align: center;
+  background-color: #6c757d;
+}
+.detail-covoiturage-section .actions .gestion-covoit {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.detail-covoiturage-section .actions .gestion-covoit form {
+  display: inline;
+}
+.detail-covoiturage-section .actions .form-notation h2 {
+  margin-top: 2rem;
+  font-size: 1.2rem;
+}
+.detail-covoiturage-section .actions .form-notation textarea {
+  margin-top: 0.5rem;
+  padding: 0.5rem;
+  border-radius: 5px;
+  width: 100%;
+  resize: vertical;
+}
+.detail-covoiturage-section .actions .form-notation select {
+  margin-top: 0.5rem;
+  padding: 0.4rem;
+  border-radius: 4px;
+}
+.detail-covoiturage-section .actions .form-notation button {
+  margin-top: 1rem;
+}
+
+@media screen and (min-width: 768px) {
+  .detail-covoiturage-section {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  .detail-covoiturage-section .actions {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+  .detail-covoiturage-section .actions .gestion-covoit {
+    flex-direction: row;
+    gap: 0.5rem;
+  }
+  .detail-covoiturage-section .actions form {
+    flex: 1 1 auto;
+  }
+  .detail-covoiturage-section .actions .form-notation {
+    width: 100%;
+    margin-top: 2rem;
+  }
 }/*# sourceMappingURL=main.css.map */

@@ -29,7 +29,7 @@ class CovoiturageController
         'places_disponibles' => intval($_POST['places_disponibles']),
         'est_ecologique' => isset($_POST['est_ecologique']) ? 1 : 0,
         'animaux_autorises' => isset($_POST['animaux_autoriser']) ? 1 : 0,
-        'fumeur' => isset($_POST['fumeur']) ? 1 : 0
+        'fumeur' => isset($_POST['fumeur']) ? 1 : 0,
       ];
 
       if (!$id_vehicule) {
@@ -99,7 +99,11 @@ class CovoiturageController
 
     $departAdresses = $model->getAdressesDepart();
     $arriveeAdresses = $model->getAdressesArrivee();
-    $datesDepart = $model->getDatesDepart();
+    $datesDepart = array_filter($model->getDatesDepart(), function ($date) { //filtre l'affichage par dates dans le selecte
+      return strtotime($date) >= strtotime(date('Y-m-d'));
+    });
+
+
 
     render(__DIR__ . '/../views/pages/formeCovoitVoyage.php', [
       'covoiturages' => $covoiturages,
@@ -114,16 +118,22 @@ class CovoiturageController
    */
   public function showCovoitDetails()
   {
-
     requireLogin();
 
     $id = intval($_GET['id']);
     $model = new Covoiturage();
     $notationModel = new Notation();
 
-
     // Récupère les infos du covoiturage
     $covoit = $model->findById($id);
+
+    // Ajout du rôle utilisateur uniquement si connecté
+    if (!empty($_SESSION['user_id'])) {
+      $roleData = $model->getCovoitWithRoleById($id, $_SESSION['user_id']);
+      if (!empty($roleData['role_utilisateur'])) {
+        $covoit['role_utilisateur'] = $roleData['role_utilisateur'];
+      }
+    }
 
     if (!$covoit) {
       $_SESSION['error'] = "Covoiturage introuvable.";
@@ -142,7 +152,7 @@ class CovoiturageController
     $id_user = $_SESSION['user_id'] ?? null;
     $covoit['peut_participer'] = ($id_user && $covoit['id_utilisateur'] != $id_user);
 
-    // Optionnel : déterminer si le covoit est terminé (par rapport à la date)
+    // détermine si le covoit est terminé (par rapport à la date)
     $covoit['est_termine'] = strtotime($covoit['date_depart']) < time();
 
     // Est-ce que l'utilisateur a déjà noté ce covoit ?
@@ -157,32 +167,6 @@ class CovoiturageController
       'passagers' => $passagers,
       'isAuthor' => $isAuthor
     ]);
-  }
-
-  /**
-   * function Controller qui ajoute une notes
-   */
-  public function ajouterNote()
-  {
-
-    $id_auteur = $_SESSION['user_id'];
-    $id_conducteur = $_POST['conducteur_id'] ?? null;
-    $id_covoiturage = $_POST['covoiturage_id'] ?? null;
-    $note = $_POST['note'] ?? null;
-
-    if ($id_conducteur && $id_covoiturage && $note >= 1 && $note <= 5) {
-      $notation = new Notation();
-      $notation->ajouter($id_conducteur, $id_auteur, $id_covoiturage, $note);
-    }
-
-    // Enregistrer l'avis NoSQL CODE POUR LES AVIS EN NOSQL
-    /*  if (!empty($commentaire)) {
-      require_once __DIR__ . '/../../MongoDb/avisFunctions.php';
-      ajouterAvisMongo($id_auteur, $id_conducteur, $id_covoiturage, $commentaire);
-    } */
-
-    header('Location: /activite');
-    exit();
   }
 
   /**
@@ -258,6 +242,156 @@ class CovoiturageController
 
     $_SESSION['success'] = "Le covoiturage a été modifié.";
     header('Location: ' . route('detailsCovoit') . '?id=' . $id);
+    exit;
+  }
+  /**
+   * function qui gére l'annulation du covoit
+   */
+  public function annulerCovoiturage()
+  {
+    requireLogin();
+
+    $id = $_POST['id_covoiturage'] ?? null;
+    $userId = $_SESSION['user_id'] ?? null;
+
+    if (!$id) {
+      $_SESSION['error'] = "ID manquant.";
+      header('Location: ' . route('home'));
+      exit;
+    }
+
+    $model = new Covoiturage();
+    $covoit = $model->findById($id);
+
+    if ($covoit['id_utilisateur'] !== $_SESSION['user_id']) {
+      $_SESSION['error'] = "Action non autorisée.";
+      header('Location: ' . route('profil'));
+      exit;
+    }
+
+    $model->updateStatut($id, 'annule');
+    $_SESSION['success'] = "Covoiturage annulé avec succès.";
+
+    header('Location: ' . route('detailsCovoit') . '?id=' . $id);
+    exit;
+  }
+
+  /**
+   * fonction qui gére si le covoit est terminer
+   */
+  public function terminerCovoiturage()
+  {
+    requireLogin();
+
+    $id = $_POST['id_covoiturage'] ?? null;
+    $userId = $_SESSION['user_id'] ?? null;
+
+    if (!$id) {
+      $_SESSION['error'] = "ID manquant.";
+      header('Location: ' . route('home'));
+      exit;
+    }
+
+    $model = new Covoiturage();
+    $covoit = $model->findById($id);
+
+    if (!$covoit || $covoit['id_utilisateur'] != $userId) {
+      $_SESSION['error'] = "Tu n’as pas l'autorisation de termoiner ce covoit.";
+      header('Location: ' . route('home'));
+      exit;
+    }
+
+    if (strtotime($covoit['date_depart']) < time()) {
+      $model->updateStatut($id, 'termine');
+    }
+
+    $model->updateStatut($id, 'termine');
+    $_SESSION['success'] = "Covoiturage terminé avec succès.";
+
+    header('Location: ' . route('detailsCovoit') . '?id=' . $id);
+    exit;
+  }
+  /**
+   * function qui gére la participation au covoit
+   */
+  public function participeCovoiturage()
+  {
+    requireLogin();
+    $id_utilisateur = $_SESSION['user_id'];
+    $id_covoiturage = $_POST['id_covoiturage'] ?? null;
+
+    if (!$id_covoiturage) {
+      $_SESSION['error'] = "Covoiturage introuvable.";
+      header('Location: /profil');
+      exit;
+    }
+
+    $model = new Covoiturage();
+    $covoit = $model->findById($id_covoiturage);
+
+    if (!$covoit) {
+      $_SESSION['error'] = "Ce covoiturage n'existe pas.";
+      header('Location: /profil');
+      exit;
+    }
+
+    // verifie si le user est le conducteur
+    if ($covoit['id_utilisateur'] == $id_utilisateur) {
+      $_SESSION['error'] = "Vous êtes le conducteur de ce covoiturage.";
+      header('Location: ' . route('detailsCovoit') . '?id=' . $id_covoiturage);
+      exit;
+    }
+
+    // verifie si terminer ou annuler
+    if ($covoit['statut'] === 'termine' || $covoit['statut'] === 'annule') {
+      $_SESSION['error'] = "Ce covoiturage n’est plus disponible.";
+      header('Location: ' . route('detailsCovoit') . '?id=' . $id_covoiturage);
+      exit;
+    }
+
+    // Vérifie s'il est déjà inscrit
+    $existeDeja = $model->verifieParticipation($id_utilisateur, $id_covoiturage);
+    if ($existeDeja) {
+      $_SESSION['error'] = "Vous participez déjà à ce covoiturage.";
+      header('Location: ' . route('detailsCovoit') . '?id=' . $id_covoiturage);
+      exit;
+    }
+    $covoiturage['peut_participer'] = !$model->verifieParticipation($_SESSION['user_id'], $id_covoiturage);
+
+
+    // Enregistre la participation
+    $model->lierUtilisateur($id_utilisateur, $id_covoiturage, 'passager');
+    $model->decrementePlacesDispo($id_covoiturage);
+
+
+    $_SESSION['success'] = "Vous participez maintenant à ce covoiturage.";
+    header('Location: ' . route('detailsCovoit') . '?id=' . $id_covoiturage);
+    exit;
+  }
+
+  /**
+   * fonction qui sert a annuler la participation d'un passager
+   */
+  public function annuleParticipation()
+  {
+    requireLogin();
+
+    $id_utilisateur = $_SESSION['user_id'];
+    $id_covoiturage = $_POST['id_covoiturage'] ?? null;
+
+    if ($id_covoiturage) {
+      $model = new Covoiturage();
+
+      // Supprimer la participation
+      $model->supprimerParticipation($id_utilisateur, $id_covoiturage);
+
+      // Incrémenter les places
+      $model->incrementePlacesDispo($id_covoiturage);
+
+      $_SESSION['success'] = "Votre participation a été annulée.";
+    }
+
+    header('Location: ' . route('detailsCovoit') . '?id=' . $id_covoiturage);
     exit;
   }
 }

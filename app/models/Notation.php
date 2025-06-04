@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use PDO;
 use App\Models\ConnexionDb;
 
 
@@ -26,6 +27,23 @@ WHERE id_utilisateur_auteur = ? AND id_covoiturage = ?
 ");
     $stmt->execute([$id_auteur, $id_covoiturage]);
     return $stmt->fetchColumn() > 0;
+  }
+
+  /**
+   * methode qui gére les notes reçus
+   */
+  public function getNotesRecues($id_utilisateur)
+  {
+    $pdo = ConnexionDb::getPdo();
+    $stmt = $pdo->prepare("
+    SELECT n.note, n.date_notation, u.pseudo AS auteur
+    FROM notation n
+    JOIN utilisateur u ON n.id_utilisateur_auteur = u.id_utilisateur
+    WHERE n.id_utilisateur_cible = ?
+    ORDER BY n.date_notation DESC
+  ");
+    $stmt->execute([$id_utilisateur]);
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
   }
 
   /**

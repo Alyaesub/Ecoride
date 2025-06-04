@@ -3,6 +3,19 @@
   .activite-section {
     padding: 2rem;
   
+        a {
+                margin: 0 10px;
+                text-decoration: none;
+                color: $text-color;
+                font-weight: bold;
+                transition: color 0.3s ease;
+                font-family: $font-link;
+                &:hover {
+            // Pour l'effet hover, vous pouvez ajuster la luminosité ou utiliser une autre couleur
+                    color: lighten($secondary-color, 10%);
+                }
+            }
+
     h1 {
       font-size: 2rem;
       margin-bottom: 1rem;
@@ -25,10 +38,11 @@
         color: #666;
         font-family: $font-primary;
       }
+
     }
   }
   .covoit-passe-block {
-  background-color: white;
+  background-color: $secondary-color;
   border: 1px solid #ddd;
   border-radius: 8px;
   margin-bottom: 1.5rem;
@@ -77,6 +91,19 @@
 @media (min-width: $min-width-desktop) {
   .activite-section {
     padding: 2rem;
+
+        a {
+                margin: 0 10px;
+                text-decoration: none;
+                color: $text-color;
+                font-weight: bold;
+                transition: color 0.3s ease;
+                font-family: $font-link;
+                &:hover {
+            // Pour l'effet hover, vous pouvez ajuster la luminosité ou utiliser une autre couleur
+                    color: lighten($secondary-color, 10%);
+                }
+            }
   
     h1 {
       font-size: 2rem;
@@ -102,7 +129,7 @@
     }
   }
   .covoit-passe-block {
-  background-color: white;
+  background-color: $secondary-color;
   border: 1px solid #ddd;
   border-radius: 8px;
   margin-bottom: 1.5rem;

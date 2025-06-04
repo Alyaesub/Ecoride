@@ -1,8 +1,14 @@
-<?php
-$title = 'Mon profil';
-?>
 <div class="dashboard-container">
   <h1>Bienvenue, <?= htmlspecialchars($user['pseudo']) ?> !</h1>
+  <?php if (!empty($_SESSION['success'])) : ?>
+    <div class="message-success"><?= htmlspecialchars($_SESSION['success']) ?></div>
+    <?php unset($_SESSION['success']); ?>
+  <?php endif; ?>
+
+  <?php if (!empty($_SESSION['error'])) : ?>
+    <div class="message-error"><?= htmlspecialchars($_SESSION['error']) ?></div>
+    <?php unset($_SESSION['error']); ?>
+  <?php endif; ?>
   <div class="profil-actions">
     <button class="logout-button">
       <a href="<?= route("logout") ?>" class="logout-link">Se déconnecter</a>
@@ -66,15 +72,6 @@ $title = 'Mon profil';
 
         <button type="submit">Mettre à jour votre profile</button>
       </form>
-      <?php if (!empty($_SESSION['success'])) : ?>
-        <div class="message-success"><?= htmlspecialchars($_SESSION['success']) ?></div>
-        <?php unset($_SESSION['success']); ?>
-      <?php endif; ?>
-
-      <?php if (!empty($_SESSION['error'])) : ?>
-        <div class="message-error"><?= htmlspecialchars($_SESSION['error']) ?></div>
-        <?php unset($_SESSION['error']); ?>
-      <?php endif; ?>
     </div>
   </div>
 
@@ -200,10 +197,12 @@ $title = 'Mon profil';
               <li><strong>Date :</strong><?= date('d/m/Y H:i', strtotime($covoiturage['date_depart'])) ?></li>
               <li><strong>Détails :</strong> <a class="btn-details" href="/detailsCovoit?id=<?= $covoiturage['id_covoiturage'] ?>">🔍 Voir détails</a></li>
               <li>
-                <form action=" <?= route('supprimeCovoiturage') ?>" method="post" style="display:inline;">
-                  <input type="hidden" name="id_covoiturage" value="<?= $covoiturage['id_covoiturage'] ?>">
-                  <button type="submit" onclick="return confirm('Supprimer définitivement ce covoiturage ?')">❌ Supprimer</button>
-                </form>
+                <?php if ($covoiturage['role_utilisateur'] === 'conducteur') : ?>
+                  <form action=" <?= route('supprimeCovoiturage') ?>" method="post" style="display:inline;">
+                    <input type="hidden" name="id_covoiturage" value="<?= $covoiturage['id_covoiturage'] ?>">
+                    <button type="submit" onclick="return confirm('Supprimer définitivement ce covoiturage ?')">❌ Supprimer</button>
+                  </form>
+                <?php endif; ?>
               </li>
             </ul>
           <?php endforeach; ?>
@@ -218,7 +217,40 @@ $title = 'Mon profil';
   <div id="avis" class="tab-content">
     <div class="section">
       <h2>Avis</h2>
-      <h2>Votres notes : ★★★★★</h2>
+      <h2 class="moyenne-note">Votre note :
+        <?php if (!empty($moyenneUtilisateur)) : ?>
+          <?php
+          $fullStars = floor($moyenneUtilisateur);
+          $halfStar = ($moyenneUtilisateur - $fullStars) >= 0.5;
+          ?>
+          <?php for ($i = 1; $i <= $fullStars; $i++) : ?>
+            ⭐
+          <?php endfor; ?>
+          <?= $halfStar ? '⭐️' : '' ?>
+          (<?= $moyenneUtilisateur ?>/5)
+        <?php else : ?>
+          Pas encore noté
+        <?php endif; ?>
+      </h2>
+      <?php if (!empty($notesRecues)) : ?>
+        <section class="notes-recues">
+          <h2>Vos notes reçus</h2>
+          <ul>
+            <?php foreach ($notesRecues as $note) : ?>
+              <li>
+                <strong><?= htmlspecialchars($note['auteur']) ?></strong> a donné
+                <strong><?= $note['note'] ?> ⭐</strong>
+                le <?= date('d/m/Y', strtotime($note['date_notation'])) ?><br>
+                <?php if (!empty($note['commentaire'])) : ?>
+                  <em>"<?= htmlspecialchars($note['commentaire']) ?>"</em>
+                <?php endif; ?>
+              </li>
+            <?php endforeach; ?>
+          </ul>
+        </section>
+      <?php else : ?>
+        <p>Pas encore d’avis reçus.</p>
+      <?php endif; ?>
       <h2>Vos avies envoyés</h2>
       <p><em>Les avis envoyés apparaîtront ici.</em></p>
       <?php /*

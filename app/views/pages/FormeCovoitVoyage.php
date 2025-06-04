@@ -1,15 +1,9 @@
-<!-- <?php
-      /* var_dump(isset($departAdresses));
-exit; */
-      ?> -->
-
-
 <div class="voyage-page-container">
 
   <section class="formulaire">
     <section class="search-covoit ">
       <h1>trouver un covoiturage</h1>
-      <form id="searchCovoiturageForm" action="<?= route('search-covoit-form') ?>" method="get">
+      <form id="searchCovoiturageForm" action="<?= route('searchCovoitForm') ?>" method="get">
         <label for="adresse_depart">Adresse de départ :</label>
         <select id="adresse_depart" name="adresse_depart" required>
           <option value="">Sélectionnez une adresse de départ</option>
@@ -39,7 +33,7 @@ exit; */
         <!-- Affichage des informations personnelles enregistrées -->
         <h2>Résultats de la recherche</h2>
         <?php if (empty($covoiturages)) : ?>
-          <p>Aucun covoiturage trouvé.</p>
+          <p><strong>Aucun covoiturage trouvé.</strong></p>
         <?php else: ?>
           <?php foreach ($covoiturages as $covoit): ?>
             <div class="covoit-result">

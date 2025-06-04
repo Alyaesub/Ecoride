@@ -23,11 +23,11 @@ class Covoiturage
       INSERT INTO covoiturage (
         id_utilisateur, id_vehicule, adresse_depart, adresse_arrivee,
         date_depart, date_arrivee, prix_personne, places_disponibles,
-        est_ecologique, animaux_autorises, fumeur, est_annule
+        est_ecologique, animaux_autorises, fumeur, statut
       ) VALUES (
         :id_utilisateur, :id_vehicule, :adresse_depart, :adresse_arrivee,
         :date_depart, :date_arrivee, :prix_personne, :places_disponibles,
-        :est_ecologique, :animaux_autorises, :fumeur, 0
+        :est_ecologique, :animaux_autorises, :fumeur, :statut
       )
     ");
 
@@ -42,7 +42,8 @@ class Covoiturage
       'places_disponibles' => $data['places_disponibles'],
       'est_ecologique' => $data['est_ecologique'],
       'animaux_autorises' => $data['animaux_autorises'],
-      'fumeur' => $data['fumeur']
+      'fumeur' => $data['fumeur'],
+      'statut' => 'actif'
     ]);
 
     return $this->pdo->lastInsertId();
@@ -84,7 +85,7 @@ class Covoiturage
     $stmt = $this->pdo->prepare("SELECT c.*, uc.role_utilisateur
     FROM covoiturage c
     JOIN user_covoiturage uc ON c.id_covoiturage = uc.id_covoiturage
-    WHERE uc.id_utilisateur = :id AND c.est_annule = 0
+    WHERE uc.id_utilisateur = :id AND c.statut NOT IN ('annule', 'termine')
     ORDER BY c.date_depart DESC");
     $stmt->execute(['id' => $id_utilisateur]);
     return $stmt->fetchAll(\PDO::FETCH_ASSOC);
@@ -109,7 +110,7 @@ class Covoiturage
    */
   public function rechercherCovoiturages(array $filters): array
   {
-    $conditions = [];
+    $conditions = ["statut = 'actif'"];
     $params = [];
     if (!empty($filters['adresse_depart'])) {
       $conditions[] = 'adresse_depart = :adresse_depart';
@@ -244,5 +245,111 @@ class Covoiturage
       'fumeur' => isset($data['fumeur']) ? 1 : 0,
       'id' => $id
     ]);
+  }
+
+  /**
+   * methode qui change le statut du covoit (actif, anuller,terminer)
+   */
+  public function updateStatut($id, $nouveauStatut)
+  {
+    $pdo = ConnexionDb::getPdo();
+    $stmt = $pdo->prepare("UPDATE covoiturage SET statut = :statut WHERE id_covoiturage = :id");
+    $stmt->bindParam(':statut', $nouveauStatut);
+    $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+    return $stmt->execute();
+  }
+
+  /**
+   * methode qui gére l'historique (annuler terminer) des covoit
+   */
+  public function getHistoriqueCovoiturages($id_utilisateur)
+  {
+    $pdo = ConnexionDb::getPdo();
+
+    $sql = "
+    SELECT c.*
+    FROM covoiturage c
+    INNER JOIN user_covoiturage uc ON c.id_covoiturage = uc.id_covoiturage
+    WHERE uc.id_utilisateur = :id_utilisateur
+      AND (c.statut = 'termine' OR c.statut = 'annule')
+    ORDER BY c.date_depart DESC
+  ";
+
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute(['id_utilisateur' => $id_utilisateur]);
+    return $stmt->fetchAll();
+  }
+
+  /**
+   * methode qui gére la participation
+   */
+  public function verifieParticipation(int $id_utilisateur, int $id_covoiturage): bool
+  {
+    $stmt = $this->pdo->prepare("SELECT COUNT(*) FROM user_covoiturage WHERE id_utilisateur = :user AND id_covoiturage = :covoit");
+    $stmt->execute([
+      'user' => $id_utilisateur,
+      'covoit' => $id_covoiturage
+    ]);
+    return $stmt->fetchColumn() > 0;
+  }
+
+  /**
+   * methode qui supprime la participation d'un passager
+   */
+  public function supprimerParticipation(int $id_utilisateur, int $id_covoiturage): void
+  {
+    $stmt = $this->pdo->prepare("
+    DELETE FROM user_covoiturage
+    WHERE id_utilisateur = :id_utilisateur AND id_covoiturage = :id_covoiturage
+  ");
+    $stmt->execute([
+      'id_utilisateur' => $id_utilisateur,
+      'id_covoiturage' => $id_covoiturage
+    ]);
+  }
+
+  /**
+   * methode qui decrémente le nombre de place dispo
+   */
+  public function decrementePlacesDispo(int $id_covoiturage): bool
+  {
+    $stmt = $this->pdo->prepare("
+    UPDATE covoiturage 
+    SET places_disponibles = places_disponibles - 1 
+    WHERE id_covoiturage = :id AND places_disponibles > 0
+  ");
+    return $stmt->execute(['id' => $id_covoiturage]);
+  }
+
+  /**
+   * methode qui incrémente le nombre de place en cas d'annulation de participation
+   */
+  public function incrementePlacesDispo(int $id_covoiturage): void
+  {
+    $stmt = $this->pdo->prepare("
+    UPDATE covoiturage 
+    SET places_disponibles = places_disponibles + 1 
+    WHERE id_covoiturage = :id
+  ");
+    $stmt->execute(['id' => $id_covoiturage]);
+  }
+
+  /**
+   * Récupère les infos d’un covoiturage + le rôle du user connecté + le pseudo du conducteur
+   */
+  public function getCovoitWithRoleById(int $id_covoiturage, int $id_utilisateur): ?array
+  {
+    $stmt = $this->pdo->prepare("
+      SELECT c.*, uc.role_utilisateur, u.pseudo AS pseudo_conducteur
+      FROM covoiturage c
+      JOIN user_covoiturage uc ON c.id_covoiturage = uc.id_covoiturage
+      JOIN utilisateur u ON u.id_utilisateur = c.id_utilisateur
+      WHERE c.id_covoiturage = :id_covoit AND uc.id_utilisateur = :id_user
+    ");
+    $stmt->execute([
+      'id_covoit' => $id_covoiturage,
+      'id_user' => $id_utilisateur
+    ]);
+    return $stmt->fetch(\PDO::FETCH_ASSOC) ?: null;
   }
 }

@@ -15,6 +15,7 @@ use App\Controllers\SearchCitiesController; //appelle le controller de la search
 use App\Controllers\ActiviteController;
 use App\Controllers\VehiculeController;
 use App\Controllers\CovoiturageController;
+use App\Controllers\NotationAvisController;
 
 // Init Whoops
 $whoops = new Run();
@@ -35,15 +36,21 @@ $routes = [
     render(__DIR__ . '/app/views/pages/login.php', ['title' => 'Connexion']);
   },
   //  recherche de villes 
-  'search-cities' => [SearchCitiesController::class, 'searchCitiesBar'],
+  'searchCities' => [SearchCitiesController::class, 'searchCitiesBar'],
   // Formulaire de covoiturage
   'covoitVoyage' => [CovoiturageController::class, 'showForm'],
-  'search-covoit-form' => [CovoiturageController::class, 'searchCovoitForm'],
+  'searchCovoitForm' => [CovoiturageController::class, 'searchCovoitForm'],
   'ajouterCovoiturage' => [CovoiturageController::class, 'create'],
   'supprimeCovoiturage' => [CovoiturageController::class, 'supprimeCovoit'],
   'detailsCovoit' => [CovoiturageController::class, 'showCovoitDetails'],
   'modifierCovoiturage' => [CovoiturageController::class, 'modifierCovoiturage'],
   'validerModifCovoit' => [CovoiturageController::class, 'validerModifCovoit'],
+  'annulerCovoiturage' => [CovoiturageController::class, 'annulerCovoiturage'],
+  'terminerCovoiturage' => [CovoiturageController::class, 'terminerCovoiturage'],
+  'participeCovoiturage' => [CovoiturageController::class, 'participeCovoiturage'],
+  'annuleParticipation' => [CovoiturageController::class, 'annuleParticipation'],
+  // Notation et Avis 
+  'ajouterNote' => [NotationAvisController::class, 'ajouterNote'],
   // Utilisateur : login, profil, enregistrement, mise à jour
   'login-user' => [UserController::class, 'login'],
   'profil' => [UserController::class, 'showProfile'],
@@ -56,7 +63,6 @@ $routes = [
   'deleteVehicule' => [VehiculeController::class, 'delete'],
   // Activités & Notation
   'activites' => [ActiviteController::class, 'showActivites'],
-  'activites-notes' => [ActiviteController::class, 'ajouterNote'],
   // Dashboards admin/employé
   'dashboardAdmin' => function () {
     render(__DIR__ . '/app/views/pages/administration/dashboardAdmin.php', ['title' => 'Dashboard Administration']);
@@ -73,11 +79,11 @@ $routes = [
 // basenam récupère juste le dernier segment de l’URL (ex: "/profil" => "profil")
 $page = basename(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH));
 /**
- * Dispatcher : appelle le bon contrôleur ou la bonne vue
+ * Dispatcher qui appelle le bon contrôleur ou la bonne vue
  */
 if (isset($routes[$page])) {
   $action = $routes[$page];
-  // Si c’est une fonction anonyme (ex : route 'login')
+  // Si c’est une fonction anonyme
   if (is_callable($action)) {
     $action();
   } else {
@@ -87,6 +93,6 @@ if (isset($routes[$page])) {
     $controller->$method();
   }
 } else {
-  // Si la route n'existe pas, afficher une page 404
+  // si  route n'existe pas affiche une page 404
   render(__DIR__ . '/app/views/pages/404.php', ['title' => 'Page introuvable']);
 }

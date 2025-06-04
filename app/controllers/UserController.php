@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\Marque;
 use App\Models\Vehicule;
 use App\Models\Covoiturage;
+use App\Models\Notation;
 
 
 class UserController
@@ -91,11 +92,28 @@ class UserController
     $covoitModel = new Covoiturage();
     $covoiturages = $covoitModel->getCovoitAndRoleByUser($_SESSION['user_id']);
 
+    // vérifie chaque covoit et mets à jour le statut si la date est passée
+    foreach ($covoiturages as $covoit) {
+      if ($covoit['statut'] === 'actif' && strtotime($covoit['date_depart']) < time()) {
+        $covoitModel->updateStatut($covoit['id_covoiturage'], 'termine');
+      }
+    }
+    // Recharge les covoiturages pour exclure ceux terminés/annulés (car le modèle les filtre)
+    $covoiturages = $covoitModel->getCovoitAndRoleByUser($_SESSION['user_id']);
+
+    $notationModel = new \App\Models\Notation();
+    $notesRecues = $notationModel->getNotesRecues($_SESSION['user_id']);
+
+    $notationModel = new \App\Models\Notation();
+    $moyenneUtilisateur = $notationModel->getMoyenneParUtilisateur($_SESSION['user_id']);
+
     render(__DIR__ . '/../views/pages/profilUsers.php', [
       'title'        => 'Votre profil',
       'covoiturages' => $covoiturages,
       'vehicules' => $vehicules,
       'marques' => $marques,
+      'notesRecues' => $notesRecues,
+      'moyenneUtilisateur' => $moyenneUtilisateur,
       'user' => $user
     ]);
   }
