@@ -7,6 +7,7 @@
     background: $background-color-dark;
     border-radius: 5px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 50px;
   }
   
   h1 {
@@ -222,6 +223,57 @@
         padding: 8px 0;
       }
   }
+  .moyenne-note {
+    display: flex;
+    align-items: center;
+    font-size: 1.2rem;
+    color: #f39c12;
+
+    span.note-chiffre {
+      margin-left: 0.5rem;
+      font-weight: bold;
+      color: #34495e;
+    }
+  }
+
+  .notes-recues {
+    margin-top: 1.5rem;
+    background-color: $secondary-color;
+    padding: 1rem;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+
+
+    ul {
+      list-style-type: none;
+      padding-left: 0;
+
+      li {
+        padding: 0.75rem;
+        border-bottom: 1px solid #e0e0e0;
+
+        strong {
+          color: $primary-color;
+        }
+
+        em {
+          display: block;
+          margin-top: 0.5rem;
+          color: #555;
+          font-style: $font-secondary;
+        }
+
+        &:last-child {
+          border-bottom: none;
+        }
+      }
+    }
+  }
+
+  p {
+    font-size: 0.95rem;
+    color: #666;
+  }
 }
 
 
@@ -370,6 +422,19 @@
     margin-top: 15px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 
+      a {
+                margin: 0 10px;
+                text-decoration: none;
+                color: $text-color;
+                font-weight: bold;
+                transition: color 0.3s ease;
+                font-family: $font-link;
+                &:hover {
+            // Pour l'effet hover, vous pouvez ajuster la luminosité ou utiliser une autre couleur
+                    color: lighten($secondary-color, 10%);
+                }
+            }
+
     h2 {
       color: $text-color;
       font-family: $font-title;
@@ -409,6 +474,62 @@
     padding: 15px;
     margin-top: 15px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    
+  }
+
+  .moyenne-note {
+    display: flex;
+    align-items: center;
+    font-size: 1.2rem;
+    color: #f39c12;
+
+    span.note-chiffre {
+      margin-left: 0.5rem;
+      font-weight: bold;
+      color: #34495e;
+    }
+  }
+
+  .notes-recues {
+    margin-top: 1.5rem;
+    background-color: $secondary-color;
+    padding: 1rem;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+
+    h2 {
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+      color: #2c3e50;
+    }
+
+    ul {
+      list-style-type: none;
+      padding-left: 0;
+
+      li {
+        padding: 0.75rem;
+        border-bottom: 1px solid #e0e0e0;
+
+        strong {
+          color: $primary-color;
+        }
+
+        em {
+          display: block;
+          margin-top: 0.5rem;
+          color: #555;
+          font-family: $font-secondary;
+        }
+
+        &:last-child {
+          border-bottom: none;
+        }
+      }
+    }
+  }
+
+  p {
+    font-size: 0.95rem;
+    color: #666;
   }
 }

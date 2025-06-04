@@ -3,7 +3,7 @@
   <section class="formulaire">
     <section class="search-covoit ">
       <h1>trouver un covoiturage</h1>
-      <form id="searchCovoiturageForm" action="<?= route('search-covoit-form') ?>" method="get">
+      <form id="searchCovoiturageForm" action="<?= route('searchCovoitForm') ?>" method="get">
         <label for="adresse_depart">Adresse de départ :</label>
         <select id="adresse_depart" name="adresse_depart" required>
           <option value="">Sélectionnez une adresse de départ</option>

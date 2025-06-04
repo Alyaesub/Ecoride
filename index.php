@@ -15,6 +15,7 @@ use App\Controllers\SearchCitiesController; //appelle le controller de la search
 use App\Controllers\ActiviteController;
 use App\Controllers\VehiculeController;
 use App\Controllers\CovoiturageController;
+use App\Controllers\NotationAvisController;
 
 // Init Whoops
 $whoops = new Run();
@@ -35,10 +36,10 @@ $routes = [
     render(__DIR__ . '/app/views/pages/login.php', ['title' => 'Connexion']);
   },
   //  recherche de villes 
-  'search-cities' => [SearchCitiesController::class, 'searchCitiesBar'],
+  'searchCities' => [SearchCitiesController::class, 'searchCitiesBar'],
   // Formulaire de covoiturage
   'covoitVoyage' => [CovoiturageController::class, 'showForm'],
-  'search-covoit-form' => [CovoiturageController::class, 'searchCovoitForm'],
+  'searchCovoitForm' => [CovoiturageController::class, 'searchCovoitForm'],
   'ajouterCovoiturage' => [CovoiturageController::class, 'create'],
   'supprimeCovoiturage' => [CovoiturageController::class, 'supprimeCovoit'],
   'detailsCovoit' => [CovoiturageController::class, 'showCovoitDetails'],
@@ -48,6 +49,8 @@ $routes = [
   'terminerCovoiturage' => [CovoiturageController::class, 'terminerCovoiturage'],
   'participeCovoiturage' => [CovoiturageController::class, 'participeCovoiturage'],
   'annuleParticipation' => [CovoiturageController::class, 'annuleParticipation'],
+  // Notation et Avis 
+  'ajouterNote' => [NotationAvisController::class, 'ajouterNote'],
   // Utilisateur : login, profil, enregistrement, mise à jour
   'login-user' => [UserController::class, 'login'],
   'profil' => [UserController::class, 'showProfile'],

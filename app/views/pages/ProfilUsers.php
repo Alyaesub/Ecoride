@@ -217,7 +217,40 @@
   <div id="avis" class="tab-content">
     <div class="section">
       <h2>Avis</h2>
-      <h2>Votres notes : ★★★★★</h2>
+      <h2 class="moyenne-note">Votre note :
+        <?php if (!empty($moyenneUtilisateur)) : ?>
+          <?php
+          $fullStars = floor($moyenneUtilisateur);
+          $halfStar = ($moyenneUtilisateur - $fullStars) >= 0.5;
+          ?>
+          <?php for ($i = 1; $i <= $fullStars; $i++) : ?>
+            ⭐
+          <?php endfor; ?>
+          <?= $halfStar ? '⭐️' : '' ?>
+          (<?= $moyenneUtilisateur ?>/5)
+        <?php else : ?>
+          Pas encore noté
+        <?php endif; ?>
+      </h2>
+      <?php if (!empty($notesRecues)) : ?>
+        <section class="notes-recues">
+          <h2>Vos notes reçus</h2>
+          <ul>
+            <?php foreach ($notesRecues as $note) : ?>
+              <li>
+                <strong><?= htmlspecialchars($note['auteur']) ?></strong> a donné
+                <strong><?= $note['note'] ?> ⭐</strong>
+                le <?= date('d/m/Y', strtotime($note['date_notation'])) ?><br>
+                <?php if (!empty($note['commentaire'])) : ?>
+                  <em>"<?= htmlspecialchars($note['commentaire']) ?>"</em>
+                <?php endif; ?>
+              </li>
+            <?php endforeach; ?>
+          </ul>
+        </section>
+      <?php else : ?>
+        <p>Pas encore d’avis reçus.</p>
+      <?php endif; ?>
       <h2>Vos avies envoyés</h2>
       <p><em>Les avis envoyés apparaîtront ici.</em></p>
       <?php /*

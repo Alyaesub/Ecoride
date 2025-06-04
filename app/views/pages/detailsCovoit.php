@@ -22,7 +22,7 @@
         <?= date('H:i', strtotime($covoiturage['date_arrivee'])) ?>
       </p>
       <p><strong>Conducteur :</strong> <?= htmlspecialchars($covoiturage['pseudo_conducteur']) ?>
-        <?php if (!empty($notation['note_conducteur'])) : ?>
+        <?php if (!empty($covoiturage['note_conducteur'])) : ?>
           <span class="note-conducteur">— Moyenne : <?= $covoiturage['note_conducteur'] ?> ⭐</span>
         <?php endif; ?>
       </p>
@@ -92,7 +92,7 @@
           <h2>Laisser une note et un commentaire</h2>
 
           <form action="<?= route('ajouterNote') ?>" method="post" onsubmit="return verifierFormulaire();">
-            <input type="hidden" name="id_covoiturage" value="<?= $covoiturage['id_covoiturage'] ?>">
+            <input type="hidden" name="covoiturage_id" value="<?= $covoiturage['id_covoiturage'] ?>">
             <input type="hidden" name="conducteur_id" value="<?= $covoiturage['id_utilisateur'] ?>">
 
             <label for="note">Note (1 à 5) :</label>

@@ -77,7 +77,7 @@
         border-radius: 4px;
         cursor: pointer;
         
-        &.hoover {
+        &:hover {
           background-color: $button-active;
         }
 
@@ -90,7 +90,6 @@
     a.btn {
       text-align: center;
       background-color: #6c757d;
-      
     }
 
     .gestion-covoit {
