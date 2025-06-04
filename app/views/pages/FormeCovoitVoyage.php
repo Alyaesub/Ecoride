@@ -1,9 +1,3 @@
-<!-- <?php
-      /* var_dump(isset($departAdresses));
-exit; */
-      ?> -->
-
-
 <div class="voyage-page-container">
 
   <section class="formulaire">
@@ -39,7 +33,7 @@ exit; */
         <!-- Affichage des informations personnelles enregistrées -->
         <h2>Résultats de la recherche</h2>
         <?php if (empty($covoiturages)) : ?>
-          <p>Aucun covoiturage trouvé.</p>
+          <p><strong>Aucun covoiturage trouvé.</strong></p>
         <?php else: ?>
           <?php foreach ($covoiturages as $covoit): ?>
             <div class="covoit-result">

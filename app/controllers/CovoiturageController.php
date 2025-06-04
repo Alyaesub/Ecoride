@@ -99,7 +99,11 @@ class CovoiturageController
 
     $departAdresses = $model->getAdressesDepart();
     $arriveeAdresses = $model->getAdressesArrivee();
-    $datesDepart = $model->getDatesDepart();
+    $datesDepart = array_filter($model->getDatesDepart(), function ($date) { //filtre l'affichage par dates dans le selecte
+      return strtotime($date) >= strtotime(date('Y-m-d'));
+    });
+
+
 
     render(__DIR__ . '/../views/pages/formeCovoitVoyage.php', [
       'covoiturages' => $covoiturages,
@@ -163,26 +167,6 @@ class CovoiturageController
       'passagers' => $passagers,
       'isAuthor' => $isAuthor
     ]);
-  }
-
-  /**
-   * function Controller qui ajoute une notes
-   */
-  public function ajouterNote()
-  {
-
-    $id_auteur = $_SESSION['user_id'];
-    $id_conducteur = $_POST['conducteur_id'] ?? null;
-    $id_covoiturage = $_POST['covoiturage_id'] ?? null;
-    $note = $_POST['note'] ?? null;
-
-    if ($id_conducteur && $id_covoiturage && $note >= 1 && $note <= 5) {
-      $notation = new Notation();
-      $notation->ajouter($id_conducteur, $id_auteur, $id_covoiturage, $note);
-    }
-
-    header('Location: /activite');
-    exit();
   }
 
   /**

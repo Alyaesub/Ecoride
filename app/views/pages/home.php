@@ -74,7 +74,7 @@ $title = 'Accueil';
     <?php endforeach; ?>
   </div>
   <div class="popular-covoits-actions">
-    <a class="btn-voir-plus" href="/covoiturages-populaires.php">Voir plus de covoiturages</a>
+    <a class="btn-voir-plus" href="<?= route('covoitVoyage') ?>">Trouvez votre covoiturages</a>
   </div>
 </section>
 <script src="/js/searchBar.js"></script>

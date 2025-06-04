@@ -110,9 +110,7 @@
           </form>
         </div>
       <?php endif; ?>
-      <button>
-        <a href="javascript:history.back()" class="btn">↩ Retour</a>
-      </button>
+      <button class="btn" onclick="history.back()">↩ Retour</button>
     </div>
 
   <?php else : ?>

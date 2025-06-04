@@ -110,7 +110,7 @@ class Covoiturage
    */
   public function rechercherCovoiturages(array $filters): array
   {
-    $conditions = [];
+    $conditions = ["statut = 'actif'"];
     $params = [];
     if (!empty($filters['adresse_depart'])) {
       $conditions[] = 'adresse_depart = :adresse_depart';
