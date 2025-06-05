@@ -352,4 +352,18 @@ class Covoiturage
     ]);
     return $stmt->fetch(\PDO::FETCH_ASSOC) ?: null;
   }
+  /**
+   * methode pour les covoit populair dans le home
+   */
+  public function getCovoituragesPopulaires(): array
+  {
+    $pdo = ConnexionDb::getPdo();
+    $stmt = $pdo->query("
+    SELECT * FROM covoiturage
+    WHERE statut = 'actif'
+    ORDER BY RAND()
+    LIMIT 5
+  ");
+    return $stmt->fetchAll();
+  }
 }

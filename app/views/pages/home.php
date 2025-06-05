@@ -1,7 +1,3 @@
-<!-- page de la vue de la page d'accueil -->
-<?php
-$title = 'Accueil';
-?>
 <section class="title-search">
   <div class="title">
     <h1>Bienvenue sur EcoRide</h1>
@@ -60,16 +56,15 @@ $title = 'Accueil';
   </section>
 </section>
 <section id="popular-covoits">
-  <?php require "../Ecoride/app/Controllers/DataTestController.php" ?>
   <h2>🚗 Covoiturages les plus populaires</h2>
   <div class="popular-covoits-container">
-    <?php foreach ($covoiturage as $covoit) : ?>
+    <?php foreach ($covoituragesPopulaires as $covoit) : ?>
       <div class="covoit-card">
         <p><strong>Départ :</strong> <?= htmlspecialchars($covoit['adresse_depart']) ?></p>
         <p><strong>Arrivée :</strong> <?= htmlspecialchars($covoit['adresse_arrivee']) ?></p>
         <p><strong>Date :</strong> <?= date('d/m/Y H:i', strtotime($covoit['date_depart'])) ?></p>
         <p><strong>Prix :</strong> <?= $covoit['prix_personne'] ?> crédits</p>
-        <a class="btn-details" href="<a class=" btn-details" href="/detailsCovoit?id=<?= $covoit['id_covoiturage'] ?>">🔍 Voir détails</a>
+        <a class="btn-details" href="/detailsCovoit?id=<?= $covoit['id_covoiturage'] ?>">🔍 Voir détails</a>
       </div>
     <?php endforeach; ?>
   </div>

@@ -219,6 +219,26 @@
   .buttonlog {
     display: none;
   }
+  .buttonlink {
+    display: inline-block;
+    padding: 5px 5px;
+    background-color: #388E3C;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    text-align: center;
+    font-family: "inter", sans-serif;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-bottom: 15px;
+  }
+  .buttonlink a {
+    text-decoration: none;
+  }
+  .buttonlink:hover {
+    background-color: #4c95ae;
+  }
 }
 @media (min-width: 768px) {
   .buttonlog {
@@ -235,6 +255,23 @@
     transition: background-color 0.3s;
   }
   .buttonlog:hover {
+    background-color: #4c95ae;
+  }
+  .buttonlink {
+    display: inline-block;
+    padding: 5px 5px;
+    background-color: #388E3C;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    text-align: center;
+    font-family: "inter", sans-serif;
+    font-size: 14px;
+    cursor: pointer;
+    margin-bottom: 15px;
+    transition: background-color 0.3s;
+  }
+  .buttonlink:hover {
     background-color: #4c95ae;
   }
 }

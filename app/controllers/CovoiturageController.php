@@ -118,7 +118,7 @@ class CovoiturageController
    */
   public function showCovoitDetails()
   {
-    requireLogin();
+    /* requireLogin(); */
 
     $id = intval($_GET['id']);
     $model = new Covoiturage();

@@ -29,6 +29,7 @@ $routes = [
 
   // Page d'accueil
   'home' => [HomeController::class, 'index'],
+  'showCovoitPopulaire' => [HomeController::class, 'showCovoitPopulaire'],
   // Mentions légales
   'mentions' => [HomeController::class, 'showMentions'],
   // Page de connexion  juste la vue
