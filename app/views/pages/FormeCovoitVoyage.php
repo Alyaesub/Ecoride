@@ -40,12 +40,7 @@
               <p><strong>Départ :</strong> <?= $covoit['adresse_depart'] ?></p>
               <p><strong>Arrivée :</strong> <?= $covoit['adresse_arrivee'] ?></p>
               <p><strong>Date :</strong> <?= $covoit['date_depart'] ?></p>
-
-              <?php if (isset($_SESSION['user'])): ?>
-                <a href="/detailsCovoit?id=<?= $covoit['id_covoiturage'] ?>">🔍 Voir détails</a>
-              <?php else: ?>
-                <a href="<?= route('login') ?>"> Connectez vous pour 🔍 Voir détails</a>
-              <?php endif; ?>
+              <a href="/detailsCovoit?id=<?= $covoit['id_covoiturage'] ?>">🔍 Voir détails</a>
             </div>
           <?php endforeach; ?>
         <?php endif; ?>

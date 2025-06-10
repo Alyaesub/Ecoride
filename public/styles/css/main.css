@@ -209,9 +209,20 @@
   font-size: 0.9rem;
   font-family: "Readex Pro", sans-serif;
   text-decoration: none;
-  color: #F0EAD6;
+  color: #333;
 }
 .cgv:hover {
+  color: #fefdfb;
+}
+
+.contactForm {
+  margin: 5px 0;
+  font-size: 0.9rem;
+  font-family: "Readex Pro", sans-serif;
+  text-decoration: none;
+  color: #333;
+}
+.contactForm:hover {
   color: #fefdfb;
 }
 

@@ -24,6 +24,10 @@ class HomeController
     render(__DIR__ . '/../views/pages/mentionsCgu.php', ['title' => 'Mentions Légales & CGV']);
   }
 
+  public function showContactForm()
+  {
+    render(__DIR__ . '/../views/pages/contactForm.php', ['title' => 'Formulaire de contacts']);
+  }
 
   public function showCovoitPopulaire()
   {
