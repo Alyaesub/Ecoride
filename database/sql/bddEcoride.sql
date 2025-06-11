@@ -1,16 +1,5 @@
 CREATE DATABASE ecoride;
 
--- Table PARAMETRE
-CREATE TABLE parametre (
-    id_parametre INT AUTO_INCREMENT PRIMARY KEY,
-    id_utilisateur INT NOT NULL,
-    propriete VARCHAR(50) NOT NULL,
-    valeur VARCHAR(50),
-    FOREIGN KEY (id_utilisateur) REFERENCES utilisateur(id_utilisateur)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE
-) ENGINE=InnoDB;
-
 --  Table ROLE
 CREATE TABLE role (
     id_role INT AUTO_INCREMENT PRIMARY KEY,
@@ -133,3 +122,15 @@ CREATE TABLE notation (
   "date_avis": "2025-05-24T17:34:00Z",
   "valide": false                     /* Par défaut à false → modéré par un employé */
 }
+
+
+-- Table PARAMETRE
+CREATE TABLE parametre (
+    id_parametre INT AUTO_INCREMENT PRIMARY KEY,
+    id_utilisateur INT NOT NULL,
+    propriete VARCHAR(50) NOT NULL,
+    valeur VARCHAR(50),
+    FOREIGN KEY (id_utilisateur) REFERENCES utilisateur(id_utilisateur)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE
+) ENGINE=InnoDB;

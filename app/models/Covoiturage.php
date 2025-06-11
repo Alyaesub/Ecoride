@@ -165,8 +165,10 @@ class Covoiturage
   public function searchCitiesBar(string $motCle): array
   {
     $sql = "SELECT * FROM covoiturage
-            WHERE adresse_depart LIKE :motCle
-              OR adresse_arrivee LIKE :motCle
+            WHERE statut = 'actif'
+            AND date_depart >= NOW()
+            AND (adresse_depart LIKE :motCle
+              OR adresse_arrivee LIKE :motCle)
             ORDER BY date_depart ASC
             LIMIT 10";
 
