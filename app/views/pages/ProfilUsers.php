@@ -14,6 +14,9 @@
     <button class="logout-button">
       <a href="<?= route("logout") ?>" class="logout-link">Se déconnecter</a>
     </button>
+    <button class="creditsBtn">
+      <a href="" class="creditsBtn-link">Acheter vos crédits</a>
+    </button>
     <?php if (isset($_SESSION['user'])): ?>
       <?php if ($_SESSION['user']['role'] === 1): ?>
         <a href="index.php?page=dashboardAdmin" class="admin-return-link">↩ Retour au Dashboard Admin</a>
