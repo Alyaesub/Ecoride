@@ -1,14 +1,15 @@
 <div class="dashboard-container">
   <h1>Bienvenue, <?= htmlspecialchars($user['pseudo']) ?> !</h1>
   <?php if (!empty($_SESSION['success'])) : ?>
+
     <div class="message-success"><?= htmlspecialchars($_SESSION['success']) ?></div>
     <?php unset($_SESSION['success']); ?>
   <?php endif; ?>
-
   <?php if (!empty($_SESSION['error'])) : ?>
     <div class="message-error"><?= htmlspecialchars($_SESSION['error']) ?></div>
     <?php unset($_SESSION['error']); ?>
   <?php endif; ?>
+
   <div class="profil-actions">
     <button class="logout-button">
       <a href="<?= route("logout") ?>" class="logout-link">Se déconnecter</a>

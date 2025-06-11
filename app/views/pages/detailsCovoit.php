@@ -44,6 +44,11 @@
       </div>
     <?php endif; ?>
 
+    <?php if (!isset($_SESSION['user_id'])) : ?>
+      <p>🚨 Tu dois être connecté pour participer à un covoiturage.</p>
+      <a href="<?= route('login') ?>" class="buttonlink actions">🔐 Se connecter</a>
+    <?php endif; ?>
+
     <div class="actions">
       <!-- Participer -->
       <?php if (!empty($covoiturage['peut_participer']) && (
@@ -87,7 +92,7 @@
       <?php endif; ?>
 
       <!-- Noter -->
-      <?php if (empty($covoiturage['deja_note'])) : ?>
+      <?php if (isset($covoiturage['role_utilisateur']) && $covoiturage['role_utilisateur'] === 'passager' && empty($covoiturage['deja_note'])) : ?>
         <div class="form-notation">
           <h2>Laisser une note et un commentaire</h2>
 
@@ -110,7 +115,7 @@
           </form>
         </div>
       <?php endif; ?>
-      <button class="btn" onclick="history.back()">↩ Retour</button>
+      <button class="buttonlink" onclick="history.back()">↩ Retour</button>
     </div>
 
   <?php else : ?>

@@ -209,15 +209,46 @@
   font-size: 0.9rem;
   font-family: "Readex Pro", sans-serif;
   text-decoration: none;
-  color: #F0EAD6;
+  color: #333;
 }
 .cgv:hover {
+  color: #fefdfb;
+}
+
+.contactForm {
+  margin: 5px 0;
+  font-size: 0.9rem;
+  font-family: "Readex Pro", sans-serif;
+  text-decoration: none;
+  color: #333;
+}
+.contactForm:hover {
   color: #fefdfb;
 }
 
 @media (max-width: 768px) {
   .buttonlog {
     display: none;
+  }
+  .buttonlink {
+    display: inline-block;
+    padding: 5px 5px;
+    background-color: #388E3C;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    text-align: center;
+    font-family: "inter", sans-serif;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-bottom: 15px;
+  }
+  .buttonlink a {
+    text-decoration: none;
+  }
+  .buttonlink:hover {
+    background-color: #4c95ae;
   }
 }
 @media (min-width: 768px) {
@@ -235,6 +266,23 @@
     transition: background-color 0.3s;
   }
   .buttonlog:hover {
+    background-color: #4c95ae;
+  }
+  .buttonlink {
+    display: inline-block;
+    padding: 5px 5px;
+    background-color: #388E3C;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    text-align: center;
+    font-family: "inter", sans-serif;
+    font-size: 14px;
+    cursor: pointer;
+    margin-bottom: 15px;
+    transition: background-color 0.3s;
+  }
+  .buttonlink:hover {
     background-color: #4c95ae;
   }
 }
@@ -1311,7 +1359,8 @@
   }
   p {
     font-size: 0.95rem;
-    color: #666;
+    color: #333;
+    font-family: "Readex Pro", sans-serif;
   }
 }
 @media (min-width: 768px) {
@@ -1524,7 +1573,8 @@
   }
   p {
     font-size: 0.95rem;
-    color: #666;
+    color: #333;
+    font-family: "Readex Pro", sans-serif;
   }
 }
 @media (max-width: 768px) {
@@ -1569,6 +1619,27 @@
     height: auto;
     margin: 0 auto;
   }
+  .voyage-page-container .custom-select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    padding: 0.6rem 1.2rem;
+    background-color: white;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-family: inherit;
+    color: #333;
+    cursor: pointer;
+  }
+  .voyage-page-container .custom-select:hover {
+    border-color: #999;
+  }
+  .voyage-page-container .custom-select:focus {
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.2);
+  }
 }
 @media (min-width: 768px) {
   .voyage-page-container {
@@ -1588,6 +1659,12 @@
   .voyage-page-container h1 {
     font-family: 32px;
     font-family: "DM Sans", sans-serif;
+  }
+  .voyage-page-container .covoit-result {
+    color: #333;
+  }
+  .voyage-page-container .covoit-result p {
+    color: #333;
   }
   .voyage-page-container .description-photo {
     display: flex;
@@ -1615,6 +1692,27 @@
     max-width: 100%;
     height: auto;
     margin: 0 auto;
+  }
+  .voyage-page-container .custom-select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    padding: 0.6rem 1.2rem;
+    background-color: white;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-family: inherit;
+    color: #333;
+    cursor: pointer;
+  }
+  .voyage-page-container .custom-select:hover {
+    border-color: #999;
+  }
+  .voyage-page-container .custom-select:focus {
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.2);
   }
 }
 @media (max-width: 768px) {

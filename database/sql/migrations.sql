@@ -105,6 +105,12 @@ CREATE TABLE notation (
     FOREIGN KEY (id_covoiturage) REFERENCES covoiturage(id_covoiturage)
 );ENGINE=InnoDB;
 
-#9 modification de la table covoiturage pour ajouter l'état des covoit
+#9 retire la colonne est_annule pour la remplacer par la colonne statut
+ALTER TABLE covoiturage DROP COLUMN est_annule;
+
+#10 ajout collone statut pour faciliter la gestion des covoit
 ALTER TABLE covoiturage
 ADD statut ENUM('actif', 'termine', 'annule') NOT NULL DEFAULT 'actif';
+
+
+
