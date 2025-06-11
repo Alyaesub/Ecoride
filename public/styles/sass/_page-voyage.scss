@@ -50,6 +50,30 @@
         }
       }
     }
+    .custom-select {
+      appearance: none; // enlève le style natif (attention : fonctionne pas partout)
+      -webkit-appearance: none;
+      -moz-appearance: none;
+
+      padding: 0.6rem 1.2rem;
+      background-color: white;
+      border: 2px solid #ccc;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-family: inherit;
+      color: #333;
+        cursor: pointer;
+
+        &:hover {
+          border-color: #999;
+        }
+
+        &:focus {
+          border-color: #007bff;
+          outline: none;
+          box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.2);
+        }
+    }
   }
 }
 ////////////// code desktop ////////////
@@ -72,6 +96,13 @@
     h1 {
       font-family: $font-size-xxlarge;
       font-family: $font-title;
+    }
+
+    .covoit-result {
+      color: $text-color;
+      p{
+        color: $text-color;
+      }
     }
   
     // Bloc de droite – description et photo
@@ -106,6 +137,30 @@
           margin: 0 auto;
         }
       }
+    }
+    .custom-select {
+      appearance: none; 
+      -webkit-appearance: none;
+      -moz-appearance: none;
+
+      padding: 0.6rem 1.2rem;
+      background-color: white;
+      border: 2px solid #ccc;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-family: inherit;
+      color: #333;
+        cursor: pointer;
+
+        &:hover {
+          border-color: #999;
+        }
+
+        &:focus {
+          border-color: #007bff;
+          outline: none;
+          box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.2);
+        }
     }
   }
 }

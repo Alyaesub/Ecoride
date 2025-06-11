@@ -118,8 +118,6 @@ class CovoiturageController
    */
   public function showCovoitDetails()
   {
-    /* requireLogin(); */
-
     $id = intval($_GET['id']);
     $model = new Covoiturage();
     $notationModel = new Notation();

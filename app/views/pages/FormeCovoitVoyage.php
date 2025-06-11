@@ -5,32 +5,31 @@
       <h1>trouver un covoiturage</h1>
       <form id="searchCovoiturageForm" action="<?= route('searchCovoitForm') ?>" method="get">
         <label for="adresse_depart">Adresse de départ :</label>
-        <select id="adresse_depart" name="adresse_depart" required>
-          <option value="">Sélectionnez une adresse de départ</option>
+        <select id="adresse_depart" name="adresse_depart" class="custom-select" required>
+          <option value="">Sélectionnez une adresse de départ ⬇</option>
           <?php foreach ($departAdresses as $adresse): ?>
             <option value="<?= htmlspecialchars($adresse['nom']) ?>"><?= htmlspecialchars($adresse['nom']) ?></option>
           <?php endforeach; ?>
         </select><br>
 
         <label for="adresse_arrivee">Adresse d'arrivée :</label>
-        <select id="adresse_arrivee" name="adresse_arrivee" required>
-          <option value="">Sélectionnez une adresse d'arrivée</option>
+        <select id="adresse_arrivee" name="adresse_arrivee" class="custom-select" required>
+          <option value="">Sélectionnez une adresse d'arrivée ⬇</option>
           <?php foreach ($arriveeAdresses as $adresse): ?>
             <option value="<?= htmlspecialchars($adresse['nom']) ?>"><?= htmlspecialchars($adresse['nom']) ?></option>
           <?php endforeach; ?>
         </select><br>
 
         <label for="date_depart">Date et heure de départ :</label>
-        <select id="date_depart" name="date_depart" required>
-          <option value="">Sélectionnez date et heure</option>
+        <select id="date_depart" name="date_depart" class="custom-select" required>
+          <option value="">Sélectionnez date et heure ⬇</option>
           <?php foreach ($datesDepart as $date): ?>
             <option value="<?= htmlspecialchars($date) ?>"><?= htmlspecialchars($date) ?></option>
           <?php endforeach; ?>
         </select><br>
-        <button type="submit">Afficher les covoiturage</button> <!-- affiche les covoit si user est log sinon redirection form register -->
+        <button type="submit">Afficher les covoiturage</button>
       </form>
       <div id="displayInfo" class="display-box">
-        <!-- Affichage des informations personnelles enregistrées -->
         <h2>Résultats de la recherche</h2>
         <?php if (empty($covoiturages)) : ?>
           <p><strong>Aucun covoiturage trouvé.</strong></p>
