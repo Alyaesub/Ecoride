@@ -156,9 +156,3 @@ INSERT INTO marque (id_marque, nom_marque) VALUES
 (24, 'Suzuki'),
 (25, 'Jeep');
 
-#14 retire la colonne est_annule pour la remplacer par la colonne statut
-ALTER TABLE covoiturage DROP COLUMN est_annule;
-
-#15 ajout collone statut pour faciliter la gestion des covoit
-ALTER TABLE covoiturage
-ADD statut ENUM('actif', 'termine', 'annule') NOT NULL DEFAULT 'actif';

@@ -1,34 +1,35 @@
+
 @startuml
-actor "Utilisateur (Conducteur)" as conducteur
-actor "Utilisateur (Passager)" as passager
-participant "Système" as system
-participant "Voiture" as voiture
-participant "Covoiturage" as covoit
+actor "Utilisateur (Conducteur)" as Conducteur
+actor "Utilisateur (Passager)" as Passager
+participant "Système" as System
+participant "Voiture" as Voiture
+participant "Covoiturage" as Covoit
 
 == Connexion du Conducteur ==
-conducteur -> system : Saisit email + mot de passe
-system -> system : Vérifie identifiants
-system --> conducteur : Confirmation de connexion
+Conducteur -> System : Saisit email + mot de passe
+System -> System : Vérifie les identifiants
+System --> Conducteur : Connexion réussie
 
-== Création d'une voiture ==
-conducteur -> system : Saisit infos Voiture (modèle, immat, marque, ...)
-system -> voiture : Crée un nouvel enregistrement Voiture
-voiture --> system : Retourne l'ID de la voiture créée
-system --> conducteur : Confirmation création voiture
+== Création d’une voiture ==
+Conducteur -> System : Remplit le formulaire voiture
+System -> Voiture : Crée l’enregistrement
+Voiture --> System : Retourne l’ID voiture
+System --> Conducteur : Confirmation création
 
-== Création d'un Covoiturage ==
-conducteur -> system : Demande de créer un covoiturage
-system -> covoit : Crée un nouvel enregistrement Covoiturage
-system -> covoit : Associe la voiture au covoiturage
-covoit --> system : Retourne l'ID du covoiturage
-system --> conducteur : Confirmation création covoiturage
+== Création d’un covoiturage ==
+Conducteur -> System : Saisit les infos du trajet
+System -> Covoit : Crée le covoiturage
+System -> Covoit : Associe l’ID de la voiture
+Covoit --> System : Retourne l’ID covoiturage
+System --> Conducteur : Confirmation de publication
 
-== Participation du Passager ==
-passager -> system : Consulte la liste des covoiturages
-system --> passager : Affiche covoiturages disponibles
-passager -> system : Sélectionne le covoiturage et participe
-system -> covoit : Ajoute l'utilisateur (passager) au covoiturage
-covoit --> system : Confirme l'ajout
-system --> passager : Confirmation de participation
+== Participation du passager ==
+Passager -> System : Recherche des trajets
+System --> Passager : Liste des covoiturages
+Passager -> System : Participe à un covoiturage
+System -> Covoit : Ajoute le passager au trajet
+Covoit --> System : Confirmation de participation
+System --> Passager : Trajet réservé avec succès
 
 @enduml

@@ -29,8 +29,10 @@ $routes = [
 
   // Page d'accueil
   'home' => [HomeController::class, 'index'],
-  // Mentions légales
+  'showCovoitPopulaire' => [HomeController::class, 'showCovoitPopulaire'],
+  // Mentions légales et contacts
   'mentions' => [HomeController::class, 'showMentions'],
+  'contactForm' => [HomeController::class, 'showContactForm'],
   // Page de connexion  juste la vue
   'login' => function () {
     render(__DIR__ . '/app/views/pages/login.php', ['title' => 'Connexion']);

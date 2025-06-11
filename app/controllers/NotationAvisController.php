@@ -2,7 +2,6 @@
 
 namespace App\Controllers;
 
-use App\Models\Covoiturage;
 use App\Models\Notation;
 
 class NotationAvisController

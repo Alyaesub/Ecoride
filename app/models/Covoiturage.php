@@ -135,7 +135,9 @@ class Covoiturage
 
   public function getAdressesDepart(): array
   {
-    $stmt = $this->pdo->query("SELECT DISTINCT adresse_depart AS nom FROM covoiturage");
+    $stmt = $this->pdo->query("SELECT DISTINCT adresse_depart
+    AS nom FROM covoiturage
+    WHERE statut = 'actif'");
     $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
     foreach ($results as $index => $row) {
       $results[$index]['id'] = $index + 1;
@@ -145,7 +147,9 @@ class Covoiturage
 
   public function getAdressesArrivee(): array
   {
-    $stmt = $this->pdo->query("SELECT DISTINCT adresse_arrivee AS nom FROM covoiturage");
+    $stmt = $this->pdo->query("SELECT DISTINCT adresse_arrivee 
+    AS nom FROM covoiturage
+    WHERE statut = 'actif'");
     $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
     foreach ($results as $index => $row) {
       $results[$index]['id'] = $index + 1;
@@ -155,7 +159,11 @@ class Covoiturage
 
   public function getDatesDepart(): array
   {
-    $stmt = $this->pdo->query("SELECT DISTINCT DATE(date_depart) AS date_depart FROM covoiturage ORDER BY date_depart ASC");
+    $stmt = $this->pdo->query("SELECT DISTINCT DATE(date_depart) 
+    AS date_depart FROM covoiturage 
+    WHERE statut = 'actif'
+    AND date_depart >= NOW()
+    ORDER BY date_depart ASC");
     return array_column($stmt->fetchAll(PDO::FETCH_ASSOC), 'date_depart');
   }
 
@@ -165,8 +173,10 @@ class Covoiturage
   public function searchCitiesBar(string $motCle): array
   {
     $sql = "SELECT * FROM covoiturage
-            WHERE adresse_depart LIKE :motCle
-              OR adresse_arrivee LIKE :motCle
+            WHERE statut = 'actif'
+            AND date_depart >= NOW()
+            AND (adresse_depart LIKE :motCle
+              OR adresse_arrivee LIKE :motCle)
             ORDER BY date_depart ASC
             LIMIT 10";
 
@@ -351,5 +361,19 @@ class Covoiturage
       'id_user' => $id_utilisateur
     ]);
     return $stmt->fetch(\PDO::FETCH_ASSOC) ?: null;
+  }
+  /**
+   * methode pour les covoit populair dans le home
+   */
+  public function getCovoituragesPopulaires(): array
+  {
+    $pdo = ConnexionDb::getPdo();
+    $stmt = $pdo->query("
+    SELECT * FROM covoiturage
+    WHERE statut = 'actif'
+    ORDER BY RAND()
+    LIMIT 5
+  ");
+    return $stmt->fetchAll();
   }
 }
