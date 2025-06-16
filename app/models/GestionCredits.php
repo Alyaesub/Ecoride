@@ -1,0 +1,39 @@
+<?php
+
+namespace App\Models;
+
+use App\Models\ConnexionDb;
+use PDO;
+
+class Covoiturage
+{
+  private PDO $pdo;
+
+  public function __construct()
+  {
+    $this->pdo = ConnexionDb::getPdo();
+  }
+
+  /**
+   * methode qui gére le versement des credit au chauffeur
+   */
+  public function crediterChauffeur($idCovoit)
+  {
+    //Récupère le nombre de crédits à verser (exemple : 10)
+    $stmt = $this->pdo->prepare("SELECT prix FROM covoiturage WHERE id_covoiturage = :id");
+    $stmt->execute(['id' => $idCovoit]);
+    $prix = $stmt->fetchColumn();
+
+    //Récupère le chauffeur
+    $stmt = $this->pdo->prepare("SELECT id_utilisateur FROM covoiturage WHERE id_covoiturage = :id");
+    $stmt->execute(['id' => $idCovoit]);
+    $chauffeurId = $stmt->fetchColumn();
+
+    //Créditer le chauffeur
+    $stmt = $this->pdo->prepare("UPDATE utilisateur SET credits = credits + :prix WHERE id_utilisateur = :chauffeur");
+    $stmt->execute([
+      'prix' => $prix,
+      'chauffeur' => $chauffeurId
+    ]);
+  }
+}

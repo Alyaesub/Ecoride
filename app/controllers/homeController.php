@@ -19,6 +19,11 @@ class HomeController
     ]);
   }
 
+  public function showLogin()
+  {
+    render(__DIR__ . '/../views/pages/login.php', ['title' => 'Connexion']);
+  }
+
   public function showMentions()
   {
     render(__DIR__ . '/../views/pages/mentionsCgu.php', ['title' => 'Mentions Légales & CGV']);

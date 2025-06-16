@@ -112,5 +112,8 @@ ALTER TABLE covoiturage DROP COLUMN est_annule;
 ALTER TABLE covoiturage
 ADD statut ENUM('actif', 'termine', 'annule') NOT NULL DEFAULT 'actif';
 
+#11 ajout de la collone trajet_termnier pour savoir si le participant a confirmé que le trajet est terminé.
+ALTER TABLE user_covoiturage ADD COLUMN trajet_termine TINYINT(1) DEFAULT 0;
 
-
+#12 modofication pour les status du covoit
+ALTER TABLE covoiturage MODIFY statut ENUM('actif', 'en_cours', 'termine', 'annule') NOT NULL;

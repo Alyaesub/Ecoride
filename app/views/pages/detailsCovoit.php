@@ -55,7 +55,8 @@
         $covoiturage['statut'] !== 'termine' &&
         $covoiturage['statut'] !== 'annule' &&
         $covoiturage['places_disponibles'] > 0 &&
-        $_SESSION['user_id'] !== $covoiturage['id_utilisateur']
+        $_SESSION['user_id'] !== $covoiturage['id_utilisateur'] &&
+        $covoiturage['statut'] !== 'en_cours'
       )) : ?>
         <form action="<?= route('participeCovoiturage') ?>" method="post">
           <input type="hidden" name="id_covoiturage" value="<?= $covoiturage['id_covoiturage'] ?>">
@@ -63,16 +64,22 @@
         </form>
       <?php endif; ?>
 
-      <?php if (!empty($covoiturage['role_utilisateur']) && $covoiturage['role_utilisateur'] === 'passager') : ?>
+      <?php if (
+        !empty($covoiturage['role_utilisateur']) &&
+        ($covoiturage['role_utilisateur'] === 'passager' &&
+          $covoiturage['statut'] !== 'termine' &&
+          $covoiturage['statut'] !== 'en_cours')
+      ) : ?>
         <form action="<?= route('annuleParticipation') ?>" method="post">
           <input type="hidden" name="id_covoiturage" value="<?= $covoiturage['id_covoiturage'] ?>">
           <button type="submit" class="btn btn-danger">Annuler ma participation</button>
         </form>
       <?php endif; ?>
 
-      <?php if ($covoiturage['statut'] === 'actif') : ?>
-        <?php if (!empty($isAuthor)) : ?>
-          <div class="gestion-covoit">
+      <?php if (!empty($isAuthor)) : ?>
+        <div class="gestion-covoit">
+
+          <?php if ($covoiturage['statut'] === 'actif') : ?>
             <form action="<?= route('modifierCovoiturage') ?>" method="post" style="display:inline;">
               <input type="hidden" name="id_covoiturage" value="<?= $covoiturage['id_covoiturage'] ?>">
               <button type="submit" class="btn">✏️ Modifier</button>
@@ -82,13 +89,33 @@
               <input type="hidden" name="id_covoiturage" value="<?= $covoiturage['id_covoiturage'] ?>">
               <button type="submit" class="btn">❌ Annuler</button>
             </form>
+          <?php endif; ?>
 
-            <form action="<?= route('terminerCovoiturage') ?>" method="post" style="display:inline;">
+          <!-- ✅ Bouton unique pour démarrer ou terminer -->
+          <?php if (in_array($covoiturage['statut'], ['actif', 'en_cours'])) : ?>
+            <form action="<?= route('changerStatutCovoiturage') ?>" method="post">
               <input type="hidden" name="id_covoiturage" value="<?= $covoiturage['id_covoiturage'] ?>">
-              <button type="submit" class="btn">✅ Terminer</button>
+              <input type="hidden" name="statut_actuel" value="<?= $covoiturage['statut'] ?>">
+              <button type="submit" class="btn">
+                <?= $covoiturage['statut'] === 'actif' ? '🟢 Démarrer le covoiturage' : '✅ Terminer le covoiturage' ?>
+              </button>
             </form>
-          </div>
-        <?php endif; ?>
+          <?php endif; ?>
+        </div>
+      <?php endif; ?>
+
+      <!-- ✅ Bouton pour les passagers une fois terminé -->
+      <?php if (
+        $covoiturage['statut'] === 'termine' &&
+        $covoiturage['role_utilisateur'] === 'passager' &&
+        empty($covoiturage['trajet_termine'])
+      ) : ?>
+        <form action="<?= route('terminerCovoiturage') ?>" method="post">
+          <input type="hidden" name="id_covoiturage" value="<?= $covoiturage['id_covoiturage'] ?>">
+          <button type="submit" class="btn">✅ Confirmer la fin du trajet</button>
+        </form>
+      <?php elseif (!empty($covoiturage['trajet_termine'])) : ?>
+        <p>✔️ Trajet confirmé</p>
       <?php endif; ?>
 
       <!-- Noter -->

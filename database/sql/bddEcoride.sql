@@ -73,6 +73,7 @@ CREATE TABLE user_covoiturage (
     id_utilisateur INT NOT NULL,
     id_covoiturage INT NOT NULL,
     role_utilisateur ENUM('conducteur', 'passager') NOT NULL,
+    trajet_termine TINYINT(1) DEFAULT 0,
     PRIMARY KEY (id_utilisateur, id_covoiturage),
     CONSTRAINT fk_uc_utilisateur
     FOREIGN KEY (id_utilisateur)

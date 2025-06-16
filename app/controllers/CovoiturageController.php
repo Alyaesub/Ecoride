@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Models\Covoiturage;
 use App\Models\Notation;
+use App\Models\GestionCredits;
 
 class CovoiturageController
 {
@@ -40,7 +41,7 @@ class CovoiturageController
 
       try {
         $id_covoiturage = $model->create($data);
-        $model->lierUtilisateur($data['id_utilisateur'], $id_covoiturage, $_POST['role_utilisateur']);
+        $model->lierUtilisateur($data['id_utilisateur'], $id_covoiturage, 'conducteur');
         $_SESSION['success'] = "Covoiturage enregistré avec succès !";
       } catch (\Exception $e) {
         $_SESSION['error'] = "Erreur : " . $e->getMessage();
@@ -99,8 +100,8 @@ class CovoiturageController
 
     $departAdresses = $model->getAdressesDepart();
     $arriveeAdresses = $model->getAdressesArrivee();
-    $datesDepart = array_filter($model->getDatesDepart(), function ($date) { //filtre l'affichage par dates dans le selecte
-      return strtotime($date) >= strtotime(date('Y-m-d'));
+    $datesDepart = array_filter($model->getDatesDepart(), function ($date) {
+      return date('Y-m-d', strtotime($date)) >= date('Y-m-d');
     });
 
 
@@ -130,6 +131,7 @@ class CovoiturageController
       $roleData = $model->getCovoitWithRoleById($id, $_SESSION['user_id']);
       if (!empty($roleData['role_utilisateur'])) {
         $covoit['role_utilisateur'] = $roleData['role_utilisateur'];
+        $covoit['trajet_termine'] = $roleData['trajet_termine'];
       }
     }
 
@@ -149,9 +151,6 @@ class CovoiturageController
     // bouton pour l'utilisateur peut participer
     $id_user = $_SESSION['user_id'] ?? null;
     $covoit['peut_participer'] = ($id_user && $covoit['id_utilisateur'] != $id_user);
-
-    // détermine si le covoit est terminé (par rapport à la date)
-    $covoit['est_termine'] = strtotime($covoit['date_depart']) < time();
 
     // Est-ce que l'utilisateur a déjà noté ce covoit ?
     $idUser = $_SESSION['user_id'] ?? null;
@@ -293,18 +292,36 @@ class CovoiturageController
     $model = new Covoiturage();
     $covoit = $model->findById($id);
 
-    if (!$covoit || $covoit['id_utilisateur'] != $userId) {
-      $_SESSION['error'] = "Tu n’as pas l'autorisation de termoiner ce covoit.";
+    if (!$covoit) {
+      $_SESSION['error'] = "Covoiturage introuvable.";
       header('Location: ' . route('home'));
       exit;
     }
 
-    if (strtotime($covoit['date_depart']) < time()) {
+    // Vérifie si l'utilisateur est le chauffeur
+    if ($covoit['id_utilisateur'] == $userId) {
+      // Le chauffeur peut marquer comme terminé à tout moment
       $model->updateStatut($id, 'termine');
-    }
 
-    $model->updateStatut($id, 'termine');
-    $_SESSION['success'] = "Covoiturage terminé avec succès.";
+      $model->confirmerParticipationTerminee($id, $userId);
+
+      $_SESSION['success'] = "Tu as marqué le covoiturage comme terminé.";
+    } else {
+      // Vérifie si le covoit est bien marqué terminé par le chauffeur
+      if ($covoit['statut'] !== 'termine') {
+        $_SESSION['error'] = "Le chauffeur n’a pas encore marqué ce trajet comme terminé.";
+      } else {
+        // Le passager confirme la fin
+        $model->confirmerParticipationTerminee($id, $userId);
+        $_SESSION['success'] = "Merci ! Tu as confirmé la fin du covoiturage.";
+
+        // Vérifie si TOUS les passagers ont confirmé
+        if ($model->tousLesPassagersOntTermine($id)) {
+          /* $model->crediterChauffeur($id); */
+          $_SESSION['success'] .= " Le chauffeur a été crédité.";
+        }
+      }
+    }
 
     header('Location: ' . route('detailsCovoit') . '?id=' . $id);
     exit;
@@ -326,6 +343,12 @@ class CovoiturageController
 
     $model = new Covoiturage();
     $covoit = $model->findById($id_covoiturage);
+    try {
+      $model->lierUtilisateur($id_utilisateur, $id_covoiturage, 'passager');
+      $_SESSION['success'] = "Liaison réussie.";
+    } catch (\PDOException $e) {
+      $_SESSION['error'] = "Erreur : " . $e->getMessage();
+    }
 
     if (!$covoit) {
       $_SESSION['error'] = "Ce covoiturage n'existe pas.";
@@ -390,6 +413,45 @@ class CovoiturageController
     }
 
     header('Location: ' . route('detailsCovoit') . '?id=' . $id_covoiturage);
+    exit;
+  }
+
+  /**
+   * function qui change le statut du covoit
+   */
+  public function changerStatutCovoiturage()
+  {
+    requireLogin();
+
+    $id = $_POST['id_covoiturage'] ?? null;
+    $userId = $_SESSION['user_id'] ?? null;
+    $statutActuel = $_POST['statut_actuel'] ?? null;
+
+    if (!$id || !$statutActuel) {
+      $_SESSION['error'] = "Données manquantes.";
+      header('Location: ' . route('home'));
+      exit;
+    }
+
+    $model = new Covoiturage();
+    $covoit = $model->findById($id);
+
+    if (!$covoit || $covoit['id_utilisateur'] != $userId) {
+      $_SESSION['error'] = "Accès refusé.";
+      header('Location: ' . route('home'));
+      exit;
+    }
+
+    if ($statutActuel === 'actif') {
+      $model->updateStatut($id, 'en_cours');
+      $_SESSION['success'] = "Le covoiturage a été démarré.";
+    } elseif ($statutActuel === 'en_cours') {
+      $model->updateStatut($id, 'termine');
+      $model->confirmerParticipationTerminee($id, $userId);
+      $_SESSION['success'] = "Tu as marqué le covoiturage comme terminé.";
+    }
+
+    header('Location: ' . route('detailsCovoit') . '?id=' . $id);
     exit;
   }
 }

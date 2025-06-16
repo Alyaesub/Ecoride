@@ -15,7 +15,7 @@
       <a href="<?= route("logout") ?>" class="logout-link">Se déconnecter</a>
     </button>
     <button class="creditsBtn">
-      <a href="" class="creditsBtn-link">Acheter vos crédits</a>
+      <a href="<?= route("achatCredits") ?>" class="creditsBtn-link">Acheter vos crédits</a>
     </button>
     <?php if (isset($_SESSION['user'])): ?>
       <?php if ($_SESSION['user']['role'] === 1): ?>
