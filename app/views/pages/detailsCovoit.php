@@ -15,17 +15,24 @@
   <?php if (!empty($covoiturage)) : ?>
     <div class="covoiturage-infos">
       <p class="statut-covoit <?= $covoiturage['statut'] ?>"><strong>Statut :</strong> <?= ucfirst($covoiturage['statut']) ?></p>
+      <p><strong>Conducteur :</strong> <?= htmlspecialchars($covoiturage['pseudo_conducteur']) ?>
+        <?php if (!empty($covoiturage['note_conducteur'])) : ?>
+          <span class="note-conducteur">— Moyenne : <?= $covoiturage['note_conducteur'] ?> ⭐</span>
+        <?php endif; ?>
+      </p>
       <p><strong>Départ :</strong> <?= htmlspecialchars($covoiturage['adresse_depart']) ?></p>
       <p><strong>Arrivée :</strong> <?= htmlspecialchars($covoiturage['adresse_arrivee']) ?></p>
       <p><strong>Date & Heure :</strong>
         <?= date('d/m/Y H:i', strtotime($covoiturage['date_depart'])) ?> →
         <?= date('H:i', strtotime($covoiturage['date_arrivee'])) ?>
       </p>
-      <p><strong>Conducteur :</strong> <?= htmlspecialchars($covoiturage['pseudo_conducteur']) ?>
-        <?php if (!empty($covoiturage['note_conducteur'])) : ?>
-          <span class="note-conducteur">— Moyenne : <?= $covoiturage['note_conducteur'] ?> ⭐</span>
-        <?php endif; ?>
-      </p>
+      <?php if (!empty($vehicule)) : ?>
+        <p>
+          <strong>Véhicule :</strong>
+          <?= htmlspecialchars($vehicule['modele']) ?> -
+          <?= htmlspecialchars($vehicule['immatriculation']) ?> (<?= htmlspecialchars($vehicule['nom_marque']) ?>)
+        </p>
+      <?php endif; ?>
       <p><strong>Places disponibles :</strong> <?= $covoiturage['places_disponibles'] ?></p>
       <p><strong>Écologique :</strong> <?= $covoiturage['est_ecologique'] ? '✅ Oui' : '❌ Non' ?></p>
       <p><strong>Animaux acceptés :</strong> <?= $covoiturage['animaux_autorises'] ? '✅ Oui' : '❌ Non' ?></p>

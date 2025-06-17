@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Models\Covoiturage;
 use App\Models\Notation;
+use App\Models\Vehicule;
 use App\Models\GestionCredits;
 
 class CovoiturageController
@@ -122,9 +123,11 @@ class CovoiturageController
     $id = intval($_GET['id']);
     $model = new Covoiturage();
     $notationModel = new Notation();
+    $vehiculeModel = new Vehicule();
 
     // Récupère les infos du covoiturage
     $covoit = $model->findById($id);
+    $vehicule = $vehiculeModel->findWithMarqueById($covoit['id_vehicule']);
 
     // Ajout du rôle utilisateur uniquement si connecté
     if (!empty($_SESSION['user_id'])) {
@@ -162,6 +165,7 @@ class CovoiturageController
     render(__DIR__ . '/../views/pages/detailsCovoit.php', [
       'covoiturage' => $covoit,
       'passagers' => $passagers,
+      'vehicule' => $vehicule,
       'isAuthor' => $isAuthor
     ]);
   }
