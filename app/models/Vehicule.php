@@ -74,4 +74,14 @@ class Vehicule
     $stmt->execute(['id_vehicule' => $idVehicule]);
     return $stmt->fetch(PDO::FETCH_ASSOC);
   }
+
+  /**
+   * methode qui verifie si le vehicule appartient bien a l'user
+   */
+  public function checkVehiculeAppartientAUser($vehiculeId, $userId): bool
+  {
+    $stmt = $this->pdo->prepare("SELECT COUNT(*) FROM vehicule WHERE id_vehicule = :id AND id_utilisateur = :uid");
+    $stmt->execute(['id' => $vehiculeId, 'uid' => $userId]);
+    return $stmt->fetchColumn() > 0;
+  }
 }

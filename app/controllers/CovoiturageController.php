@@ -16,9 +16,16 @@ class CovoiturageController
   {
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       $model = new Covoiturage();
+      $vehiculeModel = new Vehicule();
 
       $id_utilisateur = $_SESSION['user']['id'];
-      $id_vehicule = $model->getVehiculeByUser($id_utilisateur);
+      $id_vehicule = intval($_POST['id_vehicule'] ?? 0);
+
+      if (!$vehiculeModel->checkVehiculeAppartientAUser($id_vehicule, $id_utilisateur)) {
+        $_SESSION['error'] = "Véhicule invalide ou ne vous appartient pas.";
+        header('Location: ' . route('profil'));
+        exit;
+      }
 
       $data = [
         'id_utilisateur' => $id_utilisateur,
@@ -34,12 +41,6 @@ class CovoiturageController
         'fumeur' => isset($_POST['fumeur']) ? 1 : 0,
       ];
 
-      if (!$id_vehicule) {
-        $_SESSION['error'] = "Aucun véhicule trouvé pour votre compte.";
-        header('Location: ' . route('profil'));
-        exit;
-      }
-
       try {
         $id_covoiturage = $model->create($data);
         $model->lierUtilisateur($data['id_utilisateur'], $id_covoiturage, 'conducteur');
@@ -48,6 +49,8 @@ class CovoiturageController
         $_SESSION['error'] = "Erreur : " . $e->getMessage();
         $_SESSION['error'] = "Une erreur est survenue lors de l'enregistrement du covoiturage.";
       }
+
+
 
       header('Location: ' . route('profil'));
       exit;

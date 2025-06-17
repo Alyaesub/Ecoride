@@ -150,6 +150,19 @@
         <label for="date_arrivee">Date d'arrivée :</label>
         <input type="datetime-local" id="date_arrivee" name="date_arrivee" required>
 
+        <label for="id_vehicule">Choisissez un véhicule :</label>
+        <select name="id_vehicule" id="id_vehicule" required>
+          <?php if (!empty($vehicules)) : ?>
+            <?php foreach ($vehicules as $v) : ?>
+              <option value="<?= $v['id_vehicule'] ?>">
+                <?= $v['nom_marque'] . ' ' . $v['modele'] ?> (<?= $v['immatriculation'] ?>)
+              </option>
+            <?php endforeach; ?>
+          <?php else : ?>
+            <option disabled selected>⚠️ Aucun véhicule enregistré</option>
+          <?php endif; ?>
+        </select>
+
         <label for="prix_personne">Prix par personne (crédits) :</label>
         <input type="number" id="prix_personne" name="prix_personne" step="0.01" required>
 
