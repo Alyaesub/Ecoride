@@ -297,14 +297,11 @@ class CovoiturageController
       header('Location: ' . route('home'));
       exit;
     }
-
     // Vérifie si l'utilisateur est le chauffeur
     if ($covoit['id_utilisateur'] == $userId) {
       // Le chauffeur peut marquer comme terminé à tout moment
       $model->updateStatut($id, 'termine');
-
       $model->confirmerParticipationTerminee($id, $userId);
-
       $_SESSION['success'] = "Tu as marqué le covoiturage comme terminé.";
     } else {
       // Vérifie si le covoit est bien marqué terminé par le chauffeur
@@ -317,7 +314,7 @@ class CovoiturageController
 
         // Vérifie si TOUS les passagers ont confirmé
         if ($model->tousLesPassagersOntTermine($id)) {
-          /* $model->crediterChauffeur($id); */
+          /* $model->crediterChauffeur($id); */ //////////////////🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧
           $_SESSION['success'] .= " Le chauffeur a été crédité.";
         }
       }
@@ -326,6 +323,7 @@ class CovoiturageController
     header('Location: ' . route('detailsCovoit') . '?id=' . $id);
     exit;
   }
+
   /**
    * function qui gére la participation au covoit
    */
@@ -343,12 +341,6 @@ class CovoiturageController
 
     $model = new Covoiturage();
     $covoit = $model->findById($id_covoiturage);
-    try {
-      $model->lierUtilisateur($id_utilisateur, $id_covoiturage, 'passager');
-      $_SESSION['success'] = "Liaison réussie.";
-    } catch (\PDOException $e) {
-      $_SESSION['error'] = "Erreur : " . $e->getMessage();
-    }
 
     if (!$covoit) {
       $_SESSION['error'] = "Ce covoiturage n'existe pas.";
@@ -379,12 +371,14 @@ class CovoiturageController
     }
     $covoiturage['peut_participer'] = !$model->verifieParticipation($_SESSION['user_id'], $id_covoiturage);
 
-
     // Enregistre la participation
-    $model->lierUtilisateur($id_utilisateur, $id_covoiturage, 'passager');
-    $model->decrementePlacesDispo($id_covoiturage);
-
-
+    try {
+      $model->lierUtilisateur($id_utilisateur, $id_covoiturage, 'passager');
+      $model->decrementePlacesDispo($id_covoiturage);
+      $_SESSION['success'] = "Participation enregistré";
+    } catch (\PDOException $e) {
+      $_SESSION['error'] = "Erreur lors de l’inscription : " . $e->getMessage();
+    }
     $_SESSION['success'] = "Vous participez maintenant à ce covoiturage.";
     header('Location: ' . route('detailsCovoit') . '?id=' . $id_covoiturage);
     exit;

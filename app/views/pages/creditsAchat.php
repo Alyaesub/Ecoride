@@ -1,6 +1,15 @@
 <section class="credit-info">
   <h2>Acheter des crédits</h2>
 
+  <?php if (!empty($_SESSION['success'])) : ?>
+    <div class="message-success"><?= htmlspecialchars($_SESSION['success']) ?></div>
+    <?php unset($_SESSION['success']); ?>
+  <?php endif; ?>
+  <?php if (!empty($_SESSION['error'])) : ?>
+    <div class="message-error"><?= htmlspecialchars($_SESSION['error']) ?></div>
+    <?php unset($_SESSION['error']); ?>
+  <?php endif; ?>
+
   <p>
     Chez <strong>EcoRide</strong>, nous avons mis en place un système de crédits pour assurer un fonctionnement simple, équitable et sécurisé de notre plateforme.
   </p>
@@ -20,7 +29,7 @@
 
 <section class="credit-form">
   <h3>Choisissez votre formule :</h3>
-  <form action="/payer-credit" method="POST">
+  <form action="<?= route('acheteCredits') ?>" method="POST">
     <label for="credit_amount">Choisissez un montant :</label>
     <select name="credit_amount" id="credit_amount">
       <option value="5">5 crédits - 5€</option>

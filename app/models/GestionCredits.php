@@ -5,13 +5,24 @@ namespace App\Models;
 use App\Models\ConnexionDb;
 use PDO;
 
-class Covoiturage
+class GestionCredits
 {
   private PDO $pdo;
 
   public function __construct()
   {
     $this->pdo = ConnexionDb::getPdo();
+  }
+  /**
+   * methode qui ajoute des credits apres "paiment"
+   */
+  public function ajouterCredits(int $idUser, int $nbCredits): bool
+  {
+    $stmt = $this->pdo->prepare("UPDATE utilisateur SET credits = credits + :credits WHERE id_utilisateur = :id");
+    return $stmt->execute([
+      'credits' => $nbCredits,
+      'id' => $idUser
+    ]);
   }
 
   /**

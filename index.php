@@ -65,7 +65,8 @@ $routes = [
   // Activités & Notation
   'activites' => [ActiviteController::class, 'showActivites'],
   // Gestions des crédits
-  'achatCredits' => [CreditsController::class, 'showFormCredit'],
+  'showFormCredit' => [CreditsController::class, 'showFormCredit'],
+  'acheteCredits' => [CreditsController::class, 'acheteCredits'],
   // Dashboards admin/employé
   'dashboardAdmin' => function () {
     render(__DIR__ . '/app/views/pages/administration/dashboardAdmin.php', ['title' => 'Dashboard Administration']);

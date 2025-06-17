@@ -1,7 +1,7 @@
 <div class="dashboard-container">
   <h1>Bienvenue, <?= htmlspecialchars($user['pseudo']) ?> !</h1>
-  <?php if (!empty($_SESSION['success'])) : ?>
 
+  <?php if (!empty($_SESSION['success'])) : ?>
     <div class="message-success"><?= htmlspecialchars($_SESSION['success']) ?></div>
     <?php unset($_SESSION['success']); ?>
   <?php endif; ?>
@@ -15,7 +15,7 @@
       <a href="<?= route("logout") ?>" class="logout-link">Se déconnecter</a>
     </button>
     <button class="creditsBtn">
-      <a href="<?= route("achatCredits") ?>" class="creditsBtn-link">Acheter vos crédits</a>
+      <a href="<?= route("showFormCredit") ?>" class="creditsBtn-link">Acheter vos crédits</a>
     </button>
     <?php if (isset($_SESSION['user'])): ?>
       <?php if ($_SESSION['user']['role'] === 1): ?>
