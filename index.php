@@ -16,6 +16,7 @@ use App\Controllers\ActiviteController;
 use App\Controllers\VehiculeController;
 use App\Controllers\CovoiturageController;
 use App\Controllers\CreditsController;
+use App\Controllers\MaillingController;
 use App\Controllers\NotationAvisController;
 
 // Init Whoops
@@ -67,6 +68,8 @@ $routes = [
   // Gestions des crédits
   'showFormCredit' => [CreditsController::class, 'showFormCredit'],
   'acheteCredits' => [CreditsController::class, 'acheteCredits'],
+  // Mailling
+  'ContactMailEcoride' => [MaillingController::class, 'sendContactMail'],
   // Dashboards admin/employé
   'dashboardAdmin' => function () {
     render(__DIR__ . '/app/views/pages/administration/dashboardAdmin.php', ['title' => 'Dashboard Administration']);
