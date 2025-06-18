@@ -14,6 +14,7 @@ class ComposerStaticInit1a2012ceb5a454724fa2331cd94c71c7
         'P' => 
         array (
             'Psr\\Log\\' => 8,
+            'PHPMailer\\PHPMailer\\' => 20,
         ),
         'A' => 
         array (
@@ -33,6 +34,10 @@ class ComposerStaticInit1a2012ceb5a454724fa2331cd94c71c7
         'Psr\\Log\\' => 
         array (
             0 => __DIR__ . '/..' . '/psr/log/src',
+        ),
+        'PHPMailer\\PHPMailer\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/phpmailer/phpmailer/src',
         ),
         'App\\Models\\' => 
         array (

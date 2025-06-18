@@ -61,7 +61,7 @@ CREATE TABLE marque (
     est_ecologique BOOLEAN DEFAULT FALSE,
     animaux_autorises BOOLEAN DEFAULT FALSE,
     fumeur BOOLEAN DEFAULT FALSE,
-    statut ENUM('actif', 'termine', 'annule') NOT NULL DEFAULT 'actif',
+    statut ENUM('actif', 'en_cours' 'termine', 'annule') NOT NULL DEFAULT 'actif',
     FOREIGN KEY (id_utilisateur) REFERENCES utilisateur (id_utilisateur),
     FOREIGN KEY (id_vehicule) REFERENCES vehicule(id_vehicule),
     CONSTRAINT chk_places CHECK (places_disponibles >= 0),
@@ -73,6 +73,7 @@ CREATE TABLE user_covoiturage (
     id_utilisateur INT NOT NULL,
     id_covoiturage INT NOT NULL,
     role_utilisateur ENUM('conducteur', 'passager') NOT NULL,
+    trajet_termine TINYINT(1) DEFAULT 0,
     PRIMARY KEY (id_utilisateur, id_covoiturage),
     CONSTRAINT fk_uc_utilisateur
     FOREIGN KEY (id_utilisateur)
@@ -97,6 +98,22 @@ CREATE TABLE notation (
     UNIQUE(id_utilisateur_auteur, id_covoiturage),
     FOREIGN KEY (id_utilisateur_cible) REFERENCES utilisateur(id_utilisateur),
     FOREIGN KEY (id_utilisateur_auteur) REFERENCES utilisateur(id_utilisateur),
+    FOREIGN KEY (id_covoiturage) REFERENCES covoiturage(id_covoiturage)
+);
+
+#table pour géré les transaction
+CREATE TABLE transaction (
+    id_transaction INT AUTO_INCREMENT PRIMARY KEY,
+    id_utilisateur INT NOT NULL,           -- Celui qui reçoit les crédits (admin ou chauffeur)
+    id_covoiturage INT NOT NULL,           -- Le covoit concerné
+    id_passager INT NOT NULL,              -- Celui qui paie
+    montant INT NOT NULL,                  -- Nombre de crédits transférés
+    type ENUM('plateforme', 'chauffeur') NOT NULL,
+    statut ENUM('en_attente', 'validée', 'refusée') DEFAULT 'en_attente',
+    date_transaction TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+    FOREIGN KEY (id_utilisateur) REFERENCES utilisateur(id_utilisateur),
+    FOREIGN KEY (id_passager) REFERENCES utilisateur(id_utilisateur),
     FOREIGN KEY (id_covoiturage) REFERENCES covoiturage(id_covoiturage)
 );
 

@@ -1,7 +1,7 @@
 <div class="dashboard-container">
   <h1>Bienvenue, <?= htmlspecialchars($user['pseudo']) ?> !</h1>
-  <?php if (!empty($_SESSION['success'])) : ?>
 
+  <?php if (!empty($_SESSION['success'])) : ?>
     <div class="message-success"><?= htmlspecialchars($_SESSION['success']) ?></div>
     <?php unset($_SESSION['success']); ?>
   <?php endif; ?>
@@ -13,6 +13,9 @@
   <div class="profil-actions">
     <button class="logout-button">
       <a href="<?= route("logout") ?>" class="logout-link">Se déconnecter</a>
+    </button>
+    <button class="creditsBtn">
+      <a href="<?= route("showFormCredit") ?>" class="creditsBtn-link">Acheter vos crédits</a>
     </button>
     <?php if (isset($_SESSION['user'])): ?>
       <?php if ($_SESSION['user']['role'] === 1): ?>
@@ -146,6 +149,19 @@
 
         <label for="date_arrivee">Date d'arrivée :</label>
         <input type="datetime-local" id="date_arrivee" name="date_arrivee" required>
+
+        <label for="id_vehicule">Choisissez un véhicule :</label>
+        <select name="id_vehicule" id="id_vehicule" required>
+          <?php if (!empty($vehicules)) : ?>
+            <?php foreach ($vehicules as $v) : ?>
+              <option value="<?= $v['id_vehicule'] ?>">
+                <?= $v['nom_marque'] . ' ' . $v['modele'] ?> (<?= $v['immatriculation'] ?>)
+              </option>
+            <?php endforeach; ?>
+          <?php else : ?>
+            <option disabled selected>⚠️ Aucun véhicule enregistré</option>
+          <?php endif; ?>
+        </select>
 
         <label for="prix_personne">Prix par personne (crédits) :</label>
         <input type="number" id="prix_personne" name="prix_personne" step="0.01" required>

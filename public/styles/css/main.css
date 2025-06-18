@@ -1140,6 +1140,7 @@
     color: #fff;
     text-align: center;
     font-family: "DM Sans", sans-serif;
+    margin-bottom: 2rem;
   }
   h2 {
     color: #fff;
@@ -1165,6 +1166,23 @@
     font-weight: bold;
   }
   .profil-actions .logout-button:hover {
+    background-color: #4c95ae;
+  }
+  .profil-actions .creditsBtn {
+    background-color: #388E3C;
+    border: none;
+    padding: 0.6rem 1.2rem;
+    margin-left: 50px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  .profil-actions .creditsBtn .creditsBtn-link {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+  }
+  .profil-actions .creditsBtn:hover {
     background-color: #4c95ae;
   }
   .profil-actions .admin-return-link {
@@ -1376,6 +1394,7 @@
     color: #fff;
     text-align: center;
     font-family: "DM Sans", sans-serif;
+    margin-bottom: 3rem;
   }
   h2 {
     color: #fff;
@@ -1401,6 +1420,23 @@
     font-weight: bold;
   }
   .profil-actions .logout-button:hover {
+    background-color: #4c95ae;
+  }
+  .profil-actions .creditsBtn {
+    background-color: #388E3C;
+    border: none;
+    padding: 0.6rem 1.2rem;
+    margin-left: 16rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  .profil-actions .creditsBtn .creditsBtn-link {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+  }
+  .profil-actions .creditsBtn:hover {
     background-color: #4c95ae;
   }
   .profil-actions .admin-return-link {
