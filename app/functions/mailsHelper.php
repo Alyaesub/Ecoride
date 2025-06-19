@@ -76,7 +76,9 @@ function sendConfirmationMail(array $user, array $covoit): bool
   $html = "
     <html><body>
         <p>Bonjour <strong>{$user['prenom']}</strong>,</p>
-        <p>Le trajet <strong>{$covoit['adresse_depart']} → {$covoit['adresse_arrivee']}</strong> est terminé.</p>
+        <p>Votre conducteur a marqué le trajet <strong>{$covoit['adresse_depart']} → {$covoit['adresse_arrivee']}</strong> comme terminé.
+        Veuillez le confirmer pour que le chaufeur soit créditer
+        Merci de vous connecter à votre espace pour le confirmer.</p>
         <p>
             <a href='https://ecoride.fr/detailsCovoit?id={$covoit['id_covoiturage']}'>
                 Cliquez ici pour le confirmer
