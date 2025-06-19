@@ -133,3 +133,12 @@ CREATE TABLE transaction (
     FOREIGN KEY (id_passager) REFERENCES utilisateur(id_utilisateur),
     FOREIGN KEY (id_covoiturage) REFERENCES covoiturage(id_covoiturage)
 );
+
+#changement pour la suppresion en cascade des transaction quand l'user supprime un covoit
+ALTER TABLE transaction 
+DROP FOREIGN KEY transaction_ibfk_3;
+
+ALTER TABLE transaction
+ADD CONSTRAINT transaction_ibfk_3 
+FOREIGN KEY (id_covoiturage) REFERENCES covoiturage(id_covoiturage)
+ON DELETE CASCADE;

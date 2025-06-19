@@ -137,4 +137,19 @@ class GestionCredits
     $stmt->execute();
     return $stmt->fetchColumn() ?: null;
   }
+
+  /**
+   * methode qui recuéper les passager du covoit mes par id pour le mailing
+   */
+  public function getPassagersByCovoitId(int $id_covoit): array
+  {
+    $stmt = $this->pdo->prepare("
+    SELECT u.id_utilisateur, u.prenom, u.email
+    FROM user_covoiturage uc
+    JOIN utilisateur u ON uc.id_utilisateur = u.id_utilisateur
+    WHERE uc.id_covoiturage = ? AND uc.role_utilisateur = 'passager'
+  ");
+    $stmt->execute([$id_covoit]);
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+  }
 }

@@ -77,7 +77,7 @@ class CovoiturageController
         // Créer la transaction (plateforme)
         $gestionCredits->creerTransaction($idAdmin, $id_utilisateur, $id_covoiturage, 2, 'plateforme', 'validée');
 
-        $_SESSION['success'] = "Covoiturage enregistré avec succès !";
+        $_SESSION['success'] = "Covoiturage enregistré avec succès ! Vous avez etais debité de 2 crédits";
       } catch (\Exception $e) {
         $_SESSION['error'] = "Erreur : " . $e->getMessage();
         $_SESSION['error'] = "Une erreur est survenue lors de l'enregistrement du covoiturage.";

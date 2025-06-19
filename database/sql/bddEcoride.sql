@@ -112,9 +112,9 @@ CREATE TABLE transaction (
     statut ENUM('en_attente', 'validée', 'refusée') DEFAULT 'en_attente',
     date_transaction TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 
-    FOREIGN KEY (id_utilisateur) REFERENCES utilisateur(id_utilisateur),
-    FOREIGN KEY (id_passager) REFERENCES utilisateur(id_utilisateur),
-    FOREIGN KEY (id_covoiturage) REFERENCES covoiturage(id_covoiturage)
+    FOREIGN KEY (id_utilisateur) REFERENCES utilisateur(id_utilisateur) ON DELETE CASCADE,
+    FOREIGN KEY (id_passager) REFERENCES utilisateur(id_utilisateur) ON DELETE CASCADE,
+    FOREIGN KEY (id_covoiturage) REFERENCES covoiturage(id_covoiturage) ON DELETE CASCADE
 );
 
 -- Création de la table Avis NoSql
