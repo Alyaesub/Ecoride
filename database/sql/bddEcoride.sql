@@ -109,7 +109,7 @@ CREATE TABLE transaction (
     id_passager INT NOT NULL,              -- Celui qui paie
     montant INT NOT NULL,                  -- Nombre de crédits transférés
     type ENUM('plateforme', 'chauffeur') NOT NULL,
-    statut ENUM('en_attente', 'validée', 'refusée') DEFAULT 'en_attente',
+    statut ENUM('en_attente', 'validée', 'remboursée' 'refusée') DEFAULT 'en_attente',
     date_transaction TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 
     FOREIGN KEY (id_utilisateur) REFERENCES utilisateur(id_utilisateur) ON DELETE CASCADE,

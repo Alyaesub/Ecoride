@@ -96,9 +96,11 @@ class CovoiturageController
     if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id_covoiturage'])) {
       $id = intval($_POST['id_covoiturage']);
       $model = new Covoiturage();
+      $gestionCredits = new GestionCredits();
       try {
         $model->supprimeCovoit($id);
-        $_SESSION['success'] = "Covoiturage supprimé avec succès.";
+        $gestionCredits->rembourseAllPassagers($id);
+        $_SESSION['success'] = "Covoiturage supprimé avec succès. Tous les passagers ont été remboursés.";
       } catch (\Exception $e) {
         $_SESSION['error'] = "Erreur lors de la suppression : " . $e->getMessage();
       }
@@ -297,6 +299,7 @@ class CovoiturageController
 
     $model = new Covoiturage();
     $covoit = $model->findById($id);
+    $gestionCredits = new GestionCredits();
 
     if ($covoit['id_utilisateur'] !== $_SESSION['user_id']) {
       $_SESSION['error'] = "Action non autorisée.";
@@ -305,7 +308,8 @@ class CovoiturageController
     }
 
     $model->updateStatut($id, 'annule');
-    $_SESSION['success'] = "Covoiturage annulé avec succès.";
+    $gestionCredits->rembourseAllPassagers($id);
+    $_SESSION['success'] = "Covoiturage annulé avec succès, et les voyageur on étais remboursée";
 
     header('Location: ' . route('detailsCovoit') . '?id=' . $id);
     exit;
@@ -353,7 +357,13 @@ class CovoiturageController
 
         // Vérifie si TOUS les passagers ont confirmé
         if ($model->tousLesPassagersOntTermine($id)) {
+          //credite le chauffeur
           $gestionCredits->crediterChauffeur($id);
+          // envoi du mail de notification au chauffeur
+          require_once __DIR__ . '/../functions/mailsHelper.php';
+          $chauffeur = $gestionCredits->getChauffeurByCovoitId($id);
+          $totalCredits = $gestionCredits->getMontantTotalCredite($id);
+          sendCreditedMail($chauffeur, $totalCredits ?? 0, $covoit);
           $_SESSION['success'] .= " Le chauffeur a été crédité.";
         }
       }
@@ -461,14 +471,15 @@ class CovoiturageController
 
     if ($id_covoiturage) {
       $model = new Covoiturage();
+      $gestionCredits = new GestionCredits();
 
       // Supprimer la participation
       $model->supprimerParticipation($id_utilisateur, $id_covoiturage);
-
       // Incrémenter les places
       $model->incrementePlacesDispo($id_covoiturage);
-
-      $_SESSION['success'] = "Votre participation a été annulée.";
+      //Rembourse le prix du covoit
+      $gestionCredits->remboursePassagerUnique($id_utilisateur, $id_covoiturage);
+      $_SESSION['success'] = "Votre participation a été annulée et vos crédits remboursée.";
     }
 
     header('Location: ' . route('detailsCovoit') . '?id=' . $id_covoiturage);
@@ -494,6 +505,7 @@ class CovoiturageController
 
     $model = new Covoiturage();
     $covoit = $model->findById($id);
+    $gestionCredits = new GestionCredits;
 
     if (!$covoit || $covoit['id_utilisateur'] != $userId) {
       $_SESSION['error'] = "Accès refusé.";
@@ -501,13 +513,26 @@ class CovoiturageController
       exit;
     }
 
+    require_once __DIR__ . '/../functions/mailsHelper.php';
+    $passagers = $gestionCredits->getPassagersByCovoitId($id);
+
     if ($statutActuel === 'actif') {
+      //démarrage du covoit par le chauffeur
       $model->updateStatut($id, 'en_cours');
       $_SESSION['success'] = "Le covoiturage a été démarré.";
+      // envoie le mail de départ à chaque passager
+      foreach ($passagers as $passager) {
+        sendDepartMail($passager, $covoit);
+      }
     } elseif ($statutActuel === 'en_cours') {
+      //le chauffeur marque le covoit comme terminé
       $model->updateStatut($id, 'termine');
       $model->confirmerParticipationTerminee($id, $userId);
       $_SESSION['success'] = "Tu as marqué le covoiturage comme terminé.";
+      // envoie un mail à chaque passager pour confirmer
+      foreach ($passagers as $passager) {
+        sendConfirmationMail($passager, $covoit);
+      }
     }
 
     header('Location: ' . route('detailsCovoit') . '?id=' . $id);

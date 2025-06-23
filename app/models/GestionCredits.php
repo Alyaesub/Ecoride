@@ -86,7 +86,8 @@ class GestionCredits
     SET statut = 'validée' 
     WHERE id_covoiturage = :id AND type = 'chauffeur' AND statut = 'en_attente'
   ");
-    return $stmt->execute(['id' => $idCovoit]);
+    $stmt->execute(['id' => $idCovoit]);
+    return $total;
   }
 
   /**
@@ -151,5 +152,119 @@ class GestionCredits
   ");
     $stmt->execute([$id_covoit]);
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
+  }
+  /**
+   * methode qui recupere l'id du xhauffeur pour le mailing
+   */
+  public function getChauffeurByCovoitId(int $id_covoit): array
+  {
+    $stmt = $this->pdo->prepare("
+    SELECT u.id_utilisateur, u.email, u.prenom
+    FROM covoiturage c
+    JOIN utilisateur u ON c.id_utilisateur = u.id_utilisateur
+    WHERE c.id_covoiturage = ?
+  ");
+    $stmt->execute([$id_covoit]);
+    return $stmt->fetch(PDO::FETCH_ASSOC);
+  }
+
+  /**
+   * methode qui recupere le total des credit d'un covoit pour les afficher dans le mailing
+   */
+  public function getMontantTotalCredite(int $idCovoit): int
+  {
+    $stmt = $this->pdo->prepare("
+    SELECT SUM(montant)
+    FROM transaction
+    WHERE id_covoiturage = :id AND type = 'chauffeur' AND statut = 'validée'
+  ");
+    $stmt->execute(['id' => $idCovoit]);
+    return (int) $stmt->fetchColumn();
+  }
+
+  /**
+   * methode pour gére le remboursement de TOUS les passager d'un covoit (annuler ou supprimé)
+   */
+  public function rembourseAllPassagers($id_covoit): bool
+  {
+    // Récupère toutes les transactions concernées
+    $stmt = $this->pdo->prepare("
+    SELECT id_transaction, id_passager, montant 
+    FROM transaction 
+    WHERE id_covoiturage = :id 
+      AND (
+        statut = 'en_attente' 
+        OR (type = 'plateforme' AND statut = 'validée')
+      )
+  ");
+    $stmt->execute(['id' => $id_covoit]);
+    $transactions = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    // Regroupe les montants à rembourser par passager
+    $remboursements = [];
+
+    foreach ($transactions as $t) {
+      $id = $t['id_passager'];
+      $montant = (int) $t['montant'];
+
+      if (!isset($remboursements[$id])) {
+        $remboursements[$id] = 0;
+      }
+
+      $remboursements[$id] += $montant;
+
+      // Marque la transaction comme remboursée
+      $stmtUpdate = $this->pdo->prepare("
+      UPDATE transaction 
+      SET statut = 'remboursée' 
+      WHERE id_transaction = :id
+    ");
+      $stmtUpdate->execute(['id' => $t['id_transaction']]);
+    }
+
+    // Rembourse les crédits à chaque passager
+    foreach ($remboursements as $id_passager => $montantTotal) {
+      $this->ajouterCredits($id_passager, $montantTotal);
+    }
+
+    return true;
+  }
+
+  /**
+   * methode qui gére le rembousement d'un user unique (genre annuleParticipation)
+   */
+  public function remboursePassagerUnique($id_utilisateur, $id_covoit): bool
+  {
+    // Récupère les transactions à rembourser
+    $stmt = $this->pdo->prepare("
+    SELECT id_transaction, montant 
+    FROM transaction 
+    WHERE id_covoiturage = :id 
+      AND id_passager = :passager
+      AND (
+        statut = 'en_attente' 
+        OR (type = 'plateforme' AND statut = 'validée')
+      )
+  ");
+    $stmt->execute([
+      'id' => $id_covoit,
+      'passager' => $id_utilisateur
+    ]);
+    $transactions = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    // Rembourse chaque transaction
+    foreach ($transactions as $t) {
+      $this->ajouterCredits($id_utilisateur, (int) $t['montant']);
+
+      // Marque la transaction comme remboursée
+      $stmtUpdate = $this->pdo->prepare("
+      UPDATE transaction 
+      SET statut = 'remboursée' 
+      WHERE id_transaction = :id
+    ");
+      $stmtUpdate->execute(['id' => $t['id_transaction']]);
+    }
+
+    return true;
   }
 }

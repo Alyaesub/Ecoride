@@ -134,7 +134,7 @@ CREATE TABLE transaction (
     FOREIGN KEY (id_covoiturage) REFERENCES covoiturage(id_covoiturage)
 );
 
-#changement pour la suppresion en cascade des transaction quand l'user supprime un covoit
+#14 changement pour la suppresion en cascade des transaction quand l'user supprime un covoit
 ALTER TABLE transaction 
 DROP FOREIGN KEY transaction_ibfk_3;
 
@@ -142,3 +142,7 @@ ALTER TABLE transaction
 ADD CONSTRAINT transaction_ibfk_3 
 FOREIGN KEY (id_covoiturage) REFERENCES covoiturage(id_covoiturage)
 ON DELETE CASCADE;
+
+#15 alter transaction table pour ajouter le status 'rembourseé
+ALTER TABLE transaction
+MODIFY statut ENUM('en_attente', 'validée', 'refusée', 'remboursée') DEFAULT 'en_attente';
