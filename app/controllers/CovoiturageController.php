@@ -6,6 +6,7 @@ use App\Models\Covoiturage;
 use App\Models\Notation;
 use App\Models\Vehicule;
 use App\Models\GestionCredits;
+use App\Models\User;
 
 class CovoiturageController
 {
@@ -97,10 +98,28 @@ class CovoiturageController
       $id = intval($_POST['id_covoiturage']);
       $model = new Covoiturage();
       $gestionCredits = new GestionCredits();
+      $userModel = new User();
+
       try {
+        // récupère les données AVANT la suppression
+        $covoit = $model->findById($id);
+        $passagersAvecId = $userModel->getPassagersAvecId($id); // ✅ récup avec ID utilisateur
+
+        // Supprime le covoit
         $model->supprimeCovoit($id);
+
+        // Rembourse les passagers
         $gestionCredits->rembourseAllPassagers($id);
         $_SESSION['success'] = "Covoiturage supprimé avec succès. Tous les passagers ont été remboursés.";
+
+        // Envoi des mails
+        require_once __DIR__ . '/../functions/mailsHelper.php';
+        foreach ($passagersAvecId as $p) {
+          $passager = $userModel->findById($p['id_utilisateur']);
+          if ($passager) {
+            sendMailSuppressionCovoit($passager, $covoit); // ✅ mail pour le passager
+          }
+        }
       } catch (\Exception $e) {
         $_SESSION['error'] = "Erreur lors de la suppression : " . $e->getMessage();
       }
@@ -300,6 +319,7 @@ class CovoiturageController
     $model = new Covoiturage();
     $covoit = $model->findById($id);
     $gestionCredits = new GestionCredits();
+    $userModel = new User();
 
     if ($covoit['id_utilisateur'] !== $_SESSION['user_id']) {
       $_SESSION['error'] = "Action non autorisée.";
@@ -307,8 +327,24 @@ class CovoiturageController
       exit;
     }
 
+    if (!$covoit) {
+      $_SESSION['error'] = "Covoiturage introuvable.";
+      header('Location: ' . route('profil'));
+      exit;
+    }
+
     $model->updateStatut($id, 'annule');
     $gestionCredits->rembourseAllPassagers($id);
+
+    // Après le remboursement envoi du mail 
+    require_once __DIR__ . '/../functions/mailsHelper.php';
+    $passagers = $userModel->getPassagersAvecId($id);
+    foreach ($passagers as $p) {
+      $passager = $userModel->findById($p['id_utilisateur']);
+      if ($passager) {
+        sendMailAnnulationChauffeur($passager, $covoit); // mail pour le passager
+      }
+    }
     $_SESSION['success'] = "Covoiturage annulé avec succès, et les voyageur on étais remboursée";
 
     header('Location: ' . route('detailsCovoit') . '?id=' . $id);
@@ -391,6 +427,7 @@ class CovoiturageController
     $model = new Covoiturage();
     $covoit = $model->findById($id_covoiturage);
     $gestionCredits = new GestionCredits();
+    $userModel = new User();
 
     //verifie l'existence du covoit
     if (!$covoit) {
@@ -450,6 +487,13 @@ class CovoiturageController
     try {
       $model->lierUtilisateur($id_utilisateur, $id_covoiturage, 'passager');
       $model->decrementePlacesDispo($id_covoiturage);
+
+      //mailing pour le chauffeur
+      require_once __DIR__ . '/../functions/mailsHelper.php';
+      $passager = $userModel->findById($id_utilisateur);
+      $chauffeur = $userModel->findById($covoit['id_utilisateur']);
+      sendMailInscriptionPassager($chauffeur, $passager, $covoit);
+
       $_SESSION['success'] = "Participation enregistré";
     } catch (\PDOException $e) {
       $_SESSION['error'] = "Erreur lors de l’inscription : " . $e->getMessage();
@@ -472,6 +516,7 @@ class CovoiturageController
     if ($id_covoiturage) {
       $model = new Covoiturage();
       $gestionCredits = new GestionCredits();
+      $userModel = new User();
 
       // Supprimer la participation
       $model->supprimerParticipation($id_utilisateur, $id_covoiturage);
@@ -479,6 +524,18 @@ class CovoiturageController
       $model->incrementePlacesDispo($id_covoiturage);
       //Rembourse le prix du covoit
       $gestionCredits->remboursePassagerUnique($id_utilisateur, $id_covoiturage);
+
+      // Après le remboursement envoir du mail 
+      require_once __DIR__ . '/../functions/mailsHelper.php';
+      $covoit = $model->findById($id_covoiturage);
+      $passager = $userModel->findById($id_utilisateur);
+      $chauffeur = $userModel->findById($covoit['id_utilisateur']);
+      sendMailAnnulationParticipation($passager, $covoit);
+
+      $covoit = $model->findById($id_covoiturage);
+      $chauffeur = $userModel->findById($covoit['id_utilisateur']);
+      $passager = $userModel->findById($id_utilisateur);
+      sendMailAnnulationPassager($chauffeur, $passager, $covoit);
       $_SESSION['success'] = "Votre participation a été annulée et vos crédits remboursée.";
     }
 

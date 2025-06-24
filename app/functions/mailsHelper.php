@@ -153,7 +153,7 @@ function sendMailAnnulationParticipation(array $user, array $covoit): bool
  */
 function sendMailAnnulationChauffeur(array $user, array $covoit): bool
 {
-  $to = $user['email'];
+  $to = 'test@ecoride.dev';
   $subject = "🚨 Covoiturage annulé par le conducteur";
   $html = "
     <html><body>
@@ -171,7 +171,7 @@ function sendMailAnnulationChauffeur(array $user, array $covoit): bool
  */
 function sendMailSuppressionCovoit(array $user, array $covoit): bool
 {
-  $to = $user['email'];
+  $to = 'test@ecoride.dev';
   $subject = "🚗 Covoiturage supprimé";
   $html = "
     <html><body>
@@ -189,7 +189,7 @@ function sendMailSuppressionCovoit(array $user, array $covoit): bool
  */
 function sendMailInscriptionPassager(array $chauffeur, array $passager, array $covoit): bool
 {
-  $to = $chauffeur['email'];
+  $to = 'test@ecoride.dev';
   $subject = "👤 Nouveau passager pour votre covoiturage !";
 
   $html = "
@@ -207,4 +207,27 @@ function sendMailInscriptionPassager(array $chauffeur, array $passager, array $c
   ";
 
   return sendMail($to, $subject, $html);
+}
+
+/**
+ * envoie un mail au chauffeur pour dire qu'un passager annul sa participation
+ */
+function sendMailAnnulationPassager(array $chauffeur, array $passager, array $covoit): bool
+{
+  $to = 'test@ecoride.dev';
+  $subject = "❌ Un passager a annulé sa participation";
+
+  $html = "
+    <html><body>
+      <p>Bonjour <strong>{$chauffeur['prenom']}</strong>,</p>
+      <p>Votre passager <strong>{$passager['prenom']} {$passager['nom']}</strong> a annulé sa participation au covoiturage :</p>
+      <ul>
+        <li><strong>Trajet :</strong> {$covoit['adresse_depart']} → {$covoit['adresse_arrivee']}</li>
+        <li><strong>Date :</strong> {$covoit['date_depart']}</li>
+      </ul>
+      <p>Une place a été libérée automatiquement.</p>
+      <p>Bonne route,<br>L’équipe EcoRide</p>
+    </body></html>";
+
+  return sendMail($chauffeur['email'], $subject, $html);
 }
