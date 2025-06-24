@@ -9,7 +9,7 @@ require_once __DIR__ . '/../../vendor/autoload.php'; // adapte si besoin
 /**
  * Fonction générique d'envoi d'e-mail HTML
  *
- * @param string $to       Destinataire
+ * @param string $to       Destinataire # $to = $user['email']; en prod #
  * @param string $subject  Sujet du mail
  * @param string $html     Contenu HTML du message
  * @param string $from     Adresse de l'expéditeur
@@ -24,8 +24,8 @@ function sendMail(string $to, string $subject, string $html, string $from = 'no-
     $mail->isSMTP();
     $mail->Host = 'sandbox.smtp.mailtrap.io';
     $mail->SMTPAuth = true;
-    $mail->Username = '22d1451e8bd48a';      // 👈 Ton user Mailtrap
-    $mail->Password = '04f032efe07955';      // 👈 Ton mot de passe Mailtrap
+    $mail->Username = '22d1451e8bd48a';
+    $mail->Password = '04f032efe07955';
     $mail->Port = 2525;
     $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
 
@@ -35,6 +35,8 @@ function sendMail(string $to, string $subject, string $html, string $from = 'no-
 
     // Contenu HTML
     $mail->isHTML(true);
+    $mail->CharSet = 'UTF-8';
+    $mail->Encoding = 'base64';
     $mail->Subject = $subject;
     $mail->Body    = $html;
 
@@ -47,7 +49,7 @@ function sendMail(string $to, string $subject, string $html, string $from = 'no-
 }
 
 /**
- * Envoie un e-mail de contact à l'équipe EcoRide
+ * envoie un e-mail de contact à l'équipe EcoRide
  */
 function sendContactMail(string $nom, string $email, string $message): bool
 {
@@ -66,7 +68,26 @@ function sendContactMail(string $nom, string $email, string $message): bool
 }
 
 /**
- * Envoie un mail aux passagers pour qu'ils confirment le trajet terminé
+ * envoie un mail au passager pour départ covoiturage
+ */
+function sendDepartMail(array $user, array $covoit): bool
+{
+  $to = 'test@ecoride.dev';
+  $subject = "🚗 Votre trajet avec EcoRide a démarré !";
+
+  $html = "
+    <html><body>
+        <p>Bonjour <strong>{$user['prenom']}</strong>,</p>
+        <p>Votre chauffeur vient de démarrer le trajet <strong>{$covoit['adresse_depart']} → {$covoit['adresse_arrivee']}</strong>.</p>
+        <p>Pensez à préparer votre arrivée à l’heure prévue et à confirmer la fin du trajet une fois arrivé.</p>
+        <p>Bon voyage avec EcoRide !</p>
+    </body></html>";
+
+  return sendMail($to, $subject, $html);
+}
+
+/**
+ * envoie un mail aux passagers pour qu'ils confirment le trajet terminé
  */
 function sendConfirmationMail(array $user, array $covoit): bool
 {
@@ -76,9 +97,11 @@ function sendConfirmationMail(array $user, array $covoit): bool
   $html = "
     <html><body>
         <p>Bonjour <strong>{$user['prenom']}</strong>,</p>
-        <p>Le trajet <strong>{$covoit['adresse_depart']} → {$covoit['adresse_arrivee']}</strong> est terminé.</p>
+        <p>Votre conducteur a marqué le trajet <strong>{$covoit['adresse_depart']} → {$covoit['adresse_arrivee']}</strong> comme terminé.
+        Veuillez le confirmer pour que le chaufeur soit créditer
+        Merci de vous connecter à votre espace pour le confirmer.</p>
         <p>
-            <a href='https://ecoride.fr/detailsCovoit?id={$covoit['id_covoiturage']}'>
+            <a href='http://ecoride.localhost:8888/detailsCovoit?id={$covoit['id_covoiturage']}'>
                 Cliquez ici pour le confirmer
             </a>
         </p>
@@ -86,4 +109,125 @@ function sendConfirmationMail(array $user, array $covoit): bool
     </body></html>";
 
   return sendMail($to, $subject, $html);
+}
+
+/**
+ * envoie un mail au chauffeur reçus crédits
+ */
+function sendCreditedMail(array $chauffeur, int $credits, array $covoit): bool
+{
+  $to = 'test@ecoride.dev';
+  $subject = "💰 Vous avez été crédité de {$credits} crédits !";
+
+  $html = "
+    <html><body>
+        <p>Bonjour <strong>{$chauffeur['prenom']}</strong>,</p>
+        <p>Bonne nouvelle ! Tous vos passagers ont confirmé le trajet <strong>{$covoit['adresse_depart']} → {$covoit['adresse_arrivee']}</strong>.</p>
+        <p>Vous venez d’être crédité de <strong>{$credits} crédits</strong> sur votre compte EcoRide.</p>
+        <p>Merci de contribuer à une mobilité plus verte !</p>
+    </body></html>";
+
+  return sendMail($to, $subject, $html);
+}
+
+/**
+ * envoie un mail pour annulation de participation d'un passager
+ */
+function sendMailAnnulationParticipation(array $user, array $covoit): bool
+{
+  $to = 'test@ecoride.dev';
+  $subject = "🚗 Annulation de votre participation au covoiturage";
+  $html = "
+    <html><body>
+      <p>Bonjour <strong>{$user['prenom']}</strong>,</p>
+      <p>Vous avez annulé votre participation au trajet <strong>{$covoit['adresse_depart']} → {$covoit['adresse_arrivee']}</strong>.</p>
+      <p>Votre réservation a bien été annulée et vos crédits ont été remboursés.</p>
+      <p>Merci d'utiliser EcoRide,<br>L’équipe EcoRide</p>
+    </body></html>
+  ";
+  return sendMail($to, $subject, $html);
+}
+
+/**
+ * envoie un mail au passager si le chauffeur annule le covoit
+ */
+function sendMailAnnulationChauffeur(array $user, array $covoit): bool
+{
+  $to = 'test@ecoride.dev';
+  $subject = "🚨 Covoiturage annulé par le conducteur";
+  $html = "
+    <html><body>
+      <p>Bonjour <strong>{$user['prenom']}</strong>,</p>
+      <p>Le conducteur a annulé le covoiturage prévu de <strong>{$covoit['adresse_depart']} → {$covoit['adresse_arrivee']}</strong>.</p>
+      <p>Nous vous confirmons que vos crédits vous ont été remboursés automatiquement.</p>
+      <p>Merci de votre compréhension,<br>L’équipe EcoRide</p>
+    </body></html>
+  ";
+  return sendMail($to, $subject, $html);
+}
+
+/**
+ * envoie un mail au passager si le chauffeur supprime le covoit
+ */
+function sendMailSuppressionCovoit(array $user, array $covoit): bool
+{
+  $to = 'test@ecoride.dev';
+  $subject = "🚗 Covoiturage supprimé";
+  $html = "
+    <html><body>
+      <p>Bonjour <strong>{$user['prenom']}</strong>,</p>
+      <p>Le covoiturage <strong>{$covoit['adresse_depart']} → {$covoit['adresse_arrivee']}</strong> a été supprimé.</p>
+      <p>Vos crédits ont été remboursés automatiquement sur votre compte.</p>
+      <p>Merci pour votre confiance,<br>L’équipe EcoRide</p>
+    </body></html>
+  ";
+  return sendMail($to, $subject, $html);
+}
+
+/**
+ * envoie un mail au chauffeur pour prevenir qu'un passager ces incrit a son covoit
+ */
+function sendMailInscriptionPassager(array $chauffeur, array $passager, array $covoit): bool
+{
+  $to = 'test@ecoride.dev';
+  $subject = "👤 Nouveau passager pour votre covoiturage !";
+
+  $html = "
+    <html><body>
+      <p>Bonjour <strong>{$chauffeur['prenom']}</strong>,</p>
+      <p>Un nouveau passager, <strong>{$passager['prenom']} ({$passager['pseudo']})</strong>, vient de s'inscrire à votre covoiturage :</p>
+      <ul>
+        <li><strong>Départ :</strong> {$covoit['adresse_depart']}</li>
+        <li><strong>Arrivée :</strong> {$covoit['adresse_arrivee']}</li>
+        <li><strong>Date :</strong> {$covoit['date_depart']}</li>
+      </ul>
+      <p>Vous pouvez consulter les détails du trajet dans votre tableau de bord.</p>
+      <p>Merci d'utiliser EcoRide,<br>L’équipe EcoRide</p>
+    </body></html>
+  ";
+
+  return sendMail($to, $subject, $html);
+}
+
+/**
+ * envoie un mail au chauffeur pour dire qu'un passager annul sa participation
+ */
+function sendMailAnnulationPassager(array $chauffeur, array $passager, array $covoit): bool
+{
+  $to = 'test@ecoride.dev';
+  $subject = "❌ Un passager a annulé sa participation";
+
+  $html = "
+    <html><body>
+      <p>Bonjour <strong>{$chauffeur['prenom']}</strong>,</p>
+      <p>Votre passager <strong>{$passager['prenom']} {$passager['nom']}</strong> a annulé sa participation au covoiturage :</p>
+      <ul>
+        <li><strong>Trajet :</strong> {$covoit['adresse_depart']} → {$covoit['adresse_arrivee']}</li>
+        <li><strong>Date :</strong> {$covoit['date_depart']}</li>
+      </ul>
+      <p>Une place a été libérée automatiquement.</p>
+      <p>Bonne route,<br>L’équipe EcoRide</p>
+    </body></html>";
+
+  return sendMail($chauffeur['email'], $subject, $html);
 }

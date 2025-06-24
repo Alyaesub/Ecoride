@@ -48,7 +48,6 @@
           <li><strong>Nom :</strong><?= htmlspecialchars($user['nom']) ?></li>
           <li><strong>Prénom :</strong><?= htmlspecialchars($user['prenom']) ?></li>
           <li><strong>Email :</strong> <?= htmlspecialchars($user['email']) ?></li>
-          <li><strong>Mot de passe :</strong>*******</li>
           <li><strong>Vos crédits :</strong><?= htmlspecialchars($user['credits']) ?></li>
         </ul>
       </div>

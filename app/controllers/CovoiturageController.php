@@ -6,6 +6,7 @@ use App\Models\Covoiturage;
 use App\Models\Notation;
 use App\Models\Vehicule;
 use App\Models\GestionCredits;
+use App\Models\User;
 
 class CovoiturageController
 {
@@ -17,15 +18,43 @@ class CovoiturageController
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       $model = new Covoiturage();
       $vehiculeModel = new Vehicule();
+      $gestionCredits = new GestionCredits();
 
       $id_utilisateur = $_SESSION['user']['id'];
       $id_vehicule = intval($_POST['id_vehicule'] ?? 0);
+      $idAdmin = $gestionCredits->getIdAdmin();
+      if (!$idAdmin) {
+        $_SESSION['error'] = "Aucun administrateur trouvé pour recevoir les crédits.";
+        header('Location: ' . route('profil'));
+        exit;
+      }
 
       if (!$vehiculeModel->checkVehiculeAppartientAUser($id_vehicule, $id_utilisateur)) {
         $_SESSION['error'] = "Véhicule invalide ou ne vous appartient pas.";
         header('Location: ' . route('profil'));
         exit;
       }
+
+      // Vérifie si l’utilisateur a assez de crédits
+      $creditsDispo = $gestionCredits->getCredits($id_utilisateur);
+      if ($creditsDispo < 2) {
+        $_SESSION['error'] = "Vous devez avoir au moins 2 crédits pour publier un covoiturage.";
+        header('Location: ' . route('profil'));
+        exit;
+      }
+
+      // Débiter le chauffeur
+      if (!$gestionCredits->debiterCredits($id_utilisateur, 2)) {
+        $_SESSION['error'] = "Erreur lors du prélèvement des crédits.";
+        header('Location: ' . route('profil'));
+        exit;
+      }
+      // Facultatif : met à jour la session utilisateur
+      if (isset($_SESSION['user']['credits'])) {
+        $_SESSION['user']['credits'] -= 2;
+      }
+      // Créditer l’admin
+      $gestionCredits->ajouterCredits($idAdmin, 2);
 
       $data = [
         'id_utilisateur' => $id_utilisateur,
@@ -42,15 +71,18 @@ class CovoiturageController
       ];
 
       try {
+        //enregistre le covoit
         $id_covoiturage = $model->create($data);
+        //lie le chauffeur au covit
         $model->lierUtilisateur($data['id_utilisateur'], $id_covoiturage, 'conducteur');
-        $_SESSION['success'] = "Covoiturage enregistré avec succès !";
+        // Créer la transaction (plateforme)
+        $gestionCredits->creerTransaction($idAdmin, $id_utilisateur, $id_covoiturage, 2, 'plateforme', 'validée');
+
+        $_SESSION['success'] = "Covoiturage enregistré avec succès ! Vous avez etais debité de 2 crédits";
       } catch (\Exception $e) {
         $_SESSION['error'] = "Erreur : " . $e->getMessage();
         $_SESSION['error'] = "Une erreur est survenue lors de l'enregistrement du covoiturage.";
       }
-
-
 
       header('Location: ' . route('profil'));
       exit;
@@ -65,9 +97,29 @@ class CovoiturageController
     if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id_covoiturage'])) {
       $id = intval($_POST['id_covoiturage']);
       $model = new Covoiturage();
+      $gestionCredits = new GestionCredits();
+      $userModel = new User();
+
       try {
+        // récupère les données AVANT la suppression
+        $covoit = $model->findById($id);
+        $passagersAvecId = $userModel->getPassagersAvecId($id); // ✅ récup avec ID utilisateur
+
+        // Supprime le covoit
         $model->supprimeCovoit($id);
-        $_SESSION['success'] = "Covoiturage supprimé avec succès.";
+
+        // Rembourse les passagers
+        $gestionCredits->rembourseAllPassagers($id);
+        $_SESSION['success'] = "Covoiturage supprimé avec succès. Tous les passagers ont été remboursés.";
+
+        // Envoi des mails
+        require_once __DIR__ . '/../functions/mailsHelper.php';
+        foreach ($passagersAvecId as $p) {
+          $passager = $userModel->findById($p['id_utilisateur']);
+          if ($passager) {
+            sendMailSuppressionCovoit($passager, $covoit); // ✅ mail pour le passager
+          }
+        }
       } catch (\Exception $e) {
         $_SESSION['error'] = "Erreur lors de la suppression : " . $e->getMessage();
       }
@@ -266,6 +318,8 @@ class CovoiturageController
 
     $model = new Covoiturage();
     $covoit = $model->findById($id);
+    $gestionCredits = new GestionCredits();
+    $userModel = new User();
 
     if ($covoit['id_utilisateur'] !== $_SESSION['user_id']) {
       $_SESSION['error'] = "Action non autorisée.";
@@ -273,8 +327,25 @@ class CovoiturageController
       exit;
     }
 
+    if (!$covoit) {
+      $_SESSION['error'] = "Covoiturage introuvable.";
+      header('Location: ' . route('profil'));
+      exit;
+    }
+
     $model->updateStatut($id, 'annule');
-    $_SESSION['success'] = "Covoiturage annulé avec succès.";
+    $gestionCredits->rembourseAllPassagers($id);
+
+    // Après le remboursement envoi du mail 
+    require_once __DIR__ . '/../functions/mailsHelper.php';
+    $passagers = $userModel->getPassagersAvecId($id);
+    foreach ($passagers as $p) {
+      $passager = $userModel->findById($p['id_utilisateur']);
+      if ($passager) {
+        sendMailAnnulationChauffeur($passager, $covoit); // mail pour le passager
+      }
+    }
+    $_SESSION['success'] = "Covoiturage annulé avec succès, et les voyageur on étais remboursée";
 
     header('Location: ' . route('detailsCovoit') . '?id=' . $id);
     exit;
@@ -298,6 +369,7 @@ class CovoiturageController
 
     $model = new Covoiturage();
     $covoit = $model->findById($id);
+    $gestionCredits = new GestionCredits();
 
     if (!$covoit) {
       $_SESSION['error'] = "Covoiturage introuvable.";
@@ -321,7 +393,13 @@ class CovoiturageController
 
         // Vérifie si TOUS les passagers ont confirmé
         if ($model->tousLesPassagersOntTermine($id)) {
-          /* $model->crediterChauffeur($id); */ //////////////////🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧
+          //credite le chauffeur
+          $gestionCredits->crediterChauffeur($id);
+          // envoi du mail de notification au chauffeur
+          require_once __DIR__ . '/../functions/mailsHelper.php';
+          $chauffeur = $gestionCredits->getChauffeurByCovoitId($id);
+          $totalCredits = $gestionCredits->getMontantTotalCredite($id);
+          sendCreditedMail($chauffeur, $totalCredits ?? 0, $covoit);
           $_SESSION['success'] .= " Le chauffeur a été crédité.";
         }
       }
@@ -348,27 +426,27 @@ class CovoiturageController
 
     $model = new Covoiturage();
     $covoit = $model->findById($id_covoiturage);
+    $gestionCredits = new GestionCredits();
+    $userModel = new User();
 
+    //verifie l'existence du covoit
     if (!$covoit) {
       $_SESSION['error'] = "Ce covoiturage n'existe pas.";
       header('Location: /profil');
       exit;
     }
-
     // verifie si le user est le conducteur
     if ($covoit['id_utilisateur'] == $id_utilisateur) {
       $_SESSION['error'] = "Vous êtes le conducteur de ce covoiturage.";
       header('Location: ' . route('detailsCovoit') . '?id=' . $id_covoiturage);
       exit;
     }
-
     // verifie si terminer ou annuler
     if ($covoit['statut'] === 'termine' || $covoit['statut'] === 'annule') {
       $_SESSION['error'] = "Ce covoiturage n’est plus disponible.";
       header('Location: ' . route('detailsCovoit') . '?id=' . $id_covoiturage);
       exit;
     }
-
     // Vérifie s'il est déjà inscrit
     $existeDeja = $model->verifieParticipation($id_utilisateur, $id_covoiturage);
     if ($existeDeja) {
@@ -378,10 +456,44 @@ class CovoiturageController
     }
     $covoiturage['peut_participer'] = !$model->verifieParticipation($_SESSION['user_id'], $id_covoiturage);
 
+    //------------------- logique de gestion des credits --------------------
+    $prix = intval($covoit['prix_personne']);
+    $totalRequis = 2 + $prix;
+    $creditsDispo = $gestionCredits->getCredits($id_utilisateur);
+
+    if ($creditsDispo < $totalRequis) {
+      $_SESSION['error'] = "Vous n’avez pas assez de crédits pour participer (requis : $totalRequis).";
+      header('Location: ' . route('detailsCovoit') . '?id=' . $id_covoiturage);
+      exit;
+    }
+    // Débit du total
+    $gestionCredits->debiterCredits($id_utilisateur, $totalRequis);
+
+    // Crédit admin (plateforme) a adapter l'ID admin si différent plus tard
+    $idAdmin = $gestionCredits->getIdAdmin();
+    if (!$idAdmin) {
+      $_SESSION['error'] = "Admin introuvable pour recevoir les crédits.";
+      header('Location: ' . route('profil'));
+      exit;
+    }
+    $gestionCredits->ajouterCredits($idAdmin, 2);
+    $gestionCredits->creerTransaction($idAdmin, $id_utilisateur, $id_covoiturage, 2, 'plateforme', 'validée');
+
+    // Transaction en attente pour le chauffeur
+    $idChauffeur = $covoit['id_utilisateur'];
+    $gestionCredits->creerTransaction($idChauffeur, $id_utilisateur, $id_covoiturage, $prix, 'chauffeur', 'en_attente');
+
     // Enregistre la participation
     try {
       $model->lierUtilisateur($id_utilisateur, $id_covoiturage, 'passager');
       $model->decrementePlacesDispo($id_covoiturage);
+
+      //mailing pour le chauffeur
+      require_once __DIR__ . '/../functions/mailsHelper.php';
+      $passager = $userModel->findById($id_utilisateur);
+      $chauffeur = $userModel->findById($covoit['id_utilisateur']);
+      sendMailInscriptionPassager($chauffeur, $passager, $covoit);
+
       $_SESSION['success'] = "Participation enregistré";
     } catch (\PDOException $e) {
       $_SESSION['error'] = "Erreur lors de l’inscription : " . $e->getMessage();
@@ -403,14 +515,28 @@ class CovoiturageController
 
     if ($id_covoiturage) {
       $model = new Covoiturage();
+      $gestionCredits = new GestionCredits();
+      $userModel = new User();
 
       // Supprimer la participation
       $model->supprimerParticipation($id_utilisateur, $id_covoiturage);
-
       // Incrémenter les places
       $model->incrementePlacesDispo($id_covoiturage);
+      //Rembourse le prix du covoit
+      $gestionCredits->remboursePassagerUnique($id_utilisateur, $id_covoiturage);
 
-      $_SESSION['success'] = "Votre participation a été annulée.";
+      // Après le remboursement envoir du mail 
+      require_once __DIR__ . '/../functions/mailsHelper.php';
+      $covoit = $model->findById($id_covoiturage);
+      $passager = $userModel->findById($id_utilisateur);
+      $chauffeur = $userModel->findById($covoit['id_utilisateur']);
+      sendMailAnnulationParticipation($passager, $covoit);
+
+      $covoit = $model->findById($id_covoiturage);
+      $chauffeur = $userModel->findById($covoit['id_utilisateur']);
+      $passager = $userModel->findById($id_utilisateur);
+      sendMailAnnulationPassager($chauffeur, $passager, $covoit);
+      $_SESSION['success'] = "Votre participation a été annulée et vos crédits remboursée.";
     }
 
     header('Location: ' . route('detailsCovoit') . '?id=' . $id_covoiturage);
@@ -436,6 +562,7 @@ class CovoiturageController
 
     $model = new Covoiturage();
     $covoit = $model->findById($id);
+    $gestionCredits = new GestionCredits;
 
     if (!$covoit || $covoit['id_utilisateur'] != $userId) {
       $_SESSION['error'] = "Accès refusé.";
@@ -443,13 +570,26 @@ class CovoiturageController
       exit;
     }
 
+    require_once __DIR__ . '/../functions/mailsHelper.php';
+    $passagers = $gestionCredits->getPassagersByCovoitId($id);
+
     if ($statutActuel === 'actif') {
+      //démarrage du covoit par le chauffeur
       $model->updateStatut($id, 'en_cours');
       $_SESSION['success'] = "Le covoiturage a été démarré.";
+      // envoie le mail de départ à chaque passager
+      foreach ($passagers as $passager) {
+        sendDepartMail($passager, $covoit);
+      }
     } elseif ($statutActuel === 'en_cours') {
+      //le chauffeur marque le covoit comme terminé
       $model->updateStatut($id, 'termine');
       $model->confirmerParticipationTerminee($id, $userId);
       $_SESSION['success'] = "Tu as marqué le covoiturage comme terminé.";
+      // envoie un mail à chaque passager pour confirmer
+      foreach ($passagers as $passager) {
+        sendConfirmationMail($passager, $covoit);
+      }
     }
 
     header('Location: ' . route('detailsCovoit') . '?id=' . $id);
