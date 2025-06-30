@@ -267,59 +267,27 @@
       <?php else : ?>
         <p>Pas encore d’avis reçus.</p>
       <?php endif; ?>
-      <h2>Vos avies envoyés</h2>
-      <p><em>Les avis envoyés apparaîtront ici.</em></p>
-      <?php /*
-      <ul id="listeAvis">
-        <?php
-        $fichier = '../data/avis.json';
-        if (file_exists($fichier)) {
-          $avisListe = json_decode(file_get_contents($fichier), true);
-          foreach ($avisListe as $avis) {
-            if ($avis['idUser'] == $idUser) {
-              echo '<li>';
-              echo 'Vous avez mis une note de ';
-              echo '<strong>' . htmlspecialchars($avis['note']) . '/5</strong> ';
-              echo 'avec le commentaire : "' . htmlspecialchars($avis['commentaire']) . '"';
-              echo ' <small>(' . htmlspecialchars($avis['date']) . ')</small>';
-              echo '</li>';
-            }
-          }
-        } else {
-          echo '<li>Aucun avis pour le moment.</li>';
-        }
-        ?>
-      </ul>
-      */ ?>
+      <!-- commentaires -->
+      <h2>Vos commentaires</h2>
+      <div class="avis-liste">
+        <ul id="listeAvis">
+          <?php if (!empty($avisListe)) : ?>
+            <?php foreach ($avisListe as $avis) : ?>
+              <li>
+                <strong>Commentaire :</strong> <?= htmlspecialchars($avis['commentaire']) ?>
+                <br>
+                <small>Ajouté le : <?= htmlspecialchars($avis['date']) ?></small>
+              </li>
+            <?php endforeach; ?>
+          <?php else : ?>
+            <li>Aucun commentaire enregistré.</li>
+          <?php endif; ?>
+        </ul>
+      </div>
     </div>
-    <h2>Vos avies reçus</h2>
-    <p><em>Les avis envoyés apparaîtront ici.</em></p>
-    <?php /*
-      <ul id="listeAvis">
-        <?php
-        $fichier = '../data/avis.json';
-        if (file_exists($fichier)) {
-          $avisListe = json_decode(file_get_contents($fichier), true);
-          foreach ($avisListe as $avis) {
-            if ($avis['idUser'] == $idUser) {
-              echo '<li>';
-              echo 'Vous avez mis une note de ';
-              echo '<strong>' . htmlspecialchars($avis['note']) . '/5</strong> ';
-              echo 'avec le commentaire : "' . htmlspecialchars($avis['commentaire']) . '"';
-              echo ' <small>(' . htmlspecialchars($avis['date']) . ')</small>';
-              echo '</li>';
-            }
-          }
-        } else {
-          echo '<li>Aucun avis pour le moment.</li>';
-        }
-        ?>
-      </ul>
-      */ ?>
   </div>
-</div>
-<!-- Inclusion des scripts JavaScript -->
-<!-- script general pour le dashboard -->
-<script src="/js/dashboard.js"></script>
-<!-- Le script avis.js s'occupe de charger et d'afficher les avis depuis le fichier JSON -->
-<script src="/js/avis.js"></script>
+  <!-- Inclusion des scripts JavaScript -->
+  <!-- script general pour le dashboard -->
+  <script src="/js/dashboard.js"></script>
+  <!-- Le script avis.js s'occupe de charger et d'afficher les avis depuis le fichier JSON -->
+  <!-- <script src="/js/avis.js"></script> -->
