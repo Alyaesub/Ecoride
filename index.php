@@ -18,6 +18,7 @@ use App\Controllers\CovoiturageController;
 use App\Controllers\CreditsController;
 use App\Controllers\MaillingController;
 use App\Controllers\NotationController;
+use App\Controllers\AvisController;
 
 // Init Whoops
 $whoops = new Run();
@@ -53,6 +54,7 @@ $routes = [
   'changerStatutCovoiturage' => [CovoiturageController::class, 'changerStatutCovoiturage'],
   // Notation et Avis 
   'ajouterNote' => [NotationController::class, 'ajouterNote'],
+  'ajouterAvisMongo' => [AvisController::class, 'ajouterAvisMongo'],
   // Utilisateur : login, profil, enregistrement, mise à jour
   'login-user' => [UserController::class, 'login'],
   'profil' => [UserController::class, 'showProfile'],
@@ -63,7 +65,7 @@ $routes = [
   'vehicules' => [VehiculeController::class, 'showVehicule'],
   'ajouterVehicule' => [VehiculeController::class, 'create'],
   'deleteVehicule' => [VehiculeController::class, 'delete'],
-  // Activités & Notation
+  // Activités 
   'activites' => [ActiviteController::class, 'showActivites'],
   // Gestions des crédits
   'showFormCredit' => [CreditsController::class, 'showFormCredit'],

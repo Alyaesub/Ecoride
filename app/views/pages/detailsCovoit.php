@@ -125,7 +125,7 @@
         <p>✔️ Trajet confirmé</p>
       <?php endif; ?>
 
-      <!-- Noter -->
+      <!-- Notation et -->
       <?php if (isset($covoiturage['role_utilisateur']) && $covoiturage['role_utilisateur'] === 'passager' && empty($covoiturage['deja_note'])) : ?>
         <div class="form-notation">
           <h2>Laisser une note et un commentaire</h2>
@@ -133,7 +133,6 @@
           <form action="<?= route('ajouterNote') ?>" method="post" onsubmit="return verifierFormulaire();">
             <input type="hidden" name="covoiturage_id" value="<?= $covoiturage['id_covoiturage'] ?>">
             <input type="hidden" name="conducteur_id" value="<?= $covoiturage['id_utilisateur'] ?>">
-
             <label for="note">Note (1 à 5) :</label>
             <select name="note" id="note">
               <option value="">-- Choisir --</option>
@@ -141,6 +140,11 @@
                 <option value="<?= $i ?>"><?= $i ?> ⭐</option>
               <?php endfor; ?>
             </select>
+          </form>
+          <!-- FORMULAIRE 2 : AVIS -->
+          <form action="<?= route('ajouterAvisMongo') ?>" method="post">
+            <input type="hidden" name="id_utilisateur" value="<?= $_SESSION['user_id'] ?>">
+            <input type="hidden" name="id_covoiturage" value="<?= $covoiturage['id_covoiturage'] ?>">
 
             <label for="commentaire">Commentaire (optionnel) :</label>
             <textarea name="commentaire" id="commentaire" rows="4" placeholder="Tu peux ajouter un avis..."></textarea>

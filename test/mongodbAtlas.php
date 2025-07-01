@@ -6,6 +6,7 @@ mongodb+srv://root:root@cluster0.qyuka7b.mongodb.net/?retryWrites=true&w=majorit
 /* use MongoDB\Driver\ServerApi;
 
 $uri = 'mongodb+srv://root:root@cluster0.qyuka7b.mongodb.net/Ecoride?retryWrites=true&w=majority&appName=Cluster0';
+mongodb+srv://root:root@cluster0.qyuka7b.mongodb.net/EcoRide?retryWrites=true&w=majority
 
 // Set the version of the Stable API on the client
 $apiVersion = new ServerApi(ServerApi::V1);

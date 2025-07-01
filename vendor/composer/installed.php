@@ -3,7 +3,7 @@
         'name' => 'pascalreynier/ecoride',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => 'ec5d88947e8b19efc18d312d9f6877ea00066cbe',
+        'reference' => 'be3f71b1a7e757f2f242550ecf08661c7a64b34f',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -37,7 +37,7 @@
         'pascalreynier/ecoride' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => 'ec5d88947e8b19efc18d312d9f6877ea00066cbe',
+            'reference' => 'be3f71b1a7e757f2f242550ecf08661c7a64b34f',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
