@@ -276,7 +276,8 @@
               <li>
                 <strong>Commentaire :</strong> <?= htmlspecialchars($avis['commentaire']) ?>
                 <br>
-                <small>Ajouté le : <?= htmlspecialchars($avis['date']) ?></small>
+                <small>Ajouté le : <?= isset($avis['date']) ? htmlspecialchars($avis['date']) : 'Date inconnue' ?></small>
+
               </li>
             <?php endforeach; ?>
           <?php else : ?>

@@ -13,7 +13,7 @@ class Avis
   public function __construct()
   {
     $client = new Client("mongodb+srv://root:root@cluster0.qyuka7b.mongodb.net/Ecoride?retryWrites=true&w=majority");
-    $this->collection = $client->EcoRide->avis;
+    $this->collection = $client->Ecoride->avis;
   }
 
   //methode qui ajoute un comm en bdd
@@ -35,7 +35,7 @@ class Avis
   {
     $cursor = $this->collection->find([
       'id_utilisateur' => $id_utilisateur,
-      'statut' => 'validé' // ou "en_attente" si tu veux tout voir
+      'statut' => ['$in' => ['validé', 'en_attente']] //'validé' a mettre apres avoir fais la logique des admin
     ]);
 
     $avisList = [];
