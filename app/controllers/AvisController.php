@@ -12,13 +12,15 @@ class AvisController
       $commentaire = trim($_POST['commentaire'] ?? '');
       $id_utilisateur = intval($_POST['id_utilisateur'] ?? 0);
       $id_covoiturage = intval($_POST['id_covoiturage'] ?? 0);
+      $id_auteur = intval($_POST['id_auteur'] ?? 0);
 
       if ($commentaire && $id_utilisateur && $id_covoiturage) {
         $avis = new Avis();
         $avisId = $avis->ajouterCommentaire([
           'commentaire' => $commentaire,
           'id_utilisateur' => $id_utilisateur,
-          'id_covoiturage' => $id_covoiturage
+          'id_covoiturage' => $id_covoiturage,
+          'id_auteur' => $id_auteur
         ]);
 
         $_SESSION['success'] = "Commentaire ajouté avec succès (#$avisId).";

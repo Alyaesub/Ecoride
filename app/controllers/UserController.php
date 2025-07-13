@@ -104,7 +104,8 @@ class UserController
 
     //avis
     $avisModel = new Avis();
-    $avisListe = $avisModel->getAvisReçus($_SESSION['user_id']);
+    $avisReçus = $avisModel->getAvisReçus($_SESSION['user_id']);
+    $avisDonnes = $avisModel->getAvisDonnes($_SESSION['user_id']);
 
     render(__DIR__ . '/../views/pages/profilUsers.php', [
       'title'        => 'Votre profil',
@@ -113,7 +114,8 @@ class UserController
       'marques' => $marques,
       'notesRecues' => $notesRecues,
       'moyenneUtilisateur' => $moyenneUtilisateur,
-      'avisListe' => $avisListe,
+      'avisReçus' => $avisReçus,
+      'avisDonnes' => $avisDonnes,
       'user' => $user
     ]);
   }
