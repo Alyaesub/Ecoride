@@ -134,4 +134,20 @@ class User
 
     return $stmt->execute();
   }
+
+  /**
+   * methode qui recupere l'id d'un passager (pour mailing)
+   */
+  public function getPassagersAvecId($id_covoit): array
+  {
+    $pdo = ConnexionDb::getPdo();
+    $stmt = $pdo->prepare("
+    SELECT u.id_utilisateur, u.pseudo, u.email
+    FROM user_covoiturage uc
+    JOIN utilisateur u ON uc.id_utilisateur = u.id_utilisateur
+    WHERE uc.id_covoiturage = ?
+  ");
+    $stmt->execute([$id_covoit]);
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+  }
 }

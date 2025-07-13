@@ -15,7 +15,10 @@ use App\Controllers\SearchCitiesController; //appelle le controller de la search
 use App\Controllers\ActiviteController;
 use App\Controllers\VehiculeController;
 use App\Controllers\CovoiturageController;
-use App\Controllers\NotationAvisController;
+use App\Controllers\CreditsController;
+use App\Controllers\MaillingController;
+use App\Controllers\NotationController;
+use App\Controllers\AvisController;
 
 // Init Whoops
 $whoops = new Run();
@@ -30,14 +33,11 @@ $routes = [
   // Page d'accueil
   'home' => [HomeController::class, 'index'],
   'showCovoitPopulaire' => [HomeController::class, 'showCovoitPopulaire'],
+  'login' => [HomeController::class, 'showLogin'],
   // Mentions légales et contacts
   'mentions' => [HomeController::class, 'showMentions'],
   'contactForm' => [HomeController::class, 'showContactForm'],
-  // Page de connexion  juste la vue
-  'login' => function () {
-    render(__DIR__ . '/app/views/pages/login.php', ['title' => 'Connexion']);
-  },
-  //  recherche de villes 
+  //  searchbar recherche de villes 
   'searchCities' => [SearchCitiesController::class, 'searchCitiesBar'],
   // Formulaire de covoiturage
   'covoitVoyage' => [CovoiturageController::class, 'showForm'],
@@ -51,8 +51,10 @@ $routes = [
   'terminerCovoiturage' => [CovoiturageController::class, 'terminerCovoiturage'],
   'participeCovoiturage' => [CovoiturageController::class, 'participeCovoiturage'],
   'annuleParticipation' => [CovoiturageController::class, 'annuleParticipation'],
+  'changerStatutCovoiturage' => [CovoiturageController::class, 'changerStatutCovoiturage'],
   // Notation et Avis 
-  'ajouterNote' => [NotationAvisController::class, 'ajouterNote'],
+  'ajouterNote' => [NotationController::class, 'ajouterNote'],
+  'ajouterAvisMongo' => [AvisController::class, 'ajouterAvisMongo'],
   // Utilisateur : login, profil, enregistrement, mise à jour
   'login-user' => [UserController::class, 'login'],
   'profil' => [UserController::class, 'showProfile'],
@@ -63,8 +65,13 @@ $routes = [
   'vehicules' => [VehiculeController::class, 'showVehicule'],
   'ajouterVehicule' => [VehiculeController::class, 'create'],
   'deleteVehicule' => [VehiculeController::class, 'delete'],
-  // Activités & Notation
+  // Activités 
   'activites' => [ActiviteController::class, 'showActivites'],
+  // Gestions des crédits
+  'showFormCredit' => [CreditsController::class, 'showFormCredit'],
+  'acheteCredits' => [CreditsController::class, 'acheteCredits'],
+  // Mailling
+  'ContactMailEcoride' => [MaillingController::class, 'sendContactMail'],
   // Dashboards admin/employé
   'dashboardAdmin' => function () {
     render(__DIR__ . '/app/views/pages/administration/dashboardAdmin.php', ['title' => 'Dashboard Administration']);

@@ -42,7 +42,7 @@
   <section class="contact-mobile caroussel-item">
     </h3>Contactez-nous</h3>
     <p>Pour toute question ou information, n'hésitez pas à nous contacter :</p>
-    <p><a class="contactForm" href="<?= route('contact') ?>"><strong>Contactez nous par e-mail</strong> </a></p>
+    <p><a class="contactForm" href="<?= route('contactForm') ?>"><strong>Contactez nous par e-mail</strong> </a></p>
     <p>par téléphone : 01 23 45 67 89</p>
     <p>adresse : 123 Rue de l'Écologie, 75000 Paris, France</p>
     <a class="cgv" href="<?= route('mentions') ?>">Mentions légales & CGV</a>

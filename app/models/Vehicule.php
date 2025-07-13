@@ -60,4 +60,28 @@ class Vehicule
       'id_utilisateur' => $userId
     ]);
   }
+
+  /**
+   * methode qui recupére le vehicule utiliser pour un covoit
+   */
+  public function findWithMarqueById(int $idVehicule): array|false
+  {
+    $sql = "SELECT v.*, m.nom_marque
+          FROM vehicule v
+          JOIN marque m ON v.id_marque = m.id_marque
+          WHERE v.id_vehicule = :id_vehicule";
+    $stmt = $this->pdo->prepare($sql);
+    $stmt->execute(['id_vehicule' => $idVehicule]);
+    return $stmt->fetch(PDO::FETCH_ASSOC);
+  }
+
+  /**
+   * methode qui verifie si le vehicule appartient bien a l'user
+   */
+  public function checkVehiculeAppartientAUser($vehiculeId, $userId): bool
+  {
+    $stmt = $this->pdo->prepare("SELECT COUNT(*) FROM vehicule WHERE id_vehicule = :id AND id_utilisateur = :uid");
+    $stmt->execute(['id' => $vehiculeId, 'uid' => $userId]);
+    return $stmt->fetchColumn() > 0;
+  }
 }

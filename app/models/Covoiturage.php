@@ -54,8 +54,9 @@ class Covoiturage
    */
   public function lierUtilisateur(int $id_utilisateur, int $id_covoiturage, string $role): void
   {
+
     $stmt = $this->pdo->prepare("INSERT INTO user_covoiturage (id_utilisateur, id_covoiturage, role_utilisateur)
-    VALUE (:id_utilisateur, :id_covoiturage, :role_utilisateur)
+    VALUES (:id_utilisateur, :id_covoiturage, :role_utilisateur)
     ");
 
     $stmt->execute([
@@ -162,7 +163,7 @@ class Covoiturage
     $stmt = $this->pdo->query("SELECT DISTINCT DATE(date_depart) 
     AS date_depart FROM covoiturage 
     WHERE statut = 'actif'
-    AND date_depart >= NOW()
+    AND DATE(date_depart) >= CURDATE()
     ORDER BY date_depart ASC");
     return array_column($stmt->fetchAll(PDO::FETCH_ASSOC), 'date_depart');
   }
@@ -350,7 +351,7 @@ class Covoiturage
   public function getCovoitWithRoleById(int $id_covoiturage, int $id_utilisateur): ?array
   {
     $stmt = $this->pdo->prepare("
-      SELECT c.*, uc.role_utilisateur, u.pseudo AS pseudo_conducteur
+      SELECT c.*, uc.role_utilisateur, uc.trajet_termine, u.pseudo AS pseudo_conducteur
       FROM covoiturage c
       JOIN user_covoiturage uc ON c.id_covoiturage = uc.id_covoiturage
       JOIN utilisateur u ON u.id_utilisateur = c.id_utilisateur
@@ -375,5 +376,36 @@ class Covoiturage
     LIMIT 5
   ");
     return $stmt->fetchAll();
+  }
+
+  /**
+   * methode qui defini si le participant a confirmer l'arrivé d'un covoit
+   */
+  public function confirmerParticipationTerminee($idCovoit, $userId)
+  {
+    $stmt = $this->pdo->prepare("UPDATE user_covoiturage SET trajet_termine = 1 WHERE id_covoiturage = :id AND id_utilisateur = :uid");
+    $stmt->execute([
+      'id' => $idCovoit,
+      'uid' => $userId
+    ]);
+    return $stmt->rowCount() > 0;
+  }
+
+  /**
+   * methode qui defini si tous les passager on valider le terminer
+   */
+  public function tousLesPassagersOntTermine($idCovoit)
+  {
+    $stmt = $this->pdo->prepare("
+        SELECT COUNT(*) as nonTermines
+        FROM user_covoiturage
+        WHERE id_covoiturage = :id
+        AND role_utilisateur = 'passager'
+        AND trajet_termine = 0
+    ");
+    $stmt->execute(['id' => $idCovoit]);
+    $result = $stmt->fetch();
+
+    return $result['nonTermines'] == 0;
   }
 }

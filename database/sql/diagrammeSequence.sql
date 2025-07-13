@@ -33,3 +33,29 @@ Covoit --> System : Confirmation de participation
 System --> Passager : Trajet réservé avec succès
 
 @enduml
+
+@startuml
+actor Utilisateur
+participant "Navigateur\n(HTML/JS)" as Front
+participant "JavaScript\n(Fetch)" as JS
+participant "Contrôleur PHP\n(CovoiturageController)" as Controller
+participant "Modèle PHP\n(Covoiturage.php)" as Model
+database MySQL
+database "MongoDB\n(avis.json)" as MongoDB
+
+== Début de la réservation ==
+
+Utilisateur -> Front : Clique sur "Réserver"
+Front -> JS : Déclenche Fetch POST /participer
+JS -> Controller : $_POST (id_covoit, id_user)
+Controller -> Model : vérifier dispo / crédits
+Model -> MySQL : SELECT places dispo + crédits
+MySQL --> Model : Résultat
+Model -> MySQL : INSERT user_covoiturage
+Model -> MongoDB : Créer un avis vide (optionnel)
+MongoDB --> Model : OK
+Model --> Controller : Réservation réussie
+Controller --> JS : JSON success
+JS --> Front : Affiche message "Réservation OK"
+
+@enduml

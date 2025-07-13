@@ -9,6 +9,10 @@
         </ul>
     </nav>
     <div class="login">
-        <a href="<?= route('login') ?>" class="buttonlog" id="btn-log">Connectez-vous</a>
+        <?php if (!empty($_SESSION['user_id'])) : ?>
+            <button class="buttonlog" id="btn-log">Vous êtes connecté</button>
+        <?php else : ?>
+            <a href="<?= route('login') ?>" class="buttonlog" id="btn-log">Connectez-vous</a>
+        <?php endif; ?>
     </div>
 </header>
