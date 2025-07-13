@@ -1,14 +1,14 @@
 // Avis.js : Chargement et affichage des avis depuis le fichier JSON
-document.addEventListener("DOMContentLoaded", function () {
+/* document.addEventListener("DOMContentLoaded", function () {
 	const idUser =
-		""; /* récupère ici l'id de l'utilisateur connecté, par exemple depuis une variable globale ou un data-attribute */
-	const listeAvis = document.getElementById("listeAvis");
+		""; */ /* récupère ici l'id de l'utilisateur connecté, par exemple depuis une variable globale ou un data-attribute */
+/* const listeAvis = document.getElementById("listeAvis");
 
 	fetch("/database/nosql/avis.json")
 		.then((response) => response.json())
-		.then((data) => {
-			// Filtrer les avis correspondant à l'utilisateur
-			const avisUser = data.filter((avis) => avis.idUser == idUser);
+		.then((data) => { */
+// Filtrer les avis correspondant à l'utilisateur
+/* 	const avisUser = data.filter((avis) => avis.idUser == idUser);
 			if (avisUser.length > 0) {
 				avisUser.forEach((avis) => {
 					const li = document.createElement("li");
@@ -26,4 +26,4 @@ document.addEventListener("DOMContentLoaded", function () {
 			listeAvis.innerHTML =
 				"<li>Erreur lors du chargement des avis.</li>";
 		});
-});
+}); */

@@ -4,7 +4,7 @@ namespace App\Controllers;
 
 use App\Models\Notation;
 
-class NotationAvisController
+class NotationController
 {
   /**
    * function Controller qui ajoute une notes

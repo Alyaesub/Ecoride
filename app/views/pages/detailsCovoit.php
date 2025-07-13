@@ -52,8 +52,8 @@
     <?php endif; ?>
 
     <?php if (!isset($_SESSION['user_id'])) : ?>
-      <p>🚨 Tu dois être connecté pour participer à un covoiturage.</p>
-      <a href="<?= route('login') ?>" class="buttonlink actions">🔐 Se connecter</a>
+      <p> Tu dois être connecté pour participer à un covoiturage.</p>
+      <a href="<?= route('login') ?>" class="buttonlink actions"> Se connecter</a>
     <?php endif; ?>
 
     <div class="actions">
@@ -75,8 +75,9 @@
         !empty($covoiturage['role_utilisateur']) &&
         ($covoiturage['role_utilisateur'] === 'passager' &&
           $covoiturage['statut'] !== 'termine' &&
-          $covoiturage['statut'] !== 'en_cours')
-      ) : ?>
+          $covoiturage['statut'] !== 'en_cours' &&
+          $covoiturage['statut'] !== 'annule')
+      ): ?>
         <form action="<?= route('annuleParticipation') ?>" method="post">
           <input type="hidden" name="id_covoiturage" value="<?= $covoiturage['id_covoiturage'] ?>">
           <button type="submit" class="btn btn-danger">Annuler ma participation</button>
@@ -98,7 +99,7 @@
             </form>
           <?php endif; ?>
 
-          <!-- ✅ Bouton unique pour démarrer ou terminer -->
+          <!-- Bouton unique pour démarrer ou terminer -->
           <?php if (in_array($covoiturage['statut'], ['actif', 'en_cours'])) : ?>
             <form action="<?= route('changerStatutCovoiturage') ?>" method="post">
               <input type="hidden" name="id_covoiturage" value="<?= $covoiturage['id_covoiturage'] ?>">
@@ -111,7 +112,7 @@
         </div>
       <?php endif; ?>
 
-      <!-- ✅ Bouton pour les passagers une fois terminé -->
+      <!-- Bouton pour les passagers une fois terminé -->
       <?php if (
         $covoiturage['statut'] === 'termine' &&
         $covoiturage['role_utilisateur'] === 'passager' &&
@@ -125,15 +126,19 @@
         <p>✔️ Trajet confirmé</p>
       <?php endif; ?>
 
-      <!-- Noter -->
-      <?php if (isset($covoiturage['role_utilisateur']) && $covoiturage['role_utilisateur'] === 'passager' && empty($covoiturage['deja_note'])) : ?>
+      <!-- Notation et Avis -->
+      <?php if (
+        isset($covoiturage['role_utilisateur']) &&
+        $covoiturage['role_utilisateur'] === 'passager'  &&
+        $covoiturage['statut'] === 'termine' &&
+        empty($covoiturage['deja_note'])
+      ) : ?>
         <div class="form-notation">
           <h2>Laisser une note et un commentaire</h2>
-
+          <!-- formulaire notation -->
           <form action="<?= route('ajouterNote') ?>" method="post" onsubmit="return verifierFormulaire();">
             <input type="hidden" name="covoiturage_id" value="<?= $covoiturage['id_covoiturage'] ?>">
             <input type="hidden" name="conducteur_id" value="<?= $covoiturage['id_utilisateur'] ?>">
-
             <label for="note">Note (1 à 5) :</label>
             <select name="note" id="note">
               <option value="">-- Choisir --</option>
@@ -141,10 +146,14 @@
                 <option value="<?= $i ?>"><?= $i ?> ⭐</option>
               <?php endfor; ?>
             </select>
-
+          </form>
+          <!-- FORMULAIRE 2 : AVIS -->
+          <form action="<?= route('ajouterAvisMongo') ?>" method="post">
+            <input type="hidden" name="id_utilisateur" value="<?= $covoiturage['id_utilisateur'] ?>">
+            <input type="hidden" name="id_covoiturage" value="<?= $covoiturage['id_covoiturage'] ?>">
+            <input type="hidden" name="id_auteur" value="<?= $_SESSION['user_id'] ?>">
             <label for="commentaire">Commentaire (optionnel) :</label>
             <textarea name="commentaire" id="commentaire" rows="4" placeholder="Tu peux ajouter un avis..."></textarea>
-
             <button type="submit" class="btn">Envoyer</button>
           </form>
         </div>

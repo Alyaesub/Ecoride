@@ -7,6 +7,7 @@ use App\Models\Marque;
 use App\Models\Vehicule;
 use App\Models\Covoiturage;
 use App\Models\Notation;
+use App\Models\Avis;
 
 
 class UserController
@@ -95,11 +96,16 @@ class UserController
     // Recharge les covoiturages pour exclure ceux terminés/annulés (car le modèle les filtre)
     $covoiturages = $covoitModel->getCovoitAndRoleByUser($_SESSION['user_id']);
 
-    $notationModel = new \App\Models\Notation();
+    //notations
+    $notationModel = new Notation();
     $notesRecues = $notationModel->getNotesRecues($_SESSION['user_id']);
-
-    $notationModel = new \App\Models\Notation();
+    $notationModel = new Notation();
     $moyenneUtilisateur = $notationModel->getMoyenneParUtilisateur($_SESSION['user_id']);
+
+    //avis
+    $avisModel = new Avis();
+    $avisReçus = $avisModel->getAvisReçus($_SESSION['user_id']);
+    $avisDonnes = $avisModel->getAvisDonnes($_SESSION['user_id']);
 
     render(__DIR__ . '/../views/pages/profilUsers.php', [
       'title'        => 'Votre profil',
@@ -108,6 +114,8 @@ class UserController
       'marques' => $marques,
       'notesRecues' => $notesRecues,
       'moyenneUtilisateur' => $moyenneUtilisateur,
+      'avisReçus' => $avisReçus,
+      'avisDonnes' => $avisDonnes,
       'user' => $user
     ]);
   }
