@@ -296,6 +296,51 @@
     color: $text-color;
     font-family: $font-primary;
   }
+
+  .bloc-commentaires {
+  margin-top: 1rem;
+  margin-bottom: 3rem;
+  padding: 1.5rem;
+  background-color: $secondary-color;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+
+  h2 {
+    margin-bottom: 1rem;
+    color: #333;
+    font-size: 1.4rem;
+  }
+
+  ul {
+    list-style-type: none;
+    padding-left: 0;
+
+    li {
+      background-color: white;
+      border-left: 4px solid #28a745;
+      margin-bottom: 1rem;
+      padding: 1rem;
+      border-radius: 8px;
+
+      strong {
+        color: #222;
+      }
+
+      small {
+        color: #777;
+        font-style: italic;
+      }
+    }
+  }
+}
+
+// Pour différencier les blocs :
+.bloc-commentaires-recus {
+  border-left: 6px solid #007bff;
+}
+.bloc-commentaires-donnes {
+  border-left: 6px solid #ffc107;
+}
 }
 
 
@@ -576,4 +621,49 @@
     color: $text-color;
     font-family: $font-primary;
   }
+
+  .bloc-commentaires {
+  margin-top: 1rem;
+  margin-bottom: 3rem;
+  padding: 1.5rem;
+  background-color: $secondary-color;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+
+  h2 {
+    margin-bottom: 1rem;
+    color: #333;
+    font-size: 1.4rem;
+  }
+
+  ul {
+    list-style-type: none;
+    padding-left: 0;
+
+    li {
+      background-color: white;
+      border-left: 4px solid #28a745;
+      margin-bottom: 1rem;
+      padding: 1rem;
+      border-radius: 8px;
+
+      strong {
+        color: #222;
+      }
+
+      small {
+        color: #777;
+        font-style: italic;
+      }
+    }
+  }
+}
+
+// Pour différencier les blocs :
+.bloc-commentaires-recus {
+  border-left: 6px solid #007bff;
+}
+.bloc-commentaires-donnes {
+  border-left: 6px solid #ffc107;
+}
 }

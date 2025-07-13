@@ -268,27 +268,41 @@
         <p>Pas encore d’avis reçus.</p>
       <?php endif; ?>
       <!-- commentaires -->
-      <h2>Vos commentaires</h2>
-      <div class="avis-liste">
-        <ul id="listeAvis">
-          <?php if (!empty($avisListe)) : ?>
-            <?php foreach ($avisListe as $avis) : ?>
+      <!-- Commentaires reçus -->
+      <section class="bloc-commentaires bloc-commentaires-recus">
+        <h2>Commentaires reçus</h2>
+        <ul>
+          <?php if (!empty($avisReçus)) : ?>
+            <?php foreach ($avisReçus as $avis) : ?>
               <li>
-                <strong>Commentaire :</strong> <?= htmlspecialchars($avis['commentaire']) ?>
-                <br>
-                <small>Ajouté le : <?= isset($avis['date']) ? htmlspecialchars($avis['date']) : 'Date inconnue' ?></small>
-
+                <strong>Commentaire :</strong> <?= htmlspecialchars($avis['commentaire']) ?><br>
+                <small>Ajouté le : <?= htmlspecialchars($avis['date']) ?></small>
               </li>
             <?php endforeach; ?>
           <?php else : ?>
-            <li>Aucun commentaire enregistré.</li>
+            <li>Aucun commentaire reçu.</li>
           <?php endif; ?>
         </ul>
-      </div>
+      </section>
+
+      <!-- Commentaires donnés -->
+      <section class="bloc-commentaires bloc-commentaires-donnes">
+        <h2>Commentaires que vous avez laissés</h2>
+        <ul>
+          <?php if (!empty($avisDonnes)) : ?>
+            <?php foreach ($avisDonnes as $avis) : ?>
+              <li>
+                <strong>Commentaire :</strong> <?= htmlspecialchars($avis['commentaire']) ?><br>
+                <small>Ajouté le : <?= htmlspecialchars($avis['date']) ?></small>
+              </li>
+            <?php endforeach; ?>
+          <?php else : ?>
+            <li>Vous n’avez encore laissé aucun commentaire.</li>
+          <?php endif; ?>
+        </ul>
+      </section>
     </div>
   </div>
   <!-- Inclusion des scripts JavaScript -->
   <!-- script general pour le dashboard -->
   <script src="/js/dashboard.js"></script>
-  <!-- Le script avis.js s'occupe de charger et d'afficher les avis depuis le fichier JSON -->
-  <!-- <script src="/js/avis.js"></script> -->
