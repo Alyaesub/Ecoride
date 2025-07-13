@@ -12,7 +12,7 @@ class Avis
 
   public function __construct()
   {
-    $client = new Client("mongodb+srv://user:mdp@cluster0.qyuka7b.mongodb.net/Ecoride?retryWrites=true&w=majority");
+    $client = new Client("mongodb+srv://root:root@cluster0.qyuka7b.mongodb.net/Ecoride?retryWrites=true&w=majority");
     $this->collection = $client->Ecoride->avis;
   }
 
