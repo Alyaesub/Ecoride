@@ -177,13 +177,6 @@
         <label for="fumeur">Fumeur :</label>
         <input type="checkbox" id="fumeur" name="fumeur">
 
-        <div class="role-button">
-          <label>Vous êtes :</label>
-          <select name="role_utilisateur" required>
-            <option value="conducteur">Conducteur</option>
-            <option value="passager">Passager</option>
-          </select><br>
-        </div>
         <button type="submit">Enregistrer le covoiturage</button>
       </form>
       <?php if (!empty($_SESSION['success'])) : ?>
