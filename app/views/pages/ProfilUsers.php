@@ -44,12 +44,23 @@
           <img class="pp" src="/public/<?= htmlspecialchars($user['photo'] ?? '') ?>" alt="photo de profil">
         </div>
         <ul>
+          <li><strong>Role :</strong><?= htmlspecialchars($user['preference_role']) ?></li>
           <li><strong>Pseudo :</strong><?= htmlspecialchars($user['pseudo']) ?></li>
           <li><strong>Nom :</strong><?= htmlspecialchars($user['nom']) ?></li>
           <li><strong>Prénom :</strong><?= htmlspecialchars($user['prenom']) ?></li>
           <li><strong>Email :</strong> <?= htmlspecialchars($user['email']) ?></li>
           <li><strong>Vos crédits :</strong><?= htmlspecialchars($user['credits']) ?></li>
         </ul>
+        <form action="<?= route('updateRolePreference') ?>" method="POST">
+          <label for="preference_role">Je souhaite être :</label>
+          <select name="preference_role" id="preference_role" required>
+            <option value="">-- Sélectionnez --</option>
+            <option value="passager" <?= $user['preference_role'] === 'passager' ? 'selected' : '' ?>>Passager</option>
+            <option value="chauffeur" <?= $user['preference_role'] === 'chauffeur' ? 'selected' : '' ?>>Chauffeur</option>
+            <option value="les_deux" <?= $user['preference_role'] === 'les_deux' ? 'selected' : '' ?>>Les deux</option>
+          </select>
+          <button type="submit">Enregistrer</button>
+        </form>
       </div>
       <h2>Mettez a jour vos donées personnelle</h2>
       <form id="formInfo" class="registerForm" action="<?= route('updateUser') ?>" method="post" enctype="multipart/form-data">
@@ -135,55 +146,64 @@
   <div id="covoiturage" class="tab-content">
     <div class="section">
       <h2>Covoiturage</h2>
-      <form id="formCovoiturage" action="<?= route("ajouterCovoiturage") ?>" method="post">
 
-        <label for="adresse_depart">Adresse de départ :</label>
-        <input type="text" id="adresse_depart" name="adresse_depart" required>
+      <?php
+      $pref = $_SESSION['user']['preference_role'] ?? null;
+      if ($pref === 'chauffeur' || $pref === 'les_deux') :
+      ?>
 
-        <label for="adresse_arrivee">Adresse d'arrivée :</label>
-        <input type="text" id="adresse_arrivee" name="adresse_arrivee" required>
+        <form id="formCovoiturage" action="<?= route("ajouterCovoiturage") ?>" method="post">
 
-        <label for="date_depart">Date de départ :</label>
-        <input type="datetime-local" id="date_depart" name="date_depart" required>
+          <label for="adresse_depart">Adresse de départ :</label>
+          <input type="text" id="adresse_depart" name="adresse_depart" required>
 
-        <label for="date_arrivee">Date d'arrivée :</label>
-        <input type="datetime-local" id="date_arrivee" name="date_arrivee" required>
+          <label for="adresse_arrivee">Adresse d'arrivée :</label>
+          <input type="text" id="adresse_arrivee" name="adresse_arrivee" required>
 
-        <label for="id_vehicule">Choisissez un véhicule :</label>
-        <select name="id_vehicule" id="id_vehicule" required>
-          <?php if (!empty($vehicules)) : ?>
-            <?php foreach ($vehicules as $v) : ?>
-              <option value="<?= $v['id_vehicule'] ?>">
-                <?= $v['nom_marque'] . ' ' . $v['modele'] ?> (<?= $v['immatriculation'] ?>)
-              </option>
-            <?php endforeach; ?>
-          <?php else : ?>
-            <option disabled selected>⚠️ Aucun véhicule enregistré</option>
-          <?php endif; ?>
-        </select>
+          <label for="date_depart">Date de départ :</label>
+          <input type="datetime-local" id="date_depart" name="date_depart" required>
 
-        <label for="prix_personne">Prix par personne (crédits) :</label>
-        <input type="number" id="prix_personne" name="prix_personne" step="0.01" required>
+          <label for="date_arrivee">Date d'arrivée :</label>
+          <input type="datetime-local" id="date_arrivee" name="date_arrivee" required>
 
-        <label for="places_disponibles">Places disponibles :</label>
-        <input type="number" id="places_disponibles" name="places_disponibles" min="0" required>
+          <label for="id_vehicule">Choisissez un véhicule :</label>
+          <select name="id_vehicule" id="id_vehicule" required>
+            <?php if (!empty($vehicules)) : ?>
+              <?php foreach ($vehicules as $v) : ?>
+                <option value="<?= $v['id_vehicule'] ?>">
+                  <?= $v['nom_marque'] . ' ' . $v['modele'] ?> (<?= $v['immatriculation'] ?>)
+                </option>
+              <?php endforeach; ?>
+            <?php else : ?>
+              <option disabled selected>⚠️ Aucun véhicule enregistré</option>
+            <?php endif; ?>
+          </select>
 
-        <label for="est_ecologique">Est écologique :</label>
-        <input type="checkbox" id="est_ecologique" name="est_ecologique">
+          <label for="prix_personne">Prix par personne (crédits) :</label>
+          <input type="number" id="prix_personne" name="prix_personne" step="0.01" required>
 
-        <label for="animaux_autoriser">Animaux autorisés :</label>
-        <input type="checkbox" id="animaux_autoriser" name="animaux_autoriser">
+          <label for="places_disponibles">Places disponibles :</label>
+          <input type="number" id="places_disponibles" name="places_disponibles" min="0" required>
 
-        <label for="fumeur">Fumeur :</label>
-        <input type="checkbox" id="fumeur" name="fumeur">
+          <label for="est_ecologique">Est écologique :</label>
+          <input type="checkbox" id="est_ecologique" name="est_ecologique">
 
-        <button type="submit">Enregistrer le covoiturage</button>
-      </form>
+          <label for="animaux_autoriser">Animaux autorisés :</label>
+          <input type="checkbox" id="animaux_autoriser" name="animaux_autoriser">
+
+          <label for="fumeur">Fumeur :</label>
+          <input type="checkbox" id="fumeur" name="fumeur">
+
+          <button type="submit">Enregistrer le covoiturage</button>
+        </form>
+      <?php else : ?>
+        <p class="message-error" style="margin-top: 1rem;">🚫 Vous devez indiquer dans vos préférences que vous êtes <strong>chauffeur</strong> ou <strong>les deux</strong> pour pouvoir créer un covoiturage.</p>
+      <?php endif; ?>
+
       <?php if (!empty($_SESSION['success'])) : ?>
         <div class="message-success"><?= htmlspecialchars($_SESSION['success']) ?></div>
         <?php unset($_SESSION['success']); ?>
       <?php endif; ?>
-
       <?php if (!empty($_SESSION['error'])) : ?>
         <div class="message-error"><?= htmlspecialchars($_SESSION['error']) ?></div>
         <?php unset($_SESSION['error']); ?>

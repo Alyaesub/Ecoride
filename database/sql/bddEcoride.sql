@@ -21,6 +21,7 @@ CREATE TABLE utilisateur (
     credits INT DEFAULT 20,
     photo VARCHAR(50),
     id_role INT,
+    preference_role ENUM('chauffeur', 'passager', 'les_deux') DEFAULT NULL,
     CONSTRAINT fk_utilisateur_role
     FOREIGN KEY (id_role) REFERENCES role(id_role)
 ) ENGINE=InnoDB;

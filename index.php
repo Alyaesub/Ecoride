@@ -61,6 +61,7 @@ $routes = [
   'registerUser' => [UserController::class, 'registerUser'],
   'updateUser' => [UserController::class, 'updateUser'],
   'logout' => [LogoutController::class, 'logout'],
+  'updateRolePreference' => [UserController::class, 'updateRolePreference'],
   // Véhicules
   'vehicules' => [VehiculeController::class, 'showVehicule'],
   'ajouterVehicule' => [VehiculeController::class, 'create'],

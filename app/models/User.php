@@ -150,4 +150,16 @@ class User
     $stmt->execute([$id_covoit]);
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
   }
+
+  /**
+   * methode qui gér ela mise a jour du role chois par l'user
+   */
+  public function updatePreference($id, $preference)
+  {
+    $stmt = $this->pdo->prepare("UPDATE utilisateur SET preference_role = :role WHERE id_utilisateur = :id");
+    $stmt->execute([
+      'role' => $preference,
+      'id' => $id
+    ]);
+  }
 }
