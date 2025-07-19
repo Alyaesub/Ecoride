@@ -15,9 +15,13 @@
   <?php if (!empty($covoiturage)) : ?>
     <div class="covoiturage-infos">
       <p class="statut-covoit <?= $covoiturage['statut'] ?>"><strong>Statut :</strong> <?= ucfirst($covoiturage['statut']) ?></p>
-      <p><strong>Conducteur :</strong> <?= htmlspecialchars($covoiturage['pseudo_conducteur']) ?>
+      <p>
+        <strong>Conducteur :</strong>
+        <a href="<?= route('detailsProfil') . '?id=' . $covoiturage['id_utilisateur'] ?>">
+          <?= htmlspecialchars($covoiturage['pseudo_conducteur']) ?>
+        </a>
         <?php if (!empty($covoiturage['note_conducteur'])) : ?>
-          <span class="note-conducteur">— Moyenne : <?= $covoiturage['note_conducteur'] ?> ⭐</span>
+          <span class="note-conducteur"> — Moyenne : <?= $covoiturage['note_conducteur'] ?> ⭐</span>
         <?php endif; ?>
       </p>
       <p><strong>Départ :</strong> <?= htmlspecialchars($covoiturage['adresse_depart']) ?></p>

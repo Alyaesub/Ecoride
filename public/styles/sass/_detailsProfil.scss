@@ -1,0 +1,17 @@
+.profil-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.profil-photo {
+  display: block;
+  max-width: 150px;
+  max-height: 150px;
+  width: 100%;
+  height: auto;
+  border-radius: 50%;
+  object-fit: cover;
+  margin: 0 auto 1rem;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
