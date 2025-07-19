@@ -19,6 +19,7 @@ use App\Controllers\CreditsController;
 use App\Controllers\MaillingController;
 use App\Controllers\NotationController;
 use App\Controllers\AvisController;
+use App\Controllers\DetailsProfilsController;
 
 // Init Whoops
 $whoops = new Run();
@@ -62,6 +63,7 @@ $routes = [
   'updateUser' => [UserController::class, 'updateUser'],
   'logout' => [LogoutController::class, 'logout'],
   'updateRolePreference' => [UserController::class, 'updateRolePreference'],
+  'detailsProfil' => [DetailsProfilsController::class, 'getDataChauffeur'],
   // Véhicules
   'vehicules' => [VehiculeController::class, 'showVehicule'],
   'ajouterVehicule' => [VehiculeController::class, 'create'],

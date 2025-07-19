@@ -44,25 +44,27 @@
           <img class="pp" src="/public/<?= htmlspecialchars($user['photo'] ?? '') ?>" alt="photo de profil">
         </div>
         <ul>
-          <li><strong>Role :</strong><?= htmlspecialchars($user['preference_role']) ?></li>
-          <li><strong>Pseudo :</strong><?= htmlspecialchars($user['pseudo']) ?></li>
-          <li><strong>Nom :</strong><?= htmlspecialchars($user['nom']) ?></li>
-          <li><strong>Prénom :</strong><?= htmlspecialchars($user['prenom']) ?></li>
-          <li><strong>Email :</strong> <?= htmlspecialchars($user['email']) ?></li>
-          <li><strong>Vos crédits :</strong><?= htmlspecialchars($user['credits']) ?></li>
+          <li><strong>Role :</strong><?= htmlspecialchars($user['preference_role'] ?? '') ?></li>
+          <li><strong>Pseudo :</strong><?= htmlspecialchars($user['pseudo'] ?? '') ?></li>
+          <li><strong>Nom :</strong><?= htmlspecialchars($user['nom'] ?? '') ?></li>
+          <li><strong>Prénom :</strong><?= htmlspecialchars($user['prenom'] ?? '') ?></li>
+          <li><strong>Email :</strong> <?= htmlspecialchars($user['email'] ?? '') ?></li>
+          <li><strong>Vos crédits :</strong><?= htmlspecialchars($user['credits'] ?? '') ?></li>
         </ul>
-        <form action="<?= route('updateRolePreference') ?>" method="POST">
-          <label for="preference_role">Je souhaite être :</label>
-          <select name="preference_role" id="preference_role" required>
-            <option value="">-- Sélectionnez --</option>
-            <option value="passager" <?= $user['preference_role'] === 'passager' ? 'selected' : '' ?>>Passager</option>
-            <option value="chauffeur" <?= $user['preference_role'] === 'chauffeur' ? 'selected' : '' ?>>Chauffeur</option>
-            <option value="les_deux" <?= $user['preference_role'] === 'les_deux' ? 'selected' : '' ?>>Les deux</option>
-          </select>
-          <button type="submit">Enregistrer</button>
-        </form>
       </div>
+
       <h2>Mettez a jour vos donées personnelle</h2>
+      <form action="<?= route('updateRolePreference') ?>" method="POST">
+        <h2>Choisissez votre role</h2>
+        <label for="preference_role">Je souhaite être :</label>
+        <select name="preference_role" id="preference_role" required>
+          <option value="">-- Sélectionnez --</option>
+          <option value="passager" <?= $user['preference_role'] === 'passager' ? 'selected' : '' ?>>Passager</option>
+          <option value="chauffeur" <?= $user['preference_role'] === 'chauffeur' ? 'selected' : '' ?>>Chauffeur</option>
+          <option value="les_deux" <?= $user['preference_role'] === 'les_deux' ? 'selected' : '' ?>>Les deux</option>
+        </select>
+        <button type="submit">Enregistrer</button>
+      </form>
       <form id="formInfo" class="registerForm" action="<?= route('updateUser') ?>" method="post" enctype="multipart/form-data">
         <input type="hidden" name="id_role" value="3">
 
@@ -79,6 +81,8 @@
         <input type="email" id="email" name="email" require>
 
         <label for="motdepasse">Mot de passe :</label>
+        <input type="password" id="motdepasse" name="motdepasse" require>
+        <label for="motdepasse">Répetez votre mot de passe :</label>
         <input type="password" id="motdepasse" name="motdepasse" require>
 
         <label for="photo">Photo :</label>

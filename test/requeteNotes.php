@@ -30,3 +30,11 @@
     <?php endif; ?>
   </ul>
 </div>
+
+
+//////////////////: non details covoit
+<p><strong>Conducteur :</strong> <?= htmlspecialchars($covoiturage['pseudo_conducteur']) ?>
+  <?php if (!empty($covoiturage['note_conducteur'])) : ?>
+    <span class="note-conducteur">— Moyenne : <?= $covoiturage['note_conducteur'] ?> ⭐</span>
+  <?php endif; ?>
+</p>
