@@ -143,6 +143,10 @@ ADD CONSTRAINT transaction_ibfk_3
 FOREIGN KEY (id_covoiturage) REFERENCES covoiturage(id_covoiturage)
 ON DELETE CASCADE;
 
-#15 alter transaction table pour ajouter le status 'rembourseé
+#15 changement table transaction table pour ajouter le status 'rembourseé
 ALTER TABLE transaction
 MODIFY statut ENUM('en_attente', 'validée', 'refusée', 'remboursée') DEFAULT 'en_attente';
+
+#16 changement de la table utilisateur pour ajouter le role choisi par l'user
+ALTER TABLE utilisateur
+ADD preference_role ENUM('chauffeur', 'passager', 'les_deux') DEFAULT NULL;

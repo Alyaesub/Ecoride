@@ -267,4 +267,29 @@ class UserController
     header('Location: ' . route('profil'));
     exit;
   }
+
+  /**
+   * function qui met a jour le role choisi par l'user
+   */
+  public function updateRolePreference()
+  {
+    requireLogin();
+
+    $preference = $_POST['preference_role'] ?? null;
+    $allowed = ['chauffeur', 'passager', 'les_deux'];
+
+    if (!in_array($preference, $allowed)) {
+      $_SESSION['error'] = "Choix invalide.";
+      header("Location: " . route('profil'));
+      exit;
+    }
+
+    $model = new User();
+    $model->updatePreference($_SESSION['user']['id'], $preference);
+
+    $_SESSION['user']['preference_role'] = $preference; // mise à jour de la session
+    $_SESSION['success'] = "Préférence enregistrée avec succès.";
+    header("Location: " . route('profil'));
+    exit;
+  }
 }

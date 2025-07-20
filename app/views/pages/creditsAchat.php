@@ -39,6 +39,6 @@
       <option value="60">60 crédits - 50€</option>
       <option value="80">80 crédits - 60€</option>
     </select>
-    <button type="submit">Payer</button>
+    <button type="submit"> 💳 Payer</button>
   </form>
 </section>
