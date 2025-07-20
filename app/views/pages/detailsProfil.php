@@ -15,7 +15,7 @@
     </div>
 
     <div class="profil-avis">
-      <h3>Avis reçus</h3>
+      <h2>Avis reçus</h2>
       <?php if (!empty($avis)) : ?>
         <ul>
           <?php foreach ($avis as $a) : ?>
@@ -33,5 +33,7 @@
     <p>Utilisateur introuvable.</p>
   <?php endif; ?>
 
-  <a href="javascript:history.back()" class="btn-retour">← Retour</a>
+  <button class="buttonlink" onclick="history.back()">↩ Retour</button>
+
+
 </div>
