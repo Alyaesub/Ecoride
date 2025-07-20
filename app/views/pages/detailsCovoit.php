@@ -18,7 +18,7 @@
       <p>
         <strong>Conducteur :</strong>
         <a href="<?= route('detailsProfil') . '?id=' . $covoiturage['id_utilisateur'] ?>">
-          <?= htmlspecialchars($covoiturage['pseudo_conducteur']) ?>
+          <?= htmlspecialchars($covoiturage['pseudo_conducteur']) ?> 🔍
         </a>
         <?php if (!empty($covoiturage['note_conducteur'])) : ?>
           <span class="note-conducteur"> — Moyenne : <?= $covoiturage['note_conducteur'] ?> ⭐</span>

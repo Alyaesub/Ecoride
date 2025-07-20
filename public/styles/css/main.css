@@ -2567,6 +2567,12 @@ table tbody tr td {
   border-radius: 8px;
   margin-bottom: 1.5rem;
 }
+.detail-covoiturage-section .covoiturage-infos a {
+  text-decoration: none;
+  color: black;
+  font-weight: normal;
+  font-family: "Poppins", sans-serif;
+}
 .detail-covoiturage-section .covoiturage-infos p {
   margin: 0.5rem 0;
 }
@@ -2683,6 +2689,12 @@ table tbody tr td {
     width: 100%;
     margin-top: 2rem;
   }
+  .detail-covoiturage-section a {
+    text-decoration: none;
+    color: black;
+    font-weight: normal;
+    font-family: "Poppins", sans-serif;
+  }
 }
 .credit-info,
 .credit-form {
@@ -2777,6 +2789,19 @@ table tbody tr td {
   margin: 0 auto;
   padding: 2rem;
 }
+.profil-container .profil-details {
+  margin-top: 1rem;
+  margin-bottom: 3rem;
+  padding: 1.5rem;
+  background-color: #F0EAD6;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+}
+.profil-container a {
+  text-decoration: none;
+  color: #F0EAD6;
+  font-weight: normal;
+}
 
 .profil-photo {
   display: block;
@@ -2788,4 +2813,36 @@ table tbody tr td {
   object-fit: cover;
   margin: 0 auto 1rem;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.profil-avis {
+  margin-top: 1rem;
+  margin-bottom: 3rem;
+  padding: 1.5rem;
+  border-radius: 12px;
+  background-color: #F0EAD6;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+}
+.profil-avis h2 {
+  margin-bottom: 1rem;
+  color: #333;
+  font-size: 1.4rem;
+}
+.profil-avis ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+.profil-avis ul li {
+  background-color: white;
+  border-left: 4px solid #28a745;
+  margin-bottom: 1rem;
+  padding: 1rem;
+  border-radius: 8px;
+}
+.profil-avis ul li strong {
+  color: #222;
+}
+.profil-avis ul li small {
+  color: #777;
+  font-style: italic;
 }/*# sourceMappingURL=main.css.map */
