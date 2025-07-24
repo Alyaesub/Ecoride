@@ -16,39 +16,6 @@ function requireLogin(): void
   }
 }
 
-//function qui verifie si ces bien l'admin
-function requireAdmin(): void
-{
-  // Vérifie que l'utilisateur est connecté
-  if (!isset($_SESSION['user_id']) || !isset($_SESSION['user']['id_role'])) {
-    header('Location: ' . route('login'));
-    exit;
-  }
-
-  // Vérifie que le rôle est bien "admin"
-  if ($_SESSION['user']['id_role'] !== 1) {
-    // Rediriger vers l’accueil
-    header('Location: ' . route('home'));
-    exit;
-  }
-}
-
-//function qui verifie si ces bien un employer
-function requireEmploye(): void
-{
-  // Vérifie que l'utilisateur est connecté
-  if (!isset($_SESSION['user_id']) || !isset($_SESSION['user']['id_role'])) {
-    header('Location: ' . route('login'));
-    exit;
-  }
-
-  // Vérifie que le rôle est bien "admin"
-  if ($_SESSION['user']['id_role'] !== 2) {
-    // Rediriger vers l’accueil
-    header('Location: ' . route('home'));
-    exit;
-  }
-}
 
 //verifie si un compte est actif ou suspendu
 function requireActif(): void

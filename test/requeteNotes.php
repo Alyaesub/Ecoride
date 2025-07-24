@@ -38,3 +38,23 @@
     <span class="note-conducteur">— Moyenne : <?= $covoiturage['note_conducteur'] ?> ⭐</span>
   <?php endif; ?>
 </p>
+
+
+
+
+
+
+<?php foreach ($employes as $emp): ?>
+  <tr>
+    <td><?= htmlspecialchars($emp['nom']) ?></td>
+    <td><?= htmlspecialchars($emp['prenom']) ?></td>
+    <td><?= htmlspecialchars($emp['email']) ?></td>
+    <td><?= $emp['actif'] ? 'Actif' : 'Suspendu' ?></td>
+    <td>
+      <form action="<?= route('toggleEmploye') ?>" method="post">
+        <input type="hidden" name="id_utilisateur" value="<?= $emp['id_utilisateur'] ?>">
+        <button class="suspend-btn"><?= $emp['actif'] ? 'Suspendre' : 'Réactiver' ?></button>
+      </form>
+    </td>
+  </tr>
+<?php endforeach; ?>

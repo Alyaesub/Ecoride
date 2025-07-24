@@ -13,10 +13,17 @@ class Admin
     $this->pdo = ConnexionDb::getPdo();
   }
   //methode qui recup les employer en bdd
-  public function getAllEmployer()
+  public function getAllEmployes()
   {
     $sql = "SELECT id_utilisateur, nom, prenom, email, actif FROM utilisateur WHERE id_role = 2";
     $stmt = $this->pdo->query($sql);
     return $stmt->fetchAll();
+  }
+  //methode qui change le statut d'un copt employer
+  public function toggleActif($id)
+  {
+    $sql = "UPDATE utilisateur SET actif = NOT actif WHERE id_utilisateur = :id AND id_role = 2";
+    $stmt = $this->pdo->prepare($sql);
+    $stmt->execute(['id' => $id]);
   }
 }

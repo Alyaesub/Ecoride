@@ -1,5 +1,3 @@
-<?php $title = "Dashboard Administration"; ?>
-
 <section class="main-admin">
   <h1>Dashboard Administrateur</h1>
 
@@ -35,6 +33,23 @@
         </tr>
       </thead>
       <tbody>
+
+      </tbody>
+      <?php foreach ($employes as $emp): ?>
+        <tr>
+          <td><?= htmlspecialchars($emp['nom']) ?></td>
+          <td><?= htmlspecialchars($emp['prenom']) ?></td>
+          <td><?= htmlspecialchars($emp['email']) ?></td>
+          <td><?= $emp['actif'] ? 'Actif' : 'Suspendu' ?></td>
+          <td>
+            <form action="<?= route('toggleEmploye') ?>" method="post">
+              <input type="hidden" name="id_utilisateur" value="<?= $emp['id_utilisateur'] ?>">
+              <button class="suspend-btn"><?= $emp['actif'] ? 'Suspendre' : 'Réactiver' ?></button>
+            </form>
+          </td>
+        </tr>
+      <?php endforeach; ?>
+      <!--      <tbody>
         <tr>
           <td>Durand</td>
           <td>Emma</td>
@@ -49,7 +64,7 @@
           <td>Actif</td>
           <td><button class="suspend-btn">Suspendre</button></td>
         </tr>
-      </tbody>
+      </tbody> -->
     </table>
   </section>
 

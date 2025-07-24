@@ -160,8 +160,8 @@ class UserController
       __DIR__ . '/../views/pages/registerUser.php',
       [
         'title' => 'Créer votre profil',
-        'error'   => $error   ?? null, //variable qui sert a affihcer les messages d'erreurs
-        'success' => $success ?? null, //pareil mais pour le succes
+        'error'   => $error   ?? null,
+        'success' => $success ?? null,
         'old'     => $_POST   ?? [] //sert à conserver les données que l’utilisateur a déjà saisies pour les réafficher automatiquement si une erreur survient.
       ]
     );

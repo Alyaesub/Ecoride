@@ -16,6 +16,8 @@ class Utilisateur {
   +credits : INT
   +photo : VARCHAR
   +id_role : INT
+  +preference_role : ENUM
+  +actif : INT
 }
 
 Role "1" -- "0..*" Utilisateur : a pour rôle
