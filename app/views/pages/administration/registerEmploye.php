@@ -1,7 +1,9 @@
-<?php
-$title = 'Créer un profile employé';
-
-?>
+<?php if (!empty($success)): ?>
+  <div class="alert message-success"><?= htmlspecialchars($success) ?></div>
+<?php endif; ?>
+<?php if (!empty($error)): ?>
+  <div class="message-error"><?= htmlspecialchars($error) ?></div>
+<?php endif; ?>
 <section class="registerMain">
   <h1>Créer un profil employé</h1>
   <form class="registerForm" action="<?= route('registerEmploye') ?>" method="post">
@@ -26,12 +28,9 @@ $title = 'Créer un profile employé';
     <label>Mot de passe :</label>
     <input type="password" name="mot_de_passe" required><br>
 
+    <label>Repetez le mot de passe :</label>
+    <input type="password" name="mot_de_passe" required><br>
+
     <button type="submit">Créer le profil</button>
   </form>
-  <?php if (!empty($success)): ?>
-    <div class="alert message-success"><?= htmlspecialchars($success) ?></div>
-  <?php endif; ?>
-  <?php if (!empty($error)): ?>
-    <div class="message-error"><?= htmlspecialchars($error) ?></div>
-  <?php endif; ?>
 </section>

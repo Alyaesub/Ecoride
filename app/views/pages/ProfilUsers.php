@@ -19,9 +19,9 @@
     </button>
     <?php if (isset($_SESSION['user'])): ?>
       <?php if ($_SESSION['user']['role'] === 1): ?>
-        <a href="index.php?page=dashboardAdmin" class="admin-return-link">↩ Retour au Dashboard Admin</a>
+        <a href="dashboardAdmin" class="admin-return-link">↩ Retour au Dashboard Admin</a>
       <?php elseif ($_SESSION['user']['role'] === 2): ?>
-        <a href="index.php?page=dashboardEmploye" class="admin-return-link">↩ Retour au Dashboard Employé</a>
+        <a href="dashboardEmploye" class="admin-return-link">↩ Retour au Dashboard Employé</a>
       <?php endif; ?>
     <?php endif; ?>
   </div>
