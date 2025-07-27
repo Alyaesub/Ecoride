@@ -49,22 +49,6 @@
           </td>
         </tr>
       <?php endforeach; ?>
-      <!--      <tbody>
-        <tr>
-          <td>Durand</td>
-          <td>Emma</td>
-          <td>emma.durand@ecoride.com</td>
-          <td>Actif</td>
-          <td><button class="suspend-btn">Suspendre</button></td>
-        </tr>
-        <tr>
-          <td>Martin</td>
-          <td>Lucas</td>
-          <td>lucas.martin@ecoride.com</td>
-          <td>Actif</td>
-          <td><button class="suspend-btn">Suspendre</button></td>
-        </tr>
-      </tbody> -->
     </table>
   </section>
 
@@ -81,6 +65,24 @@
         </tr>
       </thead>
       <tbody>
+        <?php foreach ($utilisateurs as $user): ?>
+          <tr>
+            <td><?= htmlspecialchars($user['nom']) ?></td>
+            <td><?= htmlspecialchars($user['prenom']) ?></td>
+            <td><?= htmlspecialchars($user['email']) ?></td>
+            <td><?= $user['actif'] ? 'Actif' : 'Suspendu' ?></td>
+            <td>
+              <form method="post" action="<?= route('toggleUser') ?>">
+                <input type="hidden" name="id_utilisateur" value="<?= $user['id_utilisateur'] ?>">
+                <button class="suspend-btn">
+                  <?= $user['actif'] ? 'Suspendre' : 'Réactiver' ?>
+                </button>
+              </form>
+            </td>
+          </tr>
+        <?php endforeach; ?>
+      </tbody>
+      <!--   <tbody>
         <tr>
           <td>Lemoine</td>
           <td>Sophie</td>
@@ -95,7 +97,7 @@
           <td>Actif</td>
           <td><button class="suspend-btn">Suspendre</button></td>
         </tr>
-      </tbody>
+      </tbody> -->
     </table>
   </section>
 </section>
