@@ -32,6 +32,7 @@ class UserController
 
     // Vérification de l'email
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+      $_SESSION['error'] = "L'adresse email est invalide.";
       header('Location: /connexion?error=email');
       exit();
     }
@@ -40,13 +41,21 @@ class UserController
     $user = $userModel->findByCredentials($email, $pseudo, $password);
 
     if ($user && password_verify($password, $user['mot_de_passe'])) {
+      if ($user['actif'] != 1) {
+        $_SESSION['error'] = "Votre compte est suspendu.";
+        header('Location: ' . route('login'));
+        exit();
+      }
+
       $_SESSION['user_id'] = $user['id_utilisateur'];
       $_SESSION['user_role'] = $user['id_role'];
       $_SESSION['user'] = [
         'id' => $user['id_utilisateur'],
         'pseudo' => $user['pseudo'],
-        'role' => $user['id_role']
+        'role' => $user['id_role'],
+        'actif' => $user['actif']
       ];
+
       // Redirection selon le rôle
       switch ($user['id_role']) {
         case 1:
@@ -62,7 +71,8 @@ class UserController
       }
       exit();
     } else {
-      header('Location: /connexion?error=identifiants');
+      $_SESSION['error'] = "Pseudo, email ou mot de passe incorrect.";
+      header('Location: ' . route('login'));
       exit();
     }
   }

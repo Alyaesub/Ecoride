@@ -1,6 +1,4 @@
 <section class="main-admin">
-  <h1>Dashboard Administrateur</h1>
-
   <a class="logout" href="<?= route("logout") ?>">Déconnexion</a>
 
   <section class="sections-stats">
@@ -82,22 +80,6 @@
           </tr>
         <?php endforeach; ?>
       </tbody>
-      <!--   <tbody>
-        <tr>
-          <td>Lemoine</td>
-          <td>Sophie</td>
-          <td>sophie.lemoine@mail.com</td>
-          <td>Actif</td>
-          <td><button class="suspend-btn">Suspendre</button></td>
-        </tr>
-        <tr>
-          <td>Bernard</td>
-          <td>Thomas</td>
-          <td>thomas.bernard@mail.com</td>
-          <td>Actif</td>
-          <td><button class="suspend-btn">Suspendre</button></td>
-        </tr>
-      </tbody> -->
     </table>
   </section>
 </section>
