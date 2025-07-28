@@ -24,7 +24,8 @@ class User
     $stmt->bindParam(':pseudo', $pseudo);
     $stmt->execute();
 
-    return $stmt->fetch(PDO::FETCH_ASSOC);
+    $user =  $stmt->fetch(PDO::FETCH_ASSOC);
+    return $user ?: null;
   }
 
   /**
