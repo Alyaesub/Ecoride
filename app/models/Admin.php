@@ -12,7 +12,39 @@ class Admin
   {
     $this->pdo = ConnexionDb::getPdo();
   }
-  //methode qui recup les employer en bdd
+
+  public function getEmployesPaginated($limit, $offset)
+  {
+    $sql = "SELECT id_utilisateur, nom, prenom, email, actif FROM utilisateur WHERE id_role = 2 LIMIT :limit OFFSET :offset";
+    $stmt = $this->pdo->prepare($sql);
+    $stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
+    $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
+    $stmt->execute();
+    return $stmt->fetchAll();
+  }
+
+  public function countEmployes()
+  {
+    $sql = "SELECT COUNT(*) as total FROM utilisateur WHERE id_role = 2";
+    return $this->pdo->query($sql)->fetch()['total'];
+  }
+
+  public function getUsersPaginated($limit, $offset)
+  {
+    $sql = "SELECT id_utilisateur, nom, prenom, email, actif FROM utilisateur WHERE id_role = 3 LIMIT :limit OFFSET :offset";
+    $stmt = $this->pdo->prepare($sql);
+    $stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
+    $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
+    $stmt->execute();
+    return $stmt->fetchAll();
+  }
+
+  public function countUsers()
+  {
+    $sql = "SELECT COUNT(*) as total FROM utilisateur WHERE id_role = 3";
+    return $this->pdo->query($sql)->fetch()['total'];
+  }
+  /* //methode qui recup les employer en bdd
   public function getAllEmployes()
   {
     $sql = "SELECT id_utilisateur, nom, prenom, email, actif FROM utilisateur WHERE id_role = 2";
@@ -25,7 +57,7 @@ class Admin
   {
     $sql = "SELECT id_utilisateur, nom, prenom, email, actif FROM utilisateur WHERE id_role = 3";
     return $this->pdo->query($sql)->fetchAll();
-  }
+  } */
 
   //methode qui change le statut des user (actif)
   public function toggleUser($id)

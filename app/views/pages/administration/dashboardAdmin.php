@@ -48,6 +48,13 @@
         </tr>
       <?php endforeach; ?>
     </table>
+    <div class="pagination">
+      <?php
+      $totalPagesEmp = ceil($totalEmployes / 5);
+      for ($i = 1; $i <= $totalPagesEmp; $i++): ?>
+        <a href="<?= route('dashboardAdmin') ?>?page_emp=<?= $i ?>" <?= $pageEmployes === $i ? 'class="active"' : '' ?>><?= $i ?></a>
+      <?php endfor; ?>
+    </div>
   </section>
 
   <section class="user-management">
@@ -81,5 +88,12 @@
         <?php endforeach; ?>
       </tbody>
     </table>
+    <div class="pagination">
+      <?php
+      $totalPagesUser = ceil($totalUtilisateur / 5);
+      for ($i = 1; $i <= $totalPagesUser; $i++): ?>
+        <a href="<?= route('dashboardAdmin') ?>?page_user=<?= $i ?>" <?= $pageUtilisateur === $i ? 'class="active"' : '' ?>><?= $i ?></a>
+      <?php endfor; ?>
+    </div>
   </section>
 </section>
