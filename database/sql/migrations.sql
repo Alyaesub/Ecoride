@@ -150,3 +150,7 @@ MODIFY statut ENUM('en_attente', 'validée', 'refusée', 'remboursée') DEFAULT 
 #16 changement de la table utilisateur pour ajouter le role choisi par l'user
 ALTER TABLE utilisateur
 ADD preference_role ENUM('chauffeur', 'passager', 'les_deux') DEFAULT NULL;
+
+#17 changement de la table utilisateur pour intégré la logique "actif" ou "suspendu" pour les compte
+ALTER TABLE utilisateur
+ADD COLUMN actif TINYINT(1) NOT NULL DEFAULT 1;

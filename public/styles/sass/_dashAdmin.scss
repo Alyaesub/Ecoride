@@ -150,6 +150,34 @@ button#create-employee {
   &:hover { background-color: #d35400; }
 }
 
+.pagination {
+  margin-top: 1rem;
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  flex-wrap: wrap;
+
+  a {
+    padding: 0.4rem 0.8rem;
+    border: 1px solid #ccc;
+    border-radius: 0.4rem;
+    text-decoration: none;
+    color: #333;
+    transition: background-color 0.2s;
+
+    &:hover {
+      background-color: #f0f0f0;
+    }
+
+    &.active {
+      background-color: #0066cc;
+      color: white;
+      font-weight: bold;
+      border-color: #0066cc;
+    }
+  }
+}
+
 }
 
 /////////////////////////// code desktop //////////
@@ -322,4 +350,31 @@ button#create-employee {
       }
     }
   }
+    .pagination {
+  margin-top: 1rem;
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  flex-wrap: wrap;
+
+  a {
+    padding: 0.4rem 0.8rem;
+    border: 1px solid #ccc;
+    border-radius: 0.4rem;
+    text-decoration: none;
+    color: #333;
+    transition: background-color 0.2s;
+
+    &:hover {
+      background-color: #f0f0f0;
+    }
+
+    &.active {
+      background-color: #0066cc;
+      color: white;
+      font-weight: bold;
+      border-color: #0066cc;
+    }
+  }
+}
 }

@@ -1,5 +1,7 @@
 <?php
-
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 require_once __DIR__ . '/vendor/autoload.php';
 require_once __DIR__ . '/app/functions/view.php'; //pour appeler le moteur de rendu et la fonction render
 require_once __DIR__ . '/app/functions/helpers.php'; //pour appeler la fonction route
@@ -13,6 +15,7 @@ use App\Controllers\LogoutController; //appelle le logout
 use App\Controllers\UserController; //applle le user controller
 use App\Controllers\SearchCitiesController; //appelle le controller de la searchbar
 use App\Controllers\ActiviteController;
+use App\Controllers\AdminController;
 use App\Controllers\VehiculeController;
 use App\Controllers\CovoiturageController;
 use App\Controllers\CreditsController;
@@ -75,11 +78,12 @@ $routes = [
   'acheteCredits' => [CreditsController::class, 'acheteCredits'],
   // Mailling
   'ContactMailEcoride' => [MaillingController::class, 'sendContactMail'],
-  // Dashboards admin/employé
-  'dashboardAdmin' => function () {
-    render(__DIR__ . '/app/views/pages/administration/dashboardAdmin.php', ['title' => 'Dashboard Administration']);
-  },
+  // Dashboards admin
+  'dashboardAdmin' => [AdminController::class, 'dashboardAdmin'],
   'registerEmploye' => [UserController::class, 'registerEmploye'],
+  'toggleEmploye' => [AdminController::class, 'toggleEmploye'],
+  'toggleUser' => [AdminController::class, 'toggleUser'],
+  // Daschboard employe
   'dashboardEmploye' => function () {
     render(__DIR__ . '/app/views/pages/administration/dashboardEmploye.php', ['title' => 'Dashboard Employé']);
   },
