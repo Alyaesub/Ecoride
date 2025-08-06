@@ -24,12 +24,8 @@ class User
     $stmt->bindParam(':pseudo', $pseudo);
     $stmt->execute();
 
-    $user = $stmt->fetch(PDO::FETCH_ASSOC);
-
-    if ($user && password_verify($password, $user['mot_de_passe'])) {
-      return $user;
-    }
-    return null;
+    $user =  $stmt->fetch(PDO::FETCH_ASSOC);
+    return $user ?: null;
   }
 
   /**

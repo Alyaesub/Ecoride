@@ -30,41 +30,54 @@ class UserController
     $email = $_POST['email'] ?? '';
     $password = $_POST['password'] ?? '';
 
-    // Vérification de l'email
+    // Email non valide
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-      header('Location: /connexion?error=email');
+      $_SESSION['error'] = "L'adresse email est invalide.";
+      header('Location: ' . route('login'));
       exit();
     }
 
     $userModel = new User();
     $user = $userModel->findByCredentials($email, $pseudo, $password);
 
-    if ($user && password_verify($password, $user['mot_de_passe'])) {
-      $_SESSION['user_id'] = $user['id_utilisateur'];
-      $_SESSION['user_role'] = $user['id_role'];
-      $_SESSION['user'] = [
-        'id' => $user['id_utilisateur'],
-        'pseudo' => $user['pseudo'],
-        'role' => $user['id_role']
-      ];
-      // Redirection selon le rôle
-      switch ($user['id_role']) {
-        case 1:
-          header('Location: ' . route('dashboardAdmin'));
-          break;
-        case 2:
-          header('Location: ' . route('dashboardEmploye'));
-          break;
-        case 3:
-        default:
-          header('Location: ' . route('profil'));
-          break;
-      }
-      exit();
-    } else {
-      header('Location: /connexion?error=identifiants');
+    // Mauvais identifiants
+    if (!$user || !password_verify($password, $user['mot_de_passe'])) {
+      $_SESSION['error'] = "Pseudo, email ou mot de passe incorrect.";
+      header('Location: ' . route('login'));
       exit();
     }
+
+    // Compte suspendu
+    if ($user['actif'] != 1) {
+      $_SESSION['error'] = "Votre compte est suspendu.";
+      header('Location: ' . route('login'));
+      exit();
+    }
+
+    // Connexion OK
+    $_SESSION['user_id'] = $user['id_utilisateur'];
+    $_SESSION['user_role'] = $user['id_role'];
+    $_SESSION['user'] = [
+      'id' => $user['id_utilisateur'],
+      'pseudo' => $user['pseudo'],
+      'role' => $user['id_role'],
+      'actif' => $user['actif']
+    ];
+
+    // Redirection par rôle
+    switch ($user['id_role']) {
+      case 1:
+        header('Location: ' . route('dashboardAdmin'));
+        break;
+      case 2:
+        header('Location: ' . route('dashboardEmploye'));
+        break;
+      case 3:
+      default:
+        header('Location: ' . route('profil'));
+        break;
+    }
+    exit();
   }
 
 
@@ -107,6 +120,11 @@ class UserController
     $avisReçus = $avisModel->getAvisReçus($_SESSION['user_id']);
     $avisDonnes = $avisModel->getAvisDonnes($_SESSION['user_id']);
 
+    $messageErrorMongo = '';
+    if (empty($avisReçus) || empty($avisDonnes)) {
+      $messageErrorMongo = "Les avis sont indisponibles";
+    }
+
     render(__DIR__ . '/../views/pages/profilUsers.php', [
       'title'        => 'Votre profil',
       'covoiturages' => $covoiturages,
@@ -116,6 +134,7 @@ class UserController
       'moyenneUtilisateur' => $moyenneUtilisateur,
       'avisReçus' => $avisReçus,
       'avisDonnes' => $avisDonnes,
+      "messageErrorMongo" => $messageErrorMongo,
       'user' => $user
     ]);
   }
@@ -160,8 +179,8 @@ class UserController
       __DIR__ . '/../views/pages/registerUser.php',
       [
         'title' => 'Créer votre profil',
-        'error'   => $error   ?? null, //variable qui sert a affihcer les messages d'erreurs
-        'success' => $success ?? null, //pareil mais pour le succes
+        'error'   => $error   ?? null,
+        'success' => $success ?? null,
         'old'     => $_POST   ?? [] //sert à conserver les données que l’utilisateur a déjà saisies pour les réafficher automatiquement si une erreur survient.
       ]
     );

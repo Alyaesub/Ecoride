@@ -1,13 +1,11 @@
 <!-- page de la view du login -->
-<?php $title = 'Connexion à votre profil';
-
-?>
+<?php if (!empty($_SESSION['error'])): ?>
+  <div class="message-error"><?= htmlspecialchars($_SESSION['error']) ?></div>
+  <?php unset($_SESSION['error']); ?>
+<?php endif; ?>
 
 <div class="profile-container">
   <h1>Connectez vous a votre profil</h1>
-  <?php if (isset($_GET['error'])): ?>
-    <p style="color: red;">Identifiants incorrects, merci de réessayer.</p>
-  <?php endif; ?>
   <form action="<?= route('login-user') ?>" method="post" class="formulaire" id="profileForm">
     <label for="email">Pseudo :</label>
     <input type="text" name="pseudo" id="pseudo" required>

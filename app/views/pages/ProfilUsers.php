@@ -19,7 +19,7 @@
     </button>
     <?php if (isset($_SESSION['user'])): ?>
       <?php if ($_SESSION['user']['role'] === 1): ?>
-        <a href="dashboardAdmin" class="admin-return-link">↩ Retour au Dashboard Admin</a>
+        <a href="<?= route('dashboardAdmin') ?>" class="admin-return-link">↩ Retour au Dashboard Admin</a>
       <?php elseif ($_SESSION['user']['role'] === 2): ?>
         <a href="dashboardEmploye" class="admin-return-link">↩ Retour au Dashboard Employé</a>
       <?php endif; ?>
@@ -297,7 +297,7 @@
               </li>
             <?php endforeach; ?>
           <?php else : ?>
-            <li>Aucun commentaire reçu.</li>
+            <li><?= htmlspecialchars($messageErrorMongo) ?> ou vous n'avez reçus aucun commentaire</li>
           <?php endif; ?>
         </ul>
       </section>
@@ -314,7 +314,7 @@
               </li>
             <?php endforeach; ?>
           <?php else : ?>
-            <li>Vous n’avez encore laissé aucun commentaire.</li>
+            <li><?= htmlspecialchars($messageErrorMongo) ?> ou vous n’avez laissé aucun commentaire.</li>
           <?php endif; ?>
         </ul>
       </section>

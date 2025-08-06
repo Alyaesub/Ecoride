@@ -190,7 +190,7 @@
     font-family: "inter", sans-serif;
   }
   .footer .social-media a:hover {
-    color: #fefdfb;
+    color: rgb(253.6607142857, 253.125, 251.3392857143);
   }
 }
 .contact h3 {
@@ -212,7 +212,7 @@
   color: #333;
 }
 .cgv:hover {
-  color: #fefdfb;
+  color: rgb(253.6607142857, 253.125, 251.3392857143);
 }
 
 .contactForm {
@@ -223,7 +223,7 @@
   color: #333;
 }
 .contactForm:hover {
-  color: #fefdfb;
+  color: rgb(253.6607142857, 253.125, 251.3392857143);
 }
 
 @media (max-width: 768px) {
@@ -555,7 +555,7 @@
     width: 90%;
     max-width: 300px;
     height: auto;
-    background: radial-gradient(circle at center, #F0EAD6 0%, #6ebfbf 40%, #4CAF50 100%);
+    background: radial-gradient(circle at center, #F0EAD6 0%, rgb(109.536, 191.464, 191.464) 40%, #4CAF50 100%);
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
     transition: all 0.3s ease-in-out;
@@ -587,7 +587,7 @@
     width: 90%;
     max-width: 300px;
     height: auto;
-    background: radial-gradient(circle at center, #F0EAD6 0%, #6ebfbf 40%, #4CAF50 100%);
+    background: radial-gradient(circle at center, #F0EAD6 0%, rgb(109.536, 191.464, 191.464) 40%, #4CAF50 100%);
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
     transition: all 0.3s ease-in-out;
@@ -618,7 +618,7 @@
     width: 90%;
     max-width: 300px;
     height: auto;
-    background: radial-gradient(circle at center, #F0EAD6 0%, #6ebfbf 40%, #4CAF50 100%);
+    background: radial-gradient(circle at center, #F0EAD6 0%, rgb(109.536, 191.464, 191.464) 40%, #4CAF50 100%);
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
     transition: all 0.3s ease-in-out;
@@ -741,7 +741,7 @@
     width: 100%;
     max-width: 400px;
     height: auto;
-    background: radial-gradient(circle at center, #F0EAD6 0%, #6ebfbf 40%, #4CAF50 100%);
+    background: radial-gradient(circle at center, #F0EAD6 0%, rgb(109.536, 191.464, 191.464) 40%, #4CAF50 100%);
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
     transition: all 0.3s ease-in-out;
@@ -996,7 +996,7 @@
     font-family: "inter", sans-serif;
   }
   .activite-section a:hover {
-    color: #fefdfb;
+    color: rgb(253.6607142857, 253.125, 251.3392857143);
   }
   .activite-section h1 {
     font-size: 2rem;
@@ -1068,7 +1068,7 @@
     font-family: "inter", sans-serif;
   }
   .activite-section a:hover {
-    color: #fefdfb;
+    color: rgb(253.6607142857, 253.125, 251.3392857143);
   }
   .activite-section h1 {
     font-size: 2rem;
@@ -1274,7 +1274,7 @@
     font-family: "inter", sans-serif;
   }
   .display-box a:hover {
-    color: #fefdfb;
+    color: rgb(253.6607142857, 253.125, 251.3392857143);
   }
   .display-box h2 {
     color: #333;
@@ -1564,7 +1564,7 @@
     font-family: "inter", sans-serif;
   }
   .display-box a:hover {
-    color: #fefdfb;
+    color: rgb(253.6607142857, 253.125, 251.3392857143);
   }
   .display-box h2 {
     color: #333;
@@ -2034,6 +2034,30 @@
   .suspend-btn:hover {
     background-color: #d35400;
   }
+  .pagination {
+    margin-top: 1rem;
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .pagination a {
+    padding: 0.4rem 0.8rem;
+    border: 1px solid #ccc;
+    border-radius: 0.4rem;
+    text-decoration: none;
+    color: #333;
+    transition: background-color 0.2s;
+  }
+  .pagination a:hover {
+    background-color: #f0f0f0;
+  }
+  .pagination a.active {
+    background-color: #0066cc;
+    color: white;
+    font-weight: bold;
+    border-color: #0066cc;
+  }
 }
 @media (min-width: 768px) {
   .main-admin {
@@ -2177,6 +2201,30 @@
   }
   table .suspend-btn:hover {
     background-color: #d35400;
+  }
+  .pagination {
+    margin-top: 1rem;
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .pagination a {
+    padding: 0.4rem 0.8rem;
+    border: 1px solid #ccc;
+    border-radius: 0.4rem;
+    text-decoration: none;
+    color: #333;
+    transition: background-color 0.2s;
+  }
+  .pagination a:hover {
+    background-color: #f0f0f0;
+  }
+  .pagination a.active {
+    background-color: #0066cc;
+    color: white;
+    font-weight: bold;
+    border-color: #0066cc;
   }
 }
 @media (max-width: 768px) {
