@@ -120,6 +120,11 @@ class UserController
     $avisReçus = $avisModel->getAvisReçus($_SESSION['user_id']);
     $avisDonnes = $avisModel->getAvisDonnes($_SESSION['user_id']);
 
+    $messageErrorMongo = '';
+    if (empty($avisReçus) || empty($avisDonnes)) {
+      $messageErrorMongo = "Les avis sont indisponibles";
+    }
+
     render(__DIR__ . '/../views/pages/profilUsers.php', [
       'title'        => 'Votre profil',
       'covoiturages' => $covoiturages,
@@ -129,6 +134,7 @@ class UserController
       'moyenneUtilisateur' => $moyenneUtilisateur,
       'avisReçus' => $avisReçus,
       'avisDonnes' => $avisDonnes,
+      "messageErrorMongo" => $messageErrorMongo,
       'user' => $user
     ]);
   }

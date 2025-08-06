@@ -297,7 +297,7 @@
               </li>
             <?php endforeach; ?>
           <?php else : ?>
-            <li>Aucun commentaire reçu.</li>
+            <li><?= htmlspecialchars($messageErrorMongo) ?> ou vous n'avez reçus aucun commentaire</li>
           <?php endif; ?>
         </ul>
       </section>
@@ -314,7 +314,7 @@
               </li>
             <?php endforeach; ?>
           <?php else : ?>
-            <li>Vous n’avez encore laissé aucun commentaire.</li>
+            <li><?= htmlspecialchars($messageErrorMongo) ?> ou vous n’avez laissé aucun commentaire.</li>
           <?php endif; ?>
         </ul>
       </section>

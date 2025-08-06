@@ -12,8 +12,6 @@ class AdminController
     requireLogin();
 
     $adminModel = new Admin();
-    /* $employes = $adminModel->getAllEmployes();
-    $utilisateurs = $adminModel->getAllUtilisateurs(); */
 
     //pagination
     $limit = 5; // 5 éléments par page
@@ -28,6 +26,32 @@ class AdminController
     $utilisateurs = $adminModel->getUsersPaginated($limit, $offsetUser);
     $totalUtilisateur = $adminModel->countUsers();
 
+    $statsCovoiturages = $adminModel->getCovoituragesParJour();
+
+    $statsCovoiturages = $adminModel->getCovoituragesParJour();
+    $statsCredits = $adminModel->getCreditsParJour();
+
+    // Créer un tableau des 7 derniers jours (au format Y-m-d)
+    $jours = [];
+    for ($i = 6; $i >= 0; $i--) {
+      $jours[] = date('Y-m-d', strtotime("-$i days"));
+    }
+
+    // Transformer le tableau d’origine en associatif [jour => total]
+    $totaux = [];
+    foreach ($statsCovoiturages as $stat) {
+      $totaux[$stat['jour']] = (int)$stat['total'];
+    }
+
+    // Créer le tableau final, avec 0 pour les jours manquants
+    $statsCompletes = [];
+    foreach ($jours as $jour) {
+      $statsCompletes[] = [
+        'jour' => $jour,
+        'total' => $totaux[$jour] ?? 0
+      ];
+    }
+
     render(__DIR__ . '/../views/pages/administration/dashboardAdmin.php', [
       'title' => 'Dashboard Administration',
       'employes' => $employes,
@@ -35,7 +59,9 @@ class AdminController
       'pageEmployes' => $pageEmployes,
       'utilisateurs' => $utilisateurs,
       'totalUtilisateur' => $totalUtilisateur,
-      'pageUtilisateur' => $pageUtilisateur
+      'pageUtilisateur' => $pageUtilisateur,
+      'statsCovoiturages' => $statsCompletes,
+      'statsCredits' => $statsCredits
     ]);
   }
   //function qui gere le changement de statut d'un compte employé

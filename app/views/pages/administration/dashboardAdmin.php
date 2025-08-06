@@ -5,12 +5,10 @@
     <section class="stats">
       <h2>Statistiques :</h2>
       <div class="stat-item">
-        <p>Covoiturages aujourd'hui :</p>
-        <span id="rides-today">12</span>
+        <canvas id="covoitChart" width="400" height="200"></canvas>
       </div>
       <div class="stat-item">
-        <p>Crédits générés aujourd'hui :</p>
-        <span id="credits-today">240</span>
+        <canvas id="creditChart" width="400" height="200"></canvas>
       </div>
     </section>
   </section>
@@ -96,4 +94,13 @@
       <?php endfor; ?>
     </div>
   </section>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    const statsLabelsCovoit = <?= json_encode(array_column($statsCovoiturages, 'jour')) ?>;
+    const statsDataCovoit = <?= json_encode(array_map('intval', array_column($statsCovoiturages, 'total'))) ?>;
+
+    const statsLabelsCredits = <?= json_encode(array_column($statsCredits, 'jour')) ?>;
+    const statsDataCredits = <?= json_encode(array_map('intval', array_column($statsCredits, 'total'))) ?>;
+  </script>
+  <script src="../../../../js/chartStats.js"></script>
 </section>
