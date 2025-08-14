@@ -1,15 +1,15 @@
 # 🌱 EcoRide - Application de Covoiturage Écologique
 
-## 📋 À propos
+## À propos
 
 **EcoRide** est une application web de covoiturage écoresponsable. Elle permet aux utilisateurs de proposer, réserver et gérer des trajets partagés afin de réduire leur empreinte carbone.
 
-## 🗂️ Structure du projet
+## Structure du projet
 
 -   `/database/sql` : Scripts SQL d’installation et de test de la base relationnelle.
 -   `/database/nosql` : Données utilisateurs (avis) au format JSON.
 
-## 👤 Comptes de test
+## Comptes de test
 
 -   **Utilisateur** :
     -   `pseudo`: bob / `mail`: bob@test.com / `mot de passe`: password123
@@ -35,14 +35,14 @@
     -   `pseudo`: albert/ `mail`: albert@test.com / `poste` : informaticien / `numéro de badge` : 13 / `mot de passe`: password123
     -   `pseudo`: magalie/ `mail`: magalie@test.com / `poste` : moderatrice / `numéro de badge` : 14 / `mot de passe`: password123
 
-## 🛠️ Technologies
+## Technologies
 
 -   **Front-end** : HTML5, SCSS, JavaScript (ES6+)
 -   **Back-end** : PHP 8, MySQL, Mongodb
--   **Outils** : Node.js, npm, Composer
+-   **Outils** : chart.js, npm, Composer
 -   **Déploiement** : O2Switch
 
-## ⚙️ Installation
+## Installation
 
 ```bash
 # Cloner le projet
@@ -65,7 +65,7 @@ npm install
 
 ### Autoload
 
--   Autoload via Composer (`vendor/`, `composer.json`, `dump-autoload` ✅)
+-   Autoload via Composer (`vendor/`, `composer.json`, `dump-autoload`)
 -   Chargement automatique des classes avec `require 'vendor/autoload.php'`
 
 ### Débogage
@@ -91,7 +91,7 @@ npm install
 -   [MCP - Modèle de Conceptualisation du Projet](https://www.figma.com/design/FiuUpMhBEJEVa6j3rrmASP/MCP-Ecoride)
 -   [Diagramme de séquence](https://www.figma.com/design/p2iUH1N3JGgNAPVyS23V2m/Diagramme-sequence-Ecoride)
 
-## 🔐 Configuration
+## Configuration
 
 ### `config/env.ini`
 
@@ -150,7 +150,7 @@ $pdo = ConnexionDb::getPdo();
 -   Connexion centralisée via `ConnexionDb`
 -   Requêtes prêtes à l’emploi avec PDO
 
-## ✅ Bonnes pratiques
+## Bonnes pratiques
 
 -   Configuration centralisée et sécurisée
 -   Séparation environnement local / prod

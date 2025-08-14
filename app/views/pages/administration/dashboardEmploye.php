@@ -56,4 +56,43 @@
       </tbody>
     </table>
   </section>
+  <section class="user-management">
+    <h2>Gestion des utilisateurs</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Nom</th>
+          <th>Prénom</th>
+          <th>Email</th>
+          <th>Status</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <?php foreach ($utilisateurs as $user): ?>
+          <tr>
+            <td><?= htmlspecialchars($user['nom']) ?></td>
+            <td><?= htmlspecialchars($user['prenom']) ?></td>
+            <td><?= htmlspecialchars($user['email']) ?></td>
+            <td><?= $user['actif'] ? 'Actif' : 'Suspendu' ?></td>
+            <td>
+              <form method="post" action="<?= route('toggleUser') ?>">
+                <input type="hidden" name="id_utilisateur" value="<?= $user['id_utilisateur'] ?>">
+                <button class="suspend-btn">
+                  <?= $user['actif'] ? 'Suspendre' : 'Réactiver' ?>
+                </button>
+              </form>
+            </td>
+          </tr>
+        <?php endforeach; ?>
+      </tbody>
+    </table>
+    <div class="pagination">
+      <?php
+      $totalPagesUser = ceil($totalUtilisateur / 5);
+      for ($i = 1; $i <= $totalPagesUser; $i++): ?>
+        <a href="<?= route('dashboardemploye') ?>?page_user=<?= $i ?>" <?= $pageUtilisateur === $i ? 'class="active"' : '' ?>><?= $i ?></a>
+      <?php endfor; ?>
+    </div>
+  </section>
 </section>

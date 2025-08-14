@@ -94,7 +94,8 @@
       <?php endfor; ?>
     </div>
   </section>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <!-- <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> --><!--  ligne pour le online -->
+  <script src="../../../../js//vendor/chart.js"></script>
   <script>
     const statsLabelsCovoit = <?= json_encode(array_column($statsCovoiturages, 'jour')) ?>;
     const statsDataCovoit = <?= json_encode(array_map('intval', array_column($statsCovoiturages, 'total'))) ?>;

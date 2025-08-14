@@ -26,23 +26,26 @@ class AdminController
     $utilisateurs = $adminModel->getUsersPaginated($limit, $offsetUser);
     $totalUtilisateur = $adminModel->countUsers();
 
-    $statsCovoiturages = $adminModel->getCovoituragesParJour();
 
     $statsCovoiturages = $adminModel->getCovoituragesParJour();
     $statsCredits = $adminModel->getCreditsParJour();
-
+    /**
+     * bloque de code qui créé et transforme les tableau associatiffe pour geré les stats de covoit
+     * un tableau jours 
+     * un tableau total pour les covoit par jours
+     * et un qui affiche les stats completes pour pouvoir gére les jours a 0 covoit 
+     * et avoir un meillieur affichage 
+     */
     // Créer un tableau des 7 derniers jours (au format Y-m-d)
     $jours = [];
     for ($i = 6; $i >= 0; $i--) {
       $jours[] = date('Y-m-d', strtotime("-$i days"));
     }
-
     // Transformer le tableau d’origine en associatif [jour => total]
     $totaux = [];
     foreach ($statsCovoiturages as $stat) {
       $totaux[$stat['jour']] = (int)$stat['total'];
     }
-
     // Créer le tableau final, avec 0 pour les jours manquants
     $statsCompletes = [];
     foreach ($jours as $jour) {
@@ -60,7 +63,7 @@ class AdminController
       'utilisateurs' => $utilisateurs,
       'totalUtilisateur' => $totalUtilisateur,
       'pageUtilisateur' => $pageUtilisateur,
-      'statsCovoiturages' => $statsCompletes,
+      'statsCovoiturages' => /* $statsCompletes */ $statsCovoiturages,
       'statsCredits' => $statsCredits
     ]);
   }

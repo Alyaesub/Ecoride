@@ -23,6 +23,7 @@ use App\Controllers\MaillingController;
 use App\Controllers\NotationController;
 use App\Controllers\AvisController;
 use App\Controllers\DetailsProfilsController;
+use App\Controllers\EmployeController;
 
 // Init Whoops
 $whoops = new Run();
@@ -87,6 +88,8 @@ $routes = [
   'dashboardEmploye' => function () {
     render(__DIR__ . '/app/views/pages/administration/dashboardEmploye.php', ['title' => 'Dashboard Employé']);
   },
+  'dashboardemploye' => [EmployeController::class, 'dashboardEmploye'],
+  'toggleUser' => [EmployeController::class, 'toggleUser'],
 ];
 
 /**
