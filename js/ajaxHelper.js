@@ -1,5 +1,5 @@
 //fonction qui permet de rentre asynchrone mes formulaire
-//a integrés dans mes controllers plus tard une fois les logique fini
+//a integrés plus tard
 function handleAjaxForm(formId, resultTargetId) {
 	const form = document.getElementById(formId);
 	form.addEventListener("submit", async function (e) {
@@ -18,7 +18,7 @@ function handleAjaxForm(formId, resultTargetId) {
 	});
 }
 // appeler la fonction
-handleAjaxForm("formInfo", "updateMessage");
+handleAjaxForm();
 
 /* L’inscription (registerUser, registerEmploye)
 • La connexion (login)
