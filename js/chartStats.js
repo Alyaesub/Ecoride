@@ -21,7 +21,7 @@ if (document.getElementById("covoitChart")) {
 				y: {
 					beginAtZero: true,
 					ticks: {
-						stepSize: 2, // Affichage de l'échelle de 2 en 2
+						stepSize: 2,
 					},
 				},
 			},
@@ -52,7 +52,7 @@ if (document.getElementById("creditChart")) {
 				y: {
 					beginAtZero: true,
 					ticks: {
-						stepSize: 10,
+						stepSize: 5,
 					},
 				},
 			},

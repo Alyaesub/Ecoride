@@ -73,14 +73,13 @@ class Admin
           GROUP BY DATE(date_depart)
           ORDER BY jour ASC";
     $stmt = $this->pdo->query($sql);
-    return $stmt->fetchAll(); // Ex: [['jour' => '2025-08-01', 'total' => 2], ...]
+    return $stmt->fetchAll();
   }
 
   //methode qui recupe les credit gagner par jour pour les stats
   public function getCreditsParJour()
   {
-    $sql = "
-    SELECT DATE(date_transaction) AS jour, SUM(montant) AS total
+    $sql = "SELECT DATE(date_transaction) AS jour, SUM(montant) AS total
     FROM transaction
     WHERE statut = 'validee'
       AND date_transaction >= CURDATE() - INTERVAL 7 DAY

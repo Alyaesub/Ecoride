@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", function () {
 	if (!btn) return;
 
 	const statut = btn.dataset.statut;
-	const isAuthor = btn.dataset.isAuthor === "1"; // tu dois passer cette info en data-attr
+	const isAuthor = btn.dataset.isAuthor === "1";
 
 	// Si le covoit est déjà terminé
 	if (statut === "termine") {

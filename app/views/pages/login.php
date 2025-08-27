@@ -6,7 +6,7 @@
 
 <div class="profile-container">
   <h1>Connectez vous a votre profil</h1>
-  <form action="<?= route('login-user') ?>" method="post" class="formulaire" id="profileForm">
+  <form action="<?= route('login-user') ?>" method="post" class="formulaire" id="formId">
     <label for="email">Pseudo :</label>
     <input type="text" name="pseudo" id="pseudo" required>
     <label for="email">Email :</label>
@@ -21,3 +21,4 @@
     </div>
   </form>
 </div>
+<script src="../../../js/ajaxHelper.js"></script>

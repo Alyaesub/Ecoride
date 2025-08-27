@@ -130,6 +130,19 @@
         <p>✔️ Trajet confirmé</p>
       <?php endif; ?>
 
+      <!-- bouton pour report un covoit -->
+      <?php if (
+        $covoiturage['statut'] === 'termine' &&
+        $covoiturage['role_utilisateur'] === 'passager' &&
+        $covoiturage['role_utilisateur'] === 'chauffeur' &&
+        empty($covoiturage['trajet_termine'])
+      ) : ?>
+        <form action="" method="post">
+          <input type="hidden" name="id_covoiturage" value="<?= $covoiturage['id_covoiturage'] ?>">
+          <button type="submit" class="btn">⚠️ signalez un probleme</button>
+        </form>
+      <?php endif; ?>
+
       <!-- Notation et Avis -->
       <?php if (
         isset($covoiturage['role_utilisateur']) &&
