@@ -99,7 +99,6 @@
   <script>
     const statsLabelsCovoit = <?= json_encode(array_column($statsCovoiturages, 'jour')) ?>;
     const statsDataCovoit = <?= json_encode(array_map('intval', array_column($statsCovoiturages, 'total'))) ?>;
-
     const statsLabelsCredits = <?= json_encode(array_column($statsCredits, 'jour')) ?>;
     const statsDataCredits = <?= json_encode(array_map('intval', array_column($statsCredits, 'total'))) ?>;
   </script>

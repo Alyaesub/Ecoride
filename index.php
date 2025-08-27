@@ -85,10 +85,7 @@ $routes = [
   'toggleEmploye' => [AdminController::class, 'toggleEmploye'],
   'toggleUser' => [AdminController::class, 'toggleUser'],
   // Daschboard employe
-  'dashboardEmploye' => function () {
-    render(__DIR__ . '/app/views/pages/administration/dashboardEmploye.php', ['title' => 'Dashboard Employé']);
-  },
-  'dashboardemploye' => [EmployeController::class, 'dashboardEmploye'],
+  'dashboardEmploye' => [EmployeController::class, 'dashboardEmploye'],
   'toggleUser' => [EmployeController::class, 'toggleUser'],
 ];
 

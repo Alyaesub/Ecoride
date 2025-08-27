@@ -37,7 +37,7 @@ class EmployeController
     requireLogin();
 
     if (!empty($_POST['id_utilisateur'])) {
-      $model = new Admin();
+      $model = new Employe();
       $model->toggleUser((int) $_POST['id_utilisateur']);
     }
 

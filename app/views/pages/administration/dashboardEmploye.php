@@ -28,7 +28,7 @@
     <table>
       <thead>
         <tr>
-          <th>Numéro</th>
+          <th>ID du covoiturage</th>
           <th>Pseudo Conducteur</th>
           <th>Mail Conducteur</th>
           <th>Pseudo Passager</th>
