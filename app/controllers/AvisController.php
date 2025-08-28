@@ -27,14 +27,33 @@ class AvisController
       } else {
         $_SESSION['error'] = "Erreur : tous les champs sont requis.";
       }
-
       header('Location: ' . route('detailsCovoit') . '?id=' . $id_covoiturage);
       exit;
     }
-
     // fallback
     $_SESSION['error'] = "Méthode non autorisée.";
     header('Location: ' . route('home'));
+    exit;
+  }
+  public function validerAvis()
+  {
+    if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST['id_avis'])) {
+      $id = $_POST['id_avis'];
+      $avis = new Avis();
+      $avis->changerStatut($id, 'validé');
+    }
+    header('Location: ' . route('dashboardEmploye'));
+    exit;
+  }
+
+  public function refuserAvis()
+  {
+    if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST['id_avis'])) {
+      $id = $_POST['id_avis'];
+      $avis = new Avis();
+      $avis->changerStatut($id, 'refusé');
+    }
+    header('Location: ' . route('dashboardEmploye'));
     exit;
   }
 }

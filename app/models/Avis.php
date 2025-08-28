@@ -59,7 +59,7 @@ class Avis
     try {
       $cursor = $this->collection->find([
         'id_utilisateur' => $id_utilisateur,
-        'statut' => ['$in' => ['validé', 'en_attente']]
+        'statut' => ['$in' => ['validé']]
       ]);
 
       $avisReçus = [];
@@ -97,6 +97,50 @@ class Avis
     } catch (\Throwable $e) {
       error_log("Erreur lors de la récupération des avis donnés : " . $e->getMessage());
       return [];
+    }
+  }
+
+  // Méthode pour récupérer tous les avis en attente
+  public function getAvisEnAttente(): array
+  {
+    if ($this->collection === null) return [];
+    /**
+     * utilisation de cursor pour parse les avis sans tous les chargé (en stream)
+     */
+    try {
+      $cursor = $this->collection->find(['statut' => 'en_attente']);
+
+      $avisEnAttente = [];
+      foreach ($cursor as $doc) {
+        $avisEnAttente[] = [
+          '_id' => (string) $doc['_id'],
+          'commentaire' => $doc['commentaire'] ?? '',
+          'id_utilisateur' => $doc['id_utilisateur'] ?? '',
+          'id_auteur' => $doc['id_auteur'] ?? '',
+          'id_covoiturage' => $doc['id_covoiturage'] ?? '',
+          'date' => $doc['date']?->toDateTime()->format('d/m/Y H:i') ?? '',
+        ];
+      }
+      return $avisEnAttente;
+    } catch (\Throwable $e) {
+      error_log("Erreur récupération avis : " . $e->getMessage());
+      return [];
+    }
+  }
+  //methode pour changer le statu des commentaires
+  public function changerStatut(string $id, string $statut): bool
+  {
+    if ($this->collection === null) return false;
+
+    try {
+      $this->collection->updateOne(
+        ['_id' => new \MongoDB\BSON\ObjectId($id)],
+        ['$set' => ['statut' => $statut]]
+      );
+      return true;
+    } catch (\Throwable $e) {
+      error_log("Erreur maj avis : " . $e->getMessage());
+      return false;
     }
   }
 }
