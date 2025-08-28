@@ -87,6 +87,8 @@ $routes = [
   // Daschboard employe
   'dashboardEmploye' => [EmployeController::class, 'dashboardEmploye'],
   'toggleUser' => [EmployeController::class, 'toggleUser'],
+  'validerAvis' => [AvisController::class, 'validerAvis'],
+  'refuserAvis' => [AvisController::class, 'refuserAvis'],
 ];
 
 /**

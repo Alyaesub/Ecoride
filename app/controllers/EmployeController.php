@@ -5,6 +5,7 @@ namespace App\Controllers;
 /* use App\Models\Admin; */
 
 use App\Models\Employe;
+use App\Models\Avis;
 
 class EmployeController
 {
@@ -14,20 +15,24 @@ class EmployeController
     requireLogin();
 
     $employeModel = new Employe();
+    $avisModel = new Avis();
 
     //pagination
     $limit = 5; // 5 éléments par page
     $pageUtilisateur = isset($_GET['page_user']) ? (int)$_GET['page_user'] : 1;
     $offsetUser = ($pageUtilisateur - 1) * $limit;
-
+    //model utilisateur
     $utilisateurs = $employeModel->getUsersPaginated($limit, $offsetUser);
     $totalUtilisateur = $employeModel->countUsers();
+    //model avis et gestions des avis
+    $avisEnAttente = $avisModel->getAvisEnAttente();
 
     render(__DIR__ . '/../views/pages/administration/dashboardEmploye.php', [
       'title' => 'Dashboard Employer',
       'utilisateurs' => $utilisateurs,
       'totalUtilisateur' => $totalUtilisateur,
-      'pageUtilisateur' => $pageUtilisateur
+      'pageUtilisateur' => $pageUtilisateur,
+      'avisEnAttente' => $avisEnAttente
     ]);
   }
 

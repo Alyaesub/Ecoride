@@ -1,5 +1,3 @@
-<?php $title = "Dashboard Employer"; ?>
-
 <section class="main-admin">
   <h1>Dashboard Employé</h1>
 
@@ -7,20 +5,28 @@
 
   <section class="review-validation">
     <h2>Validation des avis</h2>
-    <div class="review">
-      <p><strong>Chauffeur :</strong> Paul Dupont</p>
-      <p><strong>Passager :</strong> Sophie Martin</p>
-      <p><strong>Avis :</strong> Super trajet, chauffeur très sympa !</p>
-      <button class="validate-btn">Valider</button>
-      <button class="reject-btn">Refuser</button>
-    </div>
-    <div class="review">
-      <p><strong>Chauffeur :</strong> Laura Bernard</p>
-      <p><strong>Passager :</strong> Marc Lemoine</p>
-      <p><strong>Avis :</strong> Chauffeur en retard de 15 minutes.</p>
-      <button class="validate-btn">Valider</button>
-      <button class="reject-btn">Refuser</button>
-    </div>
+    <?php if (empty($avisEnAttente)): ?>
+      <p>Aucun avis en attente.</p>
+    <?php else: ?>
+      <?php foreach ($avisEnAttente as $avis): ?>
+        <div class="review">
+          <p><strong>Utilisateur ciblé :</strong> <?= htmlspecialchars($avis['id_utilisateur']) ?></p>
+          <p><strong>Auteur :</strong> <?= htmlspecialchars($avis['id_auteur']) ?></p>
+          <p><strong>Commentaire :</strong> <?= htmlspecialchars($avis['commentaire']) ?></p>
+          <p><strong>Date :</strong> <?= htmlspecialchars($avis['date']) ?></p>
+
+          <form method="post" action="<?= route('validerAvis') ?>">
+            <input type="hidden" name="id_avis" value="<?= htmlspecialchars($avis['_id']) ?>">
+            <button type="submit" class="validate-btn">Valider</button>
+          </form>
+
+          <form method="post" action="<?= route('refuserAvis') ?>">
+            <input type="hidden" name="id_avis" value="<?= htmlspecialchars($avis['_id']) ?>">
+            <button type="submit" class="reject-btn">Refuser</button>
+          </form>
+        </div>
+      <?php endforeach; ?>
+    <?php endif; ?>
   </section>
 
   <section class="problematic-rides">
