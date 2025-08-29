@@ -6,6 +6,7 @@ namespace App\Controllers;
 
 use App\Models\Employe;
 use App\Models\Avis;
+use App\Models\Litige;
 
 class EmployeController
 {
@@ -16,6 +17,7 @@ class EmployeController
 
     $employeModel = new Employe();
     $avisModel = new Avis();
+    $litigeModel = new Litige();
 
     //pagination
     $limit = 5; // 5 éléments par page
@@ -26,13 +28,16 @@ class EmployeController
     $totalUtilisateur = $employeModel->countUsers();
     //model avis et gestions des avis
     $avisEnAttente = $avisModel->getAvisEnAttente();
+    //model des litiges
+    $trajetLitige = $litigeModel->getAllLitiges();
 
     render(__DIR__ . '/../views/pages/administration/dashboardEmploye.php', [
       'title' => 'Dashboard Employer',
       'utilisateurs' => $utilisateurs,
       'totalUtilisateur' => $totalUtilisateur,
       'pageUtilisateur' => $pageUtilisateur,
-      'avisEnAttente' => $avisEnAttente
+      'avisEnAttente' => $avisEnAttente,
+      'trajetLitige' => $trajetLitige
     ]);
   }
 

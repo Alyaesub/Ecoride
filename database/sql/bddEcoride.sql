@@ -63,7 +63,7 @@ CREATE TABLE marque (
     est_ecologique BOOLEAN DEFAULT FALSE,
     animaux_autorises BOOLEAN DEFAULT FALSE,
     fumeur BOOLEAN DEFAULT FALSE,
-    statut ENUM('actif', 'en_cours' 'termine', 'annule') NOT NULL DEFAULT 'actif',
+    statut ENUM('actif', 'en_cours' 'termine', 'annule', 'litige') NOT NULL DEFAULT 'actif',
     FOREIGN KEY (id_utilisateur) REFERENCES utilisateur (id_utilisateur),
     FOREIGN KEY (id_vehicule) REFERENCES vehicule(id_vehicule),
     CONSTRAINT chk_places CHECK (places_disponibles >= 0),
@@ -133,18 +133,18 @@ CREATE TABLE transaction (
 
 #collection NoSQl pour les avis
 {
-  "_id": ObjectId("..."),
-  "id_utilisateur_cible": 3,          /* ID du conducteur noté */
-  "id_utilisateur_auteur": 5,         /* ID de l'utilisateur qui laisse l'avis */
-  "id_covoiturage": 7,                /* Pour faire le lien si besoin */
-  "commentaire": "Conducteur très sympa, trajet agréable !",
-  "date_avis": "2025-05-24T17:34:00Z",
-  "valide": false                     /* Par défaut à false → modéré par un employé */
+    "_id": ObjectId("..."),
+    "id_utilisateur_cible": 3,          /* ID du conducteur noté */
+    "id_utilisateur_auteur": 5,         /* ID de l'utilisateur qui laisse l'avis */
+    "id_covoiturage": 7,                /* Pour faire le lien si besoin */
+    "commentaire": "Conducteur très sympa, trajet agréable !",
+    "date_avis": "2025-05-24T17:34:00Z",
+    "valide": false                     /* Par défaut à false → modéré par un employé */
 }
 
 
 -- Table PARAMETRE
-CREATE TABLE parametre (
+/* CREATE TABLE parametre (
     id_parametre INT AUTO_INCREMENT PRIMARY KEY,
     id_utilisateur INT NOT NULL,
     propriete VARCHAR(50) NOT NULL,
@@ -152,4 +152,4 @@ CREATE TABLE parametre (
     FOREIGN KEY (id_utilisateur) REFERENCES utilisateur(id_utilisateur)
     ON DELETE CASCADE
     ON UPDATE CASCADE
-) ENGINE=InnoDB;
+) ENGINE=InnoDB; */

@@ -408,4 +408,13 @@ class Covoiturage
 
     return $result['nonTermines'] == 0;
   }
+  /**
+   * methode qui change le statut d'un covoit en litige
+   */
+  public function marquerCommeLitige($id)
+  {
+    $sql = "UPDATE covoiturage SET statut = 'litige' WHERE id_covoiturage = :id";
+    $stmt = $this->pdo->prepare($sql);
+    $stmt->execute(['id' => $id]);
+  }
 }

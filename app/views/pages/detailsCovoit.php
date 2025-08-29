@@ -80,7 +80,8 @@
         ($covoiturage['role_utilisateur'] === 'passager' &&
           $covoiturage['statut'] !== 'termine' &&
           $covoiturage['statut'] !== 'en_cours' &&
-          $covoiturage['statut'] !== 'annule')
+          $covoiturage['statut'] !== 'annule') &&
+        $covoiturage['statut'] !== 'litige'
       ): ?>
         <form action="<?= route('annuleParticipation') ?>" method="post">
           <input type="hidden" name="id_covoiturage" value="<?= $covoiturage['id_covoiturage'] ?>">
@@ -126,21 +127,32 @@
           <input type="hidden" name="id_covoiturage" value="<?= $covoiturage['id_covoiturage'] ?>">
           <button type="submit" class="btn">✅ Confirmer la fin du trajet</button>
         </form>
-      <?php elseif (!empty($covoiturage['trajet_termine'])) : ?>
+      <?php elseif (
+        !empty($covoiturage['trajet_termine']) &&
+        $covoiturage['statut'] !== 'litige'
+      ) : ?>
         <p>✔️ Trajet confirmé</p>
       <?php endif; ?>
 
-      <!-- bouton pour report un covoit -->
+      <!-- bouton et gestion pour report un covoit -->
       <?php if (
         $covoiturage['statut'] === 'termine' &&
-        $covoiturage['role_utilisateur'] === 'passager' &&
+        $covoiturage['role_utilisateur'] === 'passager' ||
         $covoiturage['role_utilisateur'] === 'chauffeur' &&
         empty($covoiturage['trajet_termine'])
       ) : ?>
-        <form action="" method="post">
+        <form action="<?= route('signalerLitige') ?>" method="post">
           <input type="hidden" name="id_covoiturage" value="<?= $covoiturage['id_covoiturage'] ?>">
           <button type="submit" class="btn">⚠️ signalez un probleme</button>
         </form>
+      <?php endif; ?>
+      <?php if ($covoiturage['statut'] !== 'litige') : ?>
+        <form action="<?= route('annulerParticipation') ?>" method="post">
+          <input type="hidden" name="id_covoiturage" value="<?= $covoiturage['id_covoiturage'] ?>">
+          <button type="submit" class="btn">Annuler ma participation</button>
+        </form>
+      <?php else : ?>
+        <p class="warning">🚨 Ce trajet est en litige. Aucune action n'est possible pour le moment.</p>
       <?php endif; ?>
 
       <!-- Notation et Avis -->

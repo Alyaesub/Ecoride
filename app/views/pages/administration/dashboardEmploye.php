@@ -31,34 +31,33 @@
 
   <section class="problematic-rides">
     <h2>Covoiturages problématiques</h2>
+
     <table>
       <thead>
         <tr>
-          <th>ID du covoiturage</th>
-          <th>Pseudo Conducteur</th>
-          <th>Mail Conducteur</th>
-          <th>Pseudo Passager</th>
-          <th>Mail Passager</th>
-          <th>Descriptif</th>
+          <th>ID</th>
+          <th>Trajet</th>
+          <th>Date</th>
+          <th>Action</th>
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>4578</td>
-          <td>PaulD</td>
-          <td>paul.dupont@mail.com</td>
-          <td>SophieM</td>
-          <td>sophie.martin@mail.com</td>
-          <td>Conflit sur le lieu de dépose.</td>
-        </tr>
-        <tr>
-          <td>4592</td>
-          <td>LauraB</td>
-          <td>laura.bernard@mail.com</td>
-          <td>MarcL</td>
-          <td>marc.lemoine@mail.com</td>
-          <td>Retard important signalé par le passager.</td>
-        </tr>
+        <?php if (!empty($trajetLitige)): ?>
+          <?php foreach ($trajetLitige as $litige): ?>
+            <tr>
+              <td><?= htmlspecialchars($litige['id_covoiturage']) ?></td>
+              <td><?= htmlspecialchars($litige['adresse_depart']) ?> → <?= htmlspecialchars($litige['adresse_arrivee']) ?></td>
+              <td><?= htmlspecialchars($litige['date_depart']) ?></td>
+              <td>
+                <a href="<?= route('detailsLitige') ?>?id=<?= $litige['id_covoiturage'] ?>">👁 Voir détails</a>
+              </td>
+            </tr>
+          <?php endforeach; ?>
+        <?php else: ?>
+          <tr>
+            <td colspan="4">Aucun covoiturage problématique pour le moment.</td>
+          </tr>
+        <?php endif; ?>
       </tbody>
     </table>
   </section>
