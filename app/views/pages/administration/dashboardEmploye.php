@@ -5,28 +5,43 @@
 
   <section class="review-validation">
     <h2>Validation des avis</h2>
-    <?php if (empty($avisEnAttente)): ?>
-      <p>Aucun avis en attente.</p>
-    <?php else: ?>
-      <?php foreach ($avisEnAttente as $avis): ?>
-        <div class="review">
-          <p><strong>Utilisateur ciblé :</strong> <?= htmlspecialchars($avis['id_utilisateur']) ?></p>
-          <p><strong>Auteur :</strong> <?= htmlspecialchars($avis['id_auteur']) ?></p>
-          <p><strong>Commentaire :</strong> <?= htmlspecialchars($avis['commentaire']) ?></p>
-          <p><strong>Date :</strong> <?= htmlspecialchars($avis['date']) ?></p>
-
-          <form method="post" action="<?= route('validerAvis') ?>">
-            <input type="hidden" name="id_avis" value="<?= htmlspecialchars($avis['_id']) ?>">
-            <button type="submit" class="validate-btn">Valider</button>
-          </form>
-
-          <form method="post" action="<?= route('refuserAvis') ?>">
-            <input type="hidden" name="id_avis" value="<?= htmlspecialchars($avis['_id']) ?>">
-            <button type="submit" class="reject-btn">Refuser</button>
-          </form>
-        </div>
-      <?php endforeach; ?>
-    <?php endif; ?>
+    <table>
+      <thead>
+        <tr>
+          <th>Utilisateur ciblé</th>
+          <th>Auteur</th>
+          <th>Commentaire</th>
+          <th>Date</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <?php if (empty($avisEnAttente)): ?>
+          <tr>
+            <td colspan="5">Aucun avis en attente.</td>
+          </tr>
+        <?php else: ?>
+          <?php foreach ($avisEnAttente as $avis): ?>
+            <tr>
+              <td><?= htmlspecialchars($avis['id_utilisateur']) ?></td>
+              <td><?= htmlspecialchars($avis['id_auteur']) ?></td>
+              <td><?= htmlspecialchars($avis['commentaire']) ?></td>
+              <td><?= htmlspecialchars($avis['date']) ?></td>
+              <td>
+                <form method="post" action="<?= route('validerAvis') ?>">
+                  <input type="hidden" name="id_avis" value="<?= htmlspecialchars($avis['_id']) ?>">
+                  <button type="submit" class="validate-btn">Valider</button>
+                </form>
+                <form method="post" action="<?= route('refuserAvis') ?>">
+                  <input type="hidden" name="id_avis" value="<?= htmlspecialchars($avis['_id']) ?>">
+                  <button type="submit" class="reject-btn">Refuser</button>
+                </form>
+              </td>
+            </tr>
+          <?php endforeach; ?>
+        <?php endif; ?>
+      </tbody>
+    </table>
   </section>
 
   <section class="problematic-rides">

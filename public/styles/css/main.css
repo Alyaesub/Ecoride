@@ -2257,12 +2257,14 @@
   }
   .review-validation,
   .problematic-rides {
+    display: flex;
+    flex-direction: column;
     background-color: #F0EAD6;
     border-radius: 8px;
     padding: 1.5rem;
     margin-bottom: 1.5rem;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-    width: 100%;
+    width: 80%;
   }
   .review-validation h2,
   .problematic-rides h2 {
@@ -2334,6 +2336,8 @@
     background-color: #c0392b;
   }
   .review-validation {
+    display: flex;
+    flex-direction: column;
     background-color: #F0EAD6;
     border-radius: 8px;
     padding: 2rem;
