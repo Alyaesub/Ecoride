@@ -67,7 +67,8 @@
         $covoiturage['statut'] !== 'annule' &&
         $covoiturage['places_disponibles'] > 0 &&
         $_SESSION['user_id'] !== $covoiturage['id_utilisateur'] &&
-        $covoiturage['statut'] !== 'en_cours'
+        $covoiturage['statut'] !== 'en_cours' &&
+        $covoiturage['statut'] !== 'litige'
       )) : ?>
         <form action="<?= route('participeCovoiturage') ?>" method="post">
           <input type="hidden" name="id_covoiturage" value="<?= $covoiturage['id_covoiturage'] ?>">
@@ -77,10 +78,8 @@
 
       <?php if (
         !empty($covoiturage['role_utilisateur']) &&
-        ($covoiturage['role_utilisateur'] === 'passager' &&
-          $covoiturage['statut'] !== 'termine' &&
-          $covoiturage['statut'] !== 'en_cours' &&
-          $covoiturage['statut'] !== 'annule')
+        in_array($covoiturage['role_utilisateur'], ['passager', 'conducteur']) &&
+        !in_array($covoiturage['statut'], ['termine', 'en_cours', 'annule', 'litige'])
       ): ?>
         <form action="<?= route('annuleParticipation') ?>" method="post">
           <input type="hidden" name="id_covoiturage" value="<?= $covoiturage['id_covoiturage'] ?>">
@@ -126,21 +125,27 @@
           <input type="hidden" name="id_covoiturage" value="<?= $covoiturage['id_covoiturage'] ?>">
           <button type="submit" class="btn">✅ Confirmer la fin du trajet</button>
         </form>
-      <?php elseif (!empty($covoiturage['trajet_termine'])) : ?>
+      <?php elseif (
+        !empty($covoiturage['trajet_termine']) &&
+        $covoiturage['statut'] !== 'litige'
+      ) : ?>
         <p>✔️ Trajet confirmé</p>
       <?php endif; ?>
 
-      <!-- bouton pour report un covoit -->
+      <!-- bouton et gestion pour report un covoit -->
       <?php if (
         $covoiturage['statut'] === 'termine' &&
-        $covoiturage['role_utilisateur'] === 'passager' &&
+        $covoiturage['role_utilisateur'] === 'passager' ||
         $covoiturage['role_utilisateur'] === 'chauffeur' &&
         empty($covoiturage['trajet_termine'])
       ) : ?>
-        <form action="" method="post">
+        <form action="<?= route('signalerLitige') ?>" method="post">
           <input type="hidden" name="id_covoiturage" value="<?= $covoiturage['id_covoiturage'] ?>">
           <button type="submit" class="btn">⚠️ signalez un probleme</button>
         </form>
+      <?php endif; ?>
+      <?php if ($covoiturage['statut'] == 'litige') : ?>
+        <p class="warning">🚨 Ce trajet est en litige. Aucune action n'est possible pour le moment.</p>
       <?php endif; ?>
 
       <!-- Notation et Avis -->

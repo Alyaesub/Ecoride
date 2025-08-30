@@ -4,10 +4,12 @@
 
 **EcoRide** est une application web de covoiturage écoresponsable. Elle permet aux utilisateurs de proposer, réserver et gérer des trajets partagés afin de réduire leur empreinte carbone.
 
-## Structure du projet
+## Technologies
 
--   `/database/sql` : Scripts SQL d’installation et de test de la base relationnelle.
--   `/database/nosql` : Données utilisateurs (avis) au format JSON.
+-   **Front-end** : HTML5, SCSS, JavaScript (ES6+)
+-   **Back-end** : PHP 8.4.6, MySQL, Mongodb
+-   **Outils** : chart.js, npm: '11.1.0', node: '22.13.0', Composer,
+    Docker version 28.0.1, build 068a01e, Docker Compose version v2.33.1-desktop.1
 
 ## Comptes de test
 
@@ -35,13 +37,6 @@
     -   `pseudo`: albert/ `mail`: albert@test.com / `poste` : informaticien / `numéro de badge` : 13 / `mot de passe`: password123
     -   `pseudo`: magalie/ `mail`: magalie@test.com / `poste` : moderatrice / `numéro de badge` : 14 / `mot de passe`: password123
 
-## Technologies
-
--   **Front-end** : HTML5, SCSS, JavaScript (ES6+)
--   **Back-end** : PHP 8, MySQL, Mongodb
--   **Outils** : chart.js, npm, Composer
--   **Déploiement** : O2Switch
-
 ## Installation
 
 ```bash
@@ -56,7 +51,7 @@ npm install
 # → Adapter les infos dans config/env.ini
 ```
 
-## 📦 Architecture
+## 📦 Architecture et Structure du projet
 
 ### MVC
 
