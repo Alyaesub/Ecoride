@@ -154,3 +154,6 @@ ADD preference_role ENUM('chauffeur', 'passager', 'les_deux') DEFAULT NULL;
 #17 changement de la table utilisateur pour intégré la logique "actif" ou "suspendu" pour les compte
 ALTER TABLE utilisateur
 ADD COLUMN actif TINYINT(1) NOT NULL DEFAULT 1;
+
+#18 ajout de litige pour la gestions des litiges
+ALTER TABLE covoiturage MODIFY statut ENUM('actif', 'en_cours' 'termine', 'annule', 'litige');

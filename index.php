@@ -24,6 +24,7 @@ use App\Controllers\NotationController;
 use App\Controllers\AvisController;
 use App\Controllers\DetailsProfilsController;
 use App\Controllers\EmployeController;
+use App\Controllers\LitigeController;
 
 // Init Whoops
 $whoops = new Run();
@@ -87,6 +88,13 @@ $routes = [
   // Daschboard employe
   'dashboardEmploye' => [EmployeController::class, 'dashboardEmploye'],
   'toggleUser' => [EmployeController::class, 'toggleUser'],
+  'validerAvis' => [AvisController::class, 'validerAvis'],
+  'refuserAvis' => [AvisController::class, 'refuserAvis'],
+  //litiges
+  'signalerLitige' => [LitigeController::class, 'signalerLitige'],
+  'indexLitige' => [LitigeController::class, 'indexLitige'],
+  'detailsLitige' => [LitigeController::class, 'detailsLitige'],
+  'resoudreLitige' => [LitigeController::class, 'resoudreLitige'],
 ];
 
 /**

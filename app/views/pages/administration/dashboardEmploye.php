@@ -1,5 +1,3 @@
-<?php $title = "Dashboard Employer"; ?>
-
 <section class="main-admin">
   <h1>Dashboard Employé</h1>
 
@@ -7,20 +5,43 @@
 
   <section class="review-validation">
     <h2>Validation des avis</h2>
-    <div class="review">
-      <p><strong>Chauffeur :</strong> Paul Dupont</p>
-      <p><strong>Passager :</strong> Sophie Martin</p>
-      <p><strong>Avis :</strong> Super trajet, chauffeur très sympa !</p>
-      <button class="validate-btn">Valider</button>
-      <button class="reject-btn">Refuser</button>
-    </div>
-    <div class="review">
-      <p><strong>Chauffeur :</strong> Laura Bernard</p>
-      <p><strong>Passager :</strong> Marc Lemoine</p>
-      <p><strong>Avis :</strong> Chauffeur en retard de 15 minutes.</p>
-      <button class="validate-btn">Valider</button>
-      <button class="reject-btn">Refuser</button>
-    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>Utilisateur ciblé</th>
+          <th>Auteur</th>
+          <th>Commentaire</th>
+          <th>Date</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <?php if (empty($avisEnAttente)): ?>
+          <tr>
+            <td colspan="5">Aucun avis en attente.</td>
+          </tr>
+        <?php else: ?>
+          <?php foreach ($avisEnAttente as $avis): ?>
+            <tr>
+              <td><?= htmlspecialchars($avis['id_utilisateur']) ?></td>
+              <td><?= htmlspecialchars($avis['id_auteur']) ?></td>
+              <td><?= htmlspecialchars($avis['commentaire']) ?></td>
+              <td><?= htmlspecialchars($avis['date']) ?></td>
+              <td>
+                <form method="post" action="<?= route('validerAvis') ?>">
+                  <input type="hidden" name="id_avis" value="<?= htmlspecialchars($avis['_id']) ?>">
+                  <button type="submit" class="validate-btn">Valider</button>
+                </form>
+                <form method="post" action="<?= route('refuserAvis') ?>">
+                  <input type="hidden" name="id_avis" value="<?= htmlspecialchars($avis['_id']) ?>">
+                  <button type="submit" class="reject-btn">Refuser</button>
+                </form>
+              </td>
+            </tr>
+          <?php endforeach; ?>
+        <?php endif; ?>
+      </tbody>
+    </table>
   </section>
 
   <section class="problematic-rides">
@@ -28,31 +49,29 @@
     <table>
       <thead>
         <tr>
-          <th>ID du covoiturage</th>
-          <th>Pseudo Conducteur</th>
-          <th>Mail Conducteur</th>
-          <th>Pseudo Passager</th>
-          <th>Mail Passager</th>
-          <th>Descriptif</th>
+          <th>ID</th>
+          <th>Trajet</th>
+          <th>Date</th>
+          <th>Action</th>
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>4578</td>
-          <td>PaulD</td>
-          <td>paul.dupont@mail.com</td>
-          <td>SophieM</td>
-          <td>sophie.martin@mail.com</td>
-          <td>Conflit sur le lieu de dépose.</td>
-        </tr>
-        <tr>
-          <td>4592</td>
-          <td>LauraB</td>
-          <td>laura.bernard@mail.com</td>
-          <td>MarcL</td>
-          <td>marc.lemoine@mail.com</td>
-          <td>Retard important signalé par le passager.</td>
-        </tr>
+        <?php if (!empty($trajetLitige)): ?>
+          <?php foreach ($trajetLitige as $litige): ?>
+            <tr>
+              <td><?= htmlspecialchars($litige['id_covoiturage']) ?></td>
+              <td><?= htmlspecialchars($litige['adresse_depart']) ?> → <?= htmlspecialchars($litige['adresse_arrivee']) ?></td>
+              <td><?= htmlspecialchars($litige['date_depart']) ?></td>
+              <td>
+                <a href="<?= route('detailsLitige') ?>?id=<?= $litige['id_covoiturage'] ?>">👁 Voir détails</a>
+              </td>
+            </tr>
+          <?php endforeach; ?>
+        <?php else: ?>
+          <tr>
+            <td colspan="4">Aucun covoiturage problématique pour le moment.</td>
+          </tr>
+        <?php endif; ?>
       </tbody>
     </table>
   </section>
