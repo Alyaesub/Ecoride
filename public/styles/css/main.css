@@ -2897,4 +2897,89 @@ table tbody tr td {
 .profil-avis ul li small {
   color: #777;
   font-style: italic;
+}
+
+.details-litige {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: #ffffff;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+}
+.details-litige h1 {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  color: #2c3e50;
+  text-align: center;
+}
+.details-litige h2 {
+  font-size: 1.4rem;
+  margin-top: 2rem;
+  color: #34495e;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 0.4rem;
+}
+.details-litige p {
+  font-size: 1rem;
+  margin: 0.4rem 0;
+  line-height: 1.6;
+}
+.details-litige ul {
+  margin-left: 1.5rem;
+  padding-left: 1rem;
+}
+.details-litige ul li {
+  margin-bottom: 0.5rem;
+  list-style: disc;
+}
+.details-litige .message-success {
+  background-color: #e9f9e7;
+  border: 1px solid #b2d8b2;
+  color: #2e7d32;
+  padding: 0.8rem 1rem;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+.details-litige form {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+.details-litige form label {
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+}
+.details-litige form select {
+  padding: 0.5rem;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+.details-litige form .btn {
+  align-self: flex-start;
+  background-color: #27ae60;
+  color: white;
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+.details-litige form .btn:hover {
+  background-color: #219150;
+}
+.details-litige .buttonlog {
+  display: inline-block;
+  margin-top: 2rem;
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+  transition: color 0.2s ease;
+}
+.details-litige .buttonlog:hover {
+  color: #1c598c;
 }/*# sourceMappingURL=main.css.map */

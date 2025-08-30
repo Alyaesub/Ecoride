@@ -1,3 +1,6 @@
 /vendor/
-.env
+/config/env.ini
 /config/config.php
+/database/tools
+/public/uploads
+/vrac

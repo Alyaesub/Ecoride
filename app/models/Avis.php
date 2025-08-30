@@ -9,7 +9,7 @@ use MongoDB\BSON\UTCDateTime;
 class Avis
 {
   /* private Collection $collection; */
-  private ?Collection $collection = null;
+  public ?Collection $collection = null;
 
   public function __construct()
   {
@@ -142,5 +142,9 @@ class Avis
       error_log("Erreur maj avis : " . $e->getMessage());
       return false;
     }
+  }
+  public function getCollection()
+  {
+    return $this->collection;
   }
 }

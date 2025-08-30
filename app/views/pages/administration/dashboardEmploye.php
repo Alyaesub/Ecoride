@@ -46,7 +46,6 @@
 
   <section class="problematic-rides">
     <h2>Covoiturages problématiques</h2>
-
     <table>
       <thead>
         <tr>

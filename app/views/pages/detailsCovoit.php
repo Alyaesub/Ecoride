@@ -67,7 +67,8 @@
         $covoiturage['statut'] !== 'annule' &&
         $covoiturage['places_disponibles'] > 0 &&
         $_SESSION['user_id'] !== $covoiturage['id_utilisateur'] &&
-        $covoiturage['statut'] !== 'en_cours'
+        $covoiturage['statut'] !== 'en_cours' &&
+        $covoiturage['statut'] !== 'litige'
       )) : ?>
         <form action="<?= route('participeCovoiturage') ?>" method="post">
           <input type="hidden" name="id_covoiturage" value="<?= $covoiturage['id_covoiturage'] ?>">
@@ -77,11 +78,8 @@
 
       <?php if (
         !empty($covoiturage['role_utilisateur']) &&
-        ($covoiturage['role_utilisateur'] === 'passager' &&
-          $covoiturage['statut'] !== 'termine' &&
-          $covoiturage['statut'] !== 'en_cours' &&
-          $covoiturage['statut'] !== 'annule') &&
-        $covoiturage['statut'] !== 'litige'
+        in_array($covoiturage['role_utilisateur'], ['passager', 'conducteur']) &&
+        !in_array($covoiturage['statut'], ['termine', 'en_cours', 'annule', 'litige'])
       ): ?>
         <form action="<?= route('annuleParticipation') ?>" method="post">
           <input type="hidden" name="id_covoiturage" value="<?= $covoiturage['id_covoiturage'] ?>">
@@ -146,12 +144,7 @@
           <button type="submit" class="btn">⚠️ signalez un probleme</button>
         </form>
       <?php endif; ?>
-      <?php if ($covoiturage['statut'] !== 'litige') : ?>
-        <form action="<?= route('annulerParticipation') ?>" method="post">
-          <input type="hidden" name="id_covoiturage" value="<?= $covoiturage['id_covoiturage'] ?>">
-          <button type="submit" class="btn">Annuler ma participation</button>
-        </form>
-      <?php else : ?>
+      <?php if ($covoiturage['statut'] == 'litige') : ?>
         <p class="warning">🚨 Ce trajet est en litige. Aucune action n'est possible pour le moment.</p>
       <?php endif; ?>
 

@@ -49,12 +49,12 @@ class LitigeController
 
     $model = new Litige();
     $details = $model->getDetailsLitige($id);
-    /* $avis = $model->getAvisPourLitige($id); */
+    $avis = $model->getAvisPourLitige($id);
 
-    render(__DIR__ . '/../views/pages/employe/detailsLitige.php', [
+    render(__DIR__ . '/../views/pages/administration/detailsLitige.php', [
       'title' => "Détail du litige #$id",
-      'details' => $details
-      /* 'avis' => $avis */
+      'details' => $details,
+      'avis' => $avis
     ]);
   }
 
@@ -70,8 +70,7 @@ class LitigeController
       $model->resoudreLitige($id, $statut);
       $_SESSION['success'] = "Le litige a été résolu.";
     }
-
-    header("Location: " . route('litiges'));
+    header("Location: " . route('detailsLitige') . '?id=' . $id);
     exit;
   }
 }

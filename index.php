@@ -93,7 +93,7 @@ $routes = [
   //litiges
   'signalerLitige' => [LitigeController::class, 'signalerLitige'],
   'indexLitige' => [LitigeController::class, 'indexLitige'],
-  'detailsLtige' => [LitigeController::class, 'detailsLtige'],
+  'detailsLitige' => [LitigeController::class, 'detailsLitige'],
   'resoudreLitige' => [LitigeController::class, 'resoudreLitige'],
 ];
 
