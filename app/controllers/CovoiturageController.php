@@ -16,6 +16,11 @@ class CovoiturageController
   public function create()
   {
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+      if (!verifyCsrfToken($_POST['csrf_token'] ?? '')) {
+        $_SESSION['error'] = "Session expirée ou formulaire invalide, veuillez réessayer.";
+        header("location: " . route('profil'));
+        exit;
+      }
       $model = new Covoiturage();
       $vehiculeModel = new Vehicule();
       $gestionCredits = new GestionCredits();
@@ -80,7 +85,6 @@ class CovoiturageController
 
         $_SESSION['success'] = "Covoiturage enregistré avec succès ! Vous avez etais debité de 2 crédits";
       } catch (\Exception $e) {
-        $_SESSION['error'] = "Erreur : " . $e->getMessage();
         $_SESSION['error'] = "Une erreur est survenue lors de l'enregistrement du covoiturage.";
       }
 
@@ -95,6 +99,11 @@ class CovoiturageController
   public function supprimeCovoit()
   {
     if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id_covoiturage'])) {
+      if (!verifyCsrfToken($_POST['csrf_token'] ?? '')) {
+        $_SESSION['error'] = "Session expirée ou formulaire invalide, veuillez réessayer.";
+        header("location: " . route('profil'));
+        exit;
+      }
       $id = intval($_POST['id_covoiturage']);
       $model = new Covoiturage();
       $gestionCredits = new GestionCredits();
@@ -232,6 +241,12 @@ class CovoiturageController
   {
     requireLogin();
 
+    if (!verifyCsrfToken($_POST['csrf_token'] ?? '')) {
+      $_SESSION['error'] = "Session expirée ou formulaire invalide, veuillez réessayer.";
+      header("location: " . route('profil'));
+      exit;
+    }
+
     $id = $_POST['id_covoiturage'] ?? null;
     $user_id = $_SESSION['user_id'];
 
@@ -262,6 +277,12 @@ class CovoiturageController
   public function validerModifCovoit()
   {
     requireLogin();
+
+    if (!verifyCsrfToken($_POST['csrf_token'] ?? '')) {
+      $_SESSION['error'] = "Session expirée ou formulaire invalide, veuillez réessayer.";
+      header("location: " . route('profil'));
+      exit;
+    }
 
     $id = $_POST['id_covoiturage'] ?? null;
     $user_id = $_SESSION['user_id'];
@@ -294,7 +315,14 @@ class CovoiturageController
       'fumeur' => $_POST['fumeur'] ?? null,
     ];
 
-    $model->updateById($id, $data); //gére avec le model
+    try {
+      $model->updateById($id, $data); // gère avec le model
+      $_SESSION['success'] = "Le covoiturage a été modifié.";
+    } catch (\Exception $e) {
+      $_SESSION['error'] = "Erreur lors de la mise à jour du covoiturage : " . $e->getMessage();
+      header('Location: ' . route('detailsCovoit') . '?id=' . $id);
+      exit;
+    }
 
     $_SESSION['success'] = "Le covoiturage a été modifié.";
     header('Location: ' . route('detailsCovoit') . '?id=' . $id);
@@ -306,6 +334,12 @@ class CovoiturageController
   public function annulerCovoiturage()
   {
     requireLogin();
+
+    if (!verifyCsrfToken($_POST['csrf_token'] ?? '')) {
+      $_SESSION['error'] = "Session expirée ou formulaire invalide, veuillez réessayer.";
+      header("location: " . route('profil'));
+      exit;
+    }
 
     $id = $_POST['id_covoiturage'] ?? null;
     $userId = $_SESSION['user_id'] ?? null;
@@ -357,6 +391,12 @@ class CovoiturageController
   public function terminerCovoiturage()
   {
     requireLogin();
+
+    if (!verifyCsrfToken($_POST['csrf_token'] ?? '')) {
+      $_SESSION['error'] = "Session expirée ou formulaire invalide, veuillez réessayer.";
+      header("location: " . route('profil'));
+      exit;
+    }
 
     $id = $_POST['id_covoiturage'] ?? null;
     $userId = $_SESSION['user_id'] ?? null;
@@ -417,6 +457,12 @@ class CovoiturageController
     requireLogin();
     $id_utilisateur = $_SESSION['user_id'];
     $id_covoiturage = $_POST['id_covoiturage'] ?? null;
+
+    if (!verifyCsrfToken($_POST['csrf_token'] ?? '')) {
+      $_SESSION['error'] = "Session expirée ou formulaire invalide, veuillez réessayer.";
+      header("location: " . route('profil'));
+      exit;
+    }
 
     if (!$id_covoiturage) {
       $_SESSION['error'] = "Covoiturage introuvable.";
@@ -513,6 +559,12 @@ class CovoiturageController
     $id_utilisateur = $_SESSION['user_id'];
     $id_covoiturage = $_POST['id_covoiturage'] ?? null;
 
+    if (!verifyCsrfToken($_POST['csrf_token'] ?? '')) {
+      $_SESSION['error'] = "Session expirée ou formulaire invalide, veuillez réessayer.";
+      header("location: " . route('profil'));
+      exit;
+    }
+
     if ($id_covoiturage) {
       $model = new Covoiturage();
       $gestionCredits = new GestionCredits();
@@ -549,6 +601,12 @@ class CovoiturageController
   public function changerStatutCovoiturage()
   {
     requireLogin();
+
+    if (!verifyCsrfToken($_POST['csrf_token'] ?? '')) {
+      $_SESSION['error'] = "Session expirée ou formulaire invalide, veuillez réessayer.";
+      header("location: " . route('profil'));
+      exit;
+    }
 
     $id = $_POST['id_covoiturage'] ?? null;
     $userId = $_SESSION['user_id'] ?? null;

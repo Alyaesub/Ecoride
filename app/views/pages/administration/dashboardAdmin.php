@@ -39,6 +39,7 @@
           <td><?= $emp['actif'] ? 'Actif' : 'Suspendu' ?></td>
           <td>
             <form action="<?= route('toggleEmploye') ?>" method="post">
+              <input type="hidden" name="csrf_token" value="<?= htmlspecialchars(generateCsrfToken()); ?>">
               <input type="hidden" name="id_utilisateur" value="<?= $emp['id_utilisateur'] ?>">
               <button class="suspend-btn"><?= $emp['actif'] ? 'Suspendre' : 'Réactiver' ?></button>
             </form>
@@ -75,7 +76,8 @@
             <td><?= htmlspecialchars($user['email']) ?></td>
             <td><?= $user['actif'] ? 'Actif' : 'Suspendu' ?></td>
             <td>
-              <form method="post" action="<?= route('toggleUser') ?>">
+              <form method="post" action="<?= route('AdminToggleUser') ?>">
+                <input type="hidden" name="csrf_token" value="<?= htmlspecialchars(generateCsrfToken()); ?>">
                 <input type="hidden" name="id_utilisateur" value="<?= $user['id_utilisateur'] ?>">
                 <button class="suspend-btn">
                   <?= $user['actif'] ? 'Suspendre' : 'Réactiver' ?>

@@ -7,6 +7,7 @@
 <div class="profile-container">
   <h1>Connectez vous a votre profil</h1>
   <form action="<?= route('login-user') ?>" method="post" class="formulaire" id="formId">
+    <input type="hidden" name="csrf_token" value="<?= htmlspecialchars(generateCsrfToken()); ?>">
     <label for="email">Pseudo :</label>
     <input type="text" name="pseudo" id="pseudo" required>
     <label for="email">Email :</label>
