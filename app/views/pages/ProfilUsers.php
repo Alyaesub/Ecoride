@@ -328,4 +328,4 @@
   </div>
   <!-- Inclusion des scripts JavaScript -->
   <!-- script general pour le dashboard -->
-  <script src="/js/dashboard.js"></script>
+  <script src="/public/js/dashboard.js"></script>

@@ -7,7 +7,7 @@
 <!--Section de la seach-bar-->
 <section class="search-bar-section" id="searchBarSection">
   <div class="search-bar">
-    <input type="text" placeholder="Rechercher..." id="searchInput">
+    <input type="text" placeholder="Rechercher une ville..." id="searchInput">
     <button type="submit" id="searchBtn">🔍</button>
     <div id="results"></div>
   </div>
@@ -72,4 +72,4 @@
     <a class="btn-voir-plus" href="<?= route('covoitVoyage') ?>">Trouvez votre covoiturages</a>
   </div>
 </section>
-<script src="/js/searchBar.js"></script>
+<script src="/public/js/searchBar.js"></script>

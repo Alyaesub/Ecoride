@@ -27,63 +27,85 @@ class UserController
   public function login()
   {
     if (!verifyCsrfToken($_POST['csrf_token'] ?? '')) {
-      $_SESSION['error'] = "Session expirée ou formulaire invalide.";
-      header("Location: " . route('login'));
-      exit;
+      $msg = "Session expirée ou formulaire invalide, veuillez réessayer.";
+      return $this->handleLoginResponse(false, $msg);
     }
+
     $pseudo = $_POST['pseudo'] ?? '';
     $email = $_POST['email'] ?? '';
     $password = $_POST['password'] ?? '';
 
-    // Email non valide
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-      $_SESSION['error'] = "L'adresse email est invalide.";
-      header('Location: ' . route('login'));
-      exit();
+      $msg = "L'adresse email est invalide.";
+      return $this->handleLoginResponse(false, $msg);
     }
+
     $userModel = new User();
     $user = $userModel->findByCredentials($email, $pseudo, $password);
 
-    // Mauvais identifiants
     if (!$user || !password_verify($password, $user['mot_de_passe'])) {
-      $_SESSION['error'] = "Pseudo, email ou mot de passe incorrect.";
-      header('Location: ' . route('login'));
-      exit();
+      $msg = "Pseudo, email ou mot de passe incorrect.";
+      return $this->handleLoginResponse(false, $msg);
     }
 
-    // Compte suspendu
     if ($user['actif'] != 1) {
-      $_SESSION['error'] = "Votre compte est suspendu.";
-      header('Location: ' . route('login'));
-      exit();
+      $msg = "Votre compte est suspendu.";
+      return $this->handleLoginResponse(false, $msg);
     }
 
     // Connexion OK
     $_SESSION['user_id'] = $user['id_utilisateur'];
     $_SESSION['user_role'] = $user['id_role'];
     $_SESSION['user'] = [
-      'id' => $user['id_utilisateur'],
+      'id'     => $user['id_utilisateur'],
       'pseudo' => $user['pseudo'],
-      'role' => $user['id_role'],
-      'actif' => $user['actif']
+      'role'   => $user['id_role'],
+      'actif'  => $user['actif']
     ];
 
-    // Redirection par rôle
-    switch ($user['id_role']) {
-      case 1:
-        header('Location: ' . route('dashboardAdmin'));
-        break;
-      case 2:
-        header('Location: ' . route('dashboardEmploye'));
-        break;
-      case 3:
-      default:
-        header('Location: ' . route('profil'));
-        break;
-    }
-    exit();
+    return $this->handleLoginResponse(true, "Connexion réussie !", $user['id_role']);
   }
 
+  /**
+   * Renvoie la réponse AJAX
+   */
+  private function handleLoginResponse(bool $ok, string $msg, ?int $role = null)
+  {
+    $isAjax = !empty($_SERVER['HTTP_X_REQUESTED_WITH'])
+      && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest';
+
+    if ($isAjax) {
+      header('Content-Type: application/json');
+      if ($ok) {
+        echo json_encode([
+          'success' => $msg,
+          'role' => $role
+        ]);
+      } else {
+        echo json_encode(['error' => $msg]);
+      }
+      exit;
+    }
+
+    // Sinon mode classique (redirection HTML)
+    /* if ($ok) {
+      switch ($role) {
+        case 1:
+          header('Location: ' . route('dashboardAdmin'));
+          break;
+        case 2:
+          header('Location: ' . route('dashboardEmploye'));
+          break;
+        default:
+          header('Location: ' . route('profil'));
+          break;
+      }
+    } else {
+      $_SESSION['error'] = $msg;
+      header('Location: ' . route('login'));
+    }
+    exit; */
+  }
 
   /**
    * Affiche la page de profil pour l'utilisateur connecté.

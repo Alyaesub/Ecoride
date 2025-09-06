@@ -197,8 +197,11 @@ class CovoiturageController
     if (!empty($_SESSION['user_id'])) {
       $roleData = $model->getCovoitWithRoleById($id, $_SESSION['user_id']);
       if (!empty($roleData['role_utilisateur'])) {
-        $covoit['role_utilisateur'] = $roleData['role_utilisateur'];
-        $covoit['trajet_termine'] = $roleData['trajet_termine'];
+        $covoit['role_utilisateur'] = $roleData['role_utilisateur'] ?? null;
+        $covoit['trajet_termine'] = $roleData['trajet_termine'] ?? null;
+      } else {
+        $covoit['role_utilisateur'] = null;
+        $covoit['trajet_termine']   = null;
       }
     }
 

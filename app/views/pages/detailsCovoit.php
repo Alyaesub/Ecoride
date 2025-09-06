@@ -197,4 +197,4 @@
   <?php endif; ?>
 </section>
 
-<script src="/js/detailsCovoit.js"></script>
+<script src="/public/js/detailsCovoit.js"></script>

@@ -103,5 +103,5 @@
     const statsLabelsCredits = <?= json_encode(array_column($statsCredits, 'jour')) ?>;
     const statsDataCredits = <?= json_encode(array_map('intval', array_column($statsCredits, 'total'))) ?>;
   </script>
-  <script src="../../../../js/chartStats.js"></script>
+  <script src="/public/js/chartStats.js"></script>
 </section>
