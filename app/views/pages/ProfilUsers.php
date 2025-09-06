@@ -66,7 +66,7 @@
         </select>
         <button type="submit">Enregistrer</button>
       </form>
-      <form id="formInfo" class="registerForm" action="<?= route('updateUser') ?>" method="post" enctype="multipart/form-data">
+      <form id="formUpdate" class="registerForm" action="<?= route('updateUser') ?>" method="post" enctype="multipart/form-data">
         <input type="hidden" name="csrf_token" value="<?= htmlspecialchars(generateCsrfToken()); ?>">
         <input type="hidden" name="id_role" value="3">
 

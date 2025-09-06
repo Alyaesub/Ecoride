@@ -4,7 +4,7 @@ $title = 'Créer votre profile';
 ?>
 <section class="registerMain">
   <h1>Créer votre profil</h1>
-  <form class="registerForm" action="<?= route('registerUser') ?>" method="post">
+  <form class="registerForm" action="<?= route('registerUser') ?>" method="post" id="registerForm">
     <input type="hidden" name="csrf_token" value="<?= htmlspecialchars(generateCsrfToken()); ?>">
 
     <label>Pseudo :</label>

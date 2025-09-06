@@ -194,14 +194,13 @@ class CovoiturageController
     $vehicule = $vehiculeModel->findWithMarqueById($covoit['id_vehicule']);
 
     // Ajout du rôle utilisateur uniquement si connecté
+    $covoit['role_utilisateur'] = null;
+    $covoit['trajet_termine']   = null;
     if (!empty($_SESSION['user_id'])) {
       $roleData = $model->getCovoitWithRoleById($id, $_SESSION['user_id']);
       if (!empty($roleData['role_utilisateur'])) {
         $covoit['role_utilisateur'] = $roleData['role_utilisateur'] ?? null;
         $covoit['trajet_termine'] = $roleData['trajet_termine'] ?? null;
-      } else {
-        $covoit['role_utilisateur'] = null;
-        $covoit['trajet_termine']   = null;
       }
     }
 
