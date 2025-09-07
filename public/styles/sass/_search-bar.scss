@@ -7,8 +7,7 @@
         padding-top: 40px;
     }
     .search-bar {
-        position: relative; /*pour permettre à #results d'être positionné sous .search-bar */
-        display: flex;
+        position: relative; 
         align-items: center;
         background: #f4f4f4;
         border-radius: 25px;
@@ -46,7 +45,7 @@
             }
         }
         #results {
-          position: absolute; /* Permet de positionner les résultats sous l'input */
+          position: absolute; 
           top: 100%; /* Décale les résultats juste en dessous de l'input */
           left: 0;
           width: 100%; 
@@ -122,7 +121,7 @@
             }
         }
         #results {
-          position: absolute; /* Permet de positionner les résultats sous l'input */
+          position: absolute; 
           top: 100%; /* Décale les résultats juste en dessous de l'input */
           left: 0;
           width: 100%; 
@@ -132,8 +131,8 @@
           border-radius: 4px; 
           max-height: 300px; 
           overflow-y: auto; /* Si trop de résultats, un scroll apparait */
-          display: none; /* Cacher les résultats par défaut */
-          z-index: 10; /* S'assurer que les résultats sont visibles par-dessus le reste*/
+          display: none; 
+          z-index: 10; 
         }
           
           #results div {

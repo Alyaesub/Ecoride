@@ -70,7 +70,7 @@ npm install
 
 ### Débogage
 
--   Whoops installé et activé (`index.php`) pour une gestion élégante des erreurs
+-   Whoops installé et activé (`index.php`) pour la gestion des erreurs
 
 ### Vue & Layout
 
