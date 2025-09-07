@@ -1,10 +1,8 @@
-console.log("test");
-
 //fiche JS qui gére la searchbar
 // Sélectionne les éléments du DOM
-const searchInput = document.getElementById("searchInput"); // Champ de saisie utilisateur
-const searcBtn = document.getElementById("searchBtn"); // Bouton de recherche
-const resultsDiv = document.getElementById("results"); // Div qui affiche les résultats
+const searchInput = document.getElementById("searchInput");
+const searchBtn = document.getElementById("searchBtn");
+const resultsDiv = document.getElementById("results");
 
 // Fonction qui écoute les frappes dans l'input
 searchInput.addEventListener("input", function () {
@@ -16,19 +14,29 @@ searchInput.addEventListener("input", function () {
 		return;
 	}
 
+	searchInput.addEventListener("keydown", (e) => {
+		if (e.key === "Enter") {
+			e.preventDefault();
+			if (resultsDiv.firstChild) {
+				resultsDiv.firstChild.click();
+			}
+		}
+	});
+
 	// Appelle le contrôleur SearchCitiesController via Fetch pour récupérer les suggestions
 	// search-cities&q sert de route pour aller chercher le controller 'searchCitiesController.php'
 	fetch(`/searchCities?q=${encodeURIComponent(query)}`)
-		.then((response) => response.json()) // Convertit la réponse en JSON
+		.then((response) => response.json())
 		.then((data) => {
 			resultsDiv.innerHTML = ""; // Vide les anciens résultats
 			if (data.length > 0) {
 				// Pour chaque ville reçue, crée un div affichant le nom de la ville
 				data.forEach((city) => {
 					const div = document.createElement("div");
-					div.textContent = `${city.adresse_depart} ➡️ ${
-						city.adresse_arrivee
-					} (${city.date_depart.split(" ")[0]})`;
+					const date = city.date_depart
+						? city.date_depart.split(" ")[0]
+						: "";
+					div.textContent = `${city.adresse_depart} ➡️ ${city.adresse_arrivee} (${date})`;
 					div.classList.add("result-item");
 
 					div.addEventListener("click", () => {

@@ -72,6 +72,12 @@ class AdminController
   {
     requireLogin();
 
+    if (!verifyCsrfToken($_POST['csrf_token'] ?? '')) {
+      $_SESSION['error'] = "Session expirée ou formulaire invalide, veuillez réessayer.";
+      header("location: " . route('profil'));
+      exit;
+    }
+
     if (!empty($_POST['id_utilisateur'])) {
       $model = new Admin();
       $model->toggleActif((int) $_POST['id_utilisateur']);
@@ -82,9 +88,15 @@ class AdminController
   }
 
   //function qui gere le changement de statut des user
-  public function toggleUser()
+  public function AdminToggleUser()
   {
     requireLogin();
+
+    if (!verifyCsrfToken($_POST['csrf_token'] ?? '')) {
+      $_SESSION['error'] = "Session expirée ou formulaire invalide, veuillez réessayer.";
+      header("location: " . route('profil'));
+      exit;
+    }
 
     if (!empty($_POST['id_utilisateur'])) {
       $model = new Admin();

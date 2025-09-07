@@ -9,6 +9,7 @@
         width: 100%;
         background-color: $primary-color;
         box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.5);
+        z-index: 200; // plus haut que le carousel
         
             ul {
             padding-left: 0;

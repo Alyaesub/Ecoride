@@ -26,60 +26,86 @@ class UserController
    */
   public function login()
   {
+    if (!verifyCsrfToken($_POST['csrf_token'] ?? '')) {
+      $msg = "Session expirée ou formulaire invalide, veuillez réessayer.";
+      return $this->handleLoginResponse(false, $msg);
+    }
+
     $pseudo = $_POST['pseudo'] ?? '';
     $email = $_POST['email'] ?? '';
     $password = $_POST['password'] ?? '';
 
-    // Email non valide
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-      $_SESSION['error'] = "L'adresse email est invalide.";
-      header('Location: ' . route('login'));
-      exit();
+      $msg = "L'adresse email est invalide.";
+      return $this->handleLoginResponse(false, $msg);
     }
 
     $userModel = new User();
     $user = $userModel->findByCredentials($email, $pseudo, $password);
 
-    // Mauvais identifiants
     if (!$user || !password_verify($password, $user['mot_de_passe'])) {
-      $_SESSION['error'] = "Pseudo, email ou mot de passe incorrect.";
-      header('Location: ' . route('login'));
-      exit();
+      $msg = "Pseudo, email ou mot de passe incorrect.";
+      return $this->handleLoginResponse(false, $msg);
     }
 
-    // Compte suspendu
     if ($user['actif'] != 1) {
-      $_SESSION['error'] = "Votre compte est suspendu.";
-      header('Location: ' . route('login'));
-      exit();
+      $msg = "Votre compte est suspendu.";
+      return $this->handleLoginResponse(false, $msg);
     }
 
     // Connexion OK
     $_SESSION['user_id'] = $user['id_utilisateur'];
     $_SESSION['user_role'] = $user['id_role'];
     $_SESSION['user'] = [
-      'id' => $user['id_utilisateur'],
+      'id'     => $user['id_utilisateur'],
       'pseudo' => $user['pseudo'],
-      'role' => $user['id_role'],
-      'actif' => $user['actif']
+      'role'   => $user['id_role'],
+      'actif'  => $user['actif']
     ];
 
-    // Redirection par rôle
-    switch ($user['id_role']) {
-      case 1:
-        header('Location: ' . route('dashboardAdmin'));
-        break;
-      case 2:
-        header('Location: ' . route('dashboardEmploye'));
-        break;
-      case 3:
-      default:
-        header('Location: ' . route('profil'));
-        break;
-    }
-    exit();
+    return $this->handleLoginResponse(true, "Connexion réussie !", $user['id_role']);
   }
 
+  /**
+   * Renvoie la réponse AJAX
+   */
+  private function handleLoginResponse(bool $ok, string $msg, ?int $role = null)
+  {
+    $isAjax = !empty($_SERVER['HTTP_X_REQUESTED_WITH'])
+      && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest';
+
+    if ($isAjax) {
+      header('Content-Type: application/json');
+      if ($ok) {
+        echo json_encode([
+          'success' => $msg,
+          'role' => $role
+        ]);
+      } else {
+        echo json_encode(['error' => $msg]);
+      }
+      exit;
+    }
+
+    // Sinon mode classique (redirection HTML)
+    /* if ($ok) {
+      switch ($role) {
+        case 1:
+          header('Location: ' . route('dashboardAdmin'));
+          break;
+        case 2:
+          header('Location: ' . route('dashboardEmploye'));
+          break;
+        default:
+          header('Location: ' . route('profil'));
+          break;
+      }
+    } else {
+      $_SESSION['error'] = $msg;
+      header('Location: ' . route('login'));
+    }
+    exit; */
+  }
 
   /**
    * Affiche la page de profil pour l'utilisateur connecté.
@@ -146,18 +172,29 @@ class UserController
   {
     // Si on est en POST, on traite la soumission
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+      //securité token
+      if (!verifyCsrfToken($_POST['csrf_token'] ?? '')) {
+        $_SESSION['error'] = "Session expirée ou formulaire invalide, veuillez réessayer.";
+        header("location: " . route('registerUser'));
+        exit;
+      }
       // Récupération et assainissement
       $pseudo       = htmlspecialchars($_POST['pseudo']);
       $nom          = htmlspecialchars($_POST['nom']);
       $prenom       = htmlspecialchars($_POST['prenom']);
       $email        = filter_var($_POST['email'], FILTER_VALIDATE_EMAIL);
       $motDePasse   = $_POST['mot_de_passe'];
+      $confirm      = $_POST['motdepasse_confirm'] ?? '';
 
-      // Validation simple
-      if (!$email) {
+      //valdation coter back
+      if (empty($pseudo)) {
+        $error = "Le pseudo est obligatoire.";
+      } else if (!$email) {
         $error = "Email invalide.";
       } else if (empty($motDePasse)) {
         $error = "Le mot de passe ne peut pas être vide.";
+      } else if ($motDePasse !== $confirm) {
+        $error = "Les mots de passe ne correspondent pas.";
       } else {
         // Hash du mot de passe
         $hashed = password_hash($motDePasse, PASSWORD_DEFAULT);
@@ -175,13 +212,16 @@ class UserController
         }
       }
     }
+    /**
+     * old[] sert à conserver les données que l’utilisateur a déjà saisies pour les réafficher automatiquement si une erreur survient.
+     */
     render(
       __DIR__ . '/../views/pages/registerUser.php',
       [
         'title' => 'Créer votre profil',
         'error'   => $error   ?? null,
         'success' => $success ?? null,
-        'old'     => $_POST   ?? [] //sert à conserver les données que l’utilisateur a déjà saisies pour les réafficher automatiquement si une erreur survient.
+        'old'     => $_POST   ?? []
       ]
     );
   }
@@ -193,6 +233,11 @@ class UserController
   {
     // Si on est en POST, on traite la soumission
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+      if (!verifyCsrfToken($_POST['csrf_token'] ?? '')) {
+        $_SESSION['error'] = "Session expirée ou formulaire invalide, veuillez réessayer.";
+        header("location: " . route('profil'));
+        exit;
+      }
       // Récupération et assainissement
       $pseudo       = htmlspecialchars($_POST['pseudo']);
       $nom          = htmlspecialchars($_POST['nom']);
@@ -201,27 +246,29 @@ class UserController
       $numeroBadge  = htmlspecialchars($_POST['numero_badge']);
       $email        = filter_var($_POST['email'], FILTER_VALIDATE_EMAIL);
       $motDePasse   = $_POST['mot_de_passe'];
+      $confirm      = $_POST['motdepasse_confirm'];
 
       // Validation simple
       if (!$email) {
         $error = "Email invalide.";
       } else if (empty($motDePasse)) {
         $error = "Le mot de passe ne peut pas être vide.";
+      } else if ($motDePasse !== $confirm) {
+        $error = "Les mots de passe ne correspondent pas.";
       } else {
-        // Hash du mot de passe
         $hashed = password_hash($motDePasse, PASSWORD_DEFAULT);
+      }
 
-        // On appelle le modèle
-        $model = new User();
-        $created = $model->createEmploye($pseudo, $nom, $prenom, $email, $hashed, $poste, $numeroBadge);
+      // On appelle le modèle
+      $model = new User();
+      $created = $model->createEmploye($pseudo, $nom, $prenom, $email, $hashed, $poste, $numeroBadge);
 
-        if ($created) {
-          // tout est bon redirection vers la page de login
-          $success = "Le profil de l'employé a été créé avec succès. Il peut maintenant se connecter.";
-          $old = []; // pour vider les champs
-        } else {
-          $error = "Cet email est déjà utilisé.";
-        }
+      if ($created) {
+        // tout est bon redirection vers la page de login
+        $success = "Le profil de l'employé a été créé avec succès. Il peut maintenant se connecter.";
+        $old = []; // pour vider les champs
+      } else {
+        $error = "Cet email est déjà utilisé.";
       }
     }
     render(
@@ -242,6 +289,11 @@ class UserController
   {
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       $id = $_SESSION['user_id'] ?? null;
+      if (!verifyCsrfToken($_POST['csrf_token'] ?? '')) {
+        $_SESSION['error'] = "Session expirée ou formulaire invalide.";
+        header("Location: " . route('profil'));
+        exit;
+      }
 
       if (!$id) {
         $_SESSION['error']  = "Utilisateur non connecté.";
@@ -253,7 +305,13 @@ class UserController
         $email      = filter_var($_POST['email'], FILTER_VALIDATE_EMAIL);
         $motdepasse = $_POST['motdepasse'];
         $photo      = $_FILES['photo'] ?? null;
-        $hashedPassword = password_hash($motdepasse, PASSWORD_DEFAULT);
+
+        //double confirmation
+        if ($motdepasse !== $_POST['motdepasse_confirm']) {
+          $_SESSION['error'] = "Les mots de passe ne correspondent pas.";
+        } else {
+          $hashedPassword = password_hash($motdepasse, PASSWORD_DEFAULT);
+        }
 
         if (!$pseudo || !$email || !$motdepasse) {
           $_SESSION['error']  = "Tous les champs sont obligatoires.";
@@ -293,6 +351,12 @@ class UserController
   public function updateRolePreference()
   {
     requireLogin();
+
+    if (!verifyCsrfToken($_POST['csrf_token'] ?? '')) {
+      $_SESSION['error'] = "Session expirée ou formulaire invalide.";
+      header("Location: " . route('profil'));
+      exit;
+    }
 
     $preference = $_POST['preference_role'] ?? null;
     $allowed = ['chauffeur', 'passager', 'les_deux'];

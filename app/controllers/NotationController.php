@@ -12,6 +12,12 @@ class NotationController
   public function ajouterNote()
   {
 
+    if (!verifyCsrfToken($_POST['csrf_token'] ?? '')) {
+      $_SESSION['error'] = "Session expirée ou formulaire invalide, veuillez réessayer.";
+      header("location: " . route('profil'));
+      exit;
+    }
+
     $id_auteur = $_SESSION['user_id'];
     $id_conducteur = $_POST['conducteur_id'] ?? null;
     $id_covoiturage = $_POST['covoiturage_id'] ?? null;

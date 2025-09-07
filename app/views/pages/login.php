@@ -6,7 +6,9 @@
 
 <div class="profile-container">
   <h1>Connectez vous a votre profil</h1>
-  <form action="<?= route('login-user') ?>" method="post" class="formulaire" id="formId">
+  <div id=loginResult></div>
+  <form action="<?= route('login-user') ?>" method="post" class="formulaire" id="formLogin">
+    <input type="hidden" name="csrf_token" value="<?= htmlspecialchars(generateCsrfToken()); ?>">
     <label for="email">Pseudo :</label>
     <input type="text" name="pseudo" id="pseudo" required>
     <label for="email">Email :</label>
@@ -21,4 +23,4 @@
     </div>
   </form>
 </div>
-<script src="../../../js/ajaxHelper.js"></script>
+<script src="/public/js/ajaxLogin.js"></script>

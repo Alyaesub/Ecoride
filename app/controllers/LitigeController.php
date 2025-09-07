@@ -11,6 +11,13 @@ class LitigeController
   public function signalerLitige()
   {
     requireLogin();
+
+    if (!verifyCsrfToken($_POST['csrf_token'] ?? '')) {
+      $_SESSION['error'] = "Session expirée ou formulaire invalide, veuillez réessayer.";
+      header("location: " . route('profil'));
+      exit;
+    }
+
     $id = isset($_POST['id_covoiturage']) ? (int) $_POST['id_covoiturage'] : null;
     $id = $_POST['id_covoiturage'] ?? null;
     if ($id) {

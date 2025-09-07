@@ -29,10 +29,12 @@
               <td><?= htmlspecialchars($avis['date']) ?></td>
               <td>
                 <form method="post" action="<?= route('validerAvis') ?>">
+                  <input type="hidden" name="csrf_token" value="<?= htmlspecialchars(generateCsrfToken()); ?>">
                   <input type="hidden" name="id_avis" value="<?= htmlspecialchars($avis['_id']) ?>">
                   <button type="submit" class="validate-btn">Valider</button>
                 </form>
                 <form method="post" action="<?= route('refuserAvis') ?>">
+                  <input type="hidden" name="csrf_token" value="<?= htmlspecialchars(generateCsrfToken()); ?>">
                   <input type="hidden" name="id_avis" value="<?= htmlspecialchars($avis['_id']) ?>">
                   <button type="submit" class="reject-btn">Refuser</button>
                 </form>
@@ -95,7 +97,8 @@
             <td><?= htmlspecialchars($user['email']) ?></td>
             <td><?= $user['actif'] ? 'Actif' : 'Suspendu' ?></td>
             <td>
-              <form method="post" action="<?= route('toggleUser') ?>">
+              <form method="post" action="<?= route('emplyeToggleUser') ?>">
+                <input type="hidden" name="csrf_token" value="<?= htmlspecialchars(generateCsrfToken()); ?>">
                 <input type="hidden" name="id_utilisateur" value="<?= $user['id_utilisateur'] ?>">
                 <button class="suspend-btn">
                   <?= $user['actif'] ? 'Suspendre' : 'Réactiver' ?>

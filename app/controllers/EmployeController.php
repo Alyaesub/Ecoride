@@ -42,9 +42,15 @@ class EmployeController
   }
 
   //function qui gere le changement de statut des user
-  public function toggleUser()
+  public function emplyeToggleUser()
   {
     requireLogin();
+
+    if (!verifyCsrfToken($_POST['csrf_token'] ?? '')) {
+      $_SESSION['error'] = "Session expirée ou formulaire invalide, veuillez réessayer.";
+      header("location: " . route('profil'));
+      exit;
+    }
 
     if (!empty($_POST['id_utilisateur'])) {
       $model = new Employe();

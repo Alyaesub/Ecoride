@@ -30,6 +30,7 @@
 <section class="credit-form">
   <h3>Choisissez votre formule :</h3>
   <form action="<?= route('acheteCredits') ?>" method="POST">
+    <input type="hidden" name="csrf_token" value="<?= htmlspecialchars(generateCsrfToken()); ?>">
     <label for="credit_amount">Choisissez un montant :</label>
     <select name="credit_amount" id="credit_amount">
       <option value="5">5 crédits - 5€</option>
