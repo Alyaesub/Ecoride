@@ -1,8 +1,8 @@
 //fiche JS qui gére la searchbar
 // Sélectionne les éléments du DOM
-const searchInput = document.getElementById("searchInput"); // Champ de saisie utilisateur
-const searchBtn = document.getElementById("searchBtn"); // Bouton de recherche
-const resultsDiv = document.getElementById("results"); // Div qui affiche les résultats
+const searchInput = document.getElementById("searchInput");
+const searchBtn = document.getElementById("searchBtn");
+const resultsDiv = document.getElementById("results");
 
 // Fonction qui écoute les frappes dans l'input
 searchInput.addEventListener("input", function () {
@@ -26,7 +26,7 @@ searchInput.addEventListener("input", function () {
 	// Appelle le contrôleur SearchCitiesController via Fetch pour récupérer les suggestions
 	// search-cities&q sert de route pour aller chercher le controller 'searchCitiesController.php'
 	fetch(`/searchCities?q=${encodeURIComponent(query)}`)
-		.then((response) => response.json()) // Convertit la réponse en JSON
+		.then((response) => response.json())
 		.then((data) => {
 			resultsDiv.innerHTML = ""; // Vide les anciens résultats
 			if (data.length > 0) {

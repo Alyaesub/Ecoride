@@ -1,12 +1,26 @@
 @media (max-width: $max-width-mobile) {
-  .carousel {
+  .carousel-wrapper {
+    position: relative; 
+
+    .carousel {
     display: flex;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
     gap: 1rem;
     padding: 1rem;
+    padding-right: 2rem;
 
-      h1{
+    .carousel-item {
+      flex: 0 0 auto;
+      scroll-snap-align: start;
+      background-color: $primary-color;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      min-width: 250px; 
+      max-width: 250px;
+      flex-shrink: 0;
+
+        h1{
         color: $text-color;
         font-family: $font-title;
       }
@@ -16,20 +30,6 @@
         color: $text-color;
         font-family: $font-title;
       }
-    
-
-    .carousel-item {
-      flex: 0 0 auto;
-      scroll-snap-align: start;
-      background-color: $primary-color;
-      /* padding: 1rem; */
-      border-radius: 10px;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-      min-width: 250px; // pour éviter que ce soit trop petit
-      max-width: 250px; // pour éviter que ce soit trop grand
-      flex-shrink: 0;
-      scroll-snap-align: start;
-
       a {
         display: block;
         width: 250px;
@@ -37,15 +37,62 @@
         flex-shrink: 0;
         font-family: $font-link;
       }
-
-  
+    }
+    .carousel-item:last-child {
+        scroll-snap-align: end;
+      }
       scrollbar-width: none;
       -webkit-overflow-scrolling: touch;
         &::-webkit-scrollbar {
         display: none;
       }
+  }
+        .carousel-control {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.5);
+    border: none;
+    color: white;
+    font-size: 2rem;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    border-radius: 50%;
+    z-index: 100;
+
+    &.prev {
+      left: 10px;
+    }
+
+    &.next {
+      right: 10px;
+    }
+
+    &:hover {
+      background: rgba(0, 0, 0, 0.8);
     }
   }
-
+  }
 }
   
+
+
+//css desktop
+@media (min-width: $min-width-desktop) {
+  .carousel {
+    display: none;
+  }
+  .carousel-control {
+    display: none;
+  }
+  .section-photo-covoit {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    padding-top: 20px;
+    width: 100%;
+    height: 250px;
+    gap: 40px;
+  }
+}

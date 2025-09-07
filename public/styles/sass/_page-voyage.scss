@@ -11,7 +11,7 @@
       display: none;
     }
   
-    // Bloc de gauche – le formulaire
+    // Bloc de gauche 
     .formulaire {
       flex: 1 ; // occupe environ 40% de la largeur
       padding: 20px;
@@ -51,7 +51,7 @@
       }
     }
     .custom-select {
-      appearance: none; // enlève le style natif (attention : fonctionne pas partout)
+      appearance: none; // enlève le style natif 
       -webkit-appearance: none;
       -moz-appearance: none;
 
@@ -86,7 +86,7 @@
     flex-direction: row;
     gap: 20px; // espace général entre les blocs
 
-    // Bloc de gauche – le formulaire
+    // Bloc de gauche 
     .formulaire {
       flex: 1 1 40%;// occupe environ 40% de la largeur 
       padding: 10px;
