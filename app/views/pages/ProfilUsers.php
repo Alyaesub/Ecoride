@@ -55,6 +55,7 @@
 
       <h2>Mettez a jour vos donées personnelle</h2>
       <form action="<?= route('updateRolePreference') ?>" method="POST">
+        <input type="hidden" name="csrf_token" value="<?= htmlspecialchars(generateCsrfToken()); ?>">
         <h2>Choisissez votre role</h2>
         <label for="preference_role">Je souhaite être :</label>
         <select name="preference_role" id="preference_role" required>
@@ -65,25 +66,26 @@
         </select>
         <button type="submit">Enregistrer</button>
       </form>
-      <form id="formInfo" class="registerForm" action="<?= route('updateUser') ?>" method="post" enctype="multipart/form-data">
+      <form id="formUpdate" class="registerForm" action="<?= route('updateUser') ?>" method="post" enctype="multipart/form-data">
+        <input type="hidden" name="csrf_token" value="<?= htmlspecialchars(generateCsrfToken()); ?>">
         <input type="hidden" name="id_role" value="3">
 
         <label for="pseudo">Pseudo :</label>
-        <input type="text" id="pseudo" name="pseudo" require>
+        <input type="text" id="pseudo" name="pseudo" required>
 
         <label for="nom">Nom :</label>
-        <input type="text" id="nom" name="nom" require>
+        <input type="text" id="nom" name="nom" required>
 
         <label for="prenom">Prénom :</label>
-        <input type="text" id="prenom" name="prenom" require>
+        <input type="text" id="prenom" name="prenom" required>
 
         <label for="email">Email :</label>
-        <input type="email" id="email" name="email" require>
+        <input type="email" id="email" name="email" required>
 
         <label for="motdepasse">Mot de passe :</label>
-        <input type="password" id="motdepasse" name="motdepasse" require>
+        <input type="password" id="motdepasse" name="motdepasse" required>
         <label for="motdepasse">Répetez votre mot de passe :</label>
-        <input type="password" id="motdepasse" name="motdepasse" require>
+        <input type="password" id="motdepasse" name="motdepasse_confirm" required>
 
         <label for="photo">Photo :</label>
         <input type="file" id="photo" name="photo">
@@ -109,6 +111,7 @@
               <li><strong>Immatriculation :</strong> <?= htmlspecialchars($vehicule['immatriculation']) ?></li>
               <li>
                 <form action="<?= route('deleteVehicule') ?>" method="post" style="display:inline;">
+                  <input type="hidden" name="csrf_token" value="<?= htmlspecialchars(generateCsrfToken()); ?>">
                   <input type="hidden" name="id_vehicule" value="<?= $vehicule['id_vehicule'] ?>">
                   <button type="submit" onclick="return confirm('Supprimer ce véhicule ?')">Supprimer</button>
                 </form>
@@ -120,6 +123,7 @@
         <?php endif; ?>
         <h2>Ajouter un véhicule</h2>
         <form action=" <?= route('ajouterVehicule') ?>" method="post">
+          <input type="hidden" name="csrf_token" value="<?= htmlspecialchars(generateCsrfToken()); ?>">
 
           <label for="nom_marque">Marque :</label>
           <input type="text" name="nom_marque" id="nom_marque" required>
@@ -157,6 +161,7 @@
       ?>
 
         <form id="formCovoiturage" action="<?= route("ajouterCovoiturage") ?>" method="post">
+          <input type="hidden" name="csrf_token" value="<?= htmlspecialchars(generateCsrfToken()); ?>">
 
           <label for="adresse_depart">Adresse de départ :</label>
           <input type="text" id="adresse_depart" name="adresse_depart" required>
@@ -232,6 +237,7 @@
               <li>
                 <?php if ($covoiturage['role_utilisateur'] === 'conducteur') : ?>
                   <form action=" <?= route('supprimeCovoiturage') ?>" method="post" style="display:inline;">
+                    <input type="hidden" name="csrf_token" value="<?= htmlspecialchars(generateCsrfToken()); ?>">
                     <input type="hidden" name="id_covoiturage" value="<?= $covoiturage['id_covoiturage'] ?>">
                     <button type="submit" onclick="return confirm('Supprimer définitivement ce covoiturage ?')">❌ Supprimer</button>
                   </form>
@@ -322,4 +328,4 @@
   </div>
   <!-- Inclusion des scripts JavaScript -->
   <!-- script general pour le dashboard -->
-  <script src="/js/dashboard.js"></script>
+  <script src="/public/js/dashboard.js"></script>

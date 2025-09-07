@@ -84,10 +84,10 @@ $routes = [
   'dashboardAdmin' => [AdminController::class, 'dashboardAdmin'],
   'registerEmploye' => [UserController::class, 'registerEmploye'],
   'toggleEmploye' => [AdminController::class, 'toggleEmploye'],
-  'toggleUser' => [AdminController::class, 'toggleUser'],
+  'AdminToggleUser' => [AdminController::class, 'AdminToggleUser'],
   // Daschboard employe
   'dashboardEmploye' => [EmployeController::class, 'dashboardEmploye'],
-  'toggleUser' => [EmployeController::class, 'toggleUser'],
+  'employeToggleUser' => [EmployeController::class, 'employeToggleUser'],
   'validerAvis' => [AvisController::class, 'validerAvis'],
   'refuserAvis' => [AvisController::class, 'refuserAvis'],
   //litiges

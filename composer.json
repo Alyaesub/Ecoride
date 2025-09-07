@@ -21,6 +21,7 @@
     "require": {
         "filp/whoops": "^2.18",
         "phpmailer/phpmailer": "^6.10",
-        "mongodb/mongodb": "^2.1"
+        "mongodb/mongodb": "^2.1",
+        "vlucas/phpdotenv": "^5.6"
     }
 }

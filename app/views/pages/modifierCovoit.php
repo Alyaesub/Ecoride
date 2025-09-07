@@ -2,6 +2,7 @@
 
 <form action="<?= route('validerModifCovoit') ?>" method="post">
   <input type="hidden" name="id_covoiturage" value="<?= $covoiturage['id_covoiturage'] ?>">
+  <input type="hidden" name="csrf_token" value="<?= htmlspecialchars(generateCsrfToken()); ?>">
 
   <label for="adresse_depart">Adresse de départ :</label>
   <input type="text" id="adresse_depart" name="adresse_depart" value="<?= htmlspecialchars($covoiturage['adresse_depart']) ?>" required>

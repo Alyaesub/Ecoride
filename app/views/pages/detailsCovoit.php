@@ -71,6 +71,7 @@
         $covoiturage['statut'] !== 'litige'
       )) : ?>
         <form action="<?= route('participeCovoiturage') ?>" method="post">
+          <input type="hidden" name="csrf_token" value="<?= htmlspecialchars(generateCsrfToken()); ?>">
           <input type="hidden" name="id_covoiturage" value="<?= $covoiturage['id_covoiturage'] ?>">
           <button type="submit" class="btn">Participer</button>
         </form>
@@ -82,6 +83,7 @@
         !in_array($covoiturage['statut'], ['termine', 'en_cours', 'annule', 'litige'])
       ): ?>
         <form action="<?= route('annuleParticipation') ?>" method="post">
+          <input type="hidden" name="csrf_token" value="<?= htmlspecialchars(generateCsrfToken()); ?>">
           <input type="hidden" name="id_covoiturage" value="<?= $covoiturage['id_covoiturage'] ?>">
           <button type="submit" class="btn btn-danger">Annuler ma participation</button>
         </form>
@@ -92,11 +94,13 @@
 
           <?php if ($covoiturage['statut'] === 'actif') : ?>
             <form action="<?= route('modifierCovoiturage') ?>" method="post" style="display:inline;">
+              <input type="hidden" name="csrf_token" value="<?= htmlspecialchars(generateCsrfToken()); ?>">
               <input type="hidden" name="id_covoiturage" value="<?= $covoiturage['id_covoiturage'] ?>">
               <button type="submit" class="btn">✏️ Modifier</button>
             </form>
 
             <form action="<?= route('annulerCovoiturage') ?>" method="post" style="display:inline;">
+              <input type="hidden" name="csrf_token" value="<?= htmlspecialchars(generateCsrfToken()); ?>">
               <input type="hidden" name="id_covoiturage" value="<?= $covoiturage['id_covoiturage'] ?>">
               <button type="submit" class="btn">❌ Annuler</button>
             </form>
@@ -105,6 +109,7 @@
           <!-- Bouton unique pour démarrer ou terminer -->
           <?php if (in_array($covoiturage['statut'], ['actif', 'en_cours'])) : ?>
             <form action="<?= route('changerStatutCovoiturage') ?>" method="post">
+              <input type="hidden" name="csrf_token" value="<?= htmlspecialchars(generateCsrfToken()); ?>">
               <input type="hidden" name="id_covoiturage" value="<?= $covoiturage['id_covoiturage'] ?>">
               <input type="hidden" name="statut_actuel" value="<?= $covoiturage['statut'] ?>">
               <button type="submit" class="btn">
@@ -122,6 +127,7 @@
         empty($covoiturage['trajet_termine'])
       ) : ?>
         <form action="<?= route('terminerCovoiturage') ?>" method="post">
+          <input type="hidden" name="csrf_token" value="<?= htmlspecialchars(generateCsrfToken()); ?>">
           <input type="hidden" name="id_covoiturage" value="<?= $covoiturage['id_covoiturage'] ?>">
           <button type="submit" class="btn">✅ Confirmer la fin du trajet</button>
         </form>
@@ -140,6 +146,7 @@
         empty($covoiturage['trajet_termine'])
       ) : ?>
         <form action="<?= route('signalerLitige') ?>" method="post">
+          <input type="hidden" name="csrf_token" value="<?= htmlspecialchars(generateCsrfToken()); ?>">
           <input type="hidden" name="id_covoiturage" value="<?= $covoiturage['id_covoiturage'] ?>">
           <button type="submit" class="btn">⚠️ signalez un probleme</button>
         </form>
@@ -159,6 +166,7 @@
           <h2>Laisser une note et un commentaire</h2>
           <!-- formulaire notation -->
           <form action="<?= route('ajouterNote') ?>" method="post" onsubmit="return verifierFormulaire();">
+            <input type="hidden" name="csrf_token" value="<?= htmlspecialchars(generateCsrfToken()); ?>">
             <input type="hidden" name="covoiturage_id" value="<?= $covoiturage['id_covoiturage'] ?>">
             <input type="hidden" name="conducteur_id" value="<?= $covoiturage['id_utilisateur'] ?>">
             <label for="note">Note (1 à 5) :</label>
@@ -171,6 +179,7 @@
           </form>
           <!-- FORMULAIRE 2 : AVIS -->
           <form action="<?= route('ajouterAvisMongo') ?>" method="post">
+            <input type="hidden" name="csrf_token" value="<?= htmlspecialchars(generateCsrfToken()); ?>">
             <input type="hidden" name="id_utilisateur" value="<?= $covoiturage['id_utilisateur'] ?>">
             <input type="hidden" name="id_covoiturage" value="<?= $covoiturage['id_covoiturage'] ?>">
             <input type="hidden" name="id_auteur" value="<?= $_SESSION['user_id'] ?>">
@@ -188,4 +197,4 @@
   <?php endif; ?>
 </section>
 
-<script src="/js/detailsCovoit.js"></script>
+<script src="/public/js/detailsCovoit.js"></script>

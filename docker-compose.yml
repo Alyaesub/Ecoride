@@ -2,6 +2,7 @@ version: '3.8'
 
 services:
   app:
+    container_name: ecoride_app
     build: .
     ports:
       - "8000:80"
@@ -11,7 +12,16 @@ services:
       - db
 
   db:
-    image: mysql:5.7
+    container_name: ecoride_database
+    image: mysql:9.4.0
     environment:
+      MYSQL_RANDOM_ROOT_PASSWORD: true
+      MYSQL_USER: ecoride
+      MYSQL_PASSWORD: B8Byky8tcDuL
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: ecoride
+    volumes:
+      database:/var/lib/mysql
+
+volumes:
+  database:

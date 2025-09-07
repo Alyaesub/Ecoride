@@ -9,6 +9,11 @@ class AvisController
   public function ajouterAvisMongo()
   {
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+      if (!verifyCsrfToken($_POST['csrf_token'] ?? '')) {
+        $_SESSION['error'] = "Session expirée ou formulaire invalide, veuillez réessayer.";
+        header("location: " . route('profil'));
+        exit;
+      }
       $commentaire = trim($_POST['commentaire'] ?? '');
       $id_utilisateur = intval($_POST['id_utilisateur'] ?? 0);
       $id_covoiturage = intval($_POST['id_covoiturage'] ?? 0);
@@ -38,6 +43,11 @@ class AvisController
   public function validerAvis()
   {
     if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST['id_avis'])) {
+      if (!verifyCsrfToken($_POST['csrf_token'] ?? '')) {
+        $_SESSION['error'] = "Session expirée ou formulaire invalide, veuillez réessayer.";
+        header("location: " . route('profil'));
+        exit;
+      }
       $id = $_POST['id_avis'];
       $avis = new Avis();
       $avis->changerStatut($id, 'validé');
@@ -49,6 +59,11 @@ class AvisController
   public function refuserAvis()
   {
     if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST['id_avis'])) {
+      if (!verifyCsrfToken($_POST['csrf_token'] ?? '')) {
+        $_SESSION['error'] = "Session expirée ou formulaire invalide, veuillez réessayer.";
+        header("location: " . route('profil'));
+        exit;
+      }
       $id = $_POST['id_avis'];
       $avis = new Avis();
       $avis->changerStatut($id, 'refusé');

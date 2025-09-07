@@ -44,6 +44,11 @@ class VehiculeController
     }
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+      if (!verifyCsrfToken($_POST['csrf_token'] ?? '')) {
+        $_SESSION['error'] = "Session expirée ou formulaire invalide, veuillez réessayer.";
+        header("location: " . route('profil'));
+        exit;
+      }
       $marqueModel = new Marque();
 
       $nom_marque = strtolower(trim($_POST['nom_marque'] ?? ''));
@@ -104,6 +109,11 @@ class VehiculeController
     }
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id_vehicule'])) {
+      if (!verifyCsrfToken($_POST['csrf_token'] ?? '')) {
+        $_SESSION['error'] = "Session expirée ou formulaire invalide, veuillez réessayer.";
+        header("location: " . route('profil'));
+        exit;
+      }
       $idVehicule = (int) $_POST['id_vehicule'];
 
       $vehiculeModel = new Vehicule();

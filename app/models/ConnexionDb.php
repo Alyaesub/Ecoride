@@ -12,23 +12,27 @@ class ConnexionDb
   public static function getPdo(): PDO
   {
     if (self::$pdo === null) {
-      $configPath = __DIR__ . '/../../config/env.ini';
+      // Nouvelle version (.env)
+      $dsn = sprintf(
+        "mysql:host=%s;port=%s;dbname=%s;charset=utf8mb4",
+        $_ENV['DB_HOST'],
+        $_ENV['DB_PORT'],
+        $_ENV['DB_NAME']
+      );
 
-      if (!file_exists($configPath)) {
-        throw new \Exception("Configuration de la base de données manquante.");
-      }
+      self::$pdo = new PDO($dsn, $_ENV['DB_USER'], $_ENV['DB_PASS'], [
+        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+      ]);
+      //  Nouvelle version (.env)
+      $dsn = sprintf(
+        "mysql:host=%s;port=%s;dbname=%s;charset=utf8mb4",
+        $_ENV['DB_HOST'],
+        $_ENV['DB_PORT'],
+        $_ENV['DB_NAME']
+      );
 
-      $config = parse_ini_file($configPath, true);
-
-      if (!isset($config['database'])) {
-        throw new \Exception("Section [database] introuvable dans env.ini");
-      }
-
-      $db = $config['database'];
-
-      $dsn = "mysql:host={$db['DB_HOST']};port={$db['DB_PORT']};dbname={$db['DB_NAME']};charset=utf8mb4";
-
-      self::$pdo = new PDO($dsn, $db['DB_USER'], $db['DB_PASS'], [
+      self::$pdo = new PDO($dsn, $_ENV['DB_USER'], $_ENV['DB_PASS'], [
         PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
         PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
       ]);

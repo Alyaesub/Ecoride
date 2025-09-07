@@ -20,6 +20,12 @@ class CreditsController
   {
     requireLogin();
 
+    if (!verifyCsrfToken($_POST['csrf_token'] ?? '')) {
+      $_SESSION['error'] = "Session expirée ou formulaire invalide, veuillez réessayer.";
+      header("location: " . route('showFormCredit'));
+      exit;
+    }
+
     $idUser = $_SESSION['user']['id'];
     $creditAmount = intval($_POST['credit_amount'] ?? 0);
 
@@ -34,7 +40,6 @@ class CreditsController
 
     if ($ok) {
       // On met aussi à jour la session pour afficher les crédits en live
-      /* $_SESSION['user']['credits'] += $creditAmount; */
       if (!isset($_SESSION['user']['credits'])) {
         $_SESSION['user']['credits'] = 0;
       }

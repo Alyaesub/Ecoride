@@ -7,6 +7,7 @@
 <section class="registerMain">
   <h1>Créer un profil employé</h1>
   <form class="registerForm" action="<?= route('registerEmploye') ?>" method="post">
+    <input type="hidden" name="csrf_token" value="<?= htmlspecialchars(generateCsrfToken()); ?>">
     <label>Pseudo :</label>
     <input type="text" name="pseudo" required><br>
 
@@ -29,7 +30,7 @@
     <input type="password" name="mot_de_passe" required><br>
 
     <label>Repetez le mot de passe :</label>
-    <input type="password" name="mot_de_passe" required><br>
+    <input type="password" id="motdepasse" name="motdepasse_confirm" required>
 
     <button type="submit">Créer le profil</button>
   </form>

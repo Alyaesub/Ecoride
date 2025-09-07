@@ -1,5 +1,4 @@
 //fonction qui permet de rentre asynchrone mes formulaire
-//a integrés plus tard
 function handleAjaxForm(formId, resultTargetId) {
 	const form = document.getElementById(formId);
 	form.addEventListener("submit", async function (e) {
@@ -8,6 +7,9 @@ function handleAjaxForm(formId, resultTargetId) {
 		const response = await fetch(form.action, {
 			method: "POST",
 			body: formData,
+			headers: {
+				"X-Requested-With": "XMLHttpRequest", // force le mode AJAX côté PHP
+			},
 		});
 		const result = await response.json();
 
@@ -15,15 +17,22 @@ function handleAjaxForm(formId, resultTargetId) {
 		zone.innerHTML = result.success
 			? `<div class="alert alert-success">${result.success}</div>`
 			: `<div class="alert alert-danger">${result.error}</div>`;
+
+		// Si succès redirection
+		if (result.success) {
+			zone.innerHTML = `<div class="alert alert-success">${result.success}</div>`;
+
+			setTimeout(() => {
+				if (result.role === 1) {
+					window.location.href = "/dashboardAdmin";
+				} else if (result.role === 2) {
+					window.location.href = "/dashboardEmploye";
+				} else {
+					window.location.href = "/profil";
+				}
+			}, 1000);
+		}
 	});
 }
 // appeler la fonction
-handleAjaxForm();
-
-/* L’inscription (registerUser, registerEmploye)
-• La connexion (login)
-• La mise à jour du profil
-• Le formulaire de recherche de covoiturages
-• Les validations d’avis, trajets à problèmes côté employé/admin
-• L’ajout de trajets (covoiturage)
-• Et même les commentaires ou votes plus tard */
+handleAjaxForm("formLogin", "loginResult");
