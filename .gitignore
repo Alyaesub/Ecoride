@@ -5,3 +5,4 @@
 /public/uploads
 /vrac
 /.env
+/.env.prod
