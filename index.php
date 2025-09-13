@@ -102,6 +102,10 @@ $routes = [
  */
 // basenam récupère juste le dernier segment de l’URL (ex: "/profil" => "profil")
 $page = basename(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH));
+// Si aucune page n'est spécifiée redirige vers home
+if ($page === '' || $page === 'index.php') {
+  $page = 'home';
+}
 /**
  * Dispatcher qui appelle le bon contrôleur ou la bonne vue
  */
