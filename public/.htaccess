@@ -1,0 +1,25 @@
+# Activer la réécriture
+RewriteEngine On
+
+# Rediriger toutes les requêtes vers index.php
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^ index.php [QSA,L]
+
+# Bloquer accès fichiers sensibles
+<FilesMatch "\.(env|ini|sql|log|sh|bak|git|htaccess)$">
+  Order allow,deny
+  Deny from all
+</FilesMatch>
+
+# Empêcher l’exécution PHP dans /uploads
+<Directory "uploads">
+  php_flag engine off
+</Directory>
+
+# Pages d’erreur perso
+ErrorDocument 404 /404.html
+ErrorDocument 403 /403.html
+
+# Encodage UTF-8
+AddDefaultCharset UTF-8
