@@ -7,11 +7,11 @@
 ## Technologies
 
 -   **Front-end** : HTML5, SCSS, JavaScript (ES6+)
--   **Back-end** : PHP 8.4.6, MySQL, Mongodb
+-   **Back-end** : PHP 8.4.6, MySQL, MongoDB
 -   **Outils** : chart.js, npm: '11.1.0', node: '22.13.0', Composer,
     Docker version 28.0.1, build 068a01e, Docker Compose version v2.33.1-desktop.1
 -   **PDO (gestion SQL sécurisée)**
--   **MongoDB Atlas (NoSQL pour les avis)**
+-   **MongoDB (Atlas NoSQL pour les avis)**
 
 ## Comptes de test
 
@@ -31,7 +31,7 @@
     -   `pseudo`: aly / `mail`: aly@test.com / `mot de passe`: password123
     -   `pseudo`: matthieu / `mail`: matthieu@test.com / `mot de passe`: password123
     -   `pseudo`: marie / `mail`: marie@test.com / `mot de passe`: password123
-    -   `pseudo`: claudia / `mail`: claudi@test.com / `mot de passe`: password123
+    -   `pseudo`: claudia / `mail`: claudia@test.com / `mot de passe`: password123
     -   `pseudo`: testmaj/ `mail`: testmaj@test.com / `mot de passe`: testmaj
 
 -   **Formulaire** : Création d’employes via le formulaire registerEmploye.
@@ -52,7 +52,7 @@ npm install
 # Configurer la base de données
 # → Exécuter les scripts SQL dans /database/sql
 # → Configurer MongoDB Atlas : renseigner l'URI dans le fichier .env (MONGO_URI)
-# → Adapter les infos dans config/env.ini
+# → Adapter les infos dans le fichier .env
 ```
 
 ## 📦 Architecture et Structure du projet
@@ -98,8 +98,8 @@ npm install
 ```.env
 DB_HOST = 127.0.0.1
 DB_NAME = ecoride
-DB_USER =
-DB_PASS =
+DB_USER = rootExemple
+DB_PASS = rootExemple
 
 
 APP_ENV = local
@@ -149,6 +149,27 @@ $pdo = ConnexionDb::getPdo();
 
 -   Connexion centralisée via `ConnexionDb`
 -   Requêtes prêtes à l’emploi avec PDO
+
+## ✅ Tests unitaires
+
+Le projet inclut une configuration minimale de tests unitaires avec [PHPUnit](https://phpunit.de/).
+
+### Mise en place
+
+-   Installation de PHPUnit via Composer :
+    ```bash
+    composer require --dev phpunit/phpunit
+    ```
+-   Lancement des tests :
+    ```bash
+    ./vendor/bin/phpunit
+    ```
+-   Resultats attendu :
+    Connexion Db
+    ✔ Connexion db retourne un p d o
+    User
+    ✔ Create user
+    OK (2 tests, 2 assertions)
 
 ## Déploiement
 

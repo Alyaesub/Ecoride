@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit bootstrap="vendor/autoload.php"
+        colors="true"
+        testdox="true">
+    <php>
+        <env name="DB_HOST" value="127.0.0.1"/>
+        <env name="DB_PORT" value="8889"/>
+        <env name="DB_NAME" value="ecoride"/>
+        <env name="DB_USER" value="root"/>
+        <env name="DB_PASS" value="root"/>
+    </php>
+    <testsuites>
+        <testsuite name="EcoRide Test Suite">
+            <directory>tests</directory>
+        </testsuite>
+    </testsuites>
+</phpunit>
