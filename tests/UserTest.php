@@ -7,11 +7,13 @@ class UserTest extends TestCase
 {
   public function testCreateUser()
   {
+
+
     $userModel = new User();
-    $pseudo = "testUser";
+    $pseudo = "testUser3";
     $nom = "Nom";
     $prenom = "Prenom";
-    $email = "test@example.com";
+    $email = "test3@example.com";
     $password = password_hash("secret", PASSWORD_DEFAULT);
 
     $result = $userModel->createUser($pseudo, $nom, $prenom, $email, $password);

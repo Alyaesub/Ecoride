@@ -1,1 +1,1 @@
-{"version":2,"defects":{"ConnexionDbTest::testConnexionDbRetourneUnPDO":8,"UserTest::testCreateUser":8},"times":{"ConnexionDbTest::testConnexionDbRetourneUnPDO":0.002,"UserTest::testCreateUser":0.245}}
+{"version":2,"defects":{"ConnexionDbTest::testConnexionDbRetourneUnPDO":8,"UserTest::testCreateUser":8},"times":{"ConnexionDbTest::testConnexionDbRetourneUnPDO":0.002,"UserTest::testCreateUser":0.235}}
