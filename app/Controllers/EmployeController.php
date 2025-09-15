@@ -31,7 +31,7 @@ class EmployeController
     //model des litiges
     $trajetLitige = $litigeModel->getAllLitiges();
 
-    render(__DIR__ . '/../views/pages/administration/dashboardEmploye.php', [
+    render(__DIR__ . '/../Views/pages/administration/dashboardEmploye.php', [
       'title' => 'Dashboard Employer',
       'utilisateurs' => $utilisateurs,
       'totalUtilisateur' => $totalUtilisateur,

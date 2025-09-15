@@ -10,7 +10,7 @@ class CreditsController
 
   public function showFormCredit()
   {
-    render(__DIR__ . '/../views/pages/creditsAchat.php', ['title' => 'Acheter vos crédits']);
+    render(__DIR__ . '/../Views/pages/creditsAchat.php', ['title' => 'Acheter vos crédits']);
   }
 
   /**

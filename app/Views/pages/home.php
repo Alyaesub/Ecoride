@@ -21,13 +21,13 @@
       </div>
     </a>
     <div class=" photo-1 carousel-item">
-      <img class="photo-1 carousel-item" src="/public/assets/pexels-pripicart-620335 (1).webp" alt="photo-voiture">
+      <img class="photo-1 carousel-item" src="/assets/pexels-pripicart-620335 (1).webp" alt="photo-voiture">
     </div>
     <div class=" photo-2 carousel-item">
-      <img class="photo-2 carousel-item" src="/public/assets/pexels-amar-31688476.webp" alt="photo-voiture">
+      <img class="photo-2 carousel-item" src="/assets/pexels-amar-31688476.webp" alt="photo-voiture">
     </div>
     <div class=" photo-3 carousel-item">
-      <img class="photo-3 carousel-item" src="/public/assets/pexels-rachel-claire-7263902.webp" alt="photo-voiture">
+      <img class="photo-3 carousel-item" src="/assets/pexels-rachel-claire-7263902.webp" alt="photo-voiture">
     </div>
     <div class=" description-desktop carousel-item">
       <h2>Pourquoi choisir EcoRide ?</h2>
@@ -76,5 +76,5 @@
     <a class="btn-voir-plus" href="<?= route('covoitVoyage') ?>">Trouvez votre covoiturages</a>
   </div>
 </section>
-<script src="/public/js/searchBar.js"></script>
-<script src="/public/js/carousel.js"></script>
+<script src="/js/searchBar.js"></script>
+<script src="/js/carousel.js"></script>

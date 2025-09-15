@@ -1,0 +1,13 @@
+[12-Sep-2025 17:17:02 UTC] PHP Warning:  require(/home/repa7303/repositories/Ecoride/vendor/composer/../myclabs/deep-copy/src/DeepCopy/deep_copy.php): Failed to open stream: No such file or directory in /home/repa7303/repositories/Ecoride/vendor/composer/autoload_real.php on line 41
+[12-Sep-2025 17:17:02 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/repa7303/repositories/Ecoride/vendor/composer/../myclabs/deep-copy/src/DeepCopy/deep_copy.php' (include_path='.:/opt/alt/php83/usr/share/pear:/opt/alt/php83/usr/share/php:/usr/share/pear:/usr/share/php') in /home/repa7303/repositories/Ecoride/vendor/composer/autoload_real.php:41
+Stack trace:
+#0 /home/repa7303/repositories/Ecoride/vendor/composer/autoload_real.php(45): {closure}()
+#1 /home/repa7303/repositories/Ecoride/vendor/autoload.php(25): ComposerAutoloaderInit1a2012ceb5a454724fa2331cd94c71c7::getLoader()
+#2 /home/repa7303/repositories/Ecoride/index.php(5): require_once('/home/repa7303/...')
+#3 {main}
+  thrown in /home/repa7303/repositories/Ecoride/vendor/composer/autoload_real.php on line 41
+[12-Sep-2025 17:35:43 UTC] PHP Warning:  require_once(/home/repa7303/repositories/Ecoride/app/functions/view.php): Failed to open stream: No such file or directory in /home/repa7303/repositories/Ecoride/index.php on line 6
+[12-Sep-2025 17:35:43 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/repa7303/repositories/Ecoride/app/functions/view.php' (include_path='.:/opt/alt/php83/usr/share/pear:/opt/alt/php83/usr/share/php:/usr/share/pear:/usr/share/php') in /home/repa7303/repositories/Ecoride/index.php:6
+Stack trace:
+#0 {main}
+  thrown in /home/repa7303/repositories/Ecoride/index.php on line 6

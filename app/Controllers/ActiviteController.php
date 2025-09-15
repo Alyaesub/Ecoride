@@ -23,7 +23,7 @@ class ActiviteController
     $model = new Covoiturage();
     $historique = $model->getHistoriqueCovoiturages($id_utilisateur);
 
-    render(__DIR__ . '/../views/pages/activites.php', [
+    render(__DIR__ . '/../Views/pages/activites.php', [
       'title'        => 'Activités',
       'user'         => $user,
       'covoiturages' => $historique

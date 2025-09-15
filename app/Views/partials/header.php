@@ -1,5 +1,5 @@
 <header class="header">
-    <img class="logo" src="/public/assets/Design_sans_titre-removebg-preview.png" alt="logoecoride">
+    <img class="logo" src="/assets/Design_sans_titre-removebg-preview.png" alt="logoecoride">
     <nav class="navbar">
         <ul>
             <li><a href="<?= route('home') ?>">Accueil</a></li>

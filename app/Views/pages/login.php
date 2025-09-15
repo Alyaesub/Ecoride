@@ -23,4 +23,4 @@
     </div>
   </form>
 </div>
-<script src="/public/js/ajaxLogin.js"></script>
+<script src="/js/ajaxLogin.js"></script>

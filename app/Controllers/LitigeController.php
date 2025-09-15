@@ -36,7 +36,7 @@ class LitigeController
     $model = new Litige();
     $litiges = $model->getAllLitiges();
 
-    render(__DIR__ . '/../views/pages/employe/litiges.php', [
+    render(__DIR__ . '/../Views/pages/employe/litiges.php', [
       'title' => 'Trajets à problèmes',
       'litiges' => $litiges
     ]);
@@ -58,7 +58,7 @@ class LitigeController
     $details = $model->getDetailsLitige($id);
     $avis = $model->getAvisPourLitige($id);
 
-    render(__DIR__ . '/../views/pages/administration/detailsLitige.php', [
+    render(__DIR__ . '/../Views/pages/administration/detailsLitige.php', [
       'title' => "Détail du litige #$id",
       'details' => $details,
       'avis' => $avis

@@ -26,7 +26,7 @@ class VehiculeController
     $vehicules = $vehiculeModel->findAllByUserId($_SESSION['user_id']);
     $marques = $marqueModel->findAll();
 
-    render(__DIR__ . '/../views/pages/profilUsers.php', [
+    render(__DIR__ . '/../Views/pages/profilUsers.php', [
       'user' => $user,
       'vehicules' => $vehicules,
       'marques' => $marques

@@ -13,5 +13,5 @@ function render(string $viewPath, array $params = []): void
   // Rendre $pageContent accessible dans layout.php
   extract(['pageContent' => $pageContent]);
 
-  require __DIR__ . '/../views/layout.php';
+  require __DIR__ . '/../Views/layout.php';
 }

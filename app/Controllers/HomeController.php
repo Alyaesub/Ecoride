@@ -5,7 +5,7 @@ namespace App\Controllers;
 
 use App\Models\Covoiturage;
 
-require_once __DIR__ . '/../functions/view.php';
+require_once __DIR__ . '/../Functions/view.php';
 
 class HomeController
 {
@@ -13,7 +13,7 @@ class HomeController
   {
     $model = new Covoiturage();
     $covoituragesPopulaires = $model->getCovoituragesPopulaires();
-    render(__DIR__ . '/../views/pages/home.php', [
+    render(__DIR__ . '/../Views/pages/home.php', [
       'covoituragesPopulaires' => $covoituragesPopulaires,
       'title' => 'Accueil'
     ]);
@@ -21,17 +21,17 @@ class HomeController
 
   public function showLogin()
   {
-    render(__DIR__ . '/../views/pages/login.php', ['title' => 'Connexion']);
+    render(__DIR__ . '/../Views/pages/login.php', ['title' => 'Connexion']);
   }
 
   public function showMentions()
   {
-    render(__DIR__ . '/../views/pages/mentionsCgu.php', ['title' => 'Mentions Légales & CGV']);
+    render(__DIR__ . '/../Views/pages/mentionsCgu.php', ['title' => 'Mentions Légales & CGV']);
   }
 
   public function showContactForm()
   {
-    render(__DIR__ . '/../views/pages/contactForm.php', ['title' => 'Formulaire de contacts']);
+    render(__DIR__ . '/../Views/pages/contactForm.php', ['title' => 'Formulaire de contacts']);
   }
 
   public function showCovoitPopulaire()
@@ -45,7 +45,7 @@ class HomeController
       return strtotime($date) >= strtotime(date('Y-m-d'));
     });
 
-    render(__DIR__ . '/../views/pages/home.php', [
+    render(__DIR__ . '/../Views/pages/home.php', [
       'covoituragesPopulaires' => $covoituragesPopulaires,
       'departAdresses' => $departAdresses,
       'arriveeAdresses' => $arriveeAdresses,

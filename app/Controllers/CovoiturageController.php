@@ -149,7 +149,7 @@ class CovoiturageController
     $arriveeAdresses = $model->getAdressesArrivee();
     $datesDepart = $model->getDatesDepart();
 
-    render(__DIR__ . '/../views/pages/formeCovoitVoyage.php', [
+    render(__DIR__ . '/../Views/pages/formeCovoitVoyage.php', [
       'departAdresses' => $departAdresses,
       'arriveeAdresses' => $arriveeAdresses,
       'datesDepart' => $datesDepart,
@@ -171,7 +171,7 @@ class CovoiturageController
 
 
 
-    render(__DIR__ . '/../views/pages/formeCovoitVoyage.php', [
+    render(__DIR__ . '/../Views/pages/formeCovoitVoyage.php', [
       'covoiturages' => $covoiturages,
       'departAdresses' => $departAdresses,
       'arriveeAdresses' => $arriveeAdresses,
@@ -228,7 +228,7 @@ class CovoiturageController
     // Liste des passagers
     $passagers = $model->getPassagersByCovoiturage($id);
 
-    render(__DIR__ . '/../views/pages/detailsCovoit.php', [
+    render(__DIR__ . '/../Views/pages/detailsCovoit.php', [
       'covoiturage' => $covoit,
       'passagers' => $passagers,
       'vehicule' => $vehicule,
@@ -267,7 +267,7 @@ class CovoiturageController
       exit;
     }
 
-    render(__DIR__ . '/../views/pages/modifierCovoit.php', [
+    render(__DIR__ . '/../Views/pages/modifierCovoit.php', [
       'title' => 'Modifier un covoiturage',
       'covoiturage' => $covoit
     ]);

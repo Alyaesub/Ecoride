@@ -2,11 +2,11 @@
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
-require_once __DIR__ . '/vendor/autoload.php';
-require_once __DIR__ . '/app/functions/view.php'; //pour appeler le moteur de rendu et la fonction render
-require_once __DIR__ . '/app/functions/helpers.php'; //pour appeler la fonction route
-require_once __DIR__ . '/config/config.php'; //apelle la config pour gérer erreur et bug et connexionDB
-require_once __DIR__ . '/app/functions/session.php'; // démarre la scession automatiquement
+require_once __DIR__ . '/../vendor/autoload.php';
+require_once __DIR__ . '/../app/Functions/view.php'; //pour appeler le moteur de rendu et la fonction render
+require_once __DIR__ . '/../app/Functions/helpers.php'; //pour appeler la fonction route
+require_once __DIR__ . '/../config/config.php'; //apelle la config pour gérer erreur et bug et connexionDB
+require_once __DIR__ . '/../app/Functions/session.php'; // démarre la scession automatiquement
 
 use Whoops\Run;
 use Whoops\Handler\PrettyPageHandler;

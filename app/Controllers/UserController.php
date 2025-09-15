@@ -18,7 +18,7 @@ class UserController
   public function showLoginForm()
   {
     // Charger la vue du formulaire de connexion
-    render(__DIR__ . '/../views/pages/login.php', []);
+    render(__DIR__ . '/../Views/pages/login.php', []);
   }
 
   /**
@@ -151,7 +151,7 @@ class UserController
       $messageErrorMongo = "Les avis sont indisponibles";
     }
 
-    render(__DIR__ . '/../views/pages/profilUsers.php', [
+    render(__DIR__ . '/../Views/pages/profilUsers.php', [
       'title'        => 'Votre profil',
       'covoiturages' => $covoiturages,
       'vehicules' => $vehicules,
@@ -216,7 +216,7 @@ class UserController
      * old[] sert à conserver les données que l’utilisateur a déjà saisies pour les réafficher automatiquement si une erreur survient.
      */
     render(
-      __DIR__ . '/../views/pages/registerUser.php',
+      __DIR__ . '/../Views/pages/registerUser.php',
       [
         'title' => 'Créer votre profil',
         'error'   => $error   ?? null,
@@ -272,7 +272,7 @@ class UserController
       }
     }
     render(
-      __DIR__ . '/../views/pages/administration/registerEmploye.php',
+      __DIR__ . '/../Views/pages/administration/registerEmploye.php',
       [
         'title' => 'Créer un profil employes',
         'error'   => $error   ?? null, //variable qui sert a affihcer les messages d'erreurs

@@ -29,7 +29,7 @@ class DetailsProfilsController
     $moyenne = $notationModel->getMoyenneParUtilisateur($userId);
     $avis = $avisModel->getAvisReçus($userId);
 
-    render(__DIR__ . '/../views/pages/detailsProfil.php', [
+    render(__DIR__ . '/../Views/pages/detailsProfil.php', [
       'title' => 'Détails du profil',
       'utilisateur' => $utilisateur,
       'moyenne' => $moyenne,

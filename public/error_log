@@ -1,0 +1,23 @@
+[15-Sep-2025 18:03:16 UTC] PHP Warning:  require_once(/home/repa7303/repositories/Ecoride/public/app/Functions/view.php): Failed to open stream: No such file or directory in /home/repa7303/repositories/Ecoride/public/index.php on line 6
+[15-Sep-2025 18:03:16 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/repa7303/repositories/Ecoride/public/app/Functions/view.php' (include_path='.:/opt/alt/php83/usr/share/pear:/opt/alt/php83/usr/share/php:/usr/share/pear:/usr/share/php') in /home/repa7303/repositories/Ecoride/public/index.php:6
+Stack trace:
+#0 {main}
+  thrown in /home/repa7303/repositories/Ecoride/public/index.php on line 6
+[15-Sep-2025 18:09:34 UTC] Erreur de connexion MongoDB : Class "MongoDB\Driver\Manager" not found
+[15-Sep-2025 18:10:02 UTC] Erreur de connexion MongoDB : Class "MongoDB\Driver\Manager" not found
+[15-Sep-2025 18:11:41 UTC] Erreur de connexion MongoDB : Class "MongoDB\Driver\Manager" not found
+[15-Sep-2025 18:28:12 UTC] Erreur de connexion MongoDB : Class "MongoDB\Driver\Manager" not found
+[15-Sep-2025 18:29:03 UTC] Erreur de connexion MongoDB : Class "MongoDB\Driver\Manager" not found
+[15-Sep-2025 18:29:30 UTC] Erreur de connexion MongoDB : Class "MongoDB\Driver\Manager" not found
+[15-Sep-2025 18:33:52 UTC] Erreur de connexion MongoDB : Class "MongoDB\Driver\Manager" not found
+[15-Sep-2025 18:34:11 UTC] Erreur de connexion MongoDB : Class "MongoDB\Driver\Manager" not found
+[15-Sep-2025 18:34:47 UTC] Erreur de connexion MongoDB : Class "MongoDB\Driver\Manager" not found
+[15-Sep-2025 18:36:50 UTC] Erreur de connexion MongoDB : Class "MongoDB\Driver\Manager" not found
+[15-Sep-2025 18:38:02 UTC] Erreur de connexion MongoDB : Class "MongoDB\Driver\Manager" not found
+[15-Sep-2025 18:39:40 UTC] Erreur de connexion MongoDB : Class "MongoDB\Driver\Manager" not found
+[15-Sep-2025 18:40:09 UTC] Erreur de connexion MongoDB : Class "MongoDB\Driver\Manager" not found
+[15-Sep-2025 18:41:23 UTC] Erreur de connexion MongoDB : Class "MongoDB\Driver\Manager" not found
+[15-Sep-2025 18:44:39 UTC] Erreur de connexion MongoDB : Class "MongoDB\Driver\Manager" not found
+[15-Sep-2025 18:44:52 UTC] Erreur de connexion MongoDB : Class "MongoDB\Driver\Manager" not found
+[15-Sep-2025 18:45:35 UTC] Erreur de connexion MongoDB : Class "MongoDB\Driver\Manager" not found
+[15-Sep-2025 18:48:20 UTC] Erreur de connexion MongoDB : Class "MongoDB\Driver\Manager" not found

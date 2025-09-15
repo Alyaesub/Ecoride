@@ -55,7 +55,7 @@ class AdminController
       ];
     }
 
-    render(__DIR__ . '/../views/pages/administration/dashboardAdmin.php', [
+    render(__DIR__ . '/../Views/pages/administration/dashboardAdmin.php', [
       'title' => 'Dashboard Administration',
       'employes' => $employes,
       'totalEmployes' => $totalEmployes,

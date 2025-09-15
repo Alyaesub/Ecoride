@@ -56,6 +56,6 @@
       </p>
     </div>
     <div class="photo-page-voyage">
-      <img class="photo-voyage" src="/public/assets/pexels-cottonbro-5329298.webp" alt="photo-voiture">
+      <img class="photo-voyage" src="/assets/pexels-cottonbro-5329298.webp" alt="photo-voiture">
     </div>
   </section>
