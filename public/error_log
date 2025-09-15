@@ -21,3 +21,8 @@ Stack trace:
 [15-Sep-2025 18:44:52 UTC] Erreur de connexion MongoDB : Class "MongoDB\Driver\Manager" not found
 [15-Sep-2025 18:45:35 UTC] Erreur de connexion MongoDB : Class "MongoDB\Driver\Manager" not found
 [15-Sep-2025 18:48:20 UTC] Erreur de connexion MongoDB : Class "MongoDB\Driver\Manager" not found
+[15-Sep-2025 19:11:55 UTC] Erreur de connexion MongoDB : Class "MongoDB\Driver\Manager" not found
+[15-Sep-2025 19:12:15 UTC] Erreur de connexion MongoDB : Class "MongoDB\Driver\Manager" not found
+[15-Sep-2025 19:13:31 UTC] Erreur de connexion MongoDB : Class "MongoDB\Driver\Manager" not found
+[15-Sep-2025 19:14:03 UTC] Erreur de connexion MongoDB : Class "MongoDB\Driver\Manager" not found
+[15-Sep-2025 19:14:42 UTC] Erreur de connexion MongoDB : Class "MongoDB\Driver\Manager" not found

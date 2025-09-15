@@ -288,7 +288,7 @@
           </ul>
         </section>
       <?php else : ?>
-        <p>Pas encore d’avis reçus.</p>
+        <p>Pas encore de notes reçus.</p>
       <?php endif; ?>
       <!-- commentaires -->
       <!-- Commentaires reçus -->
