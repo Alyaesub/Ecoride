@@ -20,31 +20,50 @@ function sendMail(string $to, string $subject, string $html, string $from = 'no-
   $mail = new PHPMailer(true);
 
   try {
-    // Configuration Mailtrap
-    $mail->isSMTP();
-    $mail->Host = 'sandbox.smtp.mailtrap.io';
-    $mail->SMTPAuth = true;
-    $mail->Username = '22d1451e8bd48a';
-    $mail->Password = '04f032efe07955';
-    $mail->Port = 2525;
-    $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+    // Lire les variables depuis .env
+    $host       = getenv('MAIL_HOST');
+    $port       = getenv('MAIL_PORT');
+    $username   = getenv('MAIL_USERNAME');
+    $password   = getenv('MAIL_PASSWORD');
+    $encryption = getenv('MAIL_ENCRYPTION');
+    $from       = $from ?: getenv('MAIL_FROM');
+    $fromName   = getenv('MAIL_FROM_NAME');
 
-    // Adresse d’envoi et de réception
-    $mail->setFrom($from, 'EcoRide');
+    // Config SMTP O2Switch
+    $mail->isSMTP();
+    $mail->Host       = $host;
+    $mail->SMTPAuth   = true;
+    $mail->Username   = $username;
+    $mail->Password   = $password;
+    $mail->Port       = $port;
+    $mail->SMTPSecure = $encryption === 'ssl'
+      ? PHPMailer::ENCRYPTION_SMTPS
+      : PHPMailer::ENCRYPTION_STARTTLS;
+
+    // Expéditeur et destinataire
+    $mail->setFrom($from, $fromName);
     $mail->addAddress($to);
 
     // Contenu HTML
     $mail->isHTML(true);
     $mail->CharSet = 'UTF-8';
-    $mail->Encoding = 'base64';
     $mail->Subject = $subject;
     $mail->Body    = $html;
 
     $mail->send();
     return true;
   } catch (Exception $e) {
-    error_log("Erreur Mailtrap : " . $mail->ErrorInfo);
-    return false;
+    error_log("[sendMail] Erreur SMTP : " . $mail->ErrorInfo);
+
+    // Fallback : mail() natif
+    try {
+      $mail->isMail();
+      $mail->send();
+      return true;
+    } catch (Exception $e2) {
+      error_log("[sendMail Fallback] Erreur : " . $mail->ErrorInfo);
+      return false;
+    }
   }
 }
 
@@ -53,7 +72,7 @@ function sendMail(string $to, string $subject, string $html, string $from = 'no-
  */
 function sendContactMail(string $nom, string $email, string $message): bool
 {
-  $to = 'test@ecoride.dev'; // Adresse test
+  $to = 'repa7303@ecoride.repa7303.odns.fr'; // Adresse O2 switch
   $subject = "📩 Nouveau message de contact EcoRide";
 
   $html = "
@@ -72,7 +91,7 @@ function sendContactMail(string $nom, string $email, string $message): bool
  */
 function sendDepartMail(array $user, array $covoit): bool
 {
-  $to = 'test@ecoride.dev';
+  $to = $user['email'];
   $subject = "🚗 Votre trajet avec EcoRide a démarré !";
 
   $html = "
@@ -91,7 +110,7 @@ function sendDepartMail(array $user, array $covoit): bool
  */
 function sendConfirmationMail(array $user, array $covoit): bool
 {
-  $to = 'test@ecoride.dev';
+  $to = $user['email'];
   $subject = "🚗 Confirmez votre trajet terminé";
 
   $html = "
@@ -116,7 +135,7 @@ function sendConfirmationMail(array $user, array $covoit): bool
  */
 function sendCreditedMail(array $chauffeur, int $credits, array $covoit): bool
 {
-  $to = 'test@ecoride.dev';
+  $to = $chauffeur['email'];
   $subject = "💰 Vous avez été crédité de {$credits} crédits !";
 
   $html = "
@@ -135,7 +154,7 @@ function sendCreditedMail(array $chauffeur, int $credits, array $covoit): bool
  */
 function sendMailAnnulationParticipation(array $user, array $covoit): bool
 {
-  $to = 'test@ecoride.dev';
+  $to = $user['email'];
   $subject = "🚗 Annulation de votre participation au covoiturage";
   $html = "
     <html><body>
@@ -153,7 +172,7 @@ function sendMailAnnulationParticipation(array $user, array $covoit): bool
  */
 function sendMailAnnulationChauffeur(array $user, array $covoit): bool
 {
-  $to = 'test@ecoride.dev';
+  $to = $user['email'];
   $subject = "🚨 Covoiturage annulé par le conducteur";
   $html = "
     <html><body>
@@ -171,7 +190,7 @@ function sendMailAnnulationChauffeur(array $user, array $covoit): bool
  */
 function sendMailSuppressionCovoit(array $user, array $covoit): bool
 {
-  $to = 'test@ecoride.dev';
+  $to = $user['email'];
   $subject = "🚗 Covoiturage supprimé";
   $html = "
     <html><body>
@@ -189,7 +208,7 @@ function sendMailSuppressionCovoit(array $user, array $covoit): bool
  */
 function sendMailInscriptionPassager(array $chauffeur, array $passager, array $covoit): bool
 {
-  $to = 'test@ecoride.dev';
+  $to = $chauffeur['email'];
   $subject = "👤 Nouveau passager pour votre covoiturage !";
 
   $html = "
@@ -214,7 +233,7 @@ function sendMailInscriptionPassager(array $chauffeur, array $passager, array $c
  */
 function sendMailAnnulationPassager(array $chauffeur, array $passager, array $covoit): bool
 {
-  $to = 'test@ecoride.dev';
+  $to = $chauffeur['email'];
   $subject = "❌ Un passager a annulé sa participation";
 
   $html = "
@@ -229,5 +248,5 @@ function sendMailAnnulationPassager(array $chauffeur, array $passager, array $co
       <p>Bonne route,<br>L’équipe EcoRide</p>
     </body></html>";
 
-  return sendMail($chauffeur['email'], $subject, $html);
+  return sendMail($to, $subject, $html);
 }
