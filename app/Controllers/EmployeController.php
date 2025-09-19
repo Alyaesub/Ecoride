@@ -42,7 +42,7 @@ class EmployeController
   }
 
   //function qui gere le changement de statut des user
-  public function emplyeToggleUser()
+  public function employeToggleUser()
   {
     requireLogin();
 
