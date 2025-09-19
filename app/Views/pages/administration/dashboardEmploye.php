@@ -113,7 +113,7 @@
       <?php
       $totalPagesUser = ceil($totalUtilisateur / 5);
       for ($i = 1; $i <= $totalPagesUser; $i++): ?>
-        <a href="<?= route('dashboardemploye') ?>?page_user=<?= $i ?>" <?= $pageUtilisateur === $i ? 'class="active"' : '' ?>><?= $i ?></a>
+        <a href="<?= route('dashboardEmploye') ?>?page_user=<?= $i ?>" <?= $pageUtilisateur === $i ? 'class="active"' : '' ?>><?= $i ?></a>
       <?php endfor; ?>
     </div>
   </section>

@@ -122,5 +122,5 @@ if (isset($routes[$page])) {
   }
 } else {
   // si  route n'existe pas affiche une page 404
-  render(__DIR__ . '/app/views/pages/404.php', ['title' => 'Page introuvable']);
+  render(__DIR__ . '/../app/Views/pages/404.php', ['title' => 'Page introuvable']);
 }
