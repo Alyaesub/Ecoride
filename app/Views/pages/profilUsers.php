@@ -41,7 +41,7 @@
         <!-- Affichage des informations personnelles enregistrées -->
         <h2>Vos données enregistrées :</h2>
         <div class="photo-profil">
-          <img class="pp" src="/public/<?= htmlspecialchars($user['photo'] ?? '') ?>" alt="photo de profil">
+          <img class="pp" src="/<?= htmlspecialchars($user['photo'] ?? '') ?>" alt="photo de profil">
         </div>
         <ul>
           <li><strong>Role :</strong><?= htmlspecialchars($user['preference_role'] ?? '') ?></li>
