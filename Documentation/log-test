@@ -1,0 +1,26 @@
+## Comptes de test
+
+-   **Utilisateur** :
+    -   `pseudo`: bob / `mail`: bob@test.com / `mot de passe`: password123
+    -   `pseudo`: alice / `mail`: alice@test.com / `mot de passe`: password123
+-   **Administrateur** :
+
+    -   `pseudo`: satoshi / `mail`: satoshiAdmin@test.com / `mot de passe`: password123
+
+-   **Employé** :
+
+    -   `pseudo`: hal / `mail`: hal@test.com / `mot de passe`: password123
+
+-   **Formulaire** : Création d’un utilisateur via le formulaire registerUser.
+
+    -   `pseudo`: aly / `mail`: aly@test.com / `mot de passe`: password123
+    -   `pseudo`: matthieu / `mail`: matthieu@test.com / `mot de passe`: password123
+    -   `pseudo`: marie / `mail`: marie@test.com / `mot de passe`: password123
+    -   `pseudo`: claudia / `mail`: claudia@test.com / `mot de passe`: password123
+    -   `pseudo`: testmaj/ `mail`: testmaj@test.com / `mot de passe`: testmaj
+
+-   **Formulaire** : Création d’employes via le formulaire registerEmploye.
+    -   `pseudo`: vitalik/ `mail`: vitalik@test.com / `poste` : moderateur/ `numéro de badge` : 12 / `mot de passe`: password123
+    -   `pseudo`: albert/ `mail`: albert@test.com / `poste` : informaticien / `numéro de badge` : 13 / `mot de passe`: password123
+    -   `pseudo`: magalie/ `mail`: magalie@test.com / `poste` : moderatrice / `numéro de badge` : 14 / `mot de passe`: password123
+        > Note : Les utilisateurs créés via le formulaire reçoivent 20 crédits à l'inscription. L'administrateur est créé en amont. Les employés sont créés via l'espace administrateur.

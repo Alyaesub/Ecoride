@@ -1,0 +1,155 @@
+
+Manuel d’utilisation — Application EcoRide
+
+1. Introduction
+
+EcoRide est une application web de covoiturage écologique.
+Elle permet :
+	•	aux utilisateurs de proposer ou de réserver un trajet,
+	•	aux passagers de noter et laisser des avis,
+	•	aux chauffeurs de gérer leurs véhicules et trajets,
+	•	aux employés de modérer les avis et traiter les litiges,
+	•	aux administrateurs de superviser l’ensemble et d’analyser les statistiques.
+
+⸻
+
+2. Création d’un compte
+	1.	Depuis le menu principal, cliquez sur “Connexion / Inscription”.
+	2.	Sélectionnez Créer un compte.
+	3.	Remplissez le formulaire :
+	•	Pseudo
+	•	Nom, prénom
+	•	Email valide
+	•	Mot de passe sécurisé (minimum 8 caractères, majuscule, chiffre et caractère spécial).
+	4.	Validez → votre compte est créé avec 20 crédits offerts.
+	5.	Vous pouvez maintenant vous connecter.
+
+⸻
+
+3. Connexion
+	1.	Cliquez sur Connexion dans le menu.
+	2.	Entrez votre email et mot de passe.
+	3.	Selon votre rôle, vous serez redirigé vers :
+	•	Espace Utilisateur (par défaut)
+	•	Espace Employé (si compte employé)
+	•	Espace Administrateur (si compte admin)
+
+⚠️ Les comptes suspendus ne peuvent plus se connecter.
+
+⸻
+
+4. Navigation générale
+
+Le menu vous permet d’accéder rapidement à :
+	•	Accueil : présentation de la plateforme + recherche rapide de trajets.
+	•	Covoiturages : rechercher et filtrer les trajets disponibles.
+	•	Mon espace : tableau de bord utilisateur.
+	•	Contact : assistance et support.
+
+⸻
+
+5. Rechercher un covoiturage
+	1.	Depuis la page d’accueil ou le menu Covoiturages, entrez :
+	•	Ville de départ
+	•	Ville d’arrivée
+	•	Date du trajet
+	2.	Cliquez sur Rechercher.
+	3.	La liste des trajets disponibles s’affiche avec :
+	•	Pseudo, photo, note du chauffeur
+	•	Nombre de places restantes
+	•	Prix
+	•	Date et heure
+	•	Indication « 🌱 Écologique » si le véhicule est électrique
+	4.	Cliquez sur Détails pour voir toutes les informations (avis, préférences chauffeur, véhicule, prix max, durée, note minimale, écologique).
+
+⸻
+
+6. Réserver un covoiturage
+	1.	Cliquez sur Participer depuis la fiche d’un trajet.
+	2.	Vérifiez que :
+	•	Vous avez assez de crédits
+	•	Il reste une place
+	3.	Confirmez la réservation (double confirmation demandée).
+	4.	Les crédits sont débités automatiquement :
+	•	2 crédits pour la plateforme
+	•	Le prix fixé par le chauffeur (mis en attente jusqu’à validation).
+
+⸻
+
+7. Espace Utilisateur
+
+7.1 Tableau de bord
+	•	Accès à vos paramètres (langue, notifications).
+	•	Gestion de vos véhicules (ajout, modification, suppression).
+	•	Gestion de vos trajets (ajouter, annuler, consulter).
+	•	Accès à vos crédits (acheter, historique, solde restant).
+	•	Accès à vos avis (laisser une note, commentaire après un trajet).
+
+7.2 Gestion des véhicules
+
+Un chauffeur doit enregistrer :
+	•	Marque, modèle, couleur, énergie, immatriculation, nombre de places.
+	•	Préférences (fumeur, animaux, etc.).
+
+7.3 Ajouter un trajet
+	1.	Cliquez sur Ajouter un covoiturage.
+	2.	Remplissez :
+	•	Adresse de départ / arrivée
+	•	Date et heure
+	•	Prix
+	•	Véhicule utilisé
+	3.	Validez → le trajet est ajouté et visible dans les recherches.
+
+7.4 Historique
+	•	Liste des trajets passés (conducteur et passager).
+	•	Possibilité d’annuler (avec remboursement automatique si passager).
+	•	Possibilité de noter et commenter un conducteur.
+
+7.5 Crédits
+	•	Achat de crédits via formulaire de paiement.
+	•	Débit automatique lors des réservations.
+	•	Redistribution au chauffeur après validation des passagers.
+
+⸻
+
+8. Déroulement d’un covoiturage
+	1.	Le chauffeur clique sur Démarrer → les passagers reçoivent un email de confirmation.
+  2.  Une foi LE COVOITURAGE DEMARRE par le chauffeur vous ne le voyez plus dans la recherche et vous ne pouvez plus vous inscrire
+	2.	À l’arrivée, le chauffeur clique sur Arrivée à destination.
+	3.	Les passagers reçoivent un email et doivent confirmer que tout s’est bien passé.
+	4.	Si tous valident → crédits transférés au chauffeur.
+	5.	Si problème → litige transmis aux employés.
+
+⸻
+
+9. Espace Employé
+
+Accessible uniquement via login employé.
+Fonctionnalités :
+	•	Validation ou refus des avis laissés par les passagers.
+	•	Consultation des litiges : pseudo + mail des deux parties, descriptif du trajet.
+	•	Décision sur les conflits avant redistribution des crédits.
+
+⸻
+
+10. Espace Administrateur
+
+Accessible uniquement via login admin (créé en amont).
+Fonctionnalités :
+	•	Création et gestion des comptes employés.
+	•	Suspension de comptes (utilisateurs ou employés).
+	•	Statistiques :
+	•	Nombre de covoiturages par jour
+	•	Crédits générés par jour
+	•	Solde total des crédits gagnés par la plateforme
+
+⸻
+
+11. Sécurité
+	•	Mots de passe chiffrés (bcrypt).
+	•	Tokens CSRF intégrés à tous les formulaires.
+	•	Comptes suspendus bloqués.
+	•	Double confirmation pour les paiements en crédits.
+
+⸻
+
