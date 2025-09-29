@@ -176,6 +176,7 @@
                 <option value="<?= $i ?>"><?= $i ?> ⭐</option>
               <?php endfor; ?>
             </select>
+            <button type="submit" class="btn">Envoyer la note</button>
           </form>
           <!-- FORMULAIRE 2 : AVIS -->
           <form action="<?= route('ajouterAvisMongo') ?>" method="post">

@@ -373,7 +373,7 @@ class CovoiturageController
     $gestionCredits->rembourseAllPassagers($id);
 
     // Après le remboursement envoi du mail 
-    require_once __DIR__ . '/../functions/mailsHelper.php';
+    require_once __DIR__ . '/../Functions/mailsHelper.php';
     $passagers = $userModel->getPassagersAvecId($id);
     foreach ($passagers as $p) {
       $passager = $userModel->findById($p['id_utilisateur']);
@@ -438,7 +438,7 @@ class CovoiturageController
           //credite le chauffeur
           $gestionCredits->crediterChauffeur($id);
           // envoi du mail de notification au chauffeur
-          require_once __DIR__ . '/../functions/mailsHelper.php';
+          require_once __DIR__ . '/../Functions/mailsHelper.php';
           $chauffeur = $gestionCredits->getChauffeurByCovoitId($id);
           $totalCredits = $gestionCredits->getMontantTotalCredite($id);
           sendCreditedMail($chauffeur, $totalCredits ?? 0, $covoit);
@@ -537,7 +537,7 @@ class CovoiturageController
       $model->decrementePlacesDispo($id_covoiturage);
 
       //mailing pour le chauffeur
-      require_once __DIR__ . '/../functions/mailsHelper.php';
+      require_once __DIR__ . '/../Functions/mailsHelper.php';
       $passager = $userModel->findById($id_utilisateur);
       $chauffeur = $userModel->findById($covoit['id_utilisateur']);
       sendMailInscriptionPassager($chauffeur, $passager, $covoit);
@@ -580,7 +580,7 @@ class CovoiturageController
       $gestionCredits->remboursePassagerUnique($id_utilisateur, $id_covoiturage);
 
       // Après le remboursement envoir du mail 
-      require_once __DIR__ . '/../functions/mailsHelper.php';
+      require_once __DIR__ . '/../Functions/mailsHelper.php';
       $covoit = $model->findById($id_covoiturage);
       $passager = $userModel->findById($id_utilisateur);
       $chauffeur = $userModel->findById($covoit['id_utilisateur']);
@@ -630,7 +630,7 @@ class CovoiturageController
       exit;
     }
 
-    require_once __DIR__ . '/../functions/mailsHelper.php';
+    require_once __DIR__ . '/../Functions/mailsHelper.php';
     $passagers = $gestionCredits->getPassagersByCovoitId($id);
 
     if ($statutActuel === 'actif') {
