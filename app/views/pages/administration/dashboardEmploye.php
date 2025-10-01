@@ -97,7 +97,7 @@
             <td><?= htmlspecialchars($user['email']) ?></td>
             <td><?= $user['actif'] ? 'Actif' : 'Suspendu' ?></td>
             <td>
-              <form method="post" action="<?= route('emplyeToggleUser') ?>">
+              <form method="post" action="<?= route('employeToggleUser') ?>">
                 <input type="hidden" name="csrf_token" value="<?= htmlspecialchars(generateCsrfToken()); ?>">
                 <input type="hidden" name="id_utilisateur" value="<?= $user['id_utilisateur'] ?>">
                 <button class="suspend-btn">

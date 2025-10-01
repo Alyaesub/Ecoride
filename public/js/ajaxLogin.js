@@ -8,7 +8,7 @@ function handleAjaxForm(formId, resultTargetId) {
 			method: "POST",
 			body: formData,
 			headers: {
-				"X-Requested-With": "XMLHttpRequest", // force le mode AJAX côté PHP
+				"X-Requested-With": "XMLHttpRequest",
 			},
 		});
 		const result = await response.json();
@@ -18,7 +18,6 @@ function handleAjaxForm(formId, resultTargetId) {
 			? `<div class="alert alert-success">${result.success}</div>`
 			: `<div class="alert alert-danger">${result.error}</div>`;
 
-		// Si succès redirection
 		if (result.success) {
 			zone.innerHTML = `<div class="alert alert-success">${result.success}</div>`;
 

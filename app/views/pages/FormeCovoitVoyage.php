@@ -27,18 +27,37 @@
             <option value="<?= htmlspecialchars($date) ?>"><?= htmlspecialchars($date) ?></option>
           <?php endforeach; ?>
         </select><br>
+
+        <label for="duree_max">Durée maximale du trajet (en minutes) :</label>
+        <input type="number" id="duree_max" name="duree_max" min="1" placeholder="Ex : 180"><br>
+
+        <label for="eco_only">
+          <input type="checkbox" id="eco_only" name="eco_only">
+          Trajets écologiques uniquement (voitures électriques)
+        </label><br>
+
         <button type="submit">Afficher les covoiturage</button>
       </form>
+
       <div id="displayInfo" class="display-box">
         <h2>Résultats de la recherche</h2>
         <?php if (empty($covoiturages)) : ?>
           <p><strong>Aucun covoiturage trouvé.</strong></p>
         <?php else: ?>
           <?php foreach ($covoiturages as $covoit): ?>
+            <?php
+            $heureDepart = new DateTime($covoit['date_depart']);
+            $heureArrivee = new DateTime($covoit['date_arrivee']);
+            $duree = $heureDepart->diff($heureArrivee);
+            $dureeMinutes = $duree->h * 60 + $duree->i;
+            $isEco = ($covoit['est_ecologique']) ? 'true' : 'false';
+            ?>
             <div class="covoit-result">
               <p><strong>Départ :</strong> <?= $covoit['adresse_depart'] ?></p>
               <p><strong>Arrivée :</strong> <?= $covoit['adresse_arrivee'] ?></p>
               <p><strong>Date :</strong> <?= $covoit['date_depart'] ?></p>
+              <p><strong>Durée :</strong> <?= $dureeMinutes ?> minutes</p>
+              <p><strong>Écologique :</strong> <?= $isEco === 'true' ? '✅ Oui' : '❌ Non' ?></p>
               <a href="/detailsCovoit?id=<?= $covoit['id_covoiturage'] ?>">🔍 Voir détails</a>
             </div>
           <?php endforeach; ?>
@@ -58,4 +77,5 @@
     <div class="photo-page-voyage">
       <img class="photo-voyage" src="/public/assets/pexels-cottonbro-5329298.webp" alt="photo-voiture">
     </div>
+    <script src="/public/js/filtreTimeEco.js"></script>
   </section>

@@ -86,25 +86,6 @@ class UserController
       }
       exit;
     }
-
-    // Sinon mode classique (redirection HTML)
-    /* if ($ok) {
-      switch ($role) {
-        case 1:
-          header('Location: ' . route('dashboardAdmin'));
-          break;
-        case 2:
-          header('Location: ' . route('dashboardEmploye'));
-          break;
-        default:
-          header('Location: ' . route('profil'));
-          break;
-      }
-    } else {
-      $_SESSION['error'] = $msg;
-      header('Location: ' . route('login'));
-    }
-    exit; */
   }
 
   /**
