@@ -72,7 +72,7 @@ function sendMail(string $to, string $subject, string $html, string $from = 'no-
  */
 function sendContactMail(string $nom, string $email, string $message): bool
 {
-  $to = 'repa7303@ecoride.repa7303.odns.fr'; // Adresse O2 switch
+  $to = 'repa7303@ecoride.sites-alya.fr'; // Adresse O2 switch
   $subject = "📩 Nouveau message de contact EcoRide";
 
   $html = "
